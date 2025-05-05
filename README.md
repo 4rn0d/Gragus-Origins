@@ -1,6 +1,6 @@
-# GRAGRUS
+# GRAGRUS ORIGINS
 
-A 2D roguelite metroidvania platformer starring a barrel-wielding drunkard on a quest for the ultimate booze.
+A 2D roguelike metroidvania platformer starring a barrel-wielding drunkard on a quest for the ultimate booze.
 
 ## 🍺 About the Game
 
@@ -10,7 +10,7 @@ A 2D roguelite metroidvania platformer starring a barrel-wielding drunkard on a 
 
 - 🕹️ Tight 2D platforming controls
 - 🧩 Procedurally generated levels
-- 🔄 Roguelite progression
+- 🔄 Roguelike progression
 - 🔓 Metroidvania-style ability unlocks
 - 🍶 A unique alcohol-based upgrade system
 
