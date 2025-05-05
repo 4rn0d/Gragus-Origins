@@ -17,6 +17,7 @@
 
 .DS_Store
 .vscode/
+.idea/
 
 # Recordings can get excessive in size
 /[Rr]ecordings/
