@@ -36,11 +36,11 @@ public class PlayerController : MonoBehaviour
         }
         if (_horizontal < 0)
         {
-            gameObject.transform.localScale = new Vector2(0.25f, 0.25f);
+            gameObject.transform.localScale = new Vector2(0.75f, 0.75f);
         }
         if (_horizontal > 0)
         {
-            gameObject.transform.localScale = new Vector2(-0.25f, 0.25f);
+            gameObject.transform.localScale = new Vector2(-0.75f, 0.75f);
         }
         
         if (_isDashing)
