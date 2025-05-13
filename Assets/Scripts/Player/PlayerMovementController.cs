@@ -89,6 +89,15 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x * jumpMovementReductionForce, jumpForce);
         }
+        
+        if (context.canceled && !IsGrounded())
+        {
+            if (rb.linearVelocity.y > 0)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+            }
+        }
+        
     }
 
     
