@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
         transform.localScale = scale;
 
         float bounceDir = -_dashDirection;
+        transform.localScale = new Vector3(Mathf.Sign(bounceDir) * -0.75f, 0.75f, 1f);
         rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
     }
 
@@ -131,11 +132,11 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateFacingDirection()
     {
-        if (_justBounced) return;
+        if (_isBouncing) return;
 
-        if (_horizontal != 0 && !_isDashing)
+        if (_rawHorizontalInput != 0 && !_isDashing)
         {
-            transform.localScale = new Vector3(Mathf.Sign(_horizontal) * -0.75f, 0.75f, 1f);
+            transform.localScale = new Vector3(Mathf.Sign(_rawHorizontalInput) * -0.75f, 0.75f, 1f);
         }
     }
 
