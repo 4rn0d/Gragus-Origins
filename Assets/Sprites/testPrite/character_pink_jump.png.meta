@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6fcd83d1333404bbf87c94ec3be7bd64
+guid: 57de33ae188959741a86ca2a157dd00b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5792358097329263732
-    second: gragas-profile-oixel_0
+      213: 796043498952653175
+    second: character_pink_jump_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gragas-profile-oixel_0
+      name: character_pink_jump_0
       rect:
         serializedVersion: 2
-        x: 25
+        x: 22
         y: 0
-        width: 206
-        height: 256
+        width: 84
+        height: 98
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4741b231007926050800000000000000
-      internalID: 5792358097329263732
+      spriteID: 779f4dc385d1c0b00800000000000000
+      internalID: 796043498952653175
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      gragas-profile-oixel_0: 5792358097329263732
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Player Component References")]
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] Animator animator;
 
     [Header("Player Settings")]
     [SerializeField] float moveSpeed = 5f;
@@ -59,6 +60,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
+        
+        animator.SetFloat("Speed", Mathf.Abs(_horizontal));
+        
         if (_isDashing || _isBouncing) return;
 
         float fallSpeed = rb.linearVelocity.y;
@@ -70,7 +74,12 @@ public class PlayerController : MonoBehaviour
             airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
         }
 
-        float targetSpeed = _horizontal * moveSpeed;
+        if (IsGrounded())
+        {
+            animator.SetBool("IsJumping", false);
+        }
+
+        float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
         float speedDiff = targetSpeed - rb.linearVelocity.x;
         float accelRate = (Mathf.Abs(targetSpeed) >0.01f) ? acceleration : decceleration;
         float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
@@ -107,14 +116,25 @@ public class PlayerController : MonoBehaviour
         transform.localScale = scale;
 
         float bounceDir = -_dashDirection;
-        transform.localScale = new Vector3(Mathf.Sign(bounceDir) * -0.75f, 0.75f, 1f);
+        transform.localScale = new Vector3(Mathf.Sign(bounceDir) * -1.5f, 1.5f, 1f);
         rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
+        
+        animator.SetBool("IsDashing", false);
     }
 
     private void EndDash()
     {
+        animator.SetBool("IsDashing", false);
         _isDashing = false;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.5f, rb.linearVelocity.y);
+        if (_rawHorizontalInput == 0)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            _horizontal = 0;
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.5f, rb.linearVelocity.y);
+        }
     }
 
     private void HandleBounceTimer()
@@ -141,13 +161,13 @@ public class PlayerController : MonoBehaviour
 
         if (_rawHorizontalInput != 0 && !_isDashing)
         {
-            transform.localScale = new Vector3(Mathf.Sign(_rawHorizontalInput) * -0.75f, 0.75f, 1f);
+            transform.localScale = new Vector3(Mathf.Sign(_rawHorizontalInput) * -1.5f, 1.5f, 1f);
         }
     }
 
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1f, 0.2f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1.5f, 0.2f), CapsuleDirection2D.Horizontal, 0, groundLayer);
     }
 
     public bool IsTouchingWall()
@@ -160,6 +180,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && IsGrounded())
         {
+            animator.SetBool("IsJumping", true);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x * jumpMovementReductionForce, jumpForce);
         }
 
@@ -173,12 +194,13 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && !_isDashing && !_isBouncing && _canDash)
         {
+            animator.SetBool("IsDashing", true);
             _isDashing = true;
             _dashTimer = dashDuration;
             _dashDirection = _lastNonZeroHorizontal;
             _hasBouncedThisDash = false;
             _canDash = false;
-            transform.localScale = new Vector3(Mathf.Sign(_dashDirection) * -0.75f, 0.75f, 1f);
+            transform.localScale = new Vector3(Mathf.Sign(_dashDirection) * -1.5f, 1.5f, 1f);
         }
     }
 

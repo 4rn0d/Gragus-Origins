@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: f833703ab4d82463c9b44c32736a3d87
+guid: dba390a0dfea8b242b45816711fddd02
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6370825268693655206
-    second: gragas_0
-  - first:
-      213: -7496341946982286109
-    second: gragas_1
+      213: -4140512875690902828
+    second: character_pink_walk_b_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gragas_0
+      name: character_pink_walk_b_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 22
         y: 0
-        width: 749
-        height: 709
+        width: 85
+        height: 103
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6ae519ae3d7b96850800000000000000
-      internalID: 6370825268693655206
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gragas_1
-      rect:
-        serializedVersion: 2
-        x: 756
-        y: 361
-        width: 6
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3ecb24f67b4a7f790800000000000000
-      internalID: -7496341946982286109
+      spriteID: 4da33881a71f986c0800000000000000
+      internalID: -4140512875690902828
       vertices: []
       indices: 
       edges: []
@@ -172,9 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      gragas_0: 6370825268693655206
-      gragas_1: -7496341946982286109
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
