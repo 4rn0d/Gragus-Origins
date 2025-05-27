@@ -11,22 +11,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpForce = 7f;
     [SerializeField] float jumpMovementReductionForce = 0.14f;
-    [SerializeField] float minJumpVelocity = 5f;
-    [SerializeField] float acceleration;
-    [SerializeField] float decceleration;
-    [SerializeField] float velPower;
+    [SerializeField] float minJumpVelocity = 4f;
+    [SerializeField] float acceleration = 10f;
+    [SerializeField] float decceleration = 10f;
+    [SerializeField] float velPower = 0.9f;
     [Header("Dash Settings")]
     [SerializeField] float dashSpeed = 7.5f;
     [SerializeField] float dashDuration = 0.4f;
     [SerializeField] float dashDecceleration = 0.4f;
-    [SerializeField] float bounceVerticalBoost = 4f;
-    [SerializeField] float bounceHorizontalForce = 6f;
+    [SerializeField] float bounceVerticalBoost = 5f;
+    [SerializeField] float bounceHorizontalForce = 4f;
     [SerializeField] float bounceInputLockDuration = 0.6f;
 
     [Header("Air Control")]
-    [SerializeField] float fallAirControlMinMultiplier = 0.3f;
+    [SerializeField] float fallAirControlMinMultiplier = 0.4f;
     [SerializeField] float fallAirControlMaxMultiplier = 1f;
-    [SerializeField] float fallSpeedForMinControl = -10f;
+    [SerializeField] float fallSpeedForMinControl = -2f;
 
     [Header("Other")]
     [SerializeField] Transform groundCheck;
