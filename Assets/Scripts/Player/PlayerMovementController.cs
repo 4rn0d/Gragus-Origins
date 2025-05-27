@@ -73,12 +73,11 @@ public class PlayerController : MonoBehaviour
         {
             float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, fallSpeed);
             airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
-        }
-
-        if (IsGrounded() && rb.linearVelocity.y <= 0.01f)
-        {
             animator.SetBool("IsJumping", false);
         }
+
+        animator.SetBool("IsJumping", !IsGrounded() && fallSpeed > 0.01f);
+        animator.SetBool("IsFalling", !IsGrounded() && fallSpeed < -0.01f);
 
         float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
         float speedDiff = targetSpeed - rb.linearVelocity.x;
