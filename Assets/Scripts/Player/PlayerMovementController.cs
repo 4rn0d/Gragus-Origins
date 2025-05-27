@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpMovementReductionForce = 0.14f;
     [SerializeField] float minJumpVelocity = 5f;
 
+    [SerializeField] float decceleration;
+    [SerializeField] float velPower;
     [Header("Dash Settings")]
     [SerializeField] float dashSpeed = 7.5f;
     [SerializeField] float dashDuration = 0.4f;
@@ -66,6 +68,11 @@ public class PlayerController : MonoBehaviour
         {
             float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, fallSpeed);
             airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
+            float targetSpeed = _horizontal * moveSpeed;
+            float speedDiff = targetSpeed - rb.linearVelocity.x;
+            float accelRate = (Mathf.Abs(targetSpeed) >0.01f) ? acceleration : decceleration;
+            float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
+            rb.AddForce(movement * Vector2.right);
         }
 
         float currentSpeed = moveSpeed * airControlMultiplier;
