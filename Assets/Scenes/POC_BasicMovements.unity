@@ -332,17 +332,26 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 7
   jumpMovementReductionForce: 0.14
-  dashSpeed: 9.28
-  dashDuration: 0.51
+  minJumpVelocity: 4
+  acceleration: 10
+  decceleration: 9
+  velPower: 0.9
+  dashSpeed: 7.5
+  dashDuration: 0.4
   bounceVerticalBoost: 4
+  bounceHorizontalForce: 5
+  bounceInputLockDuration: 0.6
+  fallAirControlMinMultiplier: 0.3
+  fallAirControlMaxMultiplier: 1
+  fallSpeedForMinControl: -6
   groundCheck: {fileID: 723918397}
   wallCheck: {fileID: 2410516}
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 128
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &395214832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,7 +526,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 591ba48f09b1145c39840834f8279546, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -892,7 +901,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 591ba48f09b1145c39840834f8279546, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1392,7 +1401,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 591ba48f09b1145c39840834f8279546, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
