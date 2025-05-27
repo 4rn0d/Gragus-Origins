@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      character_pink_jump_0: 796043498952653175
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

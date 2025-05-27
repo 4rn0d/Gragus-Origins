@@ -1247,7 +1247,52 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spritesheet-characters-double_0: -4240608095007434132
+      spritesheet-characters-double_1: 8827008269792085561
+      spritesheet-characters-double_10: 5755033569328799132
+      spritesheet-characters-double_11: 8255879128028433076
+      spritesheet-characters-double_12: 1639810836754006545
+      spritesheet-characters-double_13: 8794303303424530111
+      spritesheet-characters-double_14: -5359348178933197495
+      spritesheet-characters-double_15: -7968221402774778867
+      spritesheet-characters-double_16: -5364077592005666863
+      spritesheet-characters-double_17: 5816494426224835668
+      spritesheet-characters-double_18: -930719394128158397
+      spritesheet-characters-double_19: 1985435936523116420
+      spritesheet-characters-double_2: 1785834815151859599
+      spritesheet-characters-double_20: 3460255935833563735
+      spritesheet-characters-double_21: -7818492830802875840
+      spritesheet-characters-double_22: 5710900622154859999
+      spritesheet-characters-double_23: -5112188588347103399
+      spritesheet-characters-double_24: 1234336100883119761
+      spritesheet-characters-double_25: 130208311661628023
+      spritesheet-characters-double_26: 2786661872038163349
+      spritesheet-characters-double_27: 3485969109513300225
+      spritesheet-characters-double_28: -7080930010913199614
+      spritesheet-characters-double_29: -1281490431499312811
+      spritesheet-characters-double_3: 8118902804049812029
+      spritesheet-characters-double_30: 6100152869056007854
+      spritesheet-characters-double_31: 3218633182156324247
+      spritesheet-characters-double_32: 1614309380643143310
+      spritesheet-characters-double_33: 5032210473173201199
+      spritesheet-characters-double_34: -4220268604751642718
+      spritesheet-characters-double_35: 3367452917787547741
+      spritesheet-characters-double_36: 469473082617748027
+      spritesheet-characters-double_37: 3691861249792100421
+      spritesheet-characters-double_38: 6878196981840408092
+      spritesheet-characters-double_39: 248614848919929195
+      spritesheet-characters-double_4: -5955983721933651213
+      spritesheet-characters-double_40: 419896424468609819
+      spritesheet-characters-double_41: -6432694280981526289
+      spritesheet-characters-double_42: 8366856283841133117
+      spritesheet-characters-double_43: -1913271957900567029
+      spritesheet-characters-double_44: 6168213015080472186
+      spritesheet-characters-double_5: 647699611479714900
+      spritesheet-characters-double_6: 9085107729180291494
+      spritesheet-characters-double_7: 4940929174907958823
+      spritesheet-characters-double_8: -663252139636849141
+      spritesheet-characters-double_9: 3533142010948858092
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

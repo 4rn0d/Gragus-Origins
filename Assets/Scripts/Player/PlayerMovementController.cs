@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
             EndDash();
         }
     }
-
+    
     private void TriggerBounce()
     {
         _isBouncing = true;
@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsDashing", false);
         _horizontal = _rawHorizontalInput;
         _isDashing = false;
+        _horizontal = _rawHorizontalInput; 
         if (_rawHorizontalInput == 0)
         {
             float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, rb.linearVelocity.y);
@@ -188,7 +189,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed && IsGrounded())
         {
             animator.SetBool("IsJumping", true);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x * jumpMovementReductionForce, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
         if (context.canceled && rb.linearVelocity.y > minJumpVelocity)

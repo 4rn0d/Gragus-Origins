@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      character_pink_climb_b_0: -7815458581410876381
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
