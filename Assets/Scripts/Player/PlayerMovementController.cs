@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [Header("Dash Settings")]
     [SerializeField] float dashSpeed = 7.5f;
     [SerializeField] float dashDuration = 0.4f;
+    [SerializeField] float dashDecceleration = 0.4f;
     [SerializeField] float bounceVerticalBoost = 4f;
     [SerializeField] float bounceHorizontalForce = 6f;
     [SerializeField] float bounceInputLockDuration = 0.6f;
@@ -125,6 +126,7 @@ public class PlayerController : MonoBehaviour
     private void EndDash()
     {
         animator.SetBool("IsDashing", false);
+        _horizontal = _rawHorizontalInput;
         _isDashing = false;
         if (_rawHorizontalInput == 0)
         {
@@ -132,7 +134,7 @@ public class PlayerController : MonoBehaviour
             float airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
             float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
             float speedDiff = targetSpeed - rb.linearVelocity.x;
-            float movement = Mathf.Pow(Mathf.Abs(speedDiff) * decceleration, velPower) * Mathf.Sign(speedDiff);
+            float movement = Mathf.Pow(Mathf.Abs(speedDiff) * (dashDecceleration), velPower) * Mathf.Sign(speedDiff);
             rb.AddForce(movement * Vector2.right);
             _horizontal = 0;
         }

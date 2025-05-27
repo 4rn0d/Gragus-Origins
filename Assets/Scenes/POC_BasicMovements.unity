@@ -340,12 +340,13 @@ MonoBehaviour:
   velPower: 0.9
   dashSpeed: 7.5
   dashDuration: 0.4
+  dashDecceleration: 0.4
   bounceVerticalBoost: 5
   bounceHorizontalForce: 5
   bounceInputLockDuration: 0.6
-  fallAirControlMinMultiplier: 0.3
+  fallAirControlMinMultiplier: 0.4
   fallAirControlMaxMultiplier: 1
-  fallSpeedForMinControl: -10
+  fallSpeedForMinControl: -2
   groundCheck: {fileID: 723918397}
   wallCheck: {fileID: 2410516}
   groundLayer:
