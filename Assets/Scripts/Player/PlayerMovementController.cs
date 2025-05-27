@@ -128,7 +128,12 @@ public class PlayerController : MonoBehaviour
         _isDashing = false;
         if (_rawHorizontalInput == 0)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, rb.linearVelocity.y);
+            float airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
+            float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
+            float speedDiff = targetSpeed - rb.linearVelocity.x;
+            float movement = Mathf.Pow(Mathf.Abs(speedDiff) * decceleration, velPower) * Mathf.Sign(speedDiff);
+            rb.AddForce(movement * Vector2.right);
             _horizontal = 0;
         }
         else
