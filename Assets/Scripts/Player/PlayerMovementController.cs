@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
             airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
         }
 
-        if (IsGrounded())
+        if (IsGrounded() && rb.linearVelocity.y <= 0.01f)
         {
             animator.SetBool("IsJumping", false);
         }
