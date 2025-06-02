@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 2410515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.395, y: -0.08, z: 0}
+  m_LocalPosition: {x: -1.369, y: -0.08, z: 0}
   m_LocalScale: {x: 1.0311475, y: 1.0442, z: 1.0442}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -489,7 +489,7 @@ Transform:
   m_GameObject: {fileID: 378479057}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.34, y: -2.18, z: -10}
+  m_LocalPosition: {x: 1.495, y: -0.455, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -617,17 +617,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0048173666, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.83, y: 0.98}
+    oldSize: {x: 2.8, y: 3.2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8, y: 0.95}
+  m_Size: {x: 2.8196347, y: 3.12}
   m_EdgeRadius: 0
 --- !u!212 &395214829
 SpriteRenderer:
@@ -673,7 +673,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1299002456533753899, guid: 12839b32948b1c44b9d36a8b3330242f, type: 3}
+  m_Sprite: {fileID: -855298285791758126, guid: 7ebba9cc27b2845a2979be97c83628dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -693,8 +693,8 @@ Transform:
   m_GameObject: {fileID: 395214826}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.34, y: -2.18, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: 1.495, y: -0.455, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 723918397}
@@ -714,7 +714,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 395214827}
-  animator: {fileID: 395214833}
   moveSpeed: 5
   jumpForce: 7
   jumpMovementReductionForce: 0.14
@@ -724,7 +723,6 @@ MonoBehaviour:
   velPower: 0.9
   dashSpeed: 7.5
   dashDuration: 0.4
-  dashDecceleration: 0.4
   bounceVerticalBoost: 5
   bounceHorizontalForce: 5
   bounceInputLockDuration: 0.6
@@ -1462,7 +1460,7 @@ Transform:
   m_GameObject: {fileID: 723918396}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: -0.491, z: 0}
+  m_LocalPosition: {x: 0.07, y: -1.598, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2494,7 +2492,7 @@ Transform:
   m_GameObject: {fileID: 1699415241}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.772316, y: 0.45088005, z: -10}
+  m_LocalPosition: {x: 1.5228274, y: 0.47607997, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
