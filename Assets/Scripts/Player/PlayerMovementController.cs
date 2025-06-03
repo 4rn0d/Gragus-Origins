@@ -1,5 +1,8 @@
+
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -125,12 +128,14 @@ public class PlayerController : MonoBehaviour
         _hasBouncedThisDash = true;
         _justBounced = true;
 
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
-
+        float bounceRotation = 180f;
+        if (_dashDirection == 1)
+        {
+            bounceRotation = 0f;
+        }
+        
         float bounceDir = -_dashDirection;
-        transform.localScale = new Vector3(Mathf.Sign(bounceDir) * -0.5f, 0.5f, 1f);
+        transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
         rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
         
         animator.SetBool("IsDashing", false);
@@ -182,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
         if (_rawHorizontalInput != 0 && !_isDashing)
         {
-            transform.localScale = new Vector3(Mathf.Sign(_rawHorizontalInput) * -0.5f, 0.5f, 1f);
+            transform.localRotation = new Quaternion(0f, (Mathf.Sign(_rawHorizontalInput) * -180) - 180f,0f, 1f);
         }
     }
 
@@ -222,7 +227,6 @@ public class PlayerController : MonoBehaviour
             _dashDirection = _lastNonZeroHorizontal;
             _hasBouncedThisDash = false;
             _canDash = false;
-            transform.localScale = new Vector3(Mathf.Sign(_dashDirection) * -0.5f, 0.5f, 1f);
         }
     }
 
