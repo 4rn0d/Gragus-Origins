@@ -30,6 +30,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float bounceVerticalBoost = 5f;
     [SerializeField] float bounceHorizontalForce = 4f;
     [SerializeField] float bounceInputLockDuration = 0.6f;
+    
+    [Header("BarrelThrow Settings")]
+    [SerializeField] GameObject barrelPrefab;
+    [SerializeField] Transform launchOffset;
+    [SerializeField] float throwDistance = 2.5f;
+    [SerializeField] float throwSpeed = 40f;
+    private float _throwTimer;
+    private bool _canThrow = true;
+    private Barrel _barrel;
 
     [Header("Air Control")]
     [SerializeField] float fallAirControlMinMultiplier = 0.4f;
@@ -49,8 +58,7 @@ public class PlayerController : MonoBehaviour
     private float _dashTimer;
     private float _dashDirection;
     private bool _canDash = true;
-
-
+    
     private bool _justBounced;
     private bool _isBouncing;
     private float _bounceTimer;
@@ -64,7 +72,21 @@ public class PlayerController : MonoBehaviour
         HandleDash();
         HandleBounceTimer();
         UpdateFacingDirection();
+        HandleThrowTimer();
         _justBounced = false;
+    }
+
+    private void HandleThrowTimer()
+    {
+        if (!_canThrow)
+        {
+            _throwTimer -= Time.fixedDeltaTime;
+
+            if (_throwTimer <= 0)
+            {
+                _barrel.StopBarrel();
+            }
+        }
     }
 
     private void HandleMovement()
@@ -241,6 +263,26 @@ public class PlayerController : MonoBehaviour
         if (!_isDashing && !_isBouncing)
         {
             _horizontal = input;
+        }
+    }
+    
+    public void BarrelThrow(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_canThrow)
+            {
+                _canThrow = false;
+                _throwTimer = throwDistance;
+                _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation).GetComponent<Barrel>();
+                _barrel.InitalizeBarrel(launchOffset, throwSpeed);
+            }
+            else
+            {
+                Debug.Log("Boom");
+                _barrel.DestroyBarrel();
+                _canThrow = true;
+            }
         }
     }
 
