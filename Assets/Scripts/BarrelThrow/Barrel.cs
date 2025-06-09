@@ -5,7 +5,9 @@ public class Barrel : MonoBehaviour
 {
     
     [SerializeField] Rigidbody2D rb;
-
+    [SerializeField] float _deceleration = 2f; 
+    
+    private bool _isStopping = false;
     private bool _isRotating;
 
     private void Update()
@@ -16,7 +18,21 @@ public class Barrel : MonoBehaviour
         }
         else
         {
-            transform.localRotation = new Quaternion(0, 0, 0, 0);
+            transform.Rotate(0,0,0);
+        }
+    }
+    
+    private void FixedUpdate()
+    {
+        if (_isStopping)
+        {
+            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, Time.fixedDeltaTime * _deceleration);
+
+            if (rb.linearVelocity.magnitude < 0.05f)
+            {
+                rb.linearVelocity = Vector2.zero;
+                _isStopping = false;
+            }
         }
     }
 
@@ -28,7 +44,7 @@ public class Barrel : MonoBehaviour
     
     public void StopBarrel()
     {
-        rb.linearVelocity = Vector2.zero;
+        _isStopping = true;
         _isRotating = false;
     }
 
