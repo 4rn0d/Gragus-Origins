@@ -1,16 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Barrel : MonoBehaviour
+public class Throw : MonoBehaviour
 {
     
     [SerializeField] GameObject barrelPrefab;
     [SerializeField] Transform launchOffset;
     
-    [SerializeField] float speed = 4.5f;
-
     public void BarrelThrow(InputAction.CallbackContext context)
     {
-        Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation);
+        if (context.performed)
+        {
+            Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation);
+        }
     }
 }
