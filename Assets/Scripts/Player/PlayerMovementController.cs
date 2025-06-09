@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (IsGrounded() && !_isDashing && !_isBouncing)
+        if (IsGrounded() || _hasBouncedThisDash && !_isDashing && !_isBouncing)
         {
             _canDash = true;
         }
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && !_isDashing && !_isBouncing && _canDash)
+        if (context.performed && !_isDashing && _canDash)
         {
             animator.SetBool("IsDashing", true);
             _isDashing = true;

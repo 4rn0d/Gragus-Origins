@@ -7,7 +7,7 @@ public class NextRoom : MonoBehaviour
     public CinemachineCamera currentCam;
     public CinemachineCamera nextCam;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -18,5 +18,6 @@ public class NextRoom : MonoBehaviour
             (currentCam, nextCam) = (nextCam, currentCam);
         }
     }
+    
     
 }
