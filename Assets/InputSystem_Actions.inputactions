@@ -63,7 +63,7 @@
                     "name": "Previous",
                     "type": "Button",
                     "id": "2776c80d-3c14-4091-8c56-d04ced07a2b0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -417,7 +417,7 @@
                 {
                     "name": "",
                     "id": "e4b535c2-93e9-42a9-bd3e-955ac94bae38",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -505,7 +505,7 @@
                 {
                     "name": "",
                     "id": "a2db312d-2015-4b24-9c26-5ddaebc6a9f1",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Touch",
