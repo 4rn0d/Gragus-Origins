@@ -35,6 +35,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float bounceVerticalBoost = 5f;
     [SerializeField] float bounceHorizontalForce = 4f;
     [SerializeField] float bounceInputLockDuration = 0.6f;
+    
+    [Header("BarrelThrow Settings")]
+    [SerializeField] GameObject barrelPrefab;
+    [SerializeField] Transform launchOffset;
+    [SerializeField] float throwDistance = 0.5f;
+    [SerializeField] float throwSpeed = 10f;
+    [SerializeField] float explosionCooldown = 2f;
+    private float _throwTimer;
+    private float _explosionTimer;
+    private bool _canThrow = true;
+    private Barrel _barrel;
 
     [Header("Air Control")]
     [SerializeField] float fallAirControlMinMultiplier = 0.4f;
@@ -43,9 +54,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] Transform groundCheck;
+    [SerializeField] Transform explosionCheck;
     [SerializeField] Transform wallCheck;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask wallLayer;
+    [SerializeField] LayerMask explosionLayer;
 
     private float _horizontal;
     private float _lastNonZeroHorizontal = 1;
@@ -54,13 +67,14 @@ public class PlayerController : MonoBehaviour
     private float _dashTimer;
     private float _dashDirection;
     private bool _canDash = true;
-
-
+    
     private bool _justBounced;
     private bool _isBouncing;
     private float _bounceTimer;
     private bool _hasBouncedThisDash;
     private float _rawHorizontalInput;
+    
+    private bool _sModIsPressed;
 
 
     private void FixedUpdate()
@@ -69,7 +83,32 @@ public class PlayerController : MonoBehaviour
         HandleDash();
         HandleBounceTimer();
         UpdateFacingDirection();
+        HandleThrow();
         _justBounced = false;
+    }
+
+    private void HandleThrow()
+    {
+        if (!_canThrow)
+        {
+            _throwTimer -= Time.fixedDeltaTime;
+            _explosionTimer -= Time.fixedDeltaTime;
+            
+            if (_throwTimer <= 0)
+            {
+                _barrel.StopBarrel();
+            }
+            if (_explosionTimer <= 0)
+            {
+                _barrel.ExplodeBarrel();
+                _canThrow = true;
+            }
+        }
+    }
+    
+    public void BarrelJump()
+    {
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     private void HandleMovement()
@@ -200,6 +239,11 @@ public class PlayerController : MonoBehaviour
     {
         return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.5f, 0.2f), CapsuleDirection2D.Horizontal, 0, groundLayer);
     }
+    
+    public bool IsTouchingExplosion()
+    {
+        return Physics2D.OverlapCapsule(explosionCheck.position, new Vector2(0.5f, 0.2f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+    }
 
     public bool IsTouchingWall()
     {
@@ -249,4 +293,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SMod(InputAction.CallbackContext context)
+    {
+        _sModIsPressed = context.performed;
+    }
+    
+    public void BarrelThrow(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_canThrow)
+            {
+                _canThrow = false;
+                _throwTimer = throwDistance;
+                _explosionTimer = explosionCooldown;
+                if (_sModIsPressed)
+                {
+                    _barrel = Instantiate(barrelPrefab, transform.position, transform.rotation).GetComponent<Barrel>();
+                }
+                else
+                {
+                    _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation).GetComponent<Barrel>();
+                    _barrel.InitalizeBarrel(throwSpeed);
+                }
+            }
+            else
+            {
+                Debug.Log("Boom");
+                _barrel.ExplodeBarrel();
+                _canThrow = true;
+            }
+        }
+    }
+    
 }
