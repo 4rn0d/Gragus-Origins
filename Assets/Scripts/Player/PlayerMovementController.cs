@@ -49,9 +49,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] Transform groundCheck;
+    [SerializeField] Transform explosionCheck;
     [SerializeField] Transform wallCheck;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask wallLayer;
+    [SerializeField] LayerMask explosionLayer;
 
     private float _horizontal;
     private float _lastNonZeroHorizontal = 1;
@@ -74,11 +76,11 @@ public class PlayerController : MonoBehaviour
         HandleDash();
         HandleBounceTimer();
         UpdateFacingDirection();
-        HandleThrowTimer();
+        HandleThrow();
         _justBounced = false;
     }
 
-    private void HandleThrowTimer()
+    private void HandleThrow()
     {
         if (!_canThrow)
         {
@@ -95,6 +97,11 @@ public class PlayerController : MonoBehaviour
                 _canThrow = true;
             }
         }
+    }
+    
+    public void BarrelJump()
+    {
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     private void HandleMovement()
@@ -224,6 +231,11 @@ public class PlayerController : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.5f, 0.2f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+    }
+    
+    public bool IsTouchingExplosion()
+    {
+        return Physics2D.OverlapCapsule(explosionCheck.position, new Vector2(0.5f, 0.2f), CapsuleDirection2D.Horizontal, 0, groundLayer);
     }
 
     public bool IsTouchingWall()

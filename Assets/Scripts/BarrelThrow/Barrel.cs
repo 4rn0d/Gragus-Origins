@@ -15,7 +15,7 @@ public class Barrel : MonoBehaviour
     {
         if (_isRotating)
         {
-            transform.Rotate(0,0,-0.2f); 
+            transform.Rotate(0,0,-0.5f); 
         }
         else
         {
@@ -51,7 +51,7 @@ public class Barrel : MonoBehaviour
 
     public void ExplodeBarrel()
     {
-        Instantiate(explosionEffect, transform.position, transform.rotation);
+        Instantiate(explosionEffect, new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f), new Quaternion(0, 0, 0, 0));
         Destroy(gameObject);
     }
     
