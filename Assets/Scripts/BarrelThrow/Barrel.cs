@@ -15,7 +15,7 @@ public class Barrel : MonoBehaviour
     {
         if (_isRotating)
         {
-            transform.Rotate(0,0,-0.5f); 
+            transform.Rotate(0,0,-1f); 
         }
         else
         {
