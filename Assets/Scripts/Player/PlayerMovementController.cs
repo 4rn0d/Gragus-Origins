@@ -6,6 +6,11 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    private static readonly int IsDashing = Animator.StringToHash("IsDashing");
+    private static readonly int Speed = Animator.StringToHash("Speed");
+    private static readonly int IsJumping = Animator.StringToHash("IsJumping");
+    private static readonly int IsFalling = Animator.StringToHash("IsFalling");
+
     [Header("Player Component References")]
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Animator animator;
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         
-        animator.SetFloat("Speed", Mathf.Abs(_horizontal));
+        animator.SetFloat(Speed, Mathf.Abs(_horizontal));
         
         if (_isDashing || _isBouncing) return;
 
@@ -81,7 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, fallSpeed);
             airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
-            animator.SetBool("IsJumping", false);
+            animator.SetBool(IsJumping, false);
         }
 
         if (IsGrounded())
@@ -93,8 +98,8 @@ public class PlayerController : MonoBehaviour
             _coyoteTimeCounter -= Time.deltaTime;
         }
         
-        animator.SetBool("IsJumping", !IsGrounded() && fallSpeed > 0.01f);
-        animator.SetBool("IsFalling", !IsGrounded() && fallSpeed < -0.01f);
+        animator.SetBool(IsJumping, !IsGrounded() && fallSpeed > 0.01f);
+        animator.SetBool(IsFalling, !IsGrounded() && fallSpeed < -0.01f);
 
         float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
         float speedDiff = targetSpeed - rb.linearVelocity.x;
@@ -138,12 +143,12 @@ public class PlayerController : MonoBehaviour
         transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
         rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
         
-        animator.SetBool("IsDashing", false);
+        animator.SetBool(IsDashing, false);
     }
 
     private void EndDash()
     {
-        animator.SetBool("IsDashing", false);
+        animator.SetBool(IsDashing, false);
         _horizontal = _rawHorizontalInput;
         _isDashing = false;
         _horizontal = _rawHorizontalInput; 
@@ -206,7 +211,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && _coyoteTimeCounter > 0)
         {
-            animator.SetBool("IsJumping", true);
+            animator.SetBool(IsJumping, true);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
@@ -221,7 +226,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && !_isDashing && _canDash)
         {
-            animator.SetBool("IsDashing", true);
+            animator.SetBool(IsDashing, true);
             _isDashing = true;
             _dashTimer = dashDuration;
             _dashDirection = _lastNonZeroHorizontal;
