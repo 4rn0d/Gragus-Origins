@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
     private float _bounceTimer;
     private bool _hasBouncedThisDash;
     private float _rawHorizontalInput;
+    
+    private bool _sModIsPressed;
 
 
     private void FixedUpdate()
@@ -285,6 +287,11 @@ public class PlayerController : MonoBehaviour
             _horizontal = input;
         }
     }
+
+    public void SMod(InputAction.CallbackContext context)
+    {
+        _sModIsPressed = context.performed;
+    }
     
     public void BarrelThrow(InputAction.CallbackContext context)
     {
@@ -295,8 +302,15 @@ public class PlayerController : MonoBehaviour
                 _canThrow = false;
                 _throwTimer = throwDistance;
                 _explosionTimer = explosionCooldown;
-                _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation).GetComponent<Barrel>();
-                _barrel.InitalizeBarrel(launchOffset, throwSpeed);
+                if (_sModIsPressed)
+                {
+                    _barrel = Instantiate(barrelPrefab, transform.position, transform.rotation).GetComponent<Barrel>();
+                }
+                else
+                {
+                    _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation).GetComponent<Barrel>();
+                    _barrel.InitalizeBarrel(throwSpeed);
+                }
             }
             else
             {
@@ -306,5 +320,5 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    
 }

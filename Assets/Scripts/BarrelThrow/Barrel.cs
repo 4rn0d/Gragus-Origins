@@ -38,7 +38,7 @@ public class Barrel : MonoBehaviour
         }
     }
 
-    public void InitalizeBarrel(Transform launchOffset, float speed)
+    public void InitalizeBarrel(float speed)
     {
         _isRotating = true;
         rb.linearVelocity = transform.right * speed;
