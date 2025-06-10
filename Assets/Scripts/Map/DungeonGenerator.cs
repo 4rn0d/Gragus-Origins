@@ -88,7 +88,6 @@ namespace Map
                 }
             }
 
-            // Try to place final room
             foreach (var room in placedRooms)
             {
                 foreach (var door in room.doors)

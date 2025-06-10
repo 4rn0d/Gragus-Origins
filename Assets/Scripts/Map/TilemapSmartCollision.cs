@@ -30,15 +30,16 @@ namespace Map
                 }
             }
 
-            if (touchedWall)
-            {
-                gameObject.layer = LayerMask.NameToLayer(wallLayer);
-            }
-            else if (touchedGround)
+            if (touchedGround)
             {
                 gameObject.layer = LayerMask.NameToLayer(groundLayer);
             }
+            else if (touchedWall)
+            {
+                gameObject.layer = LayerMask.NameToLayer(wallLayer);
+            }
         }
+
 
         private void OnCollisionExit2D(Collision2D collision)
         {
