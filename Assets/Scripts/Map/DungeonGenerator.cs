@@ -69,10 +69,19 @@ namespace Map
                         Destroy(newGO);
                         continue;
                     }
+                    
+                    newGO.transform.position = Vector3.zero;
+                    
+                    Vector3 delta = door.doorTransform.position - matchingDoor.doorTransform.position;
+                    newGO.transform.position += delta;
 
-                    // Align doors
-                    Vector3 offset = door.doorTransform.position - matchingDoor.doorTransform.localPosition;
-                    newGO.transform.position = offset;
+                    Vector3 snappedPos = new Vector3(
+                        Mathf.Round(newGO.transform.position.x),
+                        Mathf.Round(newGO.transform.position.y),
+                        Mathf.Round(newGO.transform.position.z)
+                    );
+                    newGO.transform.position = snappedPos;
+
 
                     Bounds newBounds = newRoom.GetBounds();
                     if (IsOverlapping(newBounds))
@@ -114,7 +123,6 @@ namespace Map
                         placedRooms.Add(finalRoom);
                         return;
                     }
-
                     Destroy(finalGO);
                 }
             }
@@ -132,12 +140,19 @@ namespace Map
 
         bool IsOverlapping(Bounds newRoomBounds)
         {
+            newRoomBounds.Expand(-0.1f); // Shrink bounds slightly to allow small gaps/touches
+
             foreach (var room in placedRooms)
             {
-                if (room.GetBounds().Intersects(newRoomBounds))
+                Bounds existingBounds = room.GetBounds();
+                existingBounds.Expand(-0.1f);
+
+                if (existingBounds.Intersects(newRoomBounds))
                     return true;
             }
+
             return false;
         }
+
     }
 }

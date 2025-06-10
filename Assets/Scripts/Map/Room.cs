@@ -17,13 +17,15 @@ namespace Map
     
         public Bounds GetBounds()
         {
-            var renderers = GetComponentsInChildren<Renderer>();
-            if (renderers.Length == 0) return new Bounds(transform.position, Vector3.zero);
+            var colliders = GetComponentsInChildren<Collider2D>();
+            if (colliders.Length == 0) return new Bounds(transform.position, Vector3.zero);
 
-            Bounds b = renderers[0].bounds;
-            foreach (var r in renderers)
-                b.Encapsulate(r.bounds);
-            return b;
+            Bounds bounds = colliders[0].bounds;
+            for (int i = 1; i < colliders.Length; i++)
+            {
+                bounds.Encapsulate(colliders[i].bounds);
+            }
+            return bounds;
         }
 
         public Door GetUnusedDoor()
