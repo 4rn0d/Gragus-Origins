@@ -5,7 +5,7 @@ public class Barrel : MonoBehaviour
 {
     
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] float _deceleration = 2f; 
+    [SerializeField] float deceleration = 2f;
     
     private bool _isStopping = false;
     private bool _isRotating;
@@ -26,12 +26,13 @@ public class Barrel : MonoBehaviour
     {
         if (_isStopping)
         {
-            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, Time.fixedDeltaTime * _deceleration);
+            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, Time.fixedDeltaTime * deceleration);
 
             if (rb.linearVelocity.magnitude < 0.05f)
             {
                 rb.linearVelocity = Vector2.zero;
                 _isStopping = false;
+                _isRotating = false;
             }
         }
     }
@@ -45,10 +46,9 @@ public class Barrel : MonoBehaviour
     public void StopBarrel()
     {
         _isStopping = true;
-        _isRotating = false;
     }
 
-    public void DestroyBarrel()
+    public void ExplodeBarrel()
     {
         Destroy(gameObject);
     }

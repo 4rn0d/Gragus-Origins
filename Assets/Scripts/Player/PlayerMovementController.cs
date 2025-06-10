@@ -34,9 +34,11 @@ public class PlayerController : MonoBehaviour
     [Header("BarrelThrow Settings")]
     [SerializeField] GameObject barrelPrefab;
     [SerializeField] Transform launchOffset;
-    [SerializeField] float throwDistance = 2.5f;
-    [SerializeField] float throwSpeed = 40f;
+    [SerializeField] float throwDistance = 0.5f;
+    [SerializeField] float throwSpeed = 10f;
+    [SerializeField] float explosionCooldown = 2f;
     private float _throwTimer;
+    private float _explosionTimer;
     private bool _canThrow = true;
     private Barrel _barrel;
 
@@ -81,10 +83,16 @@ public class PlayerController : MonoBehaviour
         if (!_canThrow)
         {
             _throwTimer -= Time.fixedDeltaTime;
-
+            _explosionTimer -= Time.fixedDeltaTime;
+            
             if (_throwTimer <= 0)
             {
                 _barrel.StopBarrel();
+            }
+            if (_explosionTimer <= 0)
+            {
+                _barrel.ExplodeBarrel();
+                _canThrow = true;
             }
         }
     }
@@ -274,13 +282,14 @@ public class PlayerController : MonoBehaviour
             {
                 _canThrow = false;
                 _throwTimer = throwDistance;
+                _explosionTimer = explosionCooldown;
                 _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation).GetComponent<Barrel>();
                 _barrel.InitalizeBarrel(launchOffset, throwSpeed);
             }
             else
             {
                 Debug.Log("Boom");
-                _barrel.DestroyBarrel();
+                _barrel.ExplodeBarrel();
                 _canThrow = true;
             }
         }

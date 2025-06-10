@@ -731,6 +731,10 @@ MonoBehaviour:
   bounceVerticalBoost: 5
   bounceHorizontalForce: 5
   bounceInputLockDuration: 0.6
+  barrelPrefab: {fileID: 5130933438599435640, guid: a80402e10d05e5948b163dfcee01ac3a, type: 3}
+  launchOffset: {fileID: 1673869369}
+  throwDistance: 2.5
+  throwSpeed: 40
   fallAirControlMinMultiplier: 0.4
   fallAirControlMaxMultiplier: 1
   fallSpeedForMinControl: -2
@@ -885,8 +889,8 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 395214834}
-        m_TargetAssemblyTypeName: Barrel, Assembly-CSharp
+      - m_Target: {fileID: 395214831}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: BarrelThrow
         m_Mode: 0
         m_Arguments:
@@ -938,9 +942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44758e5e0a29c542b7026144a30d904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrelPrefab: {fileID: 5130933438599435640, guid: a80402e10d05e5948b163dfcee01ac3a, type: 3}
-  launchOffset: {fileID: 1673869369}
-  speed: 4.5
 --- !u!1 &408055277
 GameObject:
   m_ObjectHideFlags: 0
