@@ -5,6 +5,7 @@ public class Barrel : MonoBehaviour
 {
     
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] GameObject explosionEffect;
     [SerializeField] float deceleration = 2f;
     
     private bool _isStopping = false;
@@ -50,6 +51,7 @@ public class Barrel : MonoBehaviour
 
     public void ExplodeBarrel()
     {
+        Instantiate(explosionEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
     
