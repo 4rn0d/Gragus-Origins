@@ -9,7 +9,7 @@ Sprite:
   m_Name: thumbnail_Gragas32-Sheet_61
   m_Rect:
     serializedVersion: 2
-    x: 107
+    x: 106
     y: 56
     width: 26
     height: 32
@@ -102,18 +102,18 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 0000d0be0000003f000000000000d03e0000003f000000000000d0be000000bf000000000000d03e000000bf00000000039db63dc7719c3e96fce23dc7719c3e039db63d721c473e96fce23d721c473e
+      _typelessdata: 0000d0be0000003f000000000000d03e0000003f000000000000d0be000000bf000000000000d03e000000bf000000001be8b43dc7719c3eae47e13dc7719c3e1be8b43d721c473eae47e13d721c473e
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
-      x: 107
+      x: 106
       y: 56
       width: 26
       height: 32
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 32, y: 120, z: 32, w: 72}
+    uvTransform: {x: 32, y: 119, z: 32, w: 72}
     downscaleMultiplier: 1
   m_AtlasRD:
     serializedVersion: 3
@@ -193,28 +193,27 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 0000d0be0000003f000000000000d03e0000003f000000000000d0be000000bf000000000000d03e000000bf00000000039db63dc7719c3e96fce23dc7719c3e039db63d721c473e96fce23d721c473e
+      _typelessdata: 0000d0be0000003f000000000000d03e0000003f000000000000d0be000000bf000000000000d03e000000bf000000001be8b43dc7719c3eae47e13dc7719c3e1be8b43d721c473eae47e13d721c473e
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
-      x: 107
+      x: 106
       y: 56
       width: 26
       height: 32
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 32, y: 120, z: 32, w: 72}
+    uvTransform: {x: 32, y: 119, z: 32, w: 72}
     downscaleMultiplier: 1
   m_PhysicsShape:
-  - - {x: 0.0625, y: 0.5}
-    - {x: -0.28125, y: 0.5}
-    - {x: -0.40625, y: 0.375}
-    - {x: -0.40625, y: -0.3125}
-    - {x: -0.34375, y: -0.5}
+  - - {x: -0.3125, y: 0.5}
+    - {x: -0.40625, y: 0.46875}
+    - {x: -0.40625, y: -0.375}
+    - {x: -0.3125, y: -0.5}
     - {x: 0.40625, y: -0.5}
-    - {x: 0.40625, y: 0.25}
-    - {x: 0.28125, y: 0.34375}
+    - {x: 0.40625, y: 0.34375}
+    - {x: 0.25, y: 0.5}
   m_Bones: []
   m_ScriptableObjects: []
   m_SpriteID: 92bc100f160bfb940800000000000000
