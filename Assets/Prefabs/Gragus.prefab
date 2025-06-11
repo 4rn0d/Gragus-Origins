@@ -315,7 +315,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5720579259584363180}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: BarrelThrow
+        m_MethodName: StartBarrelAnim
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

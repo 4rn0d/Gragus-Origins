@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour
         _sModIsPressed = context.performed;
     }
     
-    public void BarrelThrow(InputAction.CallbackContext context)
+    public void StartBarrelAnim(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -312,6 +312,11 @@ public class PlayerController : MonoBehaviour
                 _canThrow = true;
             }
         }
+    }
+
+    private void EndBarrelAnim()
+    {
+        animator.SetBool(IsRolling, false);
     }
     
     private void SpawnBarrel()
