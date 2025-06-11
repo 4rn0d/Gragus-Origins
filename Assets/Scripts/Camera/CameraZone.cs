@@ -14,6 +14,7 @@ namespace Camera
 
         void Start()
         {
+            
             if (virtualCamera != null)
                 virtualCamera.Priority = inactivePriority;
 
@@ -46,7 +47,7 @@ namespace Camera
             if (other.CompareTag("Player") && virtualCamera != null)
             {
                 virtualCamera.Priority = inactivePriority;
-                virtualCamera.Follow = null; // Optional: only if you want the camera to stop following
+                virtualCamera.Follow = null;
             }
         }
     }

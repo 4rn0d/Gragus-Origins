@@ -6828,7 +6828,7 @@ Transform:
   m_GameObject: {fileID: 8444786960299025771}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.8319025, y: 1.02595, z: -10}
+  m_LocalPosition: {x: -10.07419, y: -0.8577397, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6892,7 +6892,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8444786960299025771}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &3781983268769623777
 MonoBehaviour:
   m_ObjectHideFlags: 0

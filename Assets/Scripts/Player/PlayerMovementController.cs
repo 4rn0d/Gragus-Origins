@@ -1,6 +1,8 @@
 
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -10,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int IsJumping = Animator.StringToHash("IsJumping");
     private static readonly int IsFalling = Animator.StringToHash("IsFalling");
+    private static readonly int IsRolling = Animator.StringToHash("IsRolling");
 
     [Header("Player Component References")]
     [SerializeField] Rigidbody2D rb;
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float throwDistance = 0.5f;
     [SerializeField] float throwSpeed = 10f;
     [SerializeField] float explosionCooldown = 2f;
+    [SerializeField] float explosionForce = 10f;
     private float _throwTimer;
     private float _explosionTimer;
     private bool _canThrow = true;
@@ -54,11 +58,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] Transform groundCheck;
-    [SerializeField] Transform explosionCheck;
     [SerializeField] Transform wallCheck;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask wallLayer;
-    [SerializeField] LayerMask explosionLayer;
 
     private float _horizontal;
     private float _lastNonZeroHorizontal = 1;
@@ -93,12 +95,12 @@ public class PlayerController : MonoBehaviour
         {
             _throwTimer -= Time.fixedDeltaTime;
             _explosionTimer -= Time.fixedDeltaTime;
-            
-            if (_throwTimer <= 0)
+
+            if (_throwTimer <= 0 && _barrel != null)
             {
                 _barrel.StopBarrel();
             }
-            if (_explosionTimer <= 0)
+            if (_explosionTimer <= 0 && _barrel != null)
             {
                 _barrel.ExplodeBarrel();
                 _canThrow = true;
@@ -106,9 +108,10 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void BarrelJump()
+    public void BarrelJump(Vector3 position)
     {
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        Vector3 moveDirection = position - rb.transform.position;
+        rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
     }
 
     private void HandleMovement()
@@ -239,11 +242,6 @@ public class PlayerController : MonoBehaviour
     {
         return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.5f, 0.2f), CapsuleDirection2D.Horizontal, 0, groundLayer);
     }
-    
-    public bool IsTouchingExplosion()
-    {
-        return Physics2D.OverlapCapsule(explosionCheck.position, new Vector2(0.5f, 0.2f), CapsuleDirection2D.Horizontal, 0, groundLayer);
-    }
 
     public bool IsTouchingWall()
     {
@@ -305,17 +303,7 @@ public class PlayerController : MonoBehaviour
             if (_canThrow)
             {
                 _canThrow = false;
-                _throwTimer = throwDistance;
-                _explosionTimer = explosionCooldown;
-                if (_sModIsPressed)
-                {
-                    _barrel = Instantiate(barrelPrefab, transform.position, transform.rotation).GetComponent<Barrel>();
-                }
-                else
-                {
-                    _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation).GetComponent<Barrel>();
-                    _barrel.InitalizeBarrel(throwSpeed);
-                }
+                animator.SetBool(IsRolling, true);
             }
             else
             {
@@ -323,6 +311,21 @@ public class PlayerController : MonoBehaviour
                 _barrel.ExplodeBarrel();
                 _canThrow = true;
             }
+        }
+    }
+    
+    private void SpawnBarrel()
+    {
+        _throwTimer = throwDistance;
+        _explosionTimer = explosionCooldown;
+        if (_sModIsPressed)
+        {
+            _barrel = Instantiate(barrelPrefab, transform.position, transform.rotation).GetComponent<Barrel>();
+        }
+        else
+        {
+            _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation).GetComponent<Barrel>();
+            _barrel.InitalizeBarrel(rb, throwSpeed);
         }
     }
     

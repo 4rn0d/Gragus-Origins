@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
@@ -29,9 +31,8 @@ public class Explosion : MonoBehaviour
 
             if (_canKnockback)
             {
-                player.BarrelJump();
+                player.BarrelJump(transform.position);
             }
         }
     }
-    
 }
