@@ -17,8 +17,17 @@ namespace Map
 
         private List<Room> placedRooms = new();
 
+        [Header("Random Seed")]
+        public int seed = 0;
+        public bool useRandomSeed = true;
+        
         void Start()
         {
+            if (useRandomSeed)
+                seed = System.DateTime.Now.GetHashCode();
+            Random.InitState(seed);
+            Shuffle(normalRooms);
+            Shuffle(specialRooms);
             GenerateDungeon();
         }
 
@@ -31,17 +40,19 @@ namespace Map
             Room startRoom = startGO.GetComponent<Room>();
             placedRooms.Add(startRoom);
 
-            Queue<Room> frontier = new();
-            frontier.Enqueue(startRoom);
+            List<Room> frontier = new();
+            frontier.Add(startRoom);
 
             int placedNormals = 0;
             int placedSpecials = 0;
 
             while (frontier.Count > 0 && (placedNormals < normalRoomCount || placedSpecials < specialRoomCount))
             {
-                Room current = frontier.Dequeue();
+                int index = Random.Range(0, frontier.Count);
+                Room current = frontier[index];
+                frontier.RemoveAt(index);
 
-                foreach (var door in current.doors)
+                foreach (var door in ShuffleList(current.doors))
                 {
                     if (door.isUsed) continue;
 
@@ -93,7 +104,7 @@ namespace Map
                     door.isUsed = true;
                     matchingDoor.isUsed = true;
                     placedRooms.Add(newRoom);
-                    frontier.Enqueue(newRoom);
+                    frontier.Add(newRoom);
                 }
             }
 
@@ -152,6 +163,24 @@ namespace Map
             }
 
             return false;
+        }
+        void Shuffle<T>(List<T> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                int rand = Random.Range(i, list.Count);
+                (list[i], list[rand]) = (list[rand], list[i]);
+            }
+        }
+        List<T> ShuffleList<T>(List<T> list)
+        {
+            List<T> shuffled = new List<T>(list);
+            for (int i = 0; i < shuffled.Count; i++)
+            {
+                int rand = Random.Range(i, shuffled.Count);
+                (shuffled[i], shuffled[rand]) = (shuffled[rand], shuffled[i]);
+            }
+            return shuffled;
         }
 
     }
