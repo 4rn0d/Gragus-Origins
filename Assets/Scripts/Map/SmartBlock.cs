@@ -11,15 +11,13 @@ public class SmartBlock : MonoBehaviour
 
         foreach (var contact in collision.contacts)
         {
-            // Now checking for player on top (normal pointing down)
             if (Vector2.Angle(contact.normal, Vector2.down) < 45f)
             {
                 gameObject.layer = LayerMask.NameToLayer(groundLayer);
                 return;
             }
         }
-
-        // If no top collision found, default to wall
+        
         gameObject.layer = LayerMask.NameToLayer(wallLayer);
     }
 
