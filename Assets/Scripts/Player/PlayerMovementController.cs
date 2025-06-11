@@ -1,11 +1,19 @@
 
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    private static readonly int IsDashing = Animator.StringToHash("IsDashing");
+    private static readonly int Speed = Animator.StringToHash("Speed");
+    private static readonly int IsJumping = Animator.StringToHash("IsJumping");
+    private static readonly int IsFalling = Animator.StringToHash("IsFalling");
+    private static readonly int IsRolling = Animator.StringToHash("IsRolling");
+
     [Header("Player Component References")]
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Animator animator;
@@ -30,6 +38,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float bounceVerticalBoost = 5f;
     [SerializeField] float bounceHorizontalForce = 4f;
     [SerializeField] float bounceInputLockDuration = 0.6f;
+    
+    [Header("BarrelThrow Settings")]
+    [SerializeField] GameObject barrelPrefab;
+    [SerializeField] Transform launchOffset;
+    [SerializeField] float throwDistance = 0.5f;
+    [SerializeField] float throwSpeed = 10f;
+    [SerializeField] float explosionCooldown = 2f;
+    [SerializeField] float explosionForce = 10f;
+    private float _throwTimer;
+    private float _explosionTimer;
+    private bool _canThrow = true;
+    private Barrel _barrel;
 
     [Header("Air Control")]
     [SerializeField] float fallAirControlMinMultiplier = 0.4f;
@@ -49,13 +69,14 @@ public class PlayerController : MonoBehaviour
     private float _dashTimer;
     private float _dashDirection;
     private bool _canDash = true;
-
-
+    
     private bool _justBounced;
     private bool _isBouncing;
     private float _bounceTimer;
     private bool _hasBouncedThisDash;
     private float _rawHorizontalInput;
+    
+    private bool _sModIsPressed;
 
 
     private void FixedUpdate()
@@ -64,13 +85,39 @@ public class PlayerController : MonoBehaviour
         HandleDash();
         HandleBounceTimer();
         UpdateFacingDirection();
+        HandleThrow();
         _justBounced = false;
+    }
+
+    private void HandleThrow()
+    {
+        if (!_canThrow)
+        {
+            _throwTimer -= Time.fixedDeltaTime;
+            _explosionTimer -= Time.fixedDeltaTime;
+
+            if (_throwTimer <= 0 && _barrel != null)
+            {
+                _barrel.StopBarrel();
+            }
+            if (_explosionTimer <= 0 && _barrel != null)
+            {
+                _barrel.ExplodeBarrel();
+                _canThrow = true;
+            }
+        }
+    }
+    
+    public void BarrelJump(Vector3 position)
+    {
+        Vector3 moveDirection = position - rb.transform.position;
+        rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
     }
 
     private void HandleMovement()
     {
         
-        animator.SetFloat("Speed", Mathf.Abs(_horizontal));
+        animator.SetFloat(Speed, Mathf.Abs(_horizontal));
         
         if (_isDashing || _isBouncing) return;
 
@@ -81,7 +128,7 @@ public class PlayerController : MonoBehaviour
         {
             float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, fallSpeed);
             airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
-            animator.SetBool("IsJumping", false);
+            animator.SetBool(IsJumping, false);
         }
 
         if (IsGrounded())
@@ -93,8 +140,8 @@ public class PlayerController : MonoBehaviour
             _coyoteTimeCounter -= Time.deltaTime;
         }
         
-        animator.SetBool("IsJumping", !IsGrounded() && fallSpeed > 0.01f);
-        animator.SetBool("IsFalling", !IsGrounded() && fallSpeed < -0.01f);
+        animator.SetBool(IsJumping, !IsGrounded() && fallSpeed > 0.01f);
+        animator.SetBool(IsFalling, !IsGrounded() && fallSpeed < -0.01f);
 
         float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
         float speedDiff = targetSpeed - rb.linearVelocity.x;
@@ -138,12 +185,12 @@ public class PlayerController : MonoBehaviour
         transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
         rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
         
-        animator.SetBool("IsDashing", false);
+        animator.SetBool(IsDashing, false);
     }
 
     private void EndDash()
     {
-        animator.SetBool("IsDashing", false);
+        animator.SetBool(IsDashing, false);
         _horizontal = _rawHorizontalInput;
         _isDashing = false;
         _horizontal = _rawHorizontalInput; 
@@ -206,7 +253,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && _coyoteTimeCounter > 0)
         {
-            animator.SetBool("IsJumping", true);
+            animator.SetBool(IsJumping, true);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
@@ -221,7 +268,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && !_isDashing && _canDash)
         {
-            animator.SetBool("IsDashing", true);
+            animator.SetBool(IsDashing, true);
             _isDashing = true;
             _dashTimer = dashDuration;
             _dashDirection = _lastNonZeroHorizontal;
@@ -244,4 +291,47 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SMod(InputAction.CallbackContext context)
+    {
+        _sModIsPressed = context.performed;
+    }
+    
+    public void StartBarrelAnim(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_canThrow)
+            {
+                _canThrow = false;
+                animator.SetBool(IsRolling, true);
+            }
+            else
+            {
+                Debug.Log("Boom");
+                _barrel.ExplodeBarrel();
+                _canThrow = true;
+            }
+        }
+    }
+
+    private void EndBarrelAnim()
+    {
+        animator.SetBool(IsRolling, false);
+    }
+    
+    private void SpawnBarrel()
+    {
+        _throwTimer = throwDistance;
+        _explosionTimer = explosionCooldown;
+        if (_sModIsPressed)
+        {
+            _barrel = Instantiate(barrelPrefab, transform.position, transform.rotation).GetComponent<Barrel>();
+        }
+        else
+        {
+            _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation).GetComponent<Barrel>();
+            _barrel.InitalizeBarrel(rb, throwSpeed);
+        }
+    }
+    
 }
