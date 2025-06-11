@@ -21,39 +21,37 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: e0afc71b991d9cd41acd4de9479d9db0, type: 2}
-    - time: 0.071428575
       value: {fileID: 21300000, guid: 1bd108bec31670a4d8d7c8595100db7b, type: 2}
-    - time: 0.14285715
+    - time: 0.083333336
       value: {fileID: 21300000, guid: a1e5e51050a6c7144a5f00559d1dc9cd, type: 2}
-    - time: 0.21428572
+    - time: 0.16666667
       value: {fileID: 21300000, guid: d088bcbc5044159418923f94806970cc, type: 2}
-    - time: 0.2857143
+    - time: 0.25
       value: {fileID: 21300000, guid: e74831c0f67818a4c93a9caf4348c545, type: 2}
-    - time: 0.35714287
+    - time: 0.33333334
       value: {fileID: 21300000, guid: a3653e0630bb7654ab9bc1fbe2b570a2, type: 2}
-    - time: 0.42857143
+    - time: 0.41666666
       value: {fileID: 21300000, guid: e2ffd8149d06ade4a83f526b8e7ee614, type: 2}
     - time: 0.5
       value: {fileID: 21300000, guid: f975ca7cb17390348bb1661e2287ba23, type: 2}
-    - time: 0.5714286
+    - time: 0.5833333
       value: {fileID: 7946131094477816359, guid: f8ce89a71a09c5f48a610090a663c735, type: 3}
-    - time: 0.64285713
+    - time: 0.6666667
       value: {fileID: 21300000, guid: 5653675b9f453bc409d364549d94531d, type: 2}
-    - time: 0.71428573
+    - time: 0.75
       value: {fileID: 21300000, guid: 00f8159f88e526843b0e0ba23d9c9288, type: 2}
-    - time: 0.78571427
+    - time: 0.8333333
       value: {fileID: 21300000, guid: 1b2e417f4fdbdbb40bcd32b3b71c7c65, type: 2}
-    - time: 0.85714287
+    - time: 0.9166667
       value: {fileID: 21300000, guid: bf7d58780eb41d44a826c4f10907ff1e, type: 2}
-    - time: 0.9285714
+    - time: 1
       value: {fileID: 21300000, guid: 054c7765cb20e5041ac907604bcdc154, type: 2}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 14
+  m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -70,7 +68,6 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: e0afc71b991d9cd41acd4de9479d9db0, type: 2}
     - {fileID: 21300000, guid: 1bd108bec31670a4d8d7c8595100db7b, type: 2}
     - {fileID: 21300000, guid: a1e5e51050a6c7144a5f00559d1dc9cd, type: 2}
     - {fileID: 21300000, guid: d088bcbc5044159418923f94806970cc, type: 2}
@@ -89,7 +86,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 1.0833334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -109,14 +106,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.64285713
+  - time: 0.6666667
     functionName: SpawnBarrel
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1
+  - time: 1.0833334
     functionName: EndBarrelAnim
     data: 
     objectReferenceParameter: {fileID: 0}
