@@ -28,13 +28,10 @@ public class Barrel : MonoBehaviour
     {
         if (player.linearVelocity.magnitude <= 1f)
         {
-            Debug.Log(player.linearVelocity.magnitude);
             rb.linearVelocity = speed * transform.right;
         }
         else
         {
-            Debug.Log(player.linearVelocity.magnitude);
-            Debug.Log("En Movement");
             rb.linearVelocity = (player.linearVelocity.magnitude + speed) * transform.right;
         }
     }

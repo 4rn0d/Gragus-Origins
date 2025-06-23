@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float acceleration = 10f;
     [SerializeField] float decceleration = 10f;
     [SerializeField] float velPower = 0.9f;
+    [SerializeField] float maxAlcohoLevel = 10f;
+    [SerializeField] float alcoholLevel = 10f;
+    [SerializeField] Image alcoholBar;
     
     [Header("Jump Settings")]
     [SerializeField] float jumpForce = 7f;
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float throwSpeed = 10f;
     [SerializeField] float explosionCooldown = 2f;
     [SerializeField] float explosionForce = 10f;
+    [SerializeField] float throwAlcoholCost = 1f;
     private float _throwTimer;
     private float _explosionTimer;
     private bool _canThrow = true;
@@ -78,6 +83,10 @@ public class PlayerController : MonoBehaviour
     
     private bool _sModIsPressed;
 
+    void Awake(){
+        alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
+        // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
+    }
 
     private void FixedUpdate()
     {
@@ -302,8 +311,12 @@ public class PlayerController : MonoBehaviour
         {
             if (_canThrow)
             {
-                _canThrow = false;
-                animator.SetBool(IsRolling, true);
+                if (alcoholLevel - throwAlcoholCost >= 0)
+                {
+                    _canThrow = false;
+                    animator.SetBool(IsRolling, true);
+                    UseAlcohol(throwAlcoholCost);
+                }
             }
             else
             {
@@ -312,6 +325,14 @@ public class PlayerController : MonoBehaviour
                 _canThrow = true;
             }
         }
+    }
+
+    private float UseAlcohol(float cost)
+    {
+        alcoholLevel -= cost;
+        alcoholBar.fillAmount -= (cost*0.1f);
+        Debug.Log(alcoholLevel);
+        return alcoholLevel;
     }
 
     private void EndBarrelAnim()

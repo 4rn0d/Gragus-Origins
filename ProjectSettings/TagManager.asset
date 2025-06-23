@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - AlcoholBar
   - Wall
+  - HealthBar
   layers:
   - Default
   - TransparentFX
