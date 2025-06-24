@@ -157,8 +157,10 @@ MonoBehaviour:
   - {fileID: 7764545210754260556, guid: dda35c3c4bf275c428b1e627678c1938, type: 3}
   specialRooms:
   - {fileID: 7764545210754260556, guid: dda35c3c4bf275c428b1e627678c1938, type: 3}
-  normalRoomCount: 4
+  normalRoomCount: 3
   specialRoomCount: 1
+  seed: 0
+  useRandomSeed: 1
 --- !u!4 &1755891252
 Transform:
   m_ObjectHideFlags: 0

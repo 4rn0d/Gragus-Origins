@@ -18,14 +18,20 @@ namespace Map
         public Bounds GetBounds()
         {
             var colliders = GetComponentsInChildren<Collider2D>();
-            if (colliders.Length == 0) return new Bounds(transform.position, Vector3.zero);
-
-            Bounds bounds = colliders[0].bounds;
-            for (int i = 1; i < colliders.Length; i++)
+            var realColliders = new List<Collider2D>();
+            foreach (var col in colliders)
             {
-                bounds.Encapsulate(colliders[i].bounds);
+                if (!col.isTrigger) realColliders.Add(col);
+            }
+            if (realColliders.Count == 0) return new Bounds(transform.position, Vector3.zero);
+
+            Bounds bounds = realColliders[0].bounds;
+            for (int i = 1; i < realColliders.Count; i++)
+            {
+                bounds.Encapsulate(realColliders[i].bounds);
             }
             return bounds;
+
         }
 
         public Door GetUnusedDoor()
@@ -34,5 +40,12 @@ namespace Map
                 if (!door.isUsed) return door;
             return null;
         }
+        
+        public Collider2D[] colliders;
+        void Awake()
+        {
+            colliders = GetComponentsInChildren<Collider2D>();
+        }
+
     }
 }
