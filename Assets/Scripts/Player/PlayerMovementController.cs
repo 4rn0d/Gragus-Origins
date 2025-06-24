@@ -315,7 +315,6 @@ public class PlayerController : MonoBehaviour
                 {
                     _canThrow = false;
                     animator.SetBool(IsRolling, true);
-                    UseAlcohol(throwAlcoholCost);
                 }
             }
             else
@@ -335,6 +334,10 @@ public class PlayerController : MonoBehaviour
         return alcoholLevel;
     }
 
+    public void DrinkAlcohol()
+    {
+    }
+
     private void EndBarrelAnim()
     {
         animator.SetBool(IsRolling, false);
@@ -342,6 +345,7 @@ public class PlayerController : MonoBehaviour
     
     private void SpawnBarrel()
     {
+        UseAlcohol(throwAlcoholCost);
         _throwTimer = throwDistance;
         _explosionTimer = explosionCooldown;
         if (_sModIsPressed)
