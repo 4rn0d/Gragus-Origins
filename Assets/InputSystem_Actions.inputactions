@@ -259,11 +259,11 @@
                 },
                 {
                     "name": "",
-                    "id": "e4b535c2-93e9-42a9-bd3e-955ac94bae38",
-                    "path": "<Keyboard>/space",
+                    "id": "27ef9611-26cf-472f-b9b5-420a69de5839",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
