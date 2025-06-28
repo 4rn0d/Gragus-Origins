@@ -1,15 +1,27 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Scripts
 {
-    enum EffectType
+    public enum EffectType
     {
         Swiftness,
         Health,
         Resistance,
         Power,
         Stun
+    }
+
+    public enum State
+    {
+        Full,
+        Half,
+        Empty,
+        Broken,
+        Activated,
+        Effected
     }
     
     public class Alcohol : MonoBehaviour
@@ -24,36 +36,80 @@ namespace Scripts
         [SerializeField] float cooldown = 5;
 
         private Effect _effect;
+        public State state;
+        private Image _image;
 
         private void Awake()
         {
+            GetComponent<Image>().sprite = GetSpriteByState();
             _effect = GetEffectByType();
-            gameObject.GetComponent<Image>().sprite = fullBottle;
+            Debug.Log($"Initial state: {state}");
+            UpdateSprite();
+        }
+        
+        private void UpdateSprite()
+        {
+            Debug.Log(state);
+            GetComponent<Image>().sprite = GetSpriteByState();
         }
 
+        private Sprite GetSpriteByState()
+        {
+            switch (state)
+            {
+                case State.Full: return fullBottle;
+                case State.Half: return halfBottle;
+                case State.Empty: return emptyBottle;
+                case State.Broken: return brokenBottle;
+                case State.Activated: return activatedBottle;
+                case State.Effected: return effectBottle;
+                default: return fullBottle;
+            }
+        }
+        
         private Effect GetEffectByType()
         {
             switch (alcoholEffect)
             {
-                case EffectType.Swiftness:
-                    return _effect = new Swiftness();
-                case EffectType.Health:
-                    return _effect = new Health();
-                case EffectType.Resistance:
-                    return _effect = new Resistance();
-                case EffectType.Power:
-                    return _effect = new Power();
-                case EffectType.Stun:
-                    return _effect = new Stun();
-                default:
-                    return null;
+                case EffectType.Swiftness: return new Swiftness();
+                case EffectType.Health: return new Health();
+                case EffectType.Resistance: return new Resistance();
+                case EffectType.Power: return new Power();
+                case EffectType.Stun: return new Stun();
+                default: return null;
             }
+        }
+
+        public void ChangeState(State newState)
+        {
+            if (state == newState) return;
+        
+            state = newState;
+            UpdateSprite();
         }
         
         public void Drink()
         {
-            _effect = GetEffectByType();
-            _effect.Apply();
+            Debug.Log(state);
+            switch (state)
+            {
+                case State.Full:
+                    ChangeState(State.Half);
+                    _effect.Apply();
+                    break;
+                case State.Half:
+                    ChangeState(State.Empty);
+                    _effect.Apply();
+                    break;
+                default:
+                    Debug.LogWarning($"Can't drink in state: {state}");
+                    return;
+            }
+        }
+        
+        public void Refill()
+        {
+            ChangeState(State.Full);
         }
     }
 }

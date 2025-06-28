@@ -358,7 +358,6 @@ namespace Scripts
             if (context.performed)
             {
                 _currentAlcohol.Drink();
-                Debug.Log("drank alcohol");
             }
         }
 
