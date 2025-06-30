@@ -100,6 +100,7 @@ namespace Scripts
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
             _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+            Debug.Log(_currentAlcohol);
 
             // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
         }
@@ -357,6 +358,7 @@ namespace Scripts
         {
             if (context.performed)
             {
+                Debug.Log(_currentAlcohol);
                 _currentAlcohol.Drink();
             }
         }

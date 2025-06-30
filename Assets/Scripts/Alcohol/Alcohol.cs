@@ -50,7 +50,9 @@ namespace Scripts
         private void UpdateSprite()
         {
             Debug.Log(state);
-            GetComponent<Image>().sprite = GetSpriteByState();
+            var newSprite = GetSpriteByState();
+            Debug.Log(newSprite);
+            GetComponent<Image>().sprite = newSprite;
         }
 
         private Sprite GetSpriteByState()
@@ -69,6 +71,7 @@ namespace Scripts
         
         private Effect GetEffectByType()
         {
+            Debug.Log(alcoholEffect);   
             switch (alcoholEffect)
             {
                 case EffectType.Swiftness: return new Swiftness();
@@ -91,16 +94,17 @@ namespace Scripts
         public void Drink()
         {
             Debug.Log(state);
+            _effect = GetEffectByType();
             switch (state)
             {
                 case State.Full:
                     ChangeState(State.Half);
                     _effect.Apply();
-                    break;
+                    return;
                 case State.Half:
                     ChangeState(State.Empty);
                     _effect.Apply();
-                    break;
+                    return;
                 default:
                     Debug.LogWarning($"Can't drink in state: {state}");
                     return;

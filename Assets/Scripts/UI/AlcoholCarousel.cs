@@ -72,14 +72,14 @@ namespace Scripts
 
         public Alcohol GetCurrentAlcohol()
         {
-            return alcoholList[_currentIndex];
+            return _alcoholInstances[alcoholList[_currentIndex]];
         }
 
         public Alcohol NextPotion()
         {
             _currentIndex = (_currentIndex + 1) % alcoholList.Count;
             ShowPotions(_currentIndex);
-            return alcoholList[_currentIndex];
+            return _alcoholInstances[alcoholList[_currentIndex]];
         }
 
     }
