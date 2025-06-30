@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -34,17 +35,36 @@ namespace Scripts
         [SerializeField] Sprite effectBottle;
         [SerializeField] Sprite brokenBottle;
         [SerializeField] float cooldown = 5;
+        [SerializeField] bool hasCooldown = true;
 
         private Effect _effect;
         public State state;
         private Image _image;
-
+        private Coroutine _cooldownCoroutine;
+        
+        private float _cooldownTimer;
+        private bool _isOnCooldown;
+        
         private void Awake()
         {
+            state = State.Full;
             GetComponent<Image>().sprite = GetSpriteByState();
             _effect = GetEffectByType();
             Debug.Log($"Initial state: {state}");
             UpdateSprite();
+        }
+        
+        private void Update()
+        {
+            if (_isOnCooldown)
+            {
+                _cooldownTimer -= Time.deltaTime;
+                if (_cooldownTimer <= 0)
+                {
+                    Refill();
+                    _isOnCooldown = false;
+                }
+            }
         }
         
         private void UpdateSprite()
@@ -104,11 +124,18 @@ namespace Scripts
                 case State.Half:
                     ChangeState(State.Empty);
                     _effect.Apply();
+                    StartCooldown();
                     return;
                 default:
                     Debug.LogWarning($"Can't drink in state: {state}");
                     return;
             }
+        }
+        
+        private void StartCooldown()
+        {
+            _cooldownTimer = cooldown;
+            _isOnCooldown = true;
         }
         
         public void Refill()

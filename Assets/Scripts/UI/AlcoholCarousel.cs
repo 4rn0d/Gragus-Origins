@@ -23,7 +23,7 @@ namespace Scripts
             {
                 var instance = Instantiate(prefab);
                 instance.gameObject.SetActive(false);
-                instance.state = State.Full;
+                instance.ChangeState(State.Full); 
                 _alcoholInstances[prefab] = instance;
             }
         
@@ -72,7 +72,7 @@ namespace Scripts
 
         public Alcohol GetCurrentAlcohol()
         {
-            return _alcoholInstances[alcoholList[_currentIndex]];
+            return alcoholList[_currentIndex];
         }
 
         public Alcohol NextPotion()
