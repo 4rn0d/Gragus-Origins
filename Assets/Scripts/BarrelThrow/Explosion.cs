@@ -3,35 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour
+namespace Scripts
 {
-    private float _delay = 1f;
-    private bool _canKnockback = true;
-    
-    
-    private void Start()
+    public class Explosion : MonoBehaviour
     {
-        Destroy(gameObject, 1f);
-    }
-    
-    private void Update()
-    {
-        _delay -= Time.deltaTime;
-        if (_delay < 0.97f)
+        private float _delay = 1f;
+        private bool _canKnockback = true;
+
+
+        private void Start()
         {
-            _canKnockback = false;
+            Destroy(gameObject, 1f);
         }
-    }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        private void Update()
         {
-            PlayerController player = other.GetComponent<PlayerController>();
-
-            if (_canKnockback)
+            _delay -= Time.deltaTime;
+            if (_delay < 0.97f)
             {
-                player.BarrelJump(transform.position);
+                _canKnockback = false;
+            }
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                PlayerController player = other.GetComponent<PlayerController>();
+
+                if (_canKnockback)
+                {
+                    player.BarrelJump(transform.position);
+                }
             }
         }
     }
