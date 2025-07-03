@@ -6,13 +6,13 @@ using UnityEngine;
 [Serializable, Unity.Properties.GeneratePropertyBag]
 [Condition(
     name: "Player In Range",
-    story: "[Player] is within range of [Enemy]",
+    story: "[Player] is within [Range] of [Enemy]",
     category: "Conditions")]
 public partial class PlayerInRangeCondition : Condition
 {
     [SerializeReference] public BlackboardVariable<GameObject> Player;
     [SerializeReference] public BlackboardVariable<GameObject> Enemy;
-    [SerializeReference] public BlackboardVariable<float> Range = new(3f);
+    [SerializeReference] public BlackboardVariable<float> Range;
 
     public override bool IsTrue()
     {

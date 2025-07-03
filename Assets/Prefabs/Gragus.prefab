@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 2718031568675409886}
   - component: {fileID: 5720579259584363180}
   - component: {fileID: 8267062349567699985}
+  - component: {fileID: -4913333749114800808}
   m_Layer: 0
   m_Name: Gragus
   m_TagString: Player
@@ -366,6 +367,8 @@ MonoBehaviour:
   acceleration: 10
   decceleration: 10
   velPower: 0.9
+  maxAlcohoLevel: 10
+  alcoholLevel: 10
   jumpForce: 7
   jumpMovementReductionForce: 0.14
   minJumpVelocity: 4
@@ -382,6 +385,7 @@ MonoBehaviour:
   throwSpeed: 3.82
   explosionCooldown: 4
   explosionForce: 7
+  throwAlcoholCost: 1
   fallAirControlMinMultiplier: 0.4
   fallAirControlMaxMultiplier: 1
   fallSpeedForMinControl: -2
@@ -415,6 +419,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-4913333749114800808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6188314894093641039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a930ae52a5cf410c84b9329a9dff716c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  iFramesDuration: 0
+  numberOfFlashes: 0
+  components: []
 --- !u!1 &7149512522619010127
 GameObject:
   m_ObjectHideFlags: 0

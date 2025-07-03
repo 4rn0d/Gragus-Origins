@@ -28,7 +28,7 @@ namespace Enemy
                 float distance = Vector2.Distance(player.transform.position, transform.position);
                 agent.SetVariableValue("DistanceToPlayer", distance); // Store in blackboard
                 // Optional for debug:
-                Debug.Log($"[Updater] Distance to player: {distance}");
+                //Debug.Log($"[Updater] Distance to player: {distance}");
             }
         }
     }

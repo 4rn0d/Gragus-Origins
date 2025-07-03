@@ -9,10 +9,14 @@ public class Healthbar : MonoBehaviour
 
     private void Start()
     {
-        totalhealthBar.fillAmount = playerHealth.currentHealth / 10;
+        // Ensure total bar is full at start
+        totalhealthBar.fillAmount = 1f;
     }
+
     private void Update()
     {
-        currenthealthBar.fillAmount = playerHealth.currentHealth / 10;
+        float targetFill = playerHealth.currentHealth / playerHealth.startingHealth;
+        currenthealthBar.fillAmount = Mathf.Lerp(currenthealthBar.fillAmount, targetFill, 10f * Time.deltaTime);
     }
+
 }

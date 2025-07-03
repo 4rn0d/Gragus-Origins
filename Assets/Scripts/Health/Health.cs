@@ -4,7 +4,7 @@ using System.Collections;
 public class Health : MonoBehaviour
 {
     [Header ("Health")]
-    [SerializeField] private float startingHealth;
+    [SerializeField] public float startingHealth;
     public float currentHealth { get; private set; }
     //private Animator anim;
     private bool dead;
@@ -41,14 +41,18 @@ public class Health : MonoBehaviour
                 Debug.Log("Player dead");
                 //anim.SetTrigger("die");
 
-                //Deactivate all attached component classes
+                // Deactivate all attached component classes
                 foreach (Behaviour component in components)
                     component.enabled = false;
+
+                // Make player disappear
+                gameObject.SetActive(false);
 
                 dead = true;
             }
         }
     }
+
     public void AddHealth(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
