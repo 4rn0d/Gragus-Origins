@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 9138182457761395282}
   - component: {fileID: 3088747420001058655}
   m_Layer: 6
-  m_Name: Room_Final
+  m_Name: Room_Final_West
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

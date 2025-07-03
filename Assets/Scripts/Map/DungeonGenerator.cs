@@ -7,7 +7,10 @@ namespace Map
     {
         [Header("Salles")]
         public GameObject startRoomPrefab;
-        public GameObject finalRoomPrefab;
+        public GameObject finalRoomUpPrefab;
+        public GameObject finalRoomDownPrefab;
+        public GameObject finalRoomLeftPrefab;
+        public GameObject finalRoomRightPrefab;
         public List<GameObject> normalRooms;
         public List<GameObject> specialRooms;
 
@@ -115,38 +118,47 @@ namespace Map
         {
             foreach (var room in placedRooms)
             {
-                foreach (var door in room.doors)
+                foreach (var door in ShuffleList(room.doors))
                 {
                     if (door.isUsed) continue;
 
-                    GameObject go = Instantiate(finalRoomPrefab, Vector3.zero, Quaternion.identity);
-                    Room finalRoom = go.GetComponent<Room>();
-                    Room.Door finalDoor = FindMatchingDoor(finalRoom, door.direction.Opposite());
+                    GameObject prefab = GetFinalRoomPrefabForDirection(door.direction);
+                    if (prefab == null) continue;
 
+                    // Instantiate room
+                    GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+                    Room finalRoom = go.GetComponent<Room>();
+                    if (finalRoom == null)
+                    {
+                        Destroy(go);
+                        continue;
+                    }
+
+                    // Find matching door
+                    Room.Door finalDoor = FindMatchingDoor(finalRoom, door.direction.Opposite());
                     if (finalDoor == null)
                     {
                         Destroy(go);
                         continue;
                     }
 
-                    // Use same logic as TryPlaceRoom()
-                    Vector3 finalLocalOffset = finalDoor.doorTransform.localPosition;
-                    go.transform.position = door.doorTransform.position - finalLocalOffset;
+                    // Align final room
+                    Vector3 localOffset = finalDoor.doorTransform.localPosition;
+                    go.transform.position = door.doorTransform.position - localOffset;
 
-                    // Snap to grid
-                    go.transform.position = new Vector3(
-                        Mathf.Round(go.transform.position.x),
-                        Mathf.Round(go.transform.position.y),
-                        Mathf.Round(go.transform.position.z)
-                    );
-
+                    go.transform.position = SnapToGrid(go.transform.position);
                     Physics2D.SyncTransforms();
 
-                    if (!IsOverlapping(finalRoom))
+                    // Overlap check
+                    if (!IsOverlapping(finalRoom) && !IsInOccupiedGrid(finalRoom))
                     {
+                        // Mark doors and grid
                         door.isUsed = true;
                         finalDoor.isUsed = true;
+                        finalRoom.transform.SetParent(this.transform);
                         placedRooms.Add(finalRoom);
+                        MarkGridOccupied(finalRoom);
+
                         return true;
                     }
 
@@ -156,6 +168,7 @@ namespace Map
 
             return false;
         }
+
 
 
 
@@ -306,6 +319,23 @@ namespace Map
             List<T> copy = new List<T>(list);
             Shuffle(copy);
             return copy;
+        }
+        
+        GameObject GetFinalRoomPrefabForDirection(Direction doorDir)
+        {
+            switch (doorDir)
+            {
+                case Direction.North:
+                    return finalRoomDownPrefab;    // Because doors connect opposite
+                case Direction.South:
+                    return finalRoomUpPrefab;
+                case Direction.West:
+                    return finalRoomRightPrefab;
+                case Direction.East:
+                    return finalRoomLeftPrefab;
+                default:
+                    return null;
+            }
         }
     }
 }
