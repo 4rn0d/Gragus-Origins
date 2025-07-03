@@ -20,6 +20,8 @@ namespace Map
         public bool useRandomSeed = true;
 
         private List<Room> placedRooms = new();
+        private HashSet<Vector2Int> occupiedCells = new();
+        private const float gridSize = 1f;
 
         void Start()
         {
@@ -35,6 +37,8 @@ namespace Map
         void GenerateDungeon()
         {
             placedRooms.Clear();
+            occupiedCells.Clear();
+
             Room startRoom = GenerateStartRoom();
             List<Room> frontier = new() { startRoom };
 
@@ -42,7 +46,7 @@ namespace Map
             int placedSpecials = 0;
 
             const int maxAttempts = 5;
-            const float branchChance = 0.2f;
+            const float branchChance = 0.1f;
 
             while (frontier.Count > 0 && (placedNormals < normalRoomCount || placedSpecials < specialRoomCount))
             {
@@ -91,8 +95,10 @@ namespace Map
         Room GenerateStartRoom()
         {
             GameObject go = Instantiate(startRoomPrefab, Vector3.zero, Quaternion.identity, transform);
+            go.transform.position = Vector3.zero; 
             Room room = go.GetComponent<Room>();
             placedRooms.Add(room);
+            MarkGridOccupied(room);
             return room;
         }
 
@@ -105,43 +111,6 @@ namespace Map
             return null;
         }
 
-        bool TryPlaceRoom(GameObject prefab, Room.Door targetDoor, out Room placedRoom)
-        {
-            placedRoom = null;
-
-            GameObject go = Instantiate(prefab);
-            Room room = go.GetComponent<Room>();
-            Room.Door matching = FindMatchingDoor(room, targetDoor.direction.Opposite());
-
-            if (matching == null)
-            {
-                Destroy(go);
-                return false;
-            }
-
-            go.transform.position = Vector3.zero;
-            Vector3 offset = targetDoor.doorTransform.position - matching.doorTransform.position;
-            go.transform.position += offset;
-
-            Vector3 snapped = new Vector3(
-                Mathf.Round(go.transform.position.x),
-                Mathf.Round(go.transform.position.y),
-                Mathf.Round(go.transform.position.z)
-            );
-            go.transform.position = snapped;
-
-            Physics2D.SyncTransforms();
-
-            if (IsOverlapping(room))
-            {
-                Destroy(go);
-                return false;
-            }
-
-            placedRoom = room;
-            return true;
-        }
-
         bool TryPlaceFinalRoom()
         {
             foreach (var room in placedRooms)
@@ -150,7 +119,7 @@ namespace Map
                 {
                     if (door.isUsed) continue;
 
-                    GameObject go = Instantiate(finalRoomPrefab);
+                    GameObject go = Instantiate(finalRoomPrefab, Vector3.zero, Quaternion.identity);
                     Room finalRoom = go.GetComponent<Room>();
                     Room.Door finalDoor = FindMatchingDoor(finalRoom, door.direction.Opposite());
 
@@ -160,16 +129,16 @@ namespace Map
                         continue;
                     }
 
-                    go.transform.position = Vector3.zero;
-                    Vector3 offset = door.doorTransform.position - finalDoor.doorTransform.position;
-                    go.transform.position += offset;
+                    // Use same logic as TryPlaceRoom()
+                    Vector3 finalLocalOffset = finalDoor.doorTransform.localPosition;
+                    go.transform.position = door.doorTransform.position - finalLocalOffset;
 
-                    Vector3 snapped = new Vector3(
+                    // Snap to grid
+                    go.transform.position = new Vector3(
                         Mathf.Round(go.transform.position.x),
                         Mathf.Round(go.transform.position.y),
                         Mathf.Round(go.transform.position.z)
                     );
-                    go.transform.position = snapped;
 
                     Physics2D.SyncTransforms();
 
@@ -188,6 +157,53 @@ namespace Map
             return false;
         }
 
+
+
+
+        bool TryPlaceRoom(GameObject prefab, Room.Door targetDoor, out Room placedRoom)
+        {
+            placedRoom = null;
+
+            // Step 1: Create room at origin (so door localPosition is valid)
+            GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            Room room = go.GetComponent<Room>();
+
+            // Step 2: Find a door on this room facing opposite of targetDoor
+            Room.Door matching = FindMatchingDoor(room, targetDoor.direction.Opposite());
+            if (matching == null)
+            {
+                Destroy(go);
+                return false;
+            }
+
+            // Step 3: Get matching door's position *relative to its room*
+            Vector3 matchLocalOffset = matching.doorTransform.localPosition;
+
+            // Step 4: Move the room so its matching door aligns with the target door
+            Vector3 targetPos = targetDoor.doorTransform.position;
+            go.transform.position = targetPos - matchLocalOffset;
+
+            // Step 5: Snap to grid
+            go.transform.position = new Vector3(
+                Mathf.Round(go.transform.position.x),
+                Mathf.Round(go.transform.position.y),
+                Mathf.Round(go.transform.position.z)
+            );
+
+            // Step 6: Collision check
+            Physics2D.SyncTransforms();
+            if (IsOverlapping(room))
+            {
+                Destroy(go);
+                return false;
+            }
+
+            // Success
+            placedRoom = room;
+            return true;
+        }
+
+
         Room.Door FindMatchingDoor(Room room, Direction direction)
         {
             foreach (var door in room.doors)
@@ -198,27 +214,19 @@ namespace Map
 
         bool IsOverlapping(Room newRoom)
         {
-            float margin = 0.001f; // Réduit légèrement les bounding boxes
-
-            foreach (var other in placedRooms)
+            foreach (var col in newRoom.colliders)
             {
-                if (other == null || other == newRoom) continue;
+                // Slightly shrink bounds to avoid edge contact
+                Bounds bounds = col.bounds;
+                bounds.Expand(-0.1f);
 
-                foreach (var newCol in newRoom.colliders)
+                Collider2D[] hits = Physics2D.OverlapBoxAll(bounds.center, bounds.size, 0f);
+                foreach (var hit in hits)
                 {
-                    Bounds newBounds = newCol.bounds;
-                    newBounds.Expand(-margin);
-
-                    foreach (var existingCol in other.colliders)
+                    if (hit.transform != newRoom.transform && hit.transform.root != newRoom.transform)
                     {
-                        Bounds existingBounds = existingCol.bounds;
-                        existingBounds.Expand(-margin);
-
-                        if (newBounds.Intersects(existingBounds))
-                        {
-                            Debug.Log($"Collision détectée entre {newRoom.name} et {other.name}");
-                            return true;
-                        }
+                        Debug.Log($"Overlap with {hit.name}");
+                        return true;
                     }
                 }
             }
@@ -227,6 +235,62 @@ namespace Map
         }
 
 
+        bool IsInOccupiedGrid(Room room)
+        {
+            foreach (var col in room.colliders)
+            {
+                Bounds b = col.bounds;
+                Vector2Int min = WorldToGrid(b.min);
+                Vector2Int max = WorldToGrid(b.max);
+
+                for (int x = min.x; x <= max.x; x++)
+                {
+                    for (int y = min.y; y <= max.y; y++)
+                    {
+                        Vector2Int cell = new(x, y);
+                        if (occupiedCells.Contains(cell))
+                            return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        void MarkGridOccupied(Room room)
+        {
+            foreach (var col in room.colliders)
+            {
+                Bounds b = col.bounds;
+                Vector2Int min = WorldToGrid(b.min);
+                Vector2Int max = WorldToGrid(b.max);
+
+                for (int x = min.x; x <= max.x; x++)
+                {
+                    for (int y = min.y; y <= max.y; y++)
+                    {
+                        occupiedCells.Add(new Vector2Int(x, y));
+                    }
+                }
+            }
+        }
+
+        Vector2Int WorldToGrid(Vector3 pos)
+        {
+            return new Vector2Int(
+                Mathf.FloorToInt(pos.x / gridSize),
+                Mathf.FloorToInt(pos.y / gridSize)
+            );
+        }
+
+        Vector3 SnapToGrid(Vector3 pos)
+        {
+            return new Vector3(
+                Mathf.Round(pos.x / gridSize) * gridSize,
+                Mathf.Round(pos.y / gridSize) * gridSize,
+                0f
+            );
+        }
 
         void Shuffle<T>(List<T> list)
         {

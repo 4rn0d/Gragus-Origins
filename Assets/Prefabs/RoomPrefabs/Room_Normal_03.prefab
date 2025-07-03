@@ -419,10 +419,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -18.878145, y: 14.675572}
-      - {x: -19.026356, y: -9.98107}
-      - {x: 21.008286, y: -9.866224}
-      - {x: 21.15437, y: 14.776575}
+    - - {x: -18.986074, y: 14.624949}
+      - {x: -18.999226, y: -9.757398}
+      - {x: 20.997694, y: -9.754275}
+      - {x: 20.992477, y: 14.624706}
   m_UseDelaunayMesh: 0
 --- !u!114 &3583865835394982759
 MonoBehaviour:
@@ -7458,6 +7458,7 @@ MonoBehaviour:
   - direction: 1
     doorTransform: {fileID: 6992447113500963991}
     isUsed: 0
+  colliders: []
 --- !u!114 &4964192707675477755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7500,7 +7501,7 @@ Transform:
   m_GameObject: {fileID: 8444786960299025771}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5119686, y: 1.03143, z: -10}
+  m_LocalPosition: {x: 10.329412, y: 9.09435, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
