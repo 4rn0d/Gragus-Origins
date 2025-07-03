@@ -67,6 +67,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Change Alcohol",
+                    "type": "Button",
+                    "id": "1f915ee6-de34-4b0c-8f64-41cc77a7d29f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drink Alcohol",
+                    "type": "Button",
+                    "id": "9ecefcfe-0334-49ca-b5cc-b4b6d3f72a23",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -320,6 +338,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "S Modifiers",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9fdee380-3b9d-4710-be2e-1346747f9b7c",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Change Alcohol",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16f0db49-a948-4518-a889-f08766f06ade",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drink Alcohol",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

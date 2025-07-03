@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - AlcoholBar
   - Wall
+  - HealthBar
+  - AlcoholCarousel
   - Enemy
   layers:
   - Default
