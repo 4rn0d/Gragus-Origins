@@ -1,36 +1,35 @@
-using Unity.Behavior;
 using UnityEngine;
+using Unity.Behavior;
 
 namespace Enemy
 {
     public class EnemyBlackboardUpdater : MonoBehaviour
     {
-        public GameObject player;
-        private BehaviorGraphAgent _agent;
+        public GameObject player; // Drag the Player GameObject here
+
+        private BehaviorGraphAgent agent;
 
         void Start()
         {
-            _agent = GetComponent<BehaviorGraphAgent>();
-            if (_agent == null)
+            agent = GetComponent<BehaviorGraphAgent>();
+
+            // Optional: Set Enemy and Player in blackboard if needed by conditions
+            if (agent != null)
             {
-                Debug.LogError("BehaviorGraphAgent not found on enemy!");
-            }
-            else
-            {
-                Debug.Log("[Updater] Found BehaviorGraphAgent");
+                agent.SetVariableValue("Enemy", gameObject);
+                agent.SetVariableValue("Player", player);
             }
         }
-
 
         void Update()
         {
-            if (player != null && _agent != null)
+            if (agent != null && player != null)
             {
                 float distance = Vector2.Distance(player.transform.position, transform.position);
+                agent.SetVariableValue("DistanceToPlayer", distance); // Store in blackboard
+                // Optional for debug:
                 Debug.Log($"[Updater] Distance to player: {distance}");
-                _agent.SetVariableValue("DistanceToPlayer", distance);
             }
         }
-
     }
 }

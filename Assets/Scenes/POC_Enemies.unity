@@ -1741,7 +1741,6 @@ GameObject:
   - component: {fileID: 1740470136}
   - component: {fileID: 1740470135}
   - component: {fileID: 1740470138}
-  - component: {fileID: 1740470137}
   - component: {fileID: 1740470139}
   - component: {fileID: 1740470141}
   - component: {fileID: 1740470142}
@@ -1816,32 +1815,12 @@ Transform:
   m_GameObject: {fileID: 1740470134}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -130.42357, y: -253.88, z: 0}
+  m_LocalPosition: {x: -110.28, y: -255.31, z: 0}
   m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 230848842}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1740470137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1740470134}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccd3c07efb161418d8ba78d7bb98271e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackCooldown: 1
-  range: 4
-  damage: 1
-  colliderDistance: 2.09
-  boxCollider: {fileID: 1740470138}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!61 &1740470138
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1942,7 +1921,7 @@ MonoBehaviour:
         GUID:
           m_Value0: 1
           m_Value1: 0
-        Name: Self
+        Name: Enemy
         m_Value: {fileID: 1740470134}
     - rid: 4153498116859101802
       type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
@@ -1961,9 +1940,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740470134}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c422d5e846f84fa7a1ce74167322176, type: 3}
+  m_Script: {fileID: 11500000, guid: 73dfb54bfb5344669e70a69c5e6456af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1176713668}
@@ -2324,7 +2303,7 @@ Transform:
   m_GameObject: {fileID: 2060211399}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -137.6, y: -256.7, z: 0}
+  m_LocalPosition: {x: -122.04, y: -256.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
