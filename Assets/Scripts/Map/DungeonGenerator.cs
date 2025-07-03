@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Map
@@ -26,16 +27,54 @@ namespace Map
         private HashSet<Vector2Int> occupiedCells = new();
         private const float gridSize = 1f;
 
-        void Start()
+        IEnumerator  Start()
         {
-            if (useRandomSeed)
-                seed = System.DateTime.Now.GetHashCode();
+            bool success = false;
+            int attempt = 0;
+            int maxRetries = 50;
+            int baseSeed = useRandomSeed ? System.DateTime.Now.GetHashCode() : seed;
 
-            Random.InitState(seed);
-            Shuffle(normalRooms);
-            Shuffle(specialRooms);
-            GenerateDungeon();
+            while (!success && attempt < maxRetries)
+            {
+                Random.InitState(baseSeed + attempt);
+
+                Shuffle(normalRooms);
+                Shuffle(specialRooms);
+
+                GenerateDungeon();
+
+                success = TryPlaceFinalRoom();
+
+                if (!success)
+                {
+                    ClearDungeon();
+                    yield return null;
+                    attempt++;
+                }
+                else
+                {
+                    Debug.Log("Generated a dungeon with a final room after " + attempt + " attempts.");
+                }
+            }
+
+            if (!success)
+                Debug.LogError("Failed to generate a dungeon with a final room after " + maxRetries + " attempts.");
         }
+        void ClearDungeon()
+        {
+            foreach (var room in placedRooms)
+                if (room != null && room.gameObject != null)
+                    Destroy(room.gameObject);
+
+            foreach (Transform child in transform)
+                Destroy(child.gameObject);
+
+            placedRooms.Clear();
+            occupiedCells.Clear();
+            
+            Physics2D.SyncTransforms();
+        }
+
 
         void GenerateDungeon()
         {
@@ -90,9 +129,6 @@ namespace Map
                 if (!roomPlaced)
                     Debug.Log("Aucune salle ajoutée depuis : " + current.name);
             }
-
-            if (!TryPlaceFinalRoom())
-                Debug.LogWarning("Salle finale non placée.");
         }
 
         Room GenerateStartRoom()
