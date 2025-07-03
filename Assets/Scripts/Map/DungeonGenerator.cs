@@ -116,7 +116,11 @@ namespace Map
 
         bool TryPlaceFinalRoom()
         {
-            foreach (var room in placedRooms)
+            List<Room> candidates = new List<Room> { placedRooms[^1] };
+            
+            candidates.AddRange(ShuffleList(placedRooms));
+
+            foreach (var room in candidates)
             {
                 foreach (var door in ShuffleList(room.doors))
                 {
@@ -125,7 +129,6 @@ namespace Map
                     GameObject prefab = GetFinalRoomPrefabForDirection(door.direction);
                     if (prefab == null) continue;
 
-                    // Instantiate room
                     GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
                     Room finalRoom = go.GetComponent<Room>();
                     if (finalRoom == null)
@@ -134,7 +137,6 @@ namespace Map
                         continue;
                     }
 
-                    // Find matching door
                     Room.Door finalDoor = FindMatchingDoor(finalRoom, door.direction.Opposite());
                     if (finalDoor == null)
                     {
@@ -142,23 +144,16 @@ namespace Map
                         continue;
                     }
 
-                    // Align final room
-                    Vector3 localOffset = finalDoor.doorTransform.localPosition;
-                    go.transform.position = door.doorTransform.position - localOffset;
-
-                    go.transform.position = SnapToGrid(go.transform.position);
+                    go.transform.position = SnapToGrid(door.doorTransform.position - finalDoor.doorTransform.localPosition);
                     Physics2D.SyncTransforms();
 
-                    // Overlap check
                     if (!IsOverlapping(finalRoom) && !IsInOccupiedGrid(finalRoom))
                     {
-                        // Mark doors and grid
                         door.isUsed = true;
                         finalDoor.isUsed = true;
                         finalRoom.transform.SetParent(this.transform);
                         placedRooms.Add(finalRoom);
                         MarkGridOccupied(finalRoom);
-
                         return true;
                     }
 
@@ -168,11 +163,7 @@ namespace Map
 
             return false;
         }
-
-
-
-
-
+        
         bool TryPlaceRoom(GameObject prefab, Room.Door targetDoor, out Room placedRoom)
         {
             placedRoom = null;
