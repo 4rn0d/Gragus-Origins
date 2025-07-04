@@ -6,6 +6,10 @@ namespace Map
 {
     public class DungeonGenerator : MonoBehaviour
     {
+        [Header("Player")]
+        public GameObject playerPrefab;
+        private GameObject _playerInstance;
+        
         [Header("Salles")]
         public GameObject startRoomPrefab;
         public GameObject finalRoomUpPrefab;
@@ -23,11 +27,11 @@ namespace Map
         public int seed = 0;
         public bool useRandomSeed = true;
 
-        private List<Room> placedRooms = new();
-        private HashSet<Vector2Int> occupiedCells = new();
-        private const float gridSize = 1f;
+        private List<Room> _placedRooms = new();
+        private HashSet<Vector2Int> _occupiedCells = new();
+        private const float GridSize = 1f;
 
-        IEnumerator  Start()
+        private IEnumerator  Start()
         {
             bool success = false;
             int attempt = 0;
@@ -54,23 +58,41 @@ namespace Map
                 else
                 {
                     Debug.Log("Generated a dungeon with a final room after " + attempt + " attempts.");
+                    SpawnPlayerInStartRoom();
                 }
             }
 
             if (!success)
                 Debug.LogError("Failed to generate a dungeon with a final room after " + maxRetries + " attempts.");
         }
+        void SpawnPlayerInStartRoom()
+        {
+            Room startRoom = _placedRooms[0]; // Assuming the first room is always the start room
+            if (startRoom == null)
+            {
+                Debug.LogError("Start room is missing!");
+                return;
+            }
+
+            Vector3 spawnPosition = startRoom.transform.position;
+
+            if (_playerInstance != null)
+                Destroy(_playerInstance);
+
+            _playerInstance = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+        }
+
         void ClearDungeon()
         {
-            foreach (var room in placedRooms)
+            foreach (var room in _placedRooms)
                 if (room != null && room.gameObject != null)
                     Destroy(room.gameObject);
 
             foreach (Transform child in transform)
                 Destroy(child.gameObject);
 
-            placedRooms.Clear();
-            occupiedCells.Clear();
+            _placedRooms.Clear();
+            _occupiedCells.Clear();
             
             Physics2D.SyncTransforms();
         }
@@ -78,8 +100,8 @@ namespace Map
 
         void GenerateDungeon()
         {
-            placedRooms.Clear();
-            occupiedCells.Clear();
+            _placedRooms.Clear();
+            _occupiedCells.Clear();
 
             Room startRoom = GenerateStartRoom();
             List<Room> frontier = new() { startRoom };
@@ -110,7 +132,7 @@ namespace Map
                         if (TryPlaceRoom(prefab, door, out Room newRoom))
                         {
                             frontier.Add(newRoom);
-                            placedRooms.Add(newRoom);
+                            _placedRooms.Add(newRoom);
                             door.isUsed = true;
 
                             Room.Door matching = FindMatchingDoor(newRoom, door.direction.Opposite());
@@ -136,7 +158,7 @@ namespace Map
             GameObject go = Instantiate(startRoomPrefab, Vector3.zero, Quaternion.identity, transform);
             go.transform.position = Vector3.zero; 
             Room room = go.GetComponent<Room>();
-            placedRooms.Add(room);
+            _placedRooms.Add(room);
             MarkGridOccupied(room);
             return room;
         }
@@ -152,9 +174,9 @@ namespace Map
 
         bool TryPlaceFinalRoom()
         {
-            List<Room> candidates = new List<Room> { placedRooms[^1] };
+            List<Room> candidates = new List<Room> { _placedRooms[^1] };
             
-            candidates.AddRange(ShuffleList(placedRooms));
+            candidates.AddRange(ShuffleList(_placedRooms));
 
             foreach (var room in candidates)
             {
@@ -188,7 +210,7 @@ namespace Map
                         door.isUsed = true;
                         finalDoor.isUsed = true;
                         finalRoom.transform.SetParent(this.transform);
-                        placedRooms.Add(finalRoom);
+                        _placedRooms.Add(finalRoom);
                         MarkGridOccupied(finalRoom);
                         return true;
                     }
@@ -288,7 +310,7 @@ namespace Map
                     for (int y = min.y; y <= max.y; y++)
                     {
                         Vector2Int cell = new(x, y);
-                        if (occupiedCells.Contains(cell))
+                        if (_occupiedCells.Contains(cell))
                             return true;
                     }
                 }
@@ -309,7 +331,7 @@ namespace Map
                 {
                     for (int y = min.y; y <= max.y; y++)
                     {
-                        occupiedCells.Add(new Vector2Int(x, y));
+                        _occupiedCells.Add(new Vector2Int(x, y));
                     }
                 }
             }
@@ -318,16 +340,16 @@ namespace Map
         Vector2Int WorldToGrid(Vector3 pos)
         {
             return new Vector2Int(
-                Mathf.FloorToInt(pos.x / gridSize),
-                Mathf.FloorToInt(pos.y / gridSize)
+                Mathf.FloorToInt(pos.x / GridSize),
+                Mathf.FloorToInt(pos.y / GridSize)
             );
         }
 
         Vector3 SnapToGrid(Vector3 pos)
         {
             return new Vector3(
-                Mathf.Round(pos.x / gridSize) * gridSize,
-                Mathf.Round(pos.y / gridSize) * gridSize,
+                Mathf.Round(pos.x / GridSize) * GridSize,
+                Mathf.Round(pos.y / GridSize) * GridSize,
                 0f
             );
         }
