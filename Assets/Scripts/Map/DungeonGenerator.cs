@@ -8,6 +8,8 @@ namespace Map
     {
         [Header("Player")]
         public GameObject playerPrefab;
+
+        public Vector3 playerOffsetInStartRoom = new Vector3(0, 0, 0);
         private GameObject _playerInstance;
         
         [Header("Salles")]
@@ -74,7 +76,7 @@ namespace Map
                 return;
             }
 
-            Vector3 spawnPosition = startRoom.transform.position;
+            Vector3 spawnPosition = startRoom.transform.position + playerOffsetInStartRoom;
 
             if (_playerInstance != null)
                 Destroy(_playerInstance);
