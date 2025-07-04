@@ -254,22 +254,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 34413080470699561, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
   m_PrefabInstance: {fileID: 2099972589}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &973924881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973924874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a930ae52a5cf410c84b9329a9dff716c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  iFramesDuration: 0
-  numberOfFlashes: 0
-  components: []
 --- !u!114 &973924882 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7947544807318105662, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
@@ -350,7 +334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -320.9999, y: 137}
+  m_AnchoredPosition: {x: -321.00003, y: 137}
   m_SizeDelta: {x: -744, y: -337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1191326926
@@ -598,10 +582,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -790,7 +774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 69, y: -15}
+  m_AnchoredPosition: {x: -486, y: 249}
   m_SizeDelta: {x: 77, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2095528969
@@ -881,6 +865,14 @@ PrefabInstance:
     - target: {fileID: 7764545210754260556, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
       propertyPath: m_Name
       value: Room_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947544807318105662, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
+      propertyPath: iFramesDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947544807318105662, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
+      propertyPath: numberOfFlashes
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8080423480041067704, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -1005,10 +997,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 34413080470699561, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 973924881}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
 --- !u!1 &2114061576
 GameObject:
@@ -1095,6 +1084,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 805340345003539921, guid: 71ff1f8aba6ae4bda9795e4975285baf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 989648615714472221, guid: 71ff1f8aba6ae4bda9795e4975285baf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022541357853560340, guid: 71ff1f8aba6ae4bda9795e4975285baf, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4352751458521694411, guid: 71ff1f8aba6ae4bda9795e4975285baf, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4820439664741679196, guid: 71ff1f8aba6ae4bda9795e4975285baf, type: 3}
