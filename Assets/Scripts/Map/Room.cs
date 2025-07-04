@@ -14,38 +14,37 @@ namespace Map
         }
 
         public List<Door> doors = new();
-    
-        public Bounds GetBounds()
-        {
-            var colliders = GetComponentsInChildren<Collider2D>();
-            var realColliders = new List<Collider2D>();
-            foreach (var col in colliders)
-            {
-                if (!col.isTrigger) realColliders.Add(col);
-            }
-            if (realColliders.Count == 0) return new Bounds(transform.position, Vector3.zero);
-
-            Bounds bounds = realColliders[0].bounds;
-            for (int i = 1; i < realColliders.Count; i++)
-            {
-                bounds.Encapsulate(realColliders[i].bounds);
-            }
-            return bounds;
-
-        }
-
-        public Door GetUnusedDoor()
-        {
-            foreach (var door in doors)
-                if (!door.isUsed) return door;
-            return null;
-        }
         
         public Collider2D[] colliders;
-        void Awake()
+        private void Awake()
         {
             colliders = GetComponentsInChildren<Collider2D>();
+
+            foreach (var door in doors)
+            {
+                var col = door.doorTransform.GetComponent<Collider2D>();
+                if (col != null) col.enabled = false;
+
+                var sr = door.doorTransform.GetComponent<SpriteRenderer>();
+                if (sr != null) sr.enabled = false;
+            }
         }
+
+        public void EnableUnusedDoorVisuals()
+        {
+            foreach (var door in doors)
+            {
+                if (!door.isUsed)
+                {
+                    var col = door.doorTransform.GetComponent<Collider2D>();
+                    if (col != null) col.enabled = true;
+
+                    var sr = door.doorTransform.GetComponent<SpriteRenderer>();
+                    if (sr != null) sr.enabled = true;
+                }
+            }
+        }
+
 
     }
 }

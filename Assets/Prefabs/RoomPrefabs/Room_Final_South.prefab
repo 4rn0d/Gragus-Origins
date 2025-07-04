@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 7069889093712651651}
   m_Layer: 6
   m_Name: Door_South
-  m_TagString: Untagged
+  m_TagString: IgnoreForDungeon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -549,7 +549,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 13
-      m_TileSpriteIndex: 13
+      m_TileSpriteIndex: 14
       m_TileMatrixIndex: 2
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1236,10 +1236,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -760863287, guid: dcd20a5cfa94a4174bfacf91cd9dea80, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -760863287, guid: dcd20a5cfa94a4174bfacf91cd9dea80, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 165189443, guid: dcd20a5cfa94a4174bfacf91cd9dea80, type: 3}
   m_TileMatrixArray:
@@ -1628,7 +1628,7 @@ Transform:
   m_GameObject: {fileID: 8444786960299025771}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.790428, y: 5.00282, z: -10}
+  m_LocalPosition: {x: -6.362896, y: 5.0030394, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

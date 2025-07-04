@@ -61,6 +61,7 @@ namespace Map
                 {
                     Debug.Log("Generated a dungeon with a final room after " + attempt + " attempts.");
                     SpawnPlayerInStartRoom();
+                    EnableAllUnusedDoors();
                 }
             }
 
@@ -69,7 +70,7 @@ namespace Map
         }
         void SpawnPlayerInStartRoom()
         {
-            Room startRoom = _placedRooms[0]; // Assuming the first room is always the start room
+            Room startRoom = _placedRooms[0];
             if (startRoom == null)
             {
                 Debug.LogError("Start room is missing!");
@@ -228,11 +229,9 @@ namespace Map
         {
             placedRoom = null;
 
-            // Step 1: Create room at origin (so door localPosition is valid)
             GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             Room room = go.GetComponent<Room>();
 
-            // Step 2: Find a door on this room facing opposite of targetDoor
             Room.Door matching = FindMatchingDoor(room, targetDoor.direction.Opposite());
             if (matching == null)
             {
@@ -240,29 +239,24 @@ namespace Map
                 return false;
             }
 
-            // Step 3: Get matching door's position *relative to its room*
             Vector3 matchLocalOffset = matching.doorTransform.localPosition;
 
-            // Step 4: Move the room so its matching door aligns with the target door
             Vector3 targetPos = targetDoor.doorTransform.position;
             go.transform.position = targetPos - matchLocalOffset;
 
-            // Step 5: Snap to grid
             go.transform.position = new Vector3(
                 Mathf.Round(go.transform.position.x),
                 Mathf.Round(go.transform.position.y),
                 Mathf.Round(go.transform.position.z)
             );
 
-            // Step 6: Collision check
             Physics2D.SyncTransforms();
             if (IsOverlapping(room))
             {
                 Destroy(go);
                 return false;
             }
-
-            // Success
+            
             placedRoom = room;
             return true;
         }
@@ -278,26 +272,41 @@ namespace Map
 
         bool IsOverlapping(Room newRoom)
         {
+            HashSet<Collider2D> doorColliders = new HashSet<Collider2D>();
+            foreach (var door in newRoom.doors)
+            {
+                var col = door.doorTransform.GetComponent<Collider2D>();
+                if (col != null)
+                    doorColliders.Add(col);
+            }
+
             foreach (var col in newRoom.colliders)
             {
-                // Slightly shrink bounds to avoid edge contact
                 Bounds bounds = col.bounds;
                 bounds.Expand(-0.1f);
 
                 Collider2D[] hits = Physics2D.OverlapBoxAll(bounds.center, bounds.size, 0f);
                 foreach (var hit in hits)
                 {
-                    if (hit.transform != newRoom.transform && hit.transform.root != newRoom.transform)
-                    {
-                        Debug.Log($"Overlap with {hit.name}");
-                        return true;
-                    }
+                    // Ignore self
+                    if (hit.transform == newRoom.transform || hit.transform.root == newRoom.transform)
+                        continue;
+
+                    // Ignore door colliders
+                    if (doorColliders.Contains(hit))
+                        continue;
+
+                    // **Ignore CameraBounds or any other colliders on a specific layer or tag**
+                    if (hit.gameObject.CompareTag("IgnoreForDungeon") || hit.gameObject.layer == LayerMask.NameToLayer("IgnoreForDungeon"))
+                        continue;
+
+                    Debug.Log($"Overlap with {hit.name}");
+                    return true;
                 }
             }
 
             return false;
         }
-
 
         bool IsInOccupiedGrid(Room room)
         {
@@ -377,7 +386,7 @@ namespace Map
             switch (doorDir)
             {
                 case Direction.North:
-                    return finalRoomDownPrefab;    // Because doors connect opposite
+                    return finalRoomDownPrefab;
                 case Direction.South:
                     return finalRoomUpPrefab;
                 case Direction.West:
@@ -388,5 +397,13 @@ namespace Map
                     return null;
             }
         }
+        void EnableAllUnusedDoors()
+        {
+            foreach (var room in _placedRooms)
+            {
+                room.EnableUnusedDoorVisuals();
+            }
+        }
+
     }
 }
