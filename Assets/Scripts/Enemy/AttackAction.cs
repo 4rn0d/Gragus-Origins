@@ -61,5 +61,11 @@ public partial class AttackAction : Action
         projectile.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
         Debug.Log("[AttackAction] Shot projectile at player.");
+        
+        // Flip enemy based on player direction
+        Vector3 enemyScale = Enemy.Value.transform.localScale;
+        enemyScale.x = Mathf.Sign(direction.x) * Mathf.Abs(enemyScale.x);
+        Enemy.Value.transform.localScale = enemyScale;
+
     }
 }
