@@ -20,7 +20,7 @@ public partial class AttackAction : Action
     [SerializeReference] public BlackboardVariable<float> LastAttackTime;
 
     [SerializeField] public float projectileSpeed = 5f;
-    [SerializeField] public float cooldown = 2f; // seconds
+    [SerializeField] public float cooldown = 3f; // seconds
 
     protected override Status OnUpdate()
     {

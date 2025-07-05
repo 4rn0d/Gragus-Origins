@@ -344,6 +344,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e776128c-8e4f-42a3-acbe-82d84403156a
     m_ActionName: 'Player/S Modifiers[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1f915ee6-de34-4b0c-8f64-41cc77a7d29f
+    m_ActionName: 'Player/Change Alcohol[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9ecefcfe-0334-49ca-b5cc-b4b6d3f72a23
+    m_ActionName: 'Player/Drink Alcohol[/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -386,7 +394,7 @@ MonoBehaviour:
   explosionCooldown: 4
   explosionForce: 7
   throwAlcoholCost: 1
-  fallAirControlMinMultiplier: 0.4
+  fallAirControlMinMultiplier: 0.9
   fallAirControlMaxMultiplier: 1
   fallSpeedForMinControl: -2
   groundCheck: {fileID: 1834195700078891673}
