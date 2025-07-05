@@ -9,7 +9,7 @@ namespace Map
         [Header("Player")]
         public GameObject playerPrefab;
 
-        public Vector3 playerOffsetInStartRoom = new Vector3(0, 0, 0);
+        public Vector3 playerOffsetInStartRoom;
         private GameObject _playerInstance;
         
         [Header("Salles")]
@@ -21,9 +21,10 @@ namespace Map
         public List<GameObject> normalRooms;
         public List<GameObject> specialRooms;
 
-        [Header("Paramètres")]
-        public int normalRoomCount = 6;
-        public int specialRoomCount = 2;
+        [Header("Paramètres")] 
+        public int normalRoomCount;
+
+        public int specialRoomCount;
 
         [Header("Graine aléatoire")]
         public int seed = 0;
@@ -40,7 +41,7 @@ namespace Map
             int maxRetries = 50;
             int baseSeed = useRandomSeed ? System.DateTime.Now.GetHashCode() : seed;
 
-            while (!success && attempt < maxRetries)
+            while (!success && attempt < maxRetries || _placedRooms.Count < normalRoomCount + specialRoomCount + 2 && attempt < maxRetries)
             {
                 Random.InitState(baseSeed + attempt);
 
@@ -50,8 +51,8 @@ namespace Map
                 GenerateDungeon();
 
                 success = TryPlaceFinalRoom();
-
-                if (!success)
+                Debug.Log("Nb Rooms : " + (_placedRooms.Count));
+                if (!success || _placedRooms.Count < normalRoomCount + specialRoomCount + 2)
                 {
                     ClearDungeon();
                     yield return null;
@@ -258,6 +259,7 @@ namespace Map
             }
             
             placedRoom = room;
+            room.transform.SetParent(this.transform);
             return true;
         }
 
