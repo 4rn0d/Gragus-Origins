@@ -28,6 +28,8 @@ namespace Map
         public int normalRoomCount;
 
         public int specialRoomCount;
+        
+        public bool debug;
 
         [Header("Graine aléatoire")]
         public int seed = 0;
@@ -36,6 +38,69 @@ namespace Map
         private List<Room> _placedRooms = new();
         private HashSet<Vector2Int> _occupiedCells = new();
         private const float GridSize = 1f;
+
+        private Room _currentPlayerRoom;
+        
+
+        private void Update()
+        {
+            if (!debug)
+            {
+                UpdatePlayerRoom();
+                UpdateActiveRooms(2);
+            }
+        }
+        private void UpdatePlayerRoom()
+        {
+            Room closestRoom = null;
+            float closestDist = float.MaxValue;
+            Vector3 playerPos = _playerInstance.transform.position;
+
+            foreach (var room in _placedRooms)
+            {
+                float dist = Vector3.Distance(playerPos, room.transform.position);
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    closestRoom = room;
+                }
+            }
+
+            _currentPlayerRoom = closestRoom;
+        }
+        private void UpdateActiveRooms(int maxDepth)
+        {
+            if (_currentPlayerRoom == null) return;
+
+            HashSet<Room> roomsToActivate = new HashSet<Room>();
+            Queue<(Room room, int depth)> queue = new();
+            queue.Enqueue((_currentPlayerRoom, 0));
+
+            while (queue.Count > 0)
+            {
+                var (room, depth) = queue.Dequeue();
+
+                if (depth > maxDepth) continue;
+
+                if (!roomsToActivate.Add(room))
+                    continue; // Already visited
+
+                foreach (var door in room.doors)
+                {
+                    if (door.isUsed && door.connectedRoom != null)
+                    {
+                        queue.Enqueue((door.connectedRoom, depth + 1));
+                    }
+                }
+            }
+
+            foreach (var room in _placedRooms)
+            {
+                bool shouldBeActive = roomsToActivate.Contains(room);
+                if (room.gameObject.activeSelf != shouldBeActive)
+                    room.gameObject.SetActive(shouldBeActive);
+            }
+        }
 
         private IEnumerator  Start()
         {
@@ -103,8 +168,7 @@ namespace Map
             
             Physics2D.SyncTransforms();
         }
-
-        //TODO make it so the special room have X(make it balanced so i correlate to the noumber of room that the whole dungeon has, a dungeon with 5 room might want 50 % and 20 room might want 10% idk) chance to be placed when a branche is created and not always after all the room are placed
+        
         private void GenerateDungeon()
         {
             _placedRooms.Clear();
@@ -146,6 +210,10 @@ namespace Map
                             Room.Door matching = FindMatchingDoor(newRoom, door.direction.Opposite());
                             if (matching != null)
                                 matching.isUsed = true;
+                            
+                            door.connectedRoom = newRoom;
+                            if (matching != null)
+                                matching.connectedRoom = current;
 
                             if (normalRooms.Contains(prefab))
                                 placedNormals++;
@@ -231,10 +299,12 @@ namespace Map
                     go.transform.position = SnapToGrid(door.doorTransform.position - finalDoor.doorTransform.localPosition);
                     Physics2D.SyncTransforms();
 
-                    if (!IsOverlapping(finalRoom) && !IsInOccupiedGrid(finalRoom))
+                    if (!IsInOccupiedGrid(finalRoom))
                     {
                         door.isUsed = true;
                         finalDoor.isUsed = true;
+                        door.connectedRoom = finalRoom;
+                        finalDoor.connectedRoom = room;
                         finalRoom.transform.SetParent(this.transform);
                         _placedRooms.Add(finalRoom);
                         MarkGridOccupied(finalRoom);
@@ -296,14 +366,6 @@ namespace Map
 
         private static bool IsOverlapping(Room newRoom)
         {
-            HashSet<Collider2D> doorColliders = new HashSet<Collider2D>();
-            foreach (var door in newRoom.doors)
-            {
-                var col = door.doorTransform.GetComponent<Collider2D>();
-                if (col != null)
-                    doorColliders.Add(col);
-            }
-
             foreach (var col in newRoom.colliders)
             {
                 Bounds bounds = col.bounds;
@@ -312,25 +374,19 @@ namespace Map
                 Collider2D[] hits = Physics2D.OverlapBoxAll(bounds.center, bounds.size, 0f);
                 foreach (var hit in hits)
                 {
-                    // Ignore self
                     if (hit.transform == newRoom.transform || hit.transform.root == newRoom.transform)
                         continue;
 
-                    // Ignore door colliders
-                    if (doorColliders.Contains(hit))
-                        continue;
-
-                    // **Ignore CameraBounds or any other colliders on a specific layer or tag**
                     if (hit.gameObject.CompareTag("IgnoreForDungeon"))
                         continue;
 
-                    Debug.Log($"Overlap with {hit.name}");
                     return true;
                 }
             }
 
             return false;
         }
+
 
         private bool IsInOccupiedGrid(Room room)
         {

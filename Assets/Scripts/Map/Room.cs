@@ -11,6 +11,7 @@ namespace Map
             public Direction direction;
             public Transform doorTransform;
             public bool isUsed = false;
+            public Room connectedRoom;
         }
 
         public List<Door> doors = new();
