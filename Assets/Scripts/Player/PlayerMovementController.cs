@@ -393,6 +393,12 @@ namespace Scripts
                 _barrel.InitalizeBarrel(rb, throwSpeed);
             }
         }
+        
+        public bool IsThePlayerDashing()
+        {
+            return _isDashing;
+        }
+
 
     }
 
