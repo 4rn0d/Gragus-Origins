@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -137,6 +138,7 @@ namespace Map
 
                         if (TryPlaceRoom(prefab, door, out Room newRoom))
                         {
+                            newRoom.depth = current.depth + 1;
                             frontier.Add(newRoom);
                             _placedRooms.Add(newRoom);
                             door.isUsed = true;
@@ -197,9 +199,10 @@ namespace Map
 
         private bool TryPlaceFinalRoom()
         {
-            List<Room> candidates = new List<Room> { _placedRooms[^1] };
+            int maxDepth = _placedRooms.Max(room => room.depth);
+            List<Room> candidates = _placedRooms.Where(r => r.depth == maxDepth || r.depth == (maxDepth - 1)).ToList();
             
-            candidates.AddRange(ShuffleList(_placedRooms));
+            candidates = ShuffleList(candidates);
 
             foreach (var room in candidates)
             {

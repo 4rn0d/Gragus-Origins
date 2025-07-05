@@ -14,8 +14,8 @@ namespace Map
         }
 
         public List<Door> doors = new();
-        
         public Collider2D[] colliders;
+        public int depth;
         private void Awake()
         {
             colliders = GetComponentsInChildren<Collider2D>();
