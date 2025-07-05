@@ -1,6 +1,8 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Map
 {
@@ -41,7 +43,7 @@ namespace Map
             int maxRetries = 50;
             int baseSeed = useRandomSeed ? System.DateTime.Now.GetHashCode() : seed;
 
-            while (!success && attempt < maxRetries || _placedRooms.Count < normalRoomCount + specialRoomCount + 2 && attempt < maxRetries)
+            while ((!success && attempt < maxRetries || _placedRooms.Count < normalRoomCount + specialRoomCount + 2) && attempt < maxRetries)
             {
                 Random.InitState(baseSeed + attempt);
 
@@ -51,7 +53,7 @@ namespace Map
                 GenerateDungeon();
 
                 success = TryPlaceFinalRoom();
-                Debug.Log("Nb Rooms : " + (_placedRooms.Count));
+                Debug.Log("Nb Rooms : " + (_placedRooms.Count) + " and should be " + (normalRoomCount + specialRoomCount + 2));
                 if (!success || _placedRooms.Count < normalRoomCount + specialRoomCount + 2)
                 {
                     ClearDungeon();
@@ -69,7 +71,7 @@ namespace Map
             if (!success)
                 Debug.LogError("Failed to generate a dungeon with a final room after " + maxRetries + " attempts.");
         }
-        void SpawnPlayerInStartRoom()
+        private void SpawnPlayerInStartRoom()
         {
             Room startRoom = _placedRooms[0];
             if (startRoom == null)
@@ -86,7 +88,7 @@ namespace Map
             _playerInstance = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
         }
 
-        void ClearDungeon()
+        private void ClearDungeon()
         {
             foreach (var room in _placedRooms)
                 if (room != null && room.gameObject != null)
@@ -101,8 +103,8 @@ namespace Map
             Physics2D.SyncTransforms();
         }
 
-
-        void GenerateDungeon()
+        //TODO make it so the special room have X(make it balanced so i correlate to the noumber of room that the whole dungeon has, a dungeon with 5 room might want 50 % and 20 room might want 10% idk) chance to be placed when a branche is created and not always after all the room are placed
+        private void GenerateDungeon()
         {
             _placedRooms.Clear();
             _occupiedCells.Clear();
@@ -143,8 +145,10 @@ namespace Map
                             if (matching != null)
                                 matching.isUsed = true;
 
-                            if (placedNormals < normalRoomCount) placedNormals++;
-                            else placedSpecials++;
+                            if (normalRooms.Contains(prefab))
+                                placedNormals++;
+                            else if (specialRooms.Contains(prefab))
+                                placedSpecials++;
 
                             roomPlaced = true;
                             break;
@@ -157,7 +161,7 @@ namespace Map
             }
         }
 
-        Room GenerateStartRoom()
+        private Room GenerateStartRoom()
         {
             GameObject go = Instantiate(startRoomPrefab, Vector3.zero, Quaternion.identity, transform);
             go.transform.position = Vector3.zero; 
@@ -167,16 +171,31 @@ namespace Map
             return room;
         }
 
-        GameObject SelectRoomPrefab(int normals, int specials)
+        private GameObject SelectRoomPrefab(int normals, int specials)
         {
+            int total = normalRoomCount + specialRoomCount;
+            
+            if (normals >= normalRoomCount && specials >= specialRoomCount)
+                return null;
+
+            float specialRatio = specialRoomCount / (float)total;
+            bool chooseSpecial = Random.value < specialRatio;
+
+            if (chooseSpecial && specials < specialRoomCount)
+                return specialRooms[Random.Range(0, specialRooms.Count)];
+    
             if (normals < normalRoomCount)
                 return normalRooms[Random.Range(0, normalRooms.Count)];
-            else if (specials < specialRoomCount)
+            
+            if (specials < specialRoomCount)
                 return specialRooms[Random.Range(0, specialRooms.Count)];
+    
             return null;
         }
 
-        bool TryPlaceFinalRoom()
+
+
+        private bool TryPlaceFinalRoom()
         {
             List<Room> candidates = new List<Room> { _placedRooms[^1] };
             
@@ -226,7 +245,7 @@ namespace Map
             return false;
         }
         
-        bool TryPlaceRoom(GameObject prefab, Room.Door targetDoor, out Room placedRoom)
+        private bool TryPlaceRoom(GameObject prefab, Room.Door targetDoor, out Room placedRoom)
         {
             placedRoom = null;
 
@@ -264,7 +283,7 @@ namespace Map
         }
 
 
-        Room.Door FindMatchingDoor(Room room, Direction direction)
+        private static Room.Door FindMatchingDoor(Room room, Direction direction)
         {
             foreach (var door in room.doors)
                 if (!door.isUsed && door.direction == direction)
@@ -272,7 +291,7 @@ namespace Map
             return null;
         }
 
-        bool IsOverlapping(Room newRoom)
+        private static bool IsOverlapping(Room newRoom)
         {
             HashSet<Collider2D> doorColliders = new HashSet<Collider2D>();
             foreach (var door in newRoom.doors)
@@ -310,7 +329,7 @@ namespace Map
             return false;
         }
 
-        bool IsInOccupiedGrid(Room room)
+        private bool IsInOccupiedGrid(Room room)
         {
             foreach (var col in room.colliders)
             {
@@ -332,7 +351,7 @@ namespace Map
             return false;
         }
 
-        void MarkGridOccupied(Room room)
+        private void MarkGridOccupied(Room room)
         {
             foreach (var col in room.colliders)
             {
@@ -350,7 +369,7 @@ namespace Map
             }
         }
 
-        Vector2Int WorldToGrid(Vector3 pos)
+        private static Vector2Int WorldToGrid(Vector3 pos)
         {
             return new Vector2Int(
                 Mathf.FloorToInt(pos.x / GridSize),
@@ -358,7 +377,7 @@ namespace Map
             );
         }
 
-        Vector3 SnapToGrid(Vector3 pos)
+        private static Vector3 SnapToGrid(Vector3 pos)
         {
             return new Vector3(
                 Mathf.Round(pos.x / GridSize) * GridSize,
@@ -367,7 +386,7 @@ namespace Map
             );
         }
 
-        void Shuffle<T>(List<T> list)
+        private static void Shuffle<T>(List<T> list)
         {
             for (int i = 0; i < list.Count; i++)
             {
@@ -376,14 +395,14 @@ namespace Map
             }
         }
 
-        List<T> ShuffleList<T>(List<T> list)
+        private static List<T> ShuffleList<T>(List<T> list)
         {
             List<T> copy = new List<T>(list);
             Shuffle(copy);
             return copy;
         }
         
-        GameObject GetFinalRoomPrefabForDirection(Direction doorDir)
+        private GameObject GetFinalRoomPrefabForDirection(Direction doorDir)
         {
             switch (doorDir)
             {
@@ -399,7 +418,7 @@ namespace Map
                     return null;
             }
         }
-        void EnableAllUnusedDoors()
+        private void EnableAllUnusedDoors()
         {
             foreach (var room in _placedRooms)
             {
