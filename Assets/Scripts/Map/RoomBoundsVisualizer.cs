@@ -14,6 +14,8 @@
             Bounds bounds = colliders[0].bounds;
             for (int i = 1; i < colliders.Length; i++)
             {
+                if(colliders[i].CompareTag($"IgnoreForDungeon")) continue;
+                
                 bounds.Encapsulate(colliders[i].bounds);
             }
 

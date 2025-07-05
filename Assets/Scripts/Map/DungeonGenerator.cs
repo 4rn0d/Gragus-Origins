@@ -297,7 +297,7 @@ namespace Map
                         continue;
 
                     // **Ignore CameraBounds or any other colliders on a specific layer or tag**
-                    if (hit.gameObject.CompareTag("IgnoreForDungeon") || hit.gameObject.layer == LayerMask.NameToLayer("IgnoreForDungeon"))
+                    if (hit.gameObject.CompareTag("IgnoreForDungeon"))
                         continue;
 
                     Debug.Log($"Overlap with {hit.name}");
