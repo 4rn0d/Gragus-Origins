@@ -12,5 +12,10 @@ namespace Scripts
         {
             audioMixer.SetFloat("volume", volume);
         }
+        
+        public void SetFullscreen(bool isFullscreen)
+        {
+            Screen.fullScreen = isFullscreen;
+        }
     }
 }
