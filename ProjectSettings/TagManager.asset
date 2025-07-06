@@ -8,11 +8,12 @@ TagManager:
   - Wall
   - HealthBar
   - AlcoholCarousel
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground

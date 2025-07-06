@@ -1,40 +1,44 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Scripts;
 using UnityEngine;
 
-namespace Scripts
+
+public class Explosion : MonoBehaviour
 {
-    public class Explosion : MonoBehaviour
+    [SerializeField] private float explosionDamage = 25f;
+    private float _delay = 1f;
+    private bool _canKnockback = true;
+
+    private void Start()
     {
-        private float _delay = 1f;
-        private bool _canKnockback = true;
+        Destroy(gameObject, 1f); // Auto-destroy after 1 second
+    }
 
-
-        private void Start()
+    private void Update()
+    {
+        _delay -= Time.deltaTime;
+        if (_delay < 0.97f)
         {
-            Destroy(gameObject, 1f);
+            _canKnockback = false; // Small window for knockback
         }
+    }
 
-        private void Update()
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-            _delay -= Time.deltaTime;
-            if (_delay < 0.97f)
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (_canKnockback && player != null)
             {
-                _canKnockback = false;
+                player.BarrelJump(transform.position);
             }
         }
-
-        void OnTriggerEnter2D(Collider2D other)
+        else
         {
-            if (other.CompareTag("Player"))
+            Health.Health health = other.GetComponent<Health.Health>();
+            if (health != null)
             {
-                PlayerController player = other.GetComponent<PlayerController>();
-
-                if (_canKnockback)
-                {
-                    player.BarrelJump(transform.position);
-                }
+                health.TakeDamage(explosionDamage);
+                Debug.Log($"[Explosion] {other.name} took {explosionDamage} damage.");
             }
         }
     }
