@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestLevels/Level2.unity
     guid: e0247ba2c7f9c435981a7c2e6b68e941
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/POC_Menu.unity
     guid: fc58eb2a94d474ba486820560db4ef73
   - enabled: 1
