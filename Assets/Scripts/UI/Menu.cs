@@ -9,7 +9,7 @@ namespace Scripts
         
         public void PlayGame()
         {
-            SceneManager.LoadScene("POC_ProceduralyGeneratedMap");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         
         public void QuitGame()

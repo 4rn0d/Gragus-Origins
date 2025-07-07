@@ -101,8 +101,8 @@ namespace Scripts
         {
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
+            _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
             _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
-            _pauseMenu = Instantiate(pauseMenuPrefab).GetComponent<PauseMenu>();
 
             // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
         }
@@ -382,8 +382,11 @@ namespace Scripts
         {
             if (context.performed)
             {
-                _currentAlcohol = _alcoholCarousel.NextPotion();
-                Debug.Log(_currentAlcohol);
+                // _currentAlcohol = _alcoholCarousel.NextPotion();
+                // Debug.Log(_currentAlcohol);
+                Debug.Log("TogglePause performed");
+                _pauseMenu.TogglePause();
+                
             }
         }
 

@@ -1,15 +1,19 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Scripts
 {
     public class PauseMenu : MonoBehaviour
     {
+        [SerializeField] GameObject pauseMenuUI;
+        
         private bool _isPaused = false;
 
         void Start()
         {
-            gameObject.SetActive(false);
+            pauseMenuUI.SetActive(false);
         }
         
         public void TogglePause()
@@ -27,16 +31,23 @@ namespace Scripts
 
         private void PauseGame()
         {
-            gameObject.SetActive(true);
+            pauseMenuUI.SetActive(true);
             _isPaused = true;
             Time.timeScale = 0f;
         }
         
         private void ResumeGame()
         {
-            gameObject.SetActive(false);
+            pauseMenuUI.SetActive(false);
             _isPaused = false;
             Time.timeScale = 1f;
         }
+
+        public void ToMainMenu()
+        {
+            SceneManager.LoadScene(0);
+        }
+        
     }
+    
 }
