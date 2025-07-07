@@ -43,8 +43,9 @@ namespace Scripts
             Time.timeScale = 1f;
         }
 
-        public void ToMainMenu()
+        public void ToMenu()
         {
+            Debug.Log("Going to Main Menu");
             SceneManager.LoadScene(0);
         }
         
