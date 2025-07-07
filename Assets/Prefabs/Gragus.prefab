@@ -343,6 +343,70 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e776128c-8e4f-42a3-acbe-82d84403156a
     m_ActionName: 'Player/S Modifiers[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: ChangeAlcohol
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f915ee6-de34-4b0c-8f64-41cc77a7d29f
+    m_ActionName: 'Player/Change Alcohol[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: DrinkAlcohol
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9ecefcfe-0334-49ca-b5cc-b4b6d3f72a23
+    m_ActionName: 'Player/Drink Alcohol[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ca6dcaaa-5e7e-4524-825d-d86bdbe2fd76
+    m_ActionName: 'Player/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8de16c6f-8cbd-45ed-aec1-7261789bf7ac
+    m_ActionName: UI/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -366,6 +430,8 @@ MonoBehaviour:
   acceleration: 10
   decceleration: 10
   velPower: 0.9
+  maxAlcohoLevel: 10
+  alcoholLevel: 10
   jumpForce: 7
   jumpMovementReductionForce: 0.14
   minJumpVelocity: 4
@@ -382,6 +448,7 @@ MonoBehaviour:
   throwSpeed: 3.82
   explosionCooldown: 4
   explosionForce: 7
+  throwAlcoholCost: 1
   fallAirControlMinMultiplier: 0.4
   fallAirControlMaxMultiplier: 1
   fallSpeedForMinControl: -2
@@ -393,6 +460,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  pauseMenuPrefab: {fileID: 4974426787910646412, guid: bb15f090027264368945812a7a484cf6, type: 3}
 --- !u!95 &8267062349567699985
 Animator:
   serializedVersion: 7
