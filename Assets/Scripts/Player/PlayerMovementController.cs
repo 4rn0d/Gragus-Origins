@@ -73,6 +73,8 @@ namespace Scripts
         [SerializeField] Transform wallCheck;
         [SerializeField] LayerMask groundLayer;
         [SerializeField] LayerMask wallLayer;
+        [SerializeField] GameObject pauseMenuPrefab;
+        private PauseMenu _pauseMenu;
 
         private float _horizontal;
         private float _lastNonZeroHorizontal = 1;
@@ -99,8 +101,8 @@ namespace Scripts
         {
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
+            _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
             _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
-            Debug.Log(_currentAlcohol);
 
             // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
         }
@@ -322,7 +324,10 @@ namespace Scripts
 
         public void SMod(InputAction.CallbackContext context)
         {
-            _sModIsPressed = context.performed;
+            if (context.performed)
+            {
+                _sModIsPressed = context.performed;
+            }
         }
 
         public void StartBarrelAnim(InputAction.CallbackContext context)
@@ -343,6 +348,16 @@ namespace Scripts
                     _barrel.ExplodeBarrel();
                     _canThrow = true;
                 }
+            }
+        }
+
+        public void PauseGame(InputAction.CallbackContext context)
+        {
+            Debug.Log("TogglePause performed");
+            if (context.performed)
+            {
+                Debug.Log("TogglePause performed");
+                _pauseMenu.TogglePause();
             }
         }
 
@@ -367,8 +382,11 @@ namespace Scripts
         {
             if (context.performed)
             {
-                _currentAlcohol = _alcoholCarousel.NextPotion();
-                Debug.Log(_currentAlcohol);
+                // _currentAlcohol = _alcoholCarousel.NextPotion();
+                // Debug.Log(_currentAlcohol);
+                Debug.Log("TogglePause performed");
+                _pauseMenu.TogglePause();
+                
             }
         }
 

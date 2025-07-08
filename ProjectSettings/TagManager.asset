@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - HealthBar
   - AlcoholCarousel
+  - PauseMenu
   - Enemy
   layers:
   - Default
