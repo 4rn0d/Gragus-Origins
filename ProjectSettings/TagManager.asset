@@ -9,6 +9,7 @@ TagManager:
   - HealthBar
   - AlcoholCarousel
   - Enemy
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
