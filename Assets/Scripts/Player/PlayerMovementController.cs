@@ -416,7 +416,13 @@ namespace Scripts
         {
             return _isDashing;
         }
-
+        
+        public void RefillAlcohol(float amount)
+        {
+            alcoholLevel = Mathf.Clamp(alcoholLevel + amount, 0f, maxAlcohoLevel);
+            _alcoholBar.fillAmount = alcoholLevel / maxAlcohoLevel;
+            Debug.Log($"[Fountain] Refilled alcohol. Current level: {alcoholLevel}");
+        }
 
     }
 
