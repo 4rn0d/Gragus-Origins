@@ -5,11 +5,18 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     [SerializeField] private float explosionDamage = 25f;
+    [SerializeField] private AudioClip explosionSound;
+    
+    
+    private AudioSource _audioSource;
     private float _delay = 1f;
     private bool _canKnockback = true;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.clip = explosionSound;
+        _audioSource.Play();
         Destroy(gameObject, 1f); // Auto-destroy after 1 second
     }
 
