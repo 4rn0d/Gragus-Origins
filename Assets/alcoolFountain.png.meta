@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      alcoolFountain_0: -3938699333551241534
+      alcoolFountain_1: 1231343249170456415
+      alcoolFountain_2: -9151156454540304365
+      alcoolFountain_3: 49578967576121263
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
