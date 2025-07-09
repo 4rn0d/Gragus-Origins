@@ -382,10 +382,10 @@ namespace Scripts
         {
             if (context.performed)
             {
-                // _currentAlcohol = _alcoholCarousel.NextPotion();
-                // Debug.Log(_currentAlcohol);
-                Debug.Log("TogglePause performed");
-                _pauseMenu.TogglePause();
+                _currentAlcohol = _alcoholCarousel.NextPotion();
+                Debug.Log(_currentAlcohol);
+                // Debug.Log("TogglePause performed");
+                // _pauseMenu.TogglePause();
                 
             }
         }
