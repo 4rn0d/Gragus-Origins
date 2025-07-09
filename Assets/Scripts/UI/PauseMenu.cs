@@ -8,12 +8,14 @@ namespace Scripts
     public class PauseMenu : MonoBehaviour
     {
         [SerializeField] GameObject pauseMenuUI;
+        [SerializeField] GameObject settingsMenuUI;
         
         private bool _isPaused = false;
 
         void Start()
         {
             pauseMenuUI.SetActive(false);
+            settingsMenuUI.SetActive(false);
         }
         
         public void TogglePause()
