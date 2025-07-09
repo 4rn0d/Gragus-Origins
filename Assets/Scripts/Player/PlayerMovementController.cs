@@ -16,6 +16,7 @@ namespace Scripts
         private static readonly int IsJumping = Animator.StringToHash("IsJumping");
         private static readonly int IsFalling = Animator.StringToHash("IsFalling");
         private static readonly int IsRolling = Animator.StringToHash("IsRolling");
+        private static readonly int IsDrinking = Animator.StringToHash("IsDrinking");
 
 
         [Header("Player Component References")] [SerializeField]
@@ -377,6 +378,7 @@ namespace Scripts
             if (context.performed && !_pauseMenu.isPaused)
             {
                 Debug.Log(_currentAlcohol);
+                animator.SetBool(IsDrinking, true);
                 _currentAlcohol.Drink();
             }
         }
@@ -395,6 +397,11 @@ namespace Scripts
         private void EndBarrelAnim()
         {
             animator.SetBool(IsRolling, false);
+        }
+        
+        private void EndDrinkingAnim()
+        {
+            animator.SetBool(IsDrinking, false);
         }
 
         private void SpawnBarrel()
