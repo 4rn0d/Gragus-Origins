@@ -10,7 +10,7 @@ namespace Scripts
         [SerializeField] GameObject pauseMenuUI;
         [SerializeField] GameObject settingsMenuUI;
         
-        private bool _isPaused = false;
+        public bool isPaused = false;
 
         void Start()
         {
@@ -21,7 +21,7 @@ namespace Scripts
         public void TogglePause()
         {
             Debug.Log("TogglePause called");
-            if (_isPaused)
+            if (isPaused)
             {
                 ResumeGame();
             }
@@ -34,14 +34,14 @@ namespace Scripts
         private void PauseGame()
         {
             pauseMenuUI.SetActive(true);
-            _isPaused = true;
+            isPaused = true;
             Time.timeScale = 0f;
         }
         
         private void ResumeGame()
         {
             pauseMenuUI.SetActive(false);
-            _isPaused = false;
+            isPaused = false;
             Time.timeScale = 1f;
         }
 
