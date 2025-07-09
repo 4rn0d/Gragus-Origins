@@ -9,6 +9,7 @@ namespace Scripts
     {
         [SerializeField] GameObject pauseMenuUI;
         [SerializeField] GameObject settingsMenuUI;
+        [SerializeField] GameObject volumeMenuUI;
         
         public bool isPaused = false;
 
@@ -16,6 +17,7 @@ namespace Scripts
         {
             pauseMenuUI.SetActive(false);
             settingsMenuUI.SetActive(false);
+            volumeMenuUI.SetActive(false);
         }
         
         public void TogglePause()

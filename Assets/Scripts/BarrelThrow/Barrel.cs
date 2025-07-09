@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 
 public class Barrel : MonoBehaviour
@@ -9,13 +10,7 @@ public class Barrel : MonoBehaviour
     [SerializeField] float deceleration = 2f;
     [SerializeField] private AudioClip barrelSound;
     
-    private AudioSource _audioSource;
     private bool _isStopping = false;
-
-    private void Awake()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
 
     private void FixedUpdate()
     {
@@ -34,8 +29,7 @@ public class Barrel : MonoBehaviour
     public void InitalizeBarrel(Rigidbody2D player, float speed)
     {
         //Play Barrel Sound
-        _audioSource.clip = barrelSound;
-        _audioSource.Play();
+        SoundFXManager.instance.PlaySoundFXClip(barrelSound, transform, 1f);
         
         if (player.linearVelocity.magnitude <= 1f)
         {

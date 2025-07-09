@@ -1,3 +1,4 @@
+using Managers;
 using Scripts;
 using UnityEngine;
 
@@ -8,17 +9,6 @@ namespace Alcohol
         [SerializeField] private float refillAmount = 10f;
         [SerializeField] private AudioClip refillSound;
 
-        private AudioSource audioSource;
-
-        private void Awake()
-        {
-            audioSource = GetComponent<AudioSource>();
-            if (audioSource == null)
-            {
-                Debug.LogWarning("[FountainRefill] No AudioSource found on object.");
-            }
-        }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
@@ -28,11 +18,7 @@ namespace Alcohol
                 {
                     player.RefillAlcohol(refillAmount);
 
-                    if (audioSource != null && refillSound != null)
-                    {
-                        audioSource.clip = refillSound;
-                        audioSource.Play();
-                    }
+                    SoundFXManager.instance.PlaySoundFXClip(refillSound, transform, 1f);
                 }
             }
         }
