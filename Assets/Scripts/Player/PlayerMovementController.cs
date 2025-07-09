@@ -109,12 +109,15 @@ namespace Scripts
 
         private void FixedUpdate()
         {
-            HandleMovement();
-            HandleDash();
-            HandleBounceTimer();
-            UpdateFacingDirection();
-            HandleThrow();
-            _justBounced = false;
+            if (!_pauseMenu.isPaused)
+            {
+                HandleMovement();
+                HandleDash();
+                HandleBounceTimer();
+                UpdateFacingDirection();
+                HandleThrow();
+                _justBounced = false;
+            }
         }
 
         private void HandleThrow()
@@ -282,7 +285,7 @@ namespace Scripts
 
         public void Jump(InputAction.CallbackContext context)
         {
-            if (context.performed && _coyoteTimeCounter > 0)
+            if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0)
             {
                 animator.SetBool(IsJumping, true);
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -297,7 +300,7 @@ namespace Scripts
 
         public void Dash(InputAction.CallbackContext context)
         {
-            if (context.performed && !_isDashing && _canDash)
+            if (context.performed && !_isDashing && _canDash && !_pauseMenu.isPaused)
             {
                 animator.SetBool(IsDashing, true);
                 _isDashing = true;
@@ -332,7 +335,7 @@ namespace Scripts
 
         public void StartBarrelAnim(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (context.performed && !_pauseMenu.isPaused)
             {
                 if (_canThrow)
                 {
@@ -371,7 +374,7 @@ namespace Scripts
 
         public void DrinkAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (context.performed && !_pauseMenu.isPaused)
             {
                 Debug.Log(_currentAlcohol);
                 _currentAlcohol.Drink();
@@ -380,12 +383,11 @@ namespace Scripts
 
         public void ChangeAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (context.performed && !_pauseMenu.isPaused)
             {
-                // _currentAlcohol = _alcoholCarousel.NextPotion();
-                // Debug.Log(_currentAlcohol);
-                Debug.Log("TogglePause performed");
-                _pauseMenu.TogglePause();
+                _currentAlcohol = _alcoholCarousel.NextPotion(); 
+                // Debug.Log("TogglePause performed");
+                // _pauseMenu.TogglePause();
                 
             }
         }
