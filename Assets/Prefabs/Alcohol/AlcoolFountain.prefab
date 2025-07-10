@@ -148,3 +148,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   refillAmount: 10
+  refillSound: {fileID: 8300000, guid: b7c518c10e2a74dc6bde65ca024e56c7, type: 3}
