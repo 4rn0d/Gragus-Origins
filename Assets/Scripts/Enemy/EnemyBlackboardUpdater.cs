@@ -12,6 +12,7 @@ namespace Enemy
         void Start()
         {
             agent = GetComponent<BehaviorGraphAgent>();
+            player = GameObject.FindWithTag("Player");
 
             // Optional: Set Enemy and Player in blackboard if needed by conditions
             if (agent != null)

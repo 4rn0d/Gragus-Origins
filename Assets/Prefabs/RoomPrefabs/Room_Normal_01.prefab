@@ -6094,6 +6094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teemo
       objectReference: {fileID: 0}
+    - target: {fileID: 1590373824993018221, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 6188314894093641039, guid: 56218ff834801d448bcd0c697423c491, type: 3}
     - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.82

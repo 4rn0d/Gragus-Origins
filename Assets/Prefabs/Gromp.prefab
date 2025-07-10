@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 548661830952735478}
   - component: {fileID: 3538644100047802810}
   - component: {fileID: 1727955658534607343}
+  - component: {fileID: 3996452727728333127}
   m_Layer: 0
   m_Name: Gromp
   m_TagString: Enemy
@@ -286,7 +287,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 25
-  damageToEnemy: 25
+  damageToEnemy: 50
+--- !u!114 &3996452727728333127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869523412650322001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a930ae52a5cf410c84b9329a9dff716c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  iFramesDuration: 0
+  numberOfFlashes: 0
+  components: []
 --- !u!1 &1054648911276103854
 GameObject:
   m_ObjectHideFlags: 0
