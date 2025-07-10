@@ -12,28 +12,41 @@ namespace Map
             public Direction direction;
             public Transform doorTransform;
             public bool isUsed = false;
+            public Room connectedRoom;
         }
 
         public List<Door> doors = new();
-    
-        public Bounds GetBounds()
+        public Collider2D[] colliders;
+        public int depth;
+        private void Awake()
         {
-            var colliders = GetComponentsInChildren<Collider2D>();
-            if (colliders.Length == 0) return new Bounds(transform.position, Vector3.zero);
+            colliders = GetComponentsInChildren<Collider2D>();
 
-            Bounds bounds = colliders[0].bounds;
-            for (int i = 1; i < colliders.Length; i++)
+            foreach (var door in doors)
             {
-                bounds.Encapsulate(colliders[i].bounds);
+                var col = door.doorTransform.GetComponent<Collider2D>();
+                if (col != null) col.enabled = false;
+
+                var sr = door.doorTransform.GetComponent<SpriteRenderer>();
+                if (sr != null) sr.enabled = false;
             }
-            return bounds;
         }
 
-        public Door GetUnusedDoor()
+        public void EnableUnusedDoorVisuals()
         {
             foreach (var door in doors)
-                if (!door.isUsed) return door;
-            return null;
+            {
+                if (!door.isUsed)
+                {
+                    var col = door.doorTransform.GetComponent<Collider2D>();
+                    if (col != null) col.enabled = true;
+
+                    var sr = door.doorTransform.GetComponent<SpriteRenderer>();
+                    if (sr != null) sr.enabled = true;
+                }
+            }
         }
+
+
     }
 }

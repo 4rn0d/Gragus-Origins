@@ -279,17 +279,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7861a4dc3abc45d485b171a881987525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 6188314894093641039, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+  playerOffsetInStartRoom: {x: -15, y: -4.5, z: 0}
   startRoomPrefab: {fileID: 7764545210754260556, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
-  finalRoomPrefab: {fileID: 7764545210754260556, guid: dda35c3c4bf275c428b1e627678c1938, type: 3}
+  finalRoomUpPrefab: {fileID: 7764545210754260556, guid: 9a57dd6d1b7106942897c03936c9a25c, type: 3}
+  finalRoomDownPrefab: {fileID: 7764545210754260556, guid: 61bb7bda978497241b189302fbc09ac7, type: 3}
+  finalRoomLeftPrefab: {fileID: 7764545210754260556, guid: a02ad72aba3d18c44a676c40395c61eb, type: 3}
+  finalRoomRightPrefab: {fileID: 7764545210754260556, guid: a19b1268c21d0f244a55fe832d73a7d2, type: 3}
   normalRooms:
   - {fileID: 7764545210754260556, guid: dda35c3c4bf275c428b1e627678c1938, type: 3}
-  - {fileID: 7764545210754260556, guid: dda35c3c4bf275c428b1e627678c1938, type: 3}
-  - {fileID: 7764545210754260556, guid: dda35c3c4bf275c428b1e627678c1938, type: 3}
-  - {fileID: 7764545210754260556, guid: dda35c3c4bf275c428b1e627678c1938, type: 3}
+  - {fileID: 7764545210754260556, guid: c7baf59000b3f4448b4969f046b873a6, type: 3}
+  - {fileID: 7764545210754260556, guid: 85b1c0f3bcfb35942a4f7c76a339c69e, type: 3}
+  - {fileID: 7764545210754260556, guid: 7475ad9f66610fd49b5136f53d74fce4, type: 3}
   specialRooms:
-  - {fileID: 7764545210754260556, guid: dda35c3c4bf275c428b1e627678c1938, type: 3}
-  normalRoomCount: 4
-  specialRoomCount: 1
+  - {fileID: 7764545210754260556, guid: e8c724a8cd63e824fae80c38b03b3451, type: 3}
+  - {fileID: 7764545210754260556, guid: 0e890464b5fcb51468f820028861f5c9, type: 3}
+  normalRoomCount: 50
+  specialRoomCount: 5
+  debug: 0
+  seed: 0
+  useRandomSeed: 1
 --- !u!4 &1755891252
 Transform:
   m_ObjectHideFlags: 0
