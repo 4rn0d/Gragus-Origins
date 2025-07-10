@@ -34,7 +34,7 @@ namespace Health
         {
             if (invulnerable) return;
             currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
-            _healthBar.fillAmount = currentHealth;
+            _healthBar.fillAmount = currentHealth / startingHealth;
 
             if (currentHealth > 0)
             {
