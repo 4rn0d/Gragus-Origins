@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dfb54bfb5344669e70a69c5e6456af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 6188314894093641039, guid: 56218ff834801d448bcd0c697423c491, type: 3}
 --- !u!61 &3538644100047802810
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -285,7 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d97f0deed7f4f6cbaafb9d10e76304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
+  damageToPlayer: 25
+  damageToEnemy: 25
 --- !u!1 &1054648911276103854
 GameObject:
   m_ObjectHideFlags: 0
