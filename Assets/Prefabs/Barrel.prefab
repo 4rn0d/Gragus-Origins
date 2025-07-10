@@ -169,6 +169,7 @@ MonoBehaviour:
   rb: {fileID: 8701303651414859562}
   explosionEffect: {fileID: 3175338743976402436, guid: d4f9922e15cd85641b44d1c22c351301, type: 3}
   deceleration: 4
+  barrelSound: {fileID: 8300000, guid: e44523233ce484b11927430256ad1766, type: 3}
 --- !u!95 &8534923703048318577
 Animator:
   serializedVersion: 7
