@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 2718031568675409886}
   - component: {fileID: 5720579259584363180}
   - component: {fileID: 8267062349567699985}
+  - component: {fileID: -4913333749114800808}
   m_Layer: 0
   m_Name: Gragus
   m_TagString: Player
@@ -236,7 +237,19 @@ MonoBehaviour:
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Look[/Mouse/delta,/Pen/delta]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
@@ -315,7 +328,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5720579259584363180}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: BarrelThrow
+        m_MethodName: StartBarrelAnim
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -343,6 +356,70 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e776128c-8e4f-42a3-acbe-82d84403156a
     m_ActionName: 'Player/S Modifiers[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: ChangeAlcohol
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f915ee6-de34-4b0c-8f64-41cc77a7d29f
+    m_ActionName: 'Player/Change Alcohol[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: DrinkAlcohol
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9ecefcfe-0334-49ca-b5cc-b4b6d3f72a23
+    m_ActionName: 'Player/Drink Alcohol[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ca6dcaaa-5e7e-4524-825d-d86bdbe2fd76
+    m_ActionName: 'Player/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8de16c6f-8cbd-45ed-aec1-7261789bf7ac
+    m_ActionName: UI/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -366,6 +443,8 @@ MonoBehaviour:
   acceleration: 10
   decceleration: 10
   velPower: 0.9
+  maxAlcohoLevel: 10
+  alcoholLevel: 10
   jumpForce: 7
   jumpMovementReductionForce: 0.14
   minJumpVelocity: 4
@@ -379,13 +458,14 @@ MonoBehaviour:
   barrelPrefab: {fileID: 5130933438599435640, guid: a80402e10d05e5948b163dfcee01ac3a, type: 3}
   launchOffset: {fileID: 8630630076342250254}
   throwDistance: 0.4
-  throwSpeed: 4
+  throwSpeed: 3.82
   explosionCooldown: 4
+  explosionForce: 7
+  throwAlcoholCost: 1
   fallAirControlMinMultiplier: 0.4
   fallAirControlMaxMultiplier: 1
   fallSpeedForMinControl: -2
   groundCheck: {fileID: 1834195700078891673}
-  explosionCheck: {fileID: 0}
   wallCheck: {fileID: 3289089873371003495}
   groundLayer:
     serializedVersion: 2
@@ -393,9 +473,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  explosionLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  pauseMenuPrefab: {fileID: 4974426787910646412, guid: bb15f090027264368945812a7a484cf6, type: 3}
 --- !u!95 &8267062349567699985
 Animator:
   serializedVersion: 7
@@ -418,6 +496,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-4913333749114800808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6188314894093641039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a930ae52a5cf410c84b9329a9dff716c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  iFramesDuration: 0
+  numberOfFlashes: 0
+  components: []
 --- !u!1 &7149512522619010127
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +537,7 @@ Transform:
   m_GameObject: {fileID: 7149512522619010127}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.407, y: -0.17, z: 0}
+  m_LocalPosition: {x: -0.579, y: -0.193, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -9,19 +9,6 @@ public class Barrel : MonoBehaviour
     [SerializeField] float deceleration = 2f;
     
     private bool _isStopping = false;
-    private bool _isRotating;
-
-    private void Update()
-    {
-        if (_isRotating)
-        {
-            transform.Rotate(0,0,-1f); 
-        }
-        else
-        {
-            transform.Rotate(0,0,0);
-        }
-    }
     
     private void FixedUpdate()
     {
@@ -33,15 +20,20 @@ public class Barrel : MonoBehaviour
             {
                 rb.linearVelocity = Vector2.zero;
                 _isStopping = false;
-                _isRotating = false;
             }
         }
     }
 
-    public void InitalizeBarrel(float speed)
+    public void InitalizeBarrel(Rigidbody2D player, float speed)
     {
-        _isRotating = true;
-        rb.linearVelocity = transform.right * speed;
+        if (player.linearVelocity.magnitude <= 1f)
+        {
+            rb.linearVelocity = speed * transform.right;
+        }
+        else
+        {
+            rb.linearVelocity = (player.linearVelocity.magnitude + speed) * transform.right;
+        }
     }
     
     public void StopBarrel()

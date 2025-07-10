@@ -6983,3 +6983,152 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!1001 &6168538512445463398
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8135743442275971676}
+    m_Modifications:
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionId
+      value: 1f915ee6-de34-4b0c-8f64-41cc77a7d29f
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionId
+      value: 9ecefcfe-0334-49ca-b5cc-b4b6d3f72a23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionName
+      value: 'Player/Change Alcohol[/Keyboard/q]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionName
+      value: 'Player/Drink Alcohol[/Keyboard/e]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1943472148821500362}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1943472148821500362}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeAlcohol
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DrinkAlcohol
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Scripts.PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Scripts.PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718031568675409886, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6188314894093641039, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: m_Name
+      value: Gragus
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+--- !u!114 &1943472148821500362 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5720579259584363180, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+  m_PrefabInstance: {fileID: 6168538512445463398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9cb308084ba4fd3ace451e069f6858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &8967538029657734165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+  m_PrefabInstance: {fileID: 6168538512445463398}
+  m_PrefabAsset: {fileID: 0}
