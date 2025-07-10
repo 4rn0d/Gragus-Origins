@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Health
 {
@@ -18,11 +19,14 @@ namespace Health
 
         [Header("Components")]
         [SerializeField] private Behaviour[] components;
+        private Image _healthBar;
         private bool invulnerable;
 
         private void Awake()
         {
             currentHealth = startingHealth;
+            
+            _healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
             //anim = GetComponent<Animator>();
             spriteRend = GetComponent<SpriteRenderer>();
         }
@@ -30,6 +34,7 @@ namespace Health
         {
             if (invulnerable) return;
             currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+            _healthBar.fillAmount = currentHealth;
 
             if (currentHealth > 0)
             {
