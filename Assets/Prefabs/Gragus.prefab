@@ -439,6 +439,7 @@ MonoBehaviour:
   bounceVerticalBoost: 5
   bounceHorizontalForce: 5
   bounceInputLockDuration: 0.6
+  dashSound: {fileID: 8300000, guid: 5eecc81a7d7964d0f97ce411bdaf6078, type: 3}
   barrelPrefab: {fileID: 5130933438599435640, guid: a80402e10d05e5948b163dfcee01ac3a, type: 3}
   launchOffset: {fileID: 8630630076342250254}
   throwDistance: 0.4
@@ -493,6 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
+  dead: 0
   iFramesDuration: 2
   numberOfFlashes: 3
   components: []

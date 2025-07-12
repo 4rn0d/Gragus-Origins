@@ -1,6 +1,6 @@
-
 using System;
 using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -49,6 +49,7 @@ namespace Scripts
         [SerializeField] float bounceVerticalBoost = 5f;
         [SerializeField] float bounceHorizontalForce = 4f;
         [SerializeField] float bounceInputLockDuration = 0.6f;
+        [SerializeField] AudioClip dashSound;
 
         [Header("BarrelThrow Settings")] [SerializeField]
         GameObject barrelPrefab;
@@ -149,7 +150,6 @@ namespace Scripts
 
         private void HandleMovement()
         {
-
             animator.SetFloat(Speed, Mathf.Abs(_horizontal));
 
             if (_isDashing || _isBouncing) return;
@@ -303,6 +303,7 @@ namespace Scripts
         {
             if (context.performed && !_isDashing && _canDash && !_pauseMenu.isPaused)
             {
+                SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
                 animator.SetBool(IsDashing, true);
                 _isDashing = true;
                 _dashTimer = dashDuration;
@@ -387,10 +388,9 @@ namespace Scripts
         {
             if (context.performed && !_pauseMenu.isPaused)
             {
-                _currentAlcohol = _alcoholCarousel.NextPotion(); 
+                _currentAlcohol = _alcoholCarousel.NextPotion();
                 // Debug.Log("TogglePause performed");
                 // _pauseMenu.TogglePause();
-                
             }
         }
 
@@ -398,7 +398,7 @@ namespace Scripts
         {
             animator.SetBool(IsRolling, false);
         }
-        
+
         private void EndDrinkingAnim()
         {
             animator.SetBool(IsDrinking, false);
@@ -420,19 +420,17 @@ namespace Scripts
                 _barrel.InitalizeBarrel(rb, throwSpeed);
             }
         }
-        
+
         public bool IsThePlayerDashing()
         {
             return _isDashing;
         }
-        
+
         public void RefillAlcohol(float amount)
         {
             alcoholLevel = Mathf.Clamp(alcoholLevel + amount, 0f, maxAlcohoLevel);
             _alcoholBar.fillAmount = alcoholLevel / maxAlcohoLevel;
             Debug.Log($"[Fountain] Refilled alcohol. Current level: {alcoholLevel}");
         }
-
     }
-
 }

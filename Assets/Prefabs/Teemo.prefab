@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9119903807317058883}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 6538243492545897746}
   - component: {fileID: 2189535191658158395}
   - component: {fileID: 659358574342749967}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Teemo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
