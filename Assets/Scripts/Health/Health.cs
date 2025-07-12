@@ -1,5 +1,7 @@
 using System.Collections;
+using Map;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Health
@@ -10,7 +12,7 @@ namespace Health
         [SerializeField] public float startingHealth;
         public float currentHealth { get; private set; }
         //private Animator anim;
-        private bool dead;
+        public bool dead;
 
         [Header("iFrames")]
         [SerializeField] private float iFramesDuration;
@@ -56,6 +58,18 @@ namespace Health
                     gameObject.SetActive(false);
 
                     dead = true;
+                    if (gameObject.CompareTag("Player") == false)
+                    {
+                        Room room = GetComponentInParent<Room>();
+                        if (room != null)
+                        {
+                            GameObject enemyRoot = transform.parent.gameObject;
+
+                            room.OnEnemyDied(enemyRoot);
+
+                            Destroy(enemyRoot);
+                        }
+                    }
                 }
             }
         }

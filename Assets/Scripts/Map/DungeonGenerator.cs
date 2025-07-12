@@ -352,6 +352,7 @@ namespace Map
             
             placedRoom = room;
             room.transform.SetParent(this.transform);
+            room.SpawnEnemies();
             return true;
         }
 
@@ -481,7 +482,7 @@ namespace Map
         {
             foreach (var room in _placedRooms)
             {
-                room.EnableUnusedDoorVisuals();
+                room.EnableUnusedDoor();
             }
         }
 
