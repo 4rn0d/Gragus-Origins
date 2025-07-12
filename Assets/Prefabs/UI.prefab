@@ -201,7 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5599531a60340f2a92b1de76b46b4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: -4913333749114800808, guid: 56218ff834801d448bcd0c697423c491, type: 3}
   totalhealthBar: {fileID: 7080449579218480273}
   currenthealthBar: {fileID: 2647512680802437724}
 --- !u!1 &2781610912907785341

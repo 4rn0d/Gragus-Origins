@@ -406,7 +406,7 @@ MonoBehaviour:
     m_ActionName: UI/New action
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 265126755140196168, guid: eaf21277df3aa44ee809bb5bbd9c6024, type: 3}
+      - m_Target: {fileID: -6643552069494415329, guid: eaf21277df3aa44ee809bb5bbd9c6024, type: 3}
         m_TargetAssemblyTypeName: Alcohol.FountainRefill, Assembly-CSharp
         m_MethodName: Activate
         m_Mode: 0
@@ -445,9 +445,9 @@ MonoBehaviour:
   velPower: 0.9
   maxAlcohoLevel: 10
   alcoholLevel: 10
-  jumpForce: 7
+  jumpForce: 5
   jumpMovementReductionForce: 0.14
-  minJumpVelocity: 4
+  minJumpVelocity: 3
   coyoteTime: 0.2
   dashSpeed: 7.5
   dashDuration: 0.4
@@ -474,6 +474,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   pauseMenuPrefab: {fileID: 4974426787910646412, guid: bb15f090027264368945812a7a484cf6, type: 3}
+  triggerActive: 0
 --- !u!95 &8267062349567699985
 Animator:
   serializedVersion: 7
