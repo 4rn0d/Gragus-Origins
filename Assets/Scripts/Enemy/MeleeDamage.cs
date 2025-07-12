@@ -1,10 +1,13 @@
 using System;
+using Managers;
 using UnityEngine;
 
 public class MeleeDamage : MonoBehaviour
 {
     [SerializeField] private float damageToPlayer = 25f;
     [SerializeField] private float damageToEnemy = 25f;
+    [SerializeField] private AudioClip dashDamageSound;
+    
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,6 +25,8 @@ public class MeleeDamage : MonoBehaviour
                 var enemyHealth = GetComponent<Health.Health>();
                 if (enemyHealth != null)
                 {
+                    //move cette logique dans gragus
+                    SoundFXManager.instance.PlaySoundFXClip(dashDamageSound,transform,1f);
                     enemyHealth.TakeDamage(damageToEnemy);
                     Debug.Log("Player dashed into enemy — enemy took damage.");
                 }

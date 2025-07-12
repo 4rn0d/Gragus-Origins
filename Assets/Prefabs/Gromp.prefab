@@ -288,6 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageToPlayer: 25
   damageToEnemy: 50
+  dashDamageSound: {fileID: 8300000, guid: 7ddc2c28f26be45419bf53839197e4ef, type: 3}
 --- !u!114 &3996452727728333127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
+  dead: 0
   iFramesDuration: 0
   numberOfFlashes: 0
   components: []

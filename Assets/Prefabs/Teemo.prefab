@@ -302,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageToPlayer: 10
   damageToEnemy: 100
+  dashDamageSound: {fileID: 8300000, guid: 7ddc2c28f26be45419bf53839197e4ef, type: 3}
 --- !u!61 &8403270256628970079
 BoxCollider2D:
   m_ObjectHideFlags: 0
