@@ -46,7 +46,8 @@ namespace Map
                 availablePoints.RemoveAt(spawnIndex);
 
                 GameObject prefab = ennemieToUse[Random.Range(0, ennemieToUse.Count)];
-                GameObject enemy = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+                GameObject enemy = Instantiate(prefab, spawnPoint.position, Quaternion.identity, transform);
+                
                 ennemies.Add(enemy);
             }
         }
@@ -93,21 +94,17 @@ namespace Map
         }
         public void OnPlayerEnter()
         {
-            if (CountEnnemy() != 0)
+            if (ennemies.Count != 0)
             {
                 EnableUsedDoor();
             }
         }
-        private int CountEnnemy()
-        {
-            ennemies.RemoveAll(e => e == null);
-            return ennemies.Count;
-        }
+
         public void OnEnemyDied(GameObject enemy)
         {
             ennemies.Remove(enemy);
 
-            if (CountEnnemy() == 0)
+            if (ennemies.Count == 0)
             {
                 DisableUsedDoor();
             }
