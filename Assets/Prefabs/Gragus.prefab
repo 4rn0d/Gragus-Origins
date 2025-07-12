@@ -404,6 +404,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8de16c6f-8cbd-45ed-aec1-7261789bf7ac
     m_ActionName: UI/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 265126755140196168, guid: eaf21277df3aa44ee809bb5bbd9c6024, type: 3}
+        m_TargetAssemblyTypeName: Alcohol.FountainRefill, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7561945a-7eb6-43ab-9051-ef0699fc56f3
+    m_ActionName: 'Player/Interact[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -493,6 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
+  dead: 0
   iFramesDuration: 2
   numberOfFlashes: 3
   components: []

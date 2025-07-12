@@ -98,6 +98,7 @@ namespace Scripts
 
         private bool _sModIsPressed;
 
+        public bool triggerActive;
         void Awake()
         {
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
