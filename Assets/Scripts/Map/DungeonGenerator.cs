@@ -1,157 +1,489 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Map
 {
     public class DungeonGenerator : MonoBehaviour
     {
-        [Header("Rooms")]
+        [Header("Player")]
+        public GameObject playerPrefab;
+
+        public Vector3 playerOffsetInStartRoom;
+        private GameObject _playerInstance;
+        
+        [Header("Salles")]
         public GameObject startRoomPrefab;
-        public GameObject finalRoomPrefab;
+        public GameObject finalRoomUpPrefab;
+        public GameObject finalRoomDownPrefab;
+        public GameObject finalRoomLeftPrefab;
+        public GameObject finalRoomRightPrefab;
         public List<GameObject> normalRooms;
         public List<GameObject> specialRooms;
 
-        [Header("Settings")]
-        public int normalRoomCount = 6;
-        public int specialRoomCount = 2;
+        [Header("Paramètres")] 
+        public int normalRoomCount;
 
-        private List<Room> placedRooms = new();
+        public int specialRoomCount;
+        
+        public bool debug;
 
-        void Start()
+        [Header("Graine aléatoire")]
+        public int seed = 0;
+        public bool useRandomSeed = true;
+
+        private List<Room> _placedRooms = new();
+        private HashSet<Vector2Int> _occupiedCells = new();
+        private const float GridSize = 1f;
+
+        private Room _currentPlayerRoom;
+        
+
+        private void Update()
         {
-            GenerateDungeon();
+            if (!debug)
+            {
+                UpdatePlayerRoom();
+                UpdateActiveRooms(2);
+            }
+        }
+        private void UpdatePlayerRoom()
+        {
+            Room closestRoom = null;
+            float closestDist = float.MaxValue;
+            Vector3 playerPos = _playerInstance.transform.position;
+
+            foreach (var room in _placedRooms)
+            {
+                float dist = Vector3.Distance(playerPos, room.transform.position);
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    closestRoom = room;
+                }
+            }
+
+            _currentPlayerRoom = closestRoom;
+        }
+        private void UpdateActiveRooms(int maxDepth)
+        {
+            if (_currentPlayerRoom == null) return;
+
+            HashSet<Room> roomsToActivate = new HashSet<Room>();
+            Queue<(Room room, int depth)> queue = new();
+            queue.Enqueue((_currentPlayerRoom, 0));
+
+            while (queue.Count > 0)
+            {
+                var (room, depth) = queue.Dequeue();
+
+                if (depth > maxDepth) continue;
+
+                if (!roomsToActivate.Add(room))
+                    continue; // Already visited
+
+                foreach (var door in room.doors)
+                {
+                    if (door.isUsed && door.connectedRoom != null)
+                    {
+                        queue.Enqueue((door.connectedRoom, depth + 1));
+                    }
+                }
+            }
+
+            foreach (var room in _placedRooms)
+            {
+                bool shouldBeActive = roomsToActivate.Contains(room);
+                if (room.gameObject.activeSelf != shouldBeActive)
+                    room.gameObject.SetActive(shouldBeActive);
+            }
         }
 
-        void GenerateDungeon()
+        private IEnumerator  Start()
         {
-            placedRooms.Clear();
+            bool success = false;
+            int attempt = 0;
+            int maxRetries = 50;
+            int baseSeed = useRandomSeed ? System.DateTime.Now.GetHashCode() : seed;
 
-            // Start Room
-            GameObject startGO = Instantiate(startRoomPrefab, Vector3.zero, Quaternion.identity, transform);
-            Room startRoom = startGO.GetComponent<Room>();
-            placedRooms.Add(startRoom);
+            while ((!success && attempt < maxRetries || _placedRooms.Count < normalRoomCount + specialRoomCount + 2) && attempt < maxRetries)
+            {
+                Random.InitState(baseSeed + attempt);
 
-            Queue<Room> frontier = new();
-            frontier.Enqueue(startRoom);
+                Shuffle(normalRooms);
+                Shuffle(specialRooms);
+
+                GenerateDungeon();
+
+                success = TryPlaceFinalRoom();
+                Debug.Log("Nb Rooms : " + (_placedRooms.Count) + " and should be " + (normalRoomCount + specialRoomCount + 2));
+                if (!success || _placedRooms.Count < normalRoomCount + specialRoomCount + 2)
+                {
+                    ClearDungeon();
+                    yield return null;
+                    attempt++;
+                }
+                else
+                {
+                    Debug.Log("Generated a dungeon with a final room after " + attempt + " attempts.");
+                    SpawnPlayerInStartRoom();
+                    EnableAllUnusedDoors();
+                }
+            }
+
+            if (!success)
+                Debug.LogError("Failed to generate a dungeon with a final room after " + maxRetries + " attempts.");
+        }
+        private void SpawnPlayerInStartRoom()
+        {
+            Room startRoom = _placedRooms[0];
+            if (startRoom == null)
+            {
+                Debug.LogError("Start room is missing!");
+                return;
+            }
+
+            Vector3 spawnPosition = startRoom.transform.position + playerOffsetInStartRoom;
+
+            if (_playerInstance != null)
+                Destroy(_playerInstance);
+
+            _playerInstance = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+        }
+
+        private void ClearDungeon()
+        {
+            foreach (var room in _placedRooms)
+                if (room != null && room.gameObject != null)
+                    Destroy(room.gameObject);
+
+            foreach (Transform child in transform)
+                Destroy(child.gameObject);
+
+            _placedRooms.Clear();
+            _occupiedCells.Clear();
+            
+            Physics2D.SyncTransforms();
+        }
+        
+        private void GenerateDungeon()
+        {
+            _placedRooms.Clear();
+            _occupiedCells.Clear();
+
+            Room startRoom = GenerateStartRoom();
+            List<Room> frontier = new() { startRoom };
 
             int placedNormals = 0;
             int placedSpecials = 0;
 
+            const int maxAttempts = 5;
+            const float branchChance = 0.1f;
+
             while (frontier.Count > 0 && (placedNormals < normalRoomCount || placedSpecials < specialRoomCount))
             {
-                Room current = frontier.Dequeue();
+                int index = (Random.value < branchChance) ? Random.Range(0, frontier.Count) : frontier.Count - 1;
+                Room current = frontier[index];
+                frontier.RemoveAt(index);
 
-                foreach (var door in current.doors)
+                bool roomPlaced = false;
+
+                foreach (var door in ShuffleList(current.doors))
                 {
                     if (door.isUsed) continue;
 
-                    GameObject roomPrefab = null;
-
-                    if (placedNormals < normalRoomCount)
+                    for (int attempt = 0; attempt < maxAttempts; attempt++)
                     {
-                        roomPrefab = normalRooms[Random.Range(0, normalRooms.Count)];
-                        placedNormals++;
+                        GameObject prefab = SelectRoomPrefab(placedNormals, placedSpecials);
+                        if (prefab == null) break;
+
+                        if (TryPlaceRoom(prefab, door, out Room newRoom))
+                        {
+                            newRoom.depth = current.depth + 1;
+                            frontier.Add(newRoom);
+                            _placedRooms.Add(newRoom);
+                            door.isUsed = true;
+
+                            Room.Door matching = FindMatchingDoor(newRoom, door.direction.Opposite());
+                            if (matching != null)
+                                matching.isUsed = true;
+                            
+                            door.connectedRoom = newRoom;
+                            if (matching != null)
+                                matching.connectedRoom = current;
+
+                            if (normalRooms.Contains(prefab))
+                                placedNormals++;
+                            else if (specialRooms.Contains(prefab))
+                                placedSpecials++;
+
+                            roomPlaced = true;
+                            break;
+                        }
                     }
-                    else if (placedSpecials < specialRoomCount)
-                    {
-                        roomPrefab = specialRooms[Random.Range(0, specialRooms.Count)];
-                        placedSpecials++;
-                    }
-
-                    if (roomPrefab == null) continue;
-
-                    GameObject newGO = Instantiate(roomPrefab);
-                    Room newRoom = newGO.GetComponent<Room>();
-
-                    Room.Door matchingDoor = FindMatchingDoor(newRoom, door.direction.Opposite());
-                    if (matchingDoor == null)
-                    {
-                        Destroy(newGO);
-                        continue;
-                    }
-                    
-                    newGO.transform.position = Vector3.zero;
-                    
-                    Vector3 delta = door.doorTransform.position - matchingDoor.doorTransform.position;
-                    newGO.transform.position += delta;
-
-                    Vector3 snappedPos = new Vector3(
-                        Mathf.Round(newGO.transform.position.x),
-                        Mathf.Round(newGO.transform.position.y),
-                        Mathf.Round(newGO.transform.position.z)
-                    );
-                    newGO.transform.position = snappedPos;
-
-
-                    Bounds newBounds = newRoom.GetBounds();
-                    if (IsOverlapping(newBounds))
-                    {
-                        Destroy(newGO);
-                        continue;
-                    }
-
-                    door.isUsed = true;
-                    matchingDoor.isUsed = true;
-                    placedRooms.Add(newRoom);
-                    frontier.Enqueue(newRoom);
                 }
-            }
 
-            foreach (var room in placedRooms)
+                if (!roomPlaced)
+                    Debug.Log("Aucune salle ajoutée depuis : " + current.name);
+            }
+        }
+
+        private Room GenerateStartRoom()
+        {
+            GameObject go = Instantiate(startRoomPrefab, Vector3.zero, Quaternion.identity, transform);
+            go.transform.position = Vector3.zero; 
+            Room room = go.GetComponent<Room>();
+            _placedRooms.Add(room);
+            MarkGridOccupied(room);
+            return room;
+        }
+
+        private GameObject SelectRoomPrefab(int normals, int specials)
+        {
+            int total = normalRoomCount + specialRoomCount;
+            
+            if (normals >= normalRoomCount && specials >= specialRoomCount)
+                return null;
+
+            float specialRatio = specialRoomCount / (float)total;
+            bool chooseSpecial = Random.value < specialRatio;
+
+            if (chooseSpecial && specials < specialRoomCount)
+                return specialRooms[Random.Range(0, specialRooms.Count)];
+    
+            if (normals < normalRoomCount)
+                return normalRooms[Random.Range(0, normalRooms.Count)];
+            
+            if (specials < specialRoomCount)
+                return specialRooms[Random.Range(0, specialRooms.Count)];
+    
+            return null;
+        }
+
+
+
+        private bool TryPlaceFinalRoom()
+        {
+            int maxDepth = _placedRooms.Max(room => room.depth);
+            List<Room> candidates = _placedRooms.Where(r => r.depth == maxDepth || r.depth == (maxDepth - 1)).ToList();
+            
+            candidates = ShuffleList(candidates);
+
+            foreach (var room in candidates)
             {
-                foreach (var door in room.doors)
+                foreach (var door in ShuffleList(room.doors))
                 {
                     if (door.isUsed) continue;
 
-                    GameObject finalGO = Instantiate(finalRoomPrefab);
-                    Room finalRoom = finalGO.GetComponent<Room>();
-                    Room.Door finalDoor = FindMatchingDoor(finalRoom, door.direction.Opposite());
+                    GameObject prefab = GetFinalRoomPrefabForDirection(door.direction);
+                    if (prefab == null) continue;
 
+                    GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+                    Room finalRoom = go.GetComponent<Room>();
+                    if (finalRoom == null)
+                    {
+                        Destroy(go);
+                        continue;
+                    }
+
+                    Room.Door finalDoor = FindMatchingDoor(finalRoom, door.direction.Opposite());
                     if (finalDoor == null)
                     {
-                        Destroy(finalGO);
+                        Destroy(go);
                         continue;
                     }
 
-                    Vector3 offset = door.doorTransform.position - finalDoor.doorTransform.localPosition;
-                    finalGO.transform.position = offset;
+                    go.transform.position = SnapToGrid(door.doorTransform.position - finalDoor.doorTransform.localPosition);
+                    Physics2D.SyncTransforms();
 
-                    if (!IsOverlapping(finalRoom.GetBounds()))
+                    if (!IsInOccupiedGrid(finalRoom))
                     {
                         door.isUsed = true;
                         finalDoor.isUsed = true;
-                        placedRooms.Add(finalRoom);
-                        return;
+                        door.connectedRoom = finalRoom;
+                        finalDoor.connectedRoom = room;
+                        finalRoom.transform.SetParent(this.transform);
+                        _placedRooms.Add(finalRoom);
+                        MarkGridOccupied(finalRoom);
+                        return true;
                     }
-                    Destroy(finalGO);
+
+                    Destroy(go);
                 }
             }
 
-            Debug.LogWarning("Could not place final room.");
+            return false;
+        }
+        
+        private bool TryPlaceRoom(GameObject prefab, Room.Door targetDoor, out Room placedRoom)
+        {
+            placedRoom = null;
+
+            GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            Room room = go.GetComponent<Room>();
+
+            Room.Door matching = FindMatchingDoor(room, targetDoor.direction.Opposite());
+            if (matching == null)
+            {
+                Destroy(go);
+                return false;
+            }
+
+            Vector3 matchLocalOffset = matching.doorTransform.localPosition;
+
+            Vector3 targetPos = targetDoor.doorTransform.position;
+            go.transform.position = targetPos - matchLocalOffset;
+
+            go.transform.position = new Vector3(
+                Mathf.Round(go.transform.position.x),
+                Mathf.Round(go.transform.position.y),
+                Mathf.Round(go.transform.position.z)
+            );
+
+            Physics2D.SyncTransforms();
+            if (IsOverlapping(room))
+            {
+                Destroy(go);
+                return false;
+            }
+            
+            placedRoom = room;
+            room.transform.SetParent(this.transform);
+            room.SpawnEnemies();
+            return true;
         }
 
-        Room.Door FindMatchingDoor(Room room, Direction requiredDir)
+
+        private static Room.Door FindMatchingDoor(Room room, Direction direction)
         {
             foreach (var door in room.doors)
-                if (!door.isUsed && door.direction == requiredDir)
+                if (!door.isUsed && door.direction == direction)
                     return door;
             return null;
         }
 
-        bool IsOverlapping(Bounds newRoomBounds)
+        private static bool IsOverlapping(Room newRoom)
         {
-            newRoomBounds.Expand(-0.1f); // Shrink bounds slightly to allow small gaps/touches
-
-            foreach (var room in placedRooms)
+            foreach (var col in newRoom.colliders)
             {
-                Bounds existingBounds = room.GetBounds();
-                existingBounds.Expand(-0.1f);
+                Bounds bounds = col.bounds;
+                bounds.Expand(-0.1f);
 
-                if (existingBounds.Intersects(newRoomBounds))
+                Collider2D[] hits = Physics2D.OverlapBoxAll(bounds.center, bounds.size, 0f);
+                foreach (var hit in hits)
+                {
+                    if (hit.transform == newRoom.transform || hit.transform.root == newRoom.transform)
+                        continue;
+
+                    if (hit.gameObject.CompareTag("IgnoreForDungeon"))
+                        continue;
+
                     return true;
+                }
             }
 
             return false;
+        }
+
+
+        private bool IsInOccupiedGrid(Room room)
+        {
+            foreach (var col in room.colliders)
+            {
+                Bounds b = col.bounds;
+                Vector2Int min = WorldToGrid(b.min);
+                Vector2Int max = WorldToGrid(b.max);
+
+                for (int x = min.x; x <= max.x; x++)
+                {
+                    for (int y = min.y; y <= max.y; y++)
+                    {
+                        Vector2Int cell = new(x, y);
+                        if (_occupiedCells.Contains(cell))
+                            return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private void MarkGridOccupied(Room room)
+        {
+            foreach (var col in room.colliders)
+            {
+                Bounds b = col.bounds;
+                Vector2Int min = WorldToGrid(b.min);
+                Vector2Int max = WorldToGrid(b.max);
+
+                for (int x = min.x; x <= max.x; x++)
+                {
+                    for (int y = min.y; y <= max.y; y++)
+                    {
+                        _occupiedCells.Add(new Vector2Int(x, y));
+                    }
+                }
+            }
+        }
+
+        private static Vector2Int WorldToGrid(Vector3 pos)
+        {
+            return new Vector2Int(
+                Mathf.FloorToInt(pos.x / GridSize),
+                Mathf.FloorToInt(pos.y / GridSize)
+            );
+        }
+
+        private static Vector3 SnapToGrid(Vector3 pos)
+        {
+            return new Vector3(
+                Mathf.Round(pos.x / GridSize) * GridSize,
+                Mathf.Round(pos.y / GridSize) * GridSize,
+                0f
+            );
+        }
+
+        private static void Shuffle<T>(List<T> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                int rand = Random.Range(i, list.Count);
+                (list[i], list[rand]) = (list[rand], list[i]);
+            }
+        }
+
+        private static List<T> ShuffleList<T>(List<T> list)
+        {
+            List<T> copy = new List<T>(list);
+            Shuffle(copy);
+            return copy;
+        }
+        
+        private GameObject GetFinalRoomPrefabForDirection(Direction doorDir)
+        {
+            switch (doorDir)
+            {
+                case Direction.North:
+                    return finalRoomDownPrefab;
+                case Direction.South:
+                    return finalRoomUpPrefab;
+                case Direction.West:
+                    return finalRoomRightPrefab;
+                case Direction.East:
+                    return finalRoomLeftPrefab;
+                default:
+                    return null;
+            }
+        }
+        private void EnableAllUnusedDoors()
+        {
+            foreach (var room in _placedRooms)
+            {
+                room.EnableUnusedDoor();
+            }
         }
 
     }

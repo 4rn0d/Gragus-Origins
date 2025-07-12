@@ -10,6 +10,7 @@ TagManager:
   - AlcoholCarousel
   - Enemy
   - PauseMenu
+  - IgnoreForDungeon
   layers:
   - Default
   - TransparentFX

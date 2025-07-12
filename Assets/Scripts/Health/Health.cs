@@ -1,5 +1,8 @@
 using System.Collections;
+using Map;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Health
 {
@@ -9,7 +12,7 @@ namespace Health
         [SerializeField] public float startingHealth;
         public float currentHealth { get; private set; }
         //private Animator anim;
-        private bool dead;
+        public bool dead;
 
         [Header("iFrames")]
         [SerializeField] private float iFramesDuration;
@@ -18,11 +21,14 @@ namespace Health
 
         [Header("Components")]
         [SerializeField] private Behaviour[] components;
+        private Image _healthBar;
         private bool invulnerable;
 
         private void Awake()
         {
             currentHealth = startingHealth;
+            
+            _healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
             //anim = GetComponent<Animator>();
             spriteRend = GetComponent<SpriteRenderer>();
         }
@@ -30,6 +36,7 @@ namespace Health
         {
             if (invulnerable) return;
             currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+            _healthBar.fillAmount = currentHealth / startingHealth;
 
             if (currentHealth > 0)
             {
@@ -51,6 +58,18 @@ namespace Health
                     gameObject.SetActive(false);
 
                     dead = true;
+                    if (gameObject.CompareTag("Player") == false)
+                    {
+                        Room room = GetComponentInParent<Room>();
+                        if (room != null)
+                        {
+                            GameObject enemyRoot = transform.parent.gameObject;
+
+                            room.OnEnemyDied(enemyRoot);
+
+                            Destroy(enemyRoot);
+                        }
+                    }
                 }
             }
         }

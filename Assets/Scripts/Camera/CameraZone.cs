@@ -26,7 +26,6 @@ namespace Camera
                 // Check if player starts inside the zone
                 if (GetComponent<Collider2D>().bounds.Contains(player.position))
                 {
-                    Debug.Log("Player starts inside camera zone: " + gameObject.name);
                     virtualCamera.Priority = activePriority;
                     virtualCamera.Follow = player;
                 }
