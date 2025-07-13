@@ -16,6 +16,7 @@ namespace Scripts
         private static readonly int IsJumping = Animator.StringToHash("IsJumping");
         private static readonly int IsFalling = Animator.StringToHash("IsFalling");
         private static readonly int IsRolling = Animator.StringToHash("IsRolling");
+        private static readonly int IsDrinking = Animator.StringToHash("IsDrinking");
 
 
         [Header("Player Component References")] [SerializeField]
@@ -73,6 +74,8 @@ namespace Scripts
         [SerializeField] Transform wallCheck;
         [SerializeField] LayerMask groundLayer;
         [SerializeField] LayerMask wallLayer;
+        [SerializeField] GameObject pauseMenuPrefab;
+        private PauseMenu _pauseMenu;
 
         private float _horizontal;
         private float _lastNonZeroHorizontal = 1;
@@ -99,20 +102,23 @@ namespace Scripts
         {
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
+            _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
             _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
-            Debug.Log(_currentAlcohol);
 
             // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
         }
 
         private void FixedUpdate()
         {
-            HandleMovement();
-            HandleDash();
-            HandleBounceTimer();
-            UpdateFacingDirection();
-            HandleThrow();
-            _justBounced = false;
+            if (!_pauseMenu.isPaused)
+            {
+                HandleMovement();
+                HandleDash();
+                HandleBounceTimer();
+                UpdateFacingDirection();
+                HandleThrow();
+                _justBounced = false;
+            }
         }
 
         private void HandleThrow()
@@ -280,7 +286,7 @@ namespace Scripts
 
         public void Jump(InputAction.CallbackContext context)
         {
-            if (context.performed && _coyoteTimeCounter > 0)
+            if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0)
             {
                 animator.SetBool(IsJumping, true);
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -295,7 +301,7 @@ namespace Scripts
 
         public void Dash(InputAction.CallbackContext context)
         {
-            if (context.performed && !_isDashing && _canDash)
+            if (context.performed && !_isDashing && _canDash && !_pauseMenu.isPaused)
             {
                 animator.SetBool(IsDashing, true);
                 _isDashing = true;
@@ -322,12 +328,15 @@ namespace Scripts
 
         public void SMod(InputAction.CallbackContext context)
         {
-            _sModIsPressed = context.performed;
+            if (context.performed)
+            {
+                _sModIsPressed = context.performed;
+            }
         }
 
         public void StartBarrelAnim(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (context.performed && !_pauseMenu.isPaused)
             {
                 if (_canThrow)
                 {
@@ -346,6 +355,16 @@ namespace Scripts
             }
         }
 
+        public void PauseGame(InputAction.CallbackContext context)
+        {
+            Debug.Log("TogglePause performed");
+            if (context.performed)
+            {
+                Debug.Log("TogglePause performed");
+                _pauseMenu.TogglePause();
+            }
+        }
+
         private float UseAlcohol(float cost)
         {
             alcoholLevel -= cost;
@@ -356,25 +375,33 @@ namespace Scripts
 
         public void DrinkAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (context.performed && !_pauseMenu.isPaused)
             {
                 Debug.Log(_currentAlcohol);
+                animator.SetBool(IsDrinking, true);
                 _currentAlcohol.Drink();
             }
         }
 
         public void ChangeAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (context.performed && !_pauseMenu.isPaused)
             {
-                _currentAlcohol = _alcoholCarousel.NextPotion();
-                Debug.Log(_currentAlcohol);
+                _currentAlcohol = _alcoholCarousel.NextPotion(); 
+                // Debug.Log("TogglePause performed");
+                // _pauseMenu.TogglePause();
+                
             }
         }
 
         private void EndBarrelAnim()
         {
             animator.SetBool(IsRolling, false);
+        }
+        
+        private void EndDrinkingAnim()
+        {
+            animator.SetBool(IsDrinking, false);
         }
 
         private void SpawnBarrel()
@@ -398,7 +425,13 @@ namespace Scripts
         {
             return _isDashing;
         }
-
+        
+        public void RefillAlcohol(float amount)
+        {
+            alcoholLevel = Mathf.Clamp(alcoholLevel + amount, 0f, maxAlcohoLevel);
+            _alcoholBar.fillAmount = alcoholLevel / maxAlcohoLevel;
+            Debug.Log($"[Fountain] Refilled alcohol. Current level: {alcoholLevel}");
+        }
 
     }
 

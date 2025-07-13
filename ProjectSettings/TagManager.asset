@@ -9,6 +9,8 @@ TagManager:
   - HealthBar
   - AlcoholCarousel
   - Enemy
+  - PauseMenu
+  - IgnoreForDungeon
   layers:
   - Default
   - TransparentFX

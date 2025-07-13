@@ -1,15 +1,20 @@
-﻿using Scripts;
+﻿using Managers;
+using Scripts;
 using UnityEngine;
 
 
 public class Explosion : MonoBehaviour
 {
     [SerializeField] private float explosionDamage = 25f;
+    [SerializeField] private AudioClip explosionSound;
+    
     private float _delay = 1f;
     private bool _canKnockback = true;
 
     private void Start()
     {
+        SoundFXManager.instance.PlaySoundFXClip(explosionSound,transform,1f);
+        
         Destroy(gameObject, 1f); // Auto-destroy after 1 second
     }
 

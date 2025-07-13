@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TeemoSprite_0: 5608105384751829482
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
