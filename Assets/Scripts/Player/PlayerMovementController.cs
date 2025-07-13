@@ -109,17 +109,21 @@ namespace Scripts
             // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
         }
 
+        private void Update()
+        {
+            if (_pauseMenu.isPaused) return;
+            UpdateFacingDirection();
+            HandleThrow();
+        }
+
         private void FixedUpdate()
         {
-            if (!_pauseMenu.isPaused)
-            {
-                HandleMovement();
-                HandleDash();
-                HandleBounceTimer();
-                UpdateFacingDirection();
-                HandleThrow();
-                _justBounced = false;
-            }
+            if (_pauseMenu.isPaused) return;
+            HandleMovement();
+            HandleDash();
+            HandleBounceTimer();
+            _justBounced = false;
+            
         }
 
         private void HandleThrow()
@@ -218,7 +222,12 @@ namespace Scripts
             float bounceDir = -_dashDirection;
             transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
             rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
-
+            if (_rawHorizontalInput != 0)
+                _lastNonZeroHorizontal = _rawHorizontalInput;
+            else
+                _lastNonZeroHorizontal = -_lastNonZeroHorizontal;
+            
+            
             animator.SetBool(IsDashing, false);
         }
 
@@ -269,7 +278,7 @@ namespace Scripts
 
             if (_rawHorizontalInput != 0 && !_isDashing)
             {
-                transform.localRotation = new Quaternion(0f, (Mathf.Sign(_rawHorizontalInput) * -180) - 180f, 0f, 1f);
+                transform.localRotation = new Quaternion(0f, (Mathf.Sign(_horizontal) * -180) - 180f, 0f, 1f);
             }
         }
 
