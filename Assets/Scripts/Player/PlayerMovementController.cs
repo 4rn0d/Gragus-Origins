@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using Alcohol;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -98,6 +99,9 @@ namespace Scripts
 
         private bool _sModIsPressed;
 
+        public bool triggerActive;
+        
+        private FountainRefill _nearbyFountain;
         void Awake()
         {
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
@@ -107,18 +111,16 @@ namespace Scripts
 
             // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
         }
-
         private void FixedUpdate()
         {
-            if (!_pauseMenu.isPaused)
-            {
-                HandleMovement();
-                HandleDash();
-                HandleBounceTimer();
-                UpdateFacingDirection();
-                HandleThrow();
-                _justBounced = false;
-            }
+            if (_pauseMenu.isPaused) return;
+            UpdateFacingDirection();
+            HandleThrow();
+            HandleMovement();
+            HandleDash();
+            HandleBounceTimer();
+            _justBounced = false;
+            
         }
 
         private void HandleThrow()
@@ -217,7 +219,12 @@ namespace Scripts
             float bounceDir = -_dashDirection;
             transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
             rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
-
+            if (_rawHorizontalInput != 0)
+                _lastNonZeroHorizontal = _rawHorizontalInput;
+            else
+                _lastNonZeroHorizontal = -_lastNonZeroHorizontal;
+            
+            
             animator.SetBool(IsDashing, false);
         }
 
@@ -261,15 +268,19 @@ namespace Scripts
                 _canDash = true;
             }
         }
+        private float GetCurrentDirection()
+        {
+            if (Mathf.Abs(rb.linearVelocity.x) > 0.2f)
+            {
+                return Mathf.Sign(rb.linearVelocity.x);
+            }
+            return _lastNonZeroHorizontal;
+        }
+
 
         private void UpdateFacingDirection()
         {
-            if (_isBouncing) return;
-
-            if (_rawHorizontalInput != 0 && !_isDashing)
-            {
-                transform.localRotation = new Quaternion(0f, (Mathf.Sign(_rawHorizontalInput) * -180) - 180f, 0f, 1f);
-            }
+            transform.localRotation = new Quaternion(0f, (Mathf.Sign(GetCurrentDirection()) * -180) - 180f, 0f, 1f);
         }
 
         public bool IsGrounded()
@@ -320,7 +331,7 @@ namespace Scripts
             if (input != 0)
                 _lastNonZeroHorizontal = Mathf.Sign(input);
 
-            if (!_isDashing && !_isBouncing)
+            if (!_isDashing)
             {
                 _horizontal = input;
             }
@@ -426,11 +437,32 @@ namespace Scripts
             return _isDashing;
         }
         
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+
+            if (_nearbyFountain != null && !_nearbyFountain.IsUsed)
+            {
+                _nearbyFountain.Refill(this);
+            }
+        }
+
         public void RefillAlcohol(float amount)
         {
             alcoholLevel = Mathf.Clamp(alcoholLevel + amount, 0f, maxAlcohoLevel);
             _alcoholBar.fillAmount = alcoholLevel / maxAlcohoLevel;
             Debug.Log($"[Fountain] Refilled alcohol. Current level: {alcoholLevel}");
+        }
+
+        public void SetNearbyFountain(FountainRefill fountain)
+        {
+            _nearbyFountain = fountain;
+        }
+
+        public void ClearNearbyFountain(FountainRefill fountain)
+        {
+            if (_nearbyFountain == fountain)
+                _nearbyFountain = null;
         }
 
     }
