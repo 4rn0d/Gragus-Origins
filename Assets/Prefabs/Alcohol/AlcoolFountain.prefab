@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7050124771881326488}
   - component: {fileID: 4184003587277927383}
   - component: {fileID: 2251349227551274393}
-  - component: {fileID: -6643552069494415329}
+  - component: {fileID: 5719001570619081662}
   m_Layer: 0
   m_Name: AlcoolFountain
   m_TagString: Untagged
@@ -136,7 +136,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10.24, y: 15.17}
   m_EdgeRadius: 0
---- !u!114 &-6643552069494415329
+--- !u!114 &5719001570619081662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,6 +152,7 @@ MonoBehaviour:
   fountainRenderer: {fileID: 4184003587277927383}
   refillAmount: 4
   refillSound: {fileID: 8300000, guid: b7c518c10e2a74dc6bde65ca024e56c7, type: 3}
+  _playerController: {fileID: 0}
   _isUsed: 0
 --- !u!1 &2667730896006177761
 GameObject:

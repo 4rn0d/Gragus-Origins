@@ -406,9 +406,9 @@ MonoBehaviour:
     m_ActionName: UI/New action
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -6643552069494415329, guid: eaf21277df3aa44ee809bb5bbd9c6024, type: 3}
-        m_TargetAssemblyTypeName: Alcohol.FountainRefill, Assembly-CSharp
-        m_MethodName: Activate
+      - m_Target: {fileID: 5720579259584363180}
+        m_TargetAssemblyTypeName: Scripts.PlayerController, Assembly-CSharp
+        m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

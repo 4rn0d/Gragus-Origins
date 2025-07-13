@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using Alcohol;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -99,6 +100,8 @@ namespace Scripts
         private bool _sModIsPressed;
 
         public bool triggerActive;
+        
+        private FountainRefill _nearbyFountain;
         void Awake()
         {
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
@@ -267,12 +270,11 @@ namespace Scripts
         }
         private float GetCurrentDirection()
         {
-            // Get the direction of movement based on horizontal velocity
-            if (Mathf.Abs(rb.velocity.x) > 0.1f)  // Avoid detecting very small velocities (like 0 or very slow movements)
+            if (Mathf.Abs(rb.linearVelocity.x) > 0.2f)
             {
-                return Mathf.Sign(rb.velocity.x);  // Returns 1 for right, -1 for left
+                return Mathf.Sign(rb.linearVelocity.x);
             }
-            return _lastNonZeroHorizontal;  // Fallback to the last non-zero horizontal input
+            return _lastNonZeroHorizontal;
         }
 
 
@@ -435,11 +437,32 @@ namespace Scripts
             return _isDashing;
         }
         
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+
+            if (_nearbyFountain != null && !_nearbyFountain.IsUsed)
+            {
+                _nearbyFountain.Refill(this);
+            }
+        }
+
         public void RefillAlcohol(float amount)
         {
             alcoholLevel = Mathf.Clamp(alcoholLevel + amount, 0f, maxAlcohoLevel);
             _alcoholBar.fillAmount = alcoholLevel / maxAlcohoLevel;
             Debug.Log($"[Fountain] Refilled alcohol. Current level: {alcoholLevel}");
+        }
+
+        public void SetNearbyFountain(FountainRefill fountain)
+        {
+            _nearbyFountain = fountain;
+        }
+
+        public void ClearNearbyFountain(FountainRefill fountain)
+        {
+            if (_nearbyFountain == fountain)
+                _nearbyFountain = null;
         }
 
     }

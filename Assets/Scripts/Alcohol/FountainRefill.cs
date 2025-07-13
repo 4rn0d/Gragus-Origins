@@ -13,55 +13,52 @@ namespace Alcohol
         [SerializeField] private SpriteRenderer fountainRenderer;
         [SerializeField] private float refillAmount = 4f;
         [SerializeField] private AudioClip refillSound;
-        private static PlayerController _playerController;
-        [SerializeField] private bool _isUsed;
+        private bool _isUsed;
+
+        public bool IsUsed => _isUsed;
 
         private void Start()
         {
             fPromptUI.SetActive(false);
-            _isUsed = false;
+            fountainRenderer.color = Color.white;
+        }
+
+        public void Refill(PlayerController player)
+        {
+            if (_isUsed) return;
+
+            player.RefillAlcohol(refillAmount);
+            _isUsed = true;
+            fPromptUI.SetActive(false);
+            fountainRenderer.color = Color.gray;
+            SoundFXManager.instance.PlaySoundFXClip(refillSound, transform, 1f);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !_isUsed)
+            if (!_isUsed && other.CompareTag("Player"))
             {
-                _playerController = other.GetComponent<PlayerController>();
-                _playerController.triggerActive = true;
-                fPromptUI.SetActive(true);
+                PlayerController player = other.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    player.SetNearbyFountain(this);
+                    fPromptUI.SetActive(true);
+                }
             }
         }
 
-        public void OnTriggerExit2D(Collider2D other)
+        private void OnTriggerExit2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
-                _playerController.triggerActive = false;
-                _playerController = null;
-                fPromptUI.SetActive(false);
-                
-            }
-        }
-
-        public void Activate(InputAction.CallbackContext context)
-        {
-            if (!context.performed) return;
-
-            if (_playerController != null && _playerController.triggerActive)
-            {
-                _playerController.triggerActive = false;
-                _playerController.RefillAlcohol(refillAmount);
-                _isUsed = true;
-                SoundFXManager.instance.PlaySoundFXClip(refillSound, transform, 1f);
-            }
-        }
-
-        private void Update()
-        {
-            if (_isUsed)
-            {
-                fountainRenderer.color = Color.gray;  
+                PlayerController player = other.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    player.ClearNearbyFountain(this);
+                    fPromptUI.SetActive(false);
+                }
             }
         }
     }
+
 }
