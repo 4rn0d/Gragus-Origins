@@ -108,17 +108,11 @@ namespace Scripts
 
             // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
         }
-
-        private void Update()
+        private void FixedUpdate()
         {
             if (_pauseMenu.isPaused) return;
             UpdateFacingDirection();
             HandleThrow();
-        }
-
-        private void FixedUpdate()
-        {
-            if (_pauseMenu.isPaused) return;
             HandleMovement();
             HandleDash();
             HandleBounceTimer();
@@ -271,15 +265,20 @@ namespace Scripts
                 _canDash = true;
             }
         }
+        private float GetCurrentDirection()
+        {
+            // Get the direction of movement based on horizontal velocity
+            if (Mathf.Abs(rb.velocity.x) > 0.1f)  // Avoid detecting very small velocities (like 0 or very slow movements)
+            {
+                return Mathf.Sign(rb.velocity.x);  // Returns 1 for right, -1 for left
+            }
+            return _lastNonZeroHorizontal;  // Fallback to the last non-zero horizontal input
+        }
+
 
         private void UpdateFacingDirection()
         {
-            if (_isBouncing) return;
-
-            if (_rawHorizontalInput != 0 && !_isDashing)
-            {
-                transform.localRotation = new Quaternion(0f, (Mathf.Sign(_horizontal) * -180) - 180f, 0f, 1f);
-            }
+            transform.localRotation = new Quaternion(0f, (Mathf.Sign(GetCurrentDirection()) * -180) - 180f, 0f, 1f);
         }
 
         public bool IsGrounded()
@@ -330,7 +329,7 @@ namespace Scripts
             if (input != 0)
                 _lastNonZeroHorizontal = Mathf.Sign(input);
 
-            if (!_isDashing && !_isBouncing)
+            if (!_isDashing)
             {
                 _horizontal = input;
             }
