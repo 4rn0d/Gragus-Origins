@@ -101,6 +101,9 @@ namespace Scripts
         private bool _sModIsPressed;
 
         public bool triggerActive;
+
+        private float _cooldownTimer;
+        public bool isOnCooldown;
         
         private Interactable _nearbyInteractible;
         void Awake()
@@ -122,6 +125,16 @@ namespace Scripts
             HandleBounceTimer();
             _justBounced = false;
             
+        }
+        
+        private void Update()
+        {
+            if (!isOnCooldown) return;
+            _cooldownTimer -= Time.deltaTime;
+            if (_cooldownTimer <= 0)
+            {
+                isOnCooldown = false;
+            }
         }
 
         private void HandleThrow()
@@ -389,12 +402,24 @@ namespace Scripts
         {
             if (context.performed && !_pauseMenu.isPaused)
             {
-                Debug.Log(_currentAlcohol);
-                animator.SetBool(IsDrinking, true);
-                _currentAlcohol.Drink(this);
+                if (!isOnCooldown && _currentAlcohol.state != State.Empty || !isOnCooldown &&_currentAlcohol.state != State.Broken)
+                {
+                    Debug.Log(_currentAlcohol);
+                    animator.SetBool(IsDrinking, true);
+                    _currentAlcohol.Drink(this);  
+                }
+                else
+                { 
+                    Debug.Log("AlcoolOnCooldown");
+                }
             }
         }
 
+        public void StartCooldown(float cooldown)
+        {
+            _cooldownTimer = cooldown;
+            isOnCooldown = true;
+        }
         public void ChangeAlcohol(InputAction.CallbackContext context)
         {
             if (context.performed && !_pauseMenu.isPaused)
