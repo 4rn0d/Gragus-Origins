@@ -107,6 +107,10 @@ namespace Scripts
         public SpriteRenderer spriteRenderer;
         
         private Interactable _nearbyInteractible;
+        
+        public Health.Health health;
+
+        public bool healOnBarrel = false;
         void Awake()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -116,7 +120,7 @@ namespace Scripts
             _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
             setAlcoolBarColor(Color.darkOrchid);
 
-            // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
+            health = gameObject.GetComponent<Health.Health>();
         }
         private void FixedUpdate()
         {
@@ -446,6 +450,7 @@ namespace Scripts
 
         private void SpawnBarrel()
         {
+            health.AddHealth(50);
             UseAlcohol(throwAlcoholCost);
             _throwTimer = throwDistance;
             _explosionTimer = explosionCooldown;

@@ -12,6 +12,12 @@ public class Barrel : MonoBehaviour
     [SerializeField] private AudioClip barrelSound;
     
     private bool _isStopping = false;
+    private SpriteRenderer _barrelSprite;
+
+    private void Awake()
+    {
+        _barrelSprite = explosionEffect.GetComponent<SpriteRenderer>();
+    }
 
     private void FixedUpdate()
     {
@@ -49,8 +55,7 @@ public class Barrel : MonoBehaviour
 
     public void ExplodeBarrel(PlayerController player)
     {
-        //Explosion Sound is in the ExplosionScript
-        explosionEffect.GetComponent<SpriteRenderer>().color = player._alcoholBar.color;
+        _barrelSprite.color = player._alcoholBar.color;
         Instantiate(explosionEffect, new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f), new Quaternion(0, 0, 0, 0));
         Destroy(gameObject);
     }

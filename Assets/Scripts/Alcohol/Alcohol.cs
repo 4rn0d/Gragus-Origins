@@ -31,7 +31,7 @@ namespace Scripts
         [SerializeField] Sprite halfBottle;
         [SerializeField] Sprite emptyBottle;
         [SerializeField] Sprite brokenBottle;
-        [SerializeField] float cooldown = 5;
+        [SerializeField] float cooldown = 25;
         [SerializeField] bool hasCooldown = true;
 
         private Effect _effect;
