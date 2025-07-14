@@ -111,7 +111,7 @@ namespace Scripts
         
         private Interactable _nearbyInteractible;
         
-        public Health.Health health;
+        public Health.PlayerHealth health;
 
         public bool healOnBarrel = false;
         void Awake()
@@ -123,7 +123,7 @@ namespace Scripts
             _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
             setAlcoolBarColor(Color.darkOrchid);
 
-            health = gameObject.GetComponent<Health.Health>();
+            health = gameObject.GetComponent<Health.PlayerHealth>();
         }
         private void FixedUpdate()
         {
