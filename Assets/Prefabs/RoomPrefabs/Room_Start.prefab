@@ -472,7 +472,6 @@ Transform:
   - {fileID: 6541163017707178343}
   - {fileID: 7631926144775137856}
   - {fileID: 1577844924790218153}
-  - {fileID: 117410846356066869}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &2779902504882015673
@@ -6929,7 +6928,7 @@ Transform:
   m_GameObject: {fileID: 8444786960299025771}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.634568, y: 0.8961098, z: -10}
+  m_LocalPosition: {x: -9.979369, y: -0.84988976, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7115,72 +7114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundFXSource: {fileID: 5745653599190707306, guid: fe039dde0060d4117811dfbd4ab0c9cc, type: 3}
---- !u!1001 &3910968944341452907
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8135743442275971676}
-    m_Modifications:
-    - target: {fileID: 30737752327119152, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_Name
-      value: Teemo
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 15.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5898423015625306196, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-      propertyPath: meleeHitSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 2c54b9018053c4068ad5326a4a001696, type: 3}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
---- !u!4 &117410846356066869 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4028378617734650462, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
-  m_PrefabInstance: {fileID: 3910968944341452907}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8372951165258500657
 PrefabInstance:
   m_ObjectHideFlags: 0
