@@ -1,5 +1,6 @@
 using System;
 using Managers;
+using Scripts;
 using UnityEngine;
 
 public class Barrel : MonoBehaviour
@@ -46,9 +47,10 @@ public class Barrel : MonoBehaviour
         _isStopping = true;
     }
 
-    public void ExplodeBarrel()
+    public void ExplodeBarrel(PlayerController player)
     {
         //Explosion Sound is in the ExplosionScript
+        explosionEffect.GetComponent<SpriteRenderer>().color = player.spriteRenderer.color;
         Instantiate(explosionEffect, new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f), new Quaternion(0, 0, 0, 0));
         Destroy(gameObject);
     }

@@ -104,10 +104,12 @@ namespace Scripts
 
         private float _cooldownTimer;
         public bool isOnCooldown;
+        public SpriteRenderer spriteRenderer;
         
         private Interactable _nearbyInteractible;
         void Awake()
         {
+            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
             _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
@@ -151,7 +153,7 @@ namespace Scripts
 
                 if (_explosionTimer <= 0 && _barrel != null)
                 {
-                    _barrel.ExplodeBarrel();
+                    _barrel.ExplodeBarrel(this);
                     _canThrow = true;
                 }
             }
@@ -374,7 +376,7 @@ namespace Scripts
                 else
                 {
                     Debug.Log("Boom");
-                    _barrel.ExplodeBarrel();
+                    _barrel.ExplodeBarrel(this);
                     _canThrow = true;
                 }
             }
@@ -491,9 +493,9 @@ namespace Scripts
                 _nearbyInteractible = null;
         }
 
-        public void setSpeed()
+        public void setSpeed(float speed)
         {
-            moveSpeed += 2f;
+            moveSpeed += speed;
         }
 
     }

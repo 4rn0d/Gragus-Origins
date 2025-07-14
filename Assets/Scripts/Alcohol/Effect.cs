@@ -5,14 +5,37 @@ namespace Alcohol
 {
     public abstract class Effect
     {
+        private const float _duration = 5f;
+
+        public void ApplyWithDuration(PlayerController player)
+        {
+            Apply(player);
+            player.StartCoroutine(EffectDuration(player));
+        }
+
         public abstract void Apply(PlayerController player);
+
+        protected abstract void Revert(PlayerController player);
+
+        private System.Collections.IEnumerator EffectDuration(PlayerController player)
+        {
+            yield return new WaitForSeconds(_duration);
+            Revert(player);
+        }
     }
 
     public class Swiftness : Effect
     {
         public override void Apply(PlayerController player)
         {
-            player.setSpeed();
+            player.setSpeed(2);
+            player.spriteRenderer.color = Color.deepSkyBlue;
+        }
+
+        protected override void Revert(PlayerController player)
+        {
+            player.setSpeed(-2);
+            player.spriteRenderer.color = Color.white;
         }
     }
 
@@ -22,6 +45,11 @@ namespace Alcohol
         {
             Debug.Log("Health");
         }
+
+        protected override void Revert(PlayerController player)
+        {
+            throw new System.NotImplementedException();
+        }
     }
     
     public class Resistance : Effect
@@ -29,6 +57,11 @@ namespace Alcohol
         public override void Apply(PlayerController player)
         {
             Debug.Log("Resistance");
+        }
+
+        protected override void Revert(PlayerController player)
+        {
+            throw new System.NotImplementedException();
         }
     }
     
@@ -38,6 +71,11 @@ namespace Alcohol
         {
             Debug.Log("Power");
         }
+
+        protected override void Revert(PlayerController player)
+        {
+            throw new System.NotImplementedException();
+        }
     }
     
     public class Stun : Effect
@@ -45,6 +83,11 @@ namespace Alcohol
         public override void Apply(PlayerController player)
         {
             Debug.Log("Stun");
+        }
+
+        protected override void Revert(PlayerController player)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
