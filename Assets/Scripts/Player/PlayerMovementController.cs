@@ -400,7 +400,7 @@ namespace Scripts
 
         public void ChangeAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed && !_pauseMenu.isPaused)
+            if (context.performed && !_pauseMenu.isPaused && animator.GetBool(IsDrinking) == false)
             {
                 _currentAlcohol = _alcoholCarousel.NextPotion(); 
                 // Debug.Log("TogglePause performed");
