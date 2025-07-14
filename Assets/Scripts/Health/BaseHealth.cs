@@ -1,3 +1,4 @@
+using Scripts;
 using UnityEngine;
 
 namespace Health
@@ -14,7 +15,7 @@ namespace Health
             currentHealth = startingHealth;
         }
 
-        public virtual void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage,  PlayerController player)
         {
             if (dead) return;
 

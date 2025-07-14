@@ -104,16 +104,17 @@ namespace Scripts
         private bool _sModIsPressed;
 
         public bool triggerActive;
-
+        private Interactable _nearbyInteractible;
+        
         private float _cooldownTimer;
         public bool isOnCooldown;
         public SpriteRenderer spriteRenderer;
-        
-        private Interactable _nearbyInteractible;
+
         
         public PlayerHealth health;
-
         public bool healOnBarrel = false;
+        public bool resistant = false;
+        
         void Awake()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -470,7 +471,8 @@ namespace Scripts
 
         private void SpawnBarrel()
         {
-            health.AddHealth(50);
+            if(healOnBarrel)
+                health.AddHealth(50);
             UseAlcohol(throwAlcoholCost);
             _throwTimer = throwDistance;
             _explosionTimer = explosionCooldown;

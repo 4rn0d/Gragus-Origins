@@ -58,12 +58,14 @@ namespace Alcohol
     {
         public override void Apply(PlayerController player)
         {
-            Debug.Log("Resistance");
+            player.resistant = true;
+            player.setAlcoolBarColor(Color.orange);
         }
 
         protected override void Revert(PlayerController player)
         {
-            throw new System.NotImplementedException();
+            player.healOnBarrel = false;
+            player.setAlcoolBarColor(Color.darkOrchid);
         }
     }
     

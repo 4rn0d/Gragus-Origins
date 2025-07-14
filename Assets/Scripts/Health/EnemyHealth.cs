@@ -1,5 +1,6 @@
 using UnityEngine;
 using Map;
+using Scripts;
 
 namespace Health
 {
@@ -8,11 +9,10 @@ namespace Health
         [SerializeField] private Behaviour[] componentsToDisable;
 
 
-        public override void TakeDamage(float damage)
+        public override void TakeDamage(float damage,  PlayerController player)
         {
             Debug.Log("Enemy is taking damage");
-            
-            base.TakeDamage(damage);
+            base.TakeDamage(damage, player);
         }
 
         protected override void Die()

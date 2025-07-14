@@ -1,5 +1,6 @@
 using System;
 using Managers;
+using Scripts;
 using UnityEngine;
 
 namespace Enemy
@@ -31,9 +32,10 @@ namespace Enemy
         {
             if (!other.CompareTag("Player")) return;
             Health.PlayerHealth playerHealth = other.GetComponent<Health.PlayerHealth>();
+            var player = other.GetComponent<PlayerController>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(damage);
+                playerHealth.TakeDamage(damage, player);
                 SoundFXManager.instance.PlaySoundFXClip(dartHitSound, transform, 1f);
                 Destroy(gameObject); // Destroy bullet on hit
             }

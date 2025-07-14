@@ -1,4 +1,5 @@
 using System.Collections;
+using Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,13 +28,14 @@ namespace Health
             _healthBar = GameObject.FindWithTag("HealthBar")?.GetComponent<Image>();
         }
 
-        public override void TakeDamage(float damage)
+        public override void TakeDamage(float damage, PlayerController player)
         {
             if (invulnerable || dead) return;
-        
-            Debug.Log("Player is taking damage");
+            if (player.resistant)
+                damage /= 2;
             
-            base.TakeDamage(damage);
+            Debug.Log("Player is taking damage : " + damage);
+            base.TakeDamage(damage, player);
 
             if (!dead)
             {
