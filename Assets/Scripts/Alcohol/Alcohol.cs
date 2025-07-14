@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Alcohol;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -47,10 +48,10 @@ namespace Scripts
         
         private void Awake()
         {
+            _image = GetComponent<Image>();
             state = State.Full;
-            GetComponent<Image>().sprite = GetSpriteByState();
+            _image.sprite = GetSpriteByState();
             _effect = GetEffectByType();
-            Debug.Log($"Initial state: {state}");
             UpdateSprite();
         }
         
@@ -69,10 +70,8 @@ namespace Scripts
         
         private void UpdateSprite()
         {
-            Debug.Log(state);
             var newSprite = GetSpriteByState();
-            Debug.Log(newSprite);
-            GetComponent<Image>().sprite = newSprite;
+            _image.sprite = newSprite;
         }
 
         private Sprite GetSpriteByState()
@@ -95,7 +94,7 @@ namespace Scripts
             switch (alcoholEffect)
             {
                 case EffectType.Swiftness: return new Swiftness();
-                case EffectType.Health: return new Health();
+                case EffectType.Health: return new Healing();
                 case EffectType.Resistance: return new Resistance();
                 case EffectType.Power: return new Power();
                 case EffectType.Stun: return new Stun();
@@ -111,7 +110,7 @@ namespace Scripts
             UpdateSprite();
         }
         
-        public void Drink()
+        public void Drink(PlayerController player)
         {
             Debug.Log(state);
             _effect = GetEffectByType();
@@ -119,11 +118,11 @@ namespace Scripts
             {
                 case State.Full:
                     ChangeState(State.Half);
-                    _effect.Apply();
+                    _effect.Apply(player);
                     return;
                 case State.Half:
                     ChangeState(State.Empty);
-                    _effect.Apply();
+                    _effect.Apply(player);
                     StartCooldown();
                     return;
                 default:

@@ -1,23 +1,24 @@
+using Scripts;
 using UnityEngine;
 
-namespace Scripts
+namespace Alcohol
 {
     public abstract class Effect
     {
-        public abstract void Apply();
+        public abstract void Apply(PlayerController player);
     }
 
     public class Swiftness : Effect
     {
-        public override void Apply()
+        public override void Apply(PlayerController player)
         {
-            Debug.Log("Swiftness");
+            player.setSpeed();
         }
     }
 
-    public class Health : Effect
+    public class Healing : Effect
     {
-        public override void Apply()
+        public override void Apply(PlayerController player)
         {
             Debug.Log("Health");
         }
@@ -25,7 +26,7 @@ namespace Scripts
     
     public class Resistance : Effect
     {
-        public override void Apply()
+        public override void Apply(PlayerController player)
         {
             Debug.Log("Resistance");
         }
@@ -33,7 +34,7 @@ namespace Scripts
     
     public class Power : Effect
     {
-        public override void Apply()
+        public override void Apply(PlayerController player)
         {
             Debug.Log("Power");
         }
@@ -41,7 +42,7 @@ namespace Scripts
     
     public class Stun : Effect
     {
-        public override void Apply()
+        public override void Apply(PlayerController player)
         {
             Debug.Log("Stun");
         }

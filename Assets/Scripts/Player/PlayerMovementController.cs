@@ -391,7 +391,7 @@ namespace Scripts
             {
                 Debug.Log(_currentAlcohol);
                 animator.SetBool(IsDrinking, true);
-                _currentAlcohol.Drink();
+                _currentAlcohol.Drink(this);
             }
         }
 
@@ -464,6 +464,11 @@ namespace Scripts
         {
             if (_nearbyInteractible == interactable)
                 _nearbyInteractible = null;
+        }
+
+        public void setSpeed()
+        {
+            moveSpeed += 2f;
         }
 
     }
