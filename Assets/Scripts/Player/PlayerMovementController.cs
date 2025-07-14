@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using Alcohol;
+using Map;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -101,7 +102,7 @@ namespace Scripts
 
         public bool triggerActive;
         
-        private FountainRefill _nearbyFountain;
+        private Interactable _nearbyInteractible;
         void Awake()
         {
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
@@ -441,9 +442,9 @@ namespace Scripts
         {
             if (!context.performed) return;
 
-            if (_nearbyFountain != null && !_nearbyFountain.IsUsed)
+            if (_nearbyInteractible != null && !_nearbyInteractible.IsUsed)
             {
-                _nearbyFountain.Refill(this);
+                _nearbyInteractible.Interact(this);
             }
         }
 
@@ -454,15 +455,15 @@ namespace Scripts
             Debug.Log($"[Fountain] Refilled alcohol. Current level: {alcoholLevel}");
         }
 
-        public void SetNearbyFountain(FountainRefill fountain)
+        public void SetNearbyInteractable(Interactable interactable)
         {
-            _nearbyFountain = fountain;
+            _nearbyInteractible = interactable;
         }
 
-        public void ClearNearbyFountain(FountainRefill fountain)
+        public void ClearNearbyInteractable(Interactable interactable)
         {
-            if (_nearbyFountain == fountain)
-                _nearbyFountain = null;
+            if (_nearbyInteractible == interactable)
+                _nearbyInteractible = null;
         }
 
     }
