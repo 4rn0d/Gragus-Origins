@@ -50,7 +50,7 @@ public class Barrel : MonoBehaviour
     public void ExplodeBarrel(PlayerController player)
     {
         //Explosion Sound is in the ExplosionScript
-        explosionEffect.GetComponent<SpriteRenderer>().color = player.spriteRenderer.color;
+        explosionEffect.GetComponent<SpriteRenderer>().color = player._alcoholBar.color;
         Instantiate(explosionEffect, new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f), new Quaternion(0, 0, 0, 0));
         Destroy(gameObject);
     }

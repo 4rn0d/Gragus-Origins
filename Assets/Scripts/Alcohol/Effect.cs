@@ -29,13 +29,13 @@ namespace Alcohol
         public override void Apply(PlayerController player)
         {
             player.setSpeed(2);
-            player.spriteRenderer.color = Color.deepSkyBlue;
+            player.setAlcoolBarColor(Color.deepSkyBlue);
         }
 
         protected override void Revert(PlayerController player)
         {
             player.setSpeed(-2);
-            player.spriteRenderer.color = Color.white;
+            player.setAlcoolBarColor(Color.darkOrchid);
         }
     }
 

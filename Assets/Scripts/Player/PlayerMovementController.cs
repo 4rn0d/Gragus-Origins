@@ -94,7 +94,7 @@ namespace Scripts
         private float _rawHorizontalInput;
 
         //UI
-        private Image _alcoholBar;
+        public Image _alcoholBar;
         private Alcohol _currentAlcohol;
         private AlcoholCarousel _alcoholCarousel;
 
@@ -114,6 +114,7 @@ namespace Scripts
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
             _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
             _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+            setAlcoolBarColor(Color.darkOrchid);
 
             // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
         }
@@ -496,6 +497,11 @@ namespace Scripts
         public void setSpeed(float speed)
         {
             moveSpeed += speed;
+        }
+
+        public void setAlcoolBarColor(Color color)
+        {
+            _alcoholBar.color = color;
         }
 
     }

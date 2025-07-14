@@ -97,12 +97,12 @@ namespace Scripts
             {
                 case State.Full:
                     ChangeState(State.Half);
-                    _effect.Apply(player);
+                    _effect.ApplyWithDuration(player);
                     player.StartCooldown(cooldown);
                     return;
                 case State.Half:
                     ChangeState(State.Empty);
-                    _effect.Apply(player);
+                    _effect.ApplyWithDuration(player);
                     player.StartCooldown(cooldown);
                     return;
                 default:
