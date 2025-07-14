@@ -14,6 +14,7 @@ namespace Scripts
     public class PlayerController : MonoBehaviour
     {
         private static readonly int IsDashing = Animator.StringToHash("IsDashing");
+        private static readonly int IsBouncing = Animator.StringToHash("IsBouncing");
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int IsJumping = Animator.StringToHash("IsJumping");
         private static readonly int IsFalling = Animator.StringToHash("IsFalling");
@@ -205,6 +206,7 @@ namespace Scripts
 
         private void TriggerBounce()
         {
+            animator.SetBool(IsBouncing, true);
             _isBouncing = true;
             _bounceTimer = bounceInputLockDuration;
             _isDashing = false;
@@ -227,6 +229,7 @@ namespace Scripts
             
             
             animator.SetBool(IsDashing, false);
+            animator.SetBool(IsBouncing, true);
         }
 
         private void EndDash()
