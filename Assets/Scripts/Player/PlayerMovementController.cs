@@ -508,5 +508,29 @@ namespace Scripts
             _alcoholBar.fillAmount = alcoholLevel / maxAlcohoLevel;
             Debug.Log($"[Fountain] Refilled alcohol. Current level: {alcoholLevel}");
         }
+
+        public void SetNearbyInteractable(Interactable interactable)
+        {
+            _nearbyInteractible = interactable;
+        }
+
+        public void ClearNearbyInteractable(Interactable interactable)
+        {
+            if (_nearbyInteractible == interactable)
+                _nearbyInteractible = null;
+        }
+
+        public void setSpeed(float speed)
+        {
+            moveSpeed += speed;
+        }
+
+        public void setAlcoolBarColor(Color color)
+        {
+            _alcoholBar.color = color;
+        }
+
     }
+
 }
+
