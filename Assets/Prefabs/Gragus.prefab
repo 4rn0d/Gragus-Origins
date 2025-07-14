@@ -46,7 +46,8 @@ GameObject:
   - component: {fileID: 2718031568675409886}
   - component: {fileID: 5720579259584363180}
   - component: {fileID: 8267062349567699985}
-  - component: {fileID: -4913333749114800808}
+  - component: {fileID: 5040505111505949004}
+  - component: {fileID: 5493131787454827289}
   m_Layer: 3
   m_Name: Gragus
   m_TagString: Player
@@ -455,6 +456,7 @@ MonoBehaviour:
   bounceVerticalBoost: 5
   bounceHorizontalForce: 5
   bounceInputLockDuration: 0.6
+  dashSound: {fileID: 8300000, guid: 5eecc81a7d7964d0f97ce411bdaf6078, type: 3}
   barrelPrefab: {fileID: 5130933438599435640, guid: a80402e10d05e5948b163dfcee01ac3a, type: 3}
   launchOffset: {fileID: 8630630076342250254}
   throwDistance: 0.4
@@ -497,7 +499,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-4913333749114800808
+--- !u!114 &5040505111505949004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -506,14 +508,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 6188314894093641039}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a930ae52a5cf410c84b9329a9dff716c, type: 3}
+  m_Script: {fileID: 11500000, guid: 644b18655d65f4d33a9d5dfb7984d909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToEnemy: 50
+  dashDamageSound: {fileID: 8300000, guid: 7ddc2c28f26be45419bf53839197e4ef, type: 3}
+--- !u!114 &5493131787454827289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6188314894093641039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7d09e8121e4fdcabb20f1fafc0c51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
-  dead: 0
-  iFramesDuration: 2
-  numberOfFlashes: 3
-  components: []
+  iFramesDuration: 1
+  numberOfFlashes: 4
+  spriteRend: {fileID: 0}
+  componentsToDisable: []
 --- !u!1 &7149512522619010127
 GameObject:
   m_ObjectHideFlags: 0

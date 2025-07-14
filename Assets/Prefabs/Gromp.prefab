@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 3947143714455762921}
   - component: {fileID: 548661830952735478}
   - component: {fileID: 3538644100047802810}
-  - component: {fileID: 1727955658534607343}
-  - component: {fileID: 3996452727728333127}
+  - component: {fileID: 2106255948977822489}
+  - component: {fileID: 6961886329390007610}
   m_Layer: 0
   m_Name: Gromp
   m_TagString: Enemy
@@ -274,7 +274,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 17.75, y: 15.75}
   m_EdgeRadius: 0
---- !u!114 &1727955658534607343
+--- !u!114 &2106255948977822489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,28 +283,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 869523412650322001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d97f0deed7f4f6cbaafb9d10e76304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageToPlayer: 25
-  damageToEnemy: 50
---- !u!114 &3996452727728333127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869523412650322001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a930ae52a5cf410c84b9329a9dff716c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c7123133c8b469a911c6fac71627869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
-  dead: 0
-  iFramesDuration: 0
-  numberOfFlashes: 0
-  components: []
+  componentsToDisable: []
+--- !u!114 &6961886329390007610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869523412650322001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085579bdf3adc44f0aabd01755ab9d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToPlayer: 34
+  meleeHitSound: {fileID: 8300000, guid: deacbe98c6102452aaebea75af428bda, type: 3}
 --- !u!1 &1054648911276103854
 GameObject:
   m_ObjectHideFlags: 0

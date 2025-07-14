@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9119903807317058883}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,15 +163,15 @@ GameObject:
   - component: {fileID: 3133776321653607713}
   - component: {fileID: 1781993096884309684}
   - component: {fileID: 8162281460242632466}
-  - component: {fileID: 5084015771366105316}
-  - component: {fileID: 5898423015625306196}
   - component: {fileID: 8403270256628970079}
   - component: {fileID: 6538243492545897746}
   - component: {fileID: 2189535191658158395}
   - component: {fileID: 659358574342749967}
-  m_Layer: 0
+  - component: {fileID: 6212477299137405509}
+  - component: {fileID: 9061901830755212310}
+  m_Layer: 11
   m_Name: Teemo
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,37 +271,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6188314894093641039, guid: 56218ff834801d448bcd0c697423c491, type: 3}
---- !u!114 &5084015771366105316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3619221698321341920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a930ae52a5cf410c84b9329a9dff716c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  dead: 0
-  iFramesDuration: 0
-  numberOfFlashes: 0
-  components: []
---- !u!114 &5898423015625306196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3619221698321341920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d97f0deed7f4f6cbaafb9d10e76304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageToPlayer: 10
-  damageToEnemy: 100
 --- !u!61 &8403270256628970079
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -364,7 +333,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -476,6 +445,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6212477299137405509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3619221698321341920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085579bdf3adc44f0aabd01755ab9d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToPlayer: 15
+  meleeHitSound: {fileID: 8300000, guid: b382d7c3551864a77a27ca9cd7c36f14, type: 3}
+--- !u!114 &9061901830755212310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3619221698321341920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7123133c8b469a911c6fac71627869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 50
+  componentsToDisable: []
 --- !u!1 &5065283215047554215
 GameObject:
   m_ObjectHideFlags: 0
