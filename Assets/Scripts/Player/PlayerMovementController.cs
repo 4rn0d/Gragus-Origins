@@ -123,7 +123,6 @@ namespace Scripts
             HandleMovement();
             HandleDash();
             HandleBounceTimer();
-            _justBounced = false;
             
         }
         
@@ -135,6 +134,7 @@ namespace Scripts
             {
                 isOnCooldown = false;
             }
+            _justBounced = false;
         }
 
         private void HandleThrow()
@@ -402,9 +402,9 @@ namespace Scripts
         {
             if (context.performed && !_pauseMenu.isPaused)
             {
-                if (!isOnCooldown && _currentAlcohol.state != State.Empty || !isOnCooldown &&_currentAlcohol.state != State.Broken)
+                Debug.Log(_currentAlcohol);
+                if (!isOnCooldown && (_currentAlcohol.state != State.Broken && _currentAlcohol.state != State.Empty))
                 {
-                    Debug.Log(_currentAlcohol);
                     animator.SetBool(IsDrinking, true);
                     _currentAlcohol.Drink(this);  
                 }
