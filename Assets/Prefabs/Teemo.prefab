@@ -163,8 +163,6 @@ GameObject:
   - component: {fileID: 3133776321653607713}
   - component: {fileID: 1781993096884309684}
   - component: {fileID: 8162281460242632466}
-  - component: {fileID: 5084015771366105316}
-  - component: {fileID: 5898423015625306196}
   - component: {fileID: 8403270256628970079}
   - component: {fileID: 6538243492545897746}
   - component: {fileID: 2189535191658158395}
@@ -271,38 +269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6188314894093641039, guid: 56218ff834801d448bcd0c697423c491, type: 3}
---- !u!114 &5084015771366105316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3619221698321341920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a930ae52a5cf410c84b9329a9dff716c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  dead: 0
-  iFramesDuration: 0
-  numberOfFlashes: 0
-  components: []
---- !u!114 &5898423015625306196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3619221698321341920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d97f0deed7f4f6cbaafb9d10e76304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageToPlayer: 10
-  damageToEnemy: 100
-  dashDamageSound: {fileID: 8300000, guid: 7ddc2c28f26be45419bf53839197e4ef, type: 3}
 --- !u!61 &8403270256628970079
 BoxCollider2D:
   m_ObjectHideFlags: 0

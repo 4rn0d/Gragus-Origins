@@ -2,6 +2,7 @@ using System.Collections;
 using Map;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Health
@@ -22,7 +23,7 @@ namespace Health
         [Header("Components")]
         [SerializeField] private Behaviour[] components;
         private Image _healthBar;
-        private bool invulnerable;
+        public bool invulnerable;
 
         private void Awake()
         {
@@ -35,6 +36,7 @@ namespace Health
         public void TakeDamage(float _damage)
         {
             if (invulnerable) return;
+            
             currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
             _healthBar.fillAmount = currentHealth / startingHealth;
 
@@ -56,6 +58,8 @@ namespace Health
 
                     // Make player disappear
                     gameObject.SetActive(false);
+                    SceneManager.LoadScene(0); // Loads the scene at index 0 (your main menu)
+
 
                     dead = true;
                     if (gameObject.CompareTag("Player") == false)

@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using System.Threading;
 using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Health;
 
 namespace Scripts
 {
@@ -221,11 +223,20 @@ namespace Scripts
             animator.SetBool(IsDashing, false);
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void EndDash()
         {
+            
             animator.SetBool(IsDashing, false);
             _horizontal = _rawHorizontalInput;
             _isDashing = false;
+            global::Health.Health playerHealth = GetComponent<global::Health.Health>();
+
+            if (playerHealth != null)
+            {
+                Debug.Log("Vunerable");
+                playerHealth.invulnerable = false;
+            }
             _horizontal = _rawHorizontalInput;
             if (_rawHorizontalInput == 0)
             {
@@ -306,6 +317,15 @@ namespace Scripts
                 SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
                 animator.SetBool(IsDashing, true);
                 _isDashing = true;
+                
+                global::Health.Health playerHealth = GetComponent<global::Health.Health>();
+
+                if (playerHealth != null)
+                {
+                    playerHealth.invulnerable = true;
+                    Debug.Log("Invulnerable");
+                }
+                
                 _dashTimer = dashDuration;
                 _dashDirection = _lastNonZeroHorizontal;
                 _hasBouncedThisDash = false;

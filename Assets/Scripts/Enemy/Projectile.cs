@@ -30,7 +30,7 @@ namespace Enemy
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Player")) return;
-            Health.Health playerHealth = other.GetComponent<Health.Health>();
+            Health.PlayerHealth playerHealth = other.GetComponent<Health.PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);

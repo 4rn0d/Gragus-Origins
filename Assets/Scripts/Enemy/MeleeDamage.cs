@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 
@@ -14,19 +16,20 @@ public class MeleeDamage : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        // Try to get the player's controller
         var controller = other.GetComponent<Scripts.PlayerController>();
         var playerHealth = other.GetComponent<Health.Health>();
 
         if (controller != null && playerHealth != null)
         {
-            if (controller.IsThePlayerDashing()) // You’ll need to expose this with a public method
+            if (controller.IsThePlayerDashing())
             {
-                // Player is dashing → damage the enemy (this GameObject)
+                GetComponent<MeleeDamage>().enabled = false;
+                StartCoroutine(ReenableDamage());
+
+                // ✅ Player is dashing → only damage enemy
                 var enemyHealth = GetComponent<Health.Health>();
                 if (enemyHealth != null)
                 {
-                    //move cette logique dans gragus
                     SoundFXManager.instance.PlaySoundFXClip(dashDamageSound, transform, 1f);
                     enemyHealth.TakeDamage(damageToEnemy);
                     Debug.Log("Player dashed into enemy — enemy took damage.");
@@ -34,11 +37,26 @@ public class MeleeDamage : MonoBehaviour
             }
             else
             {
-                // Player is not dashing → damage the player
-                playerHealth.TakeDamage(damageToPlayer);
-                SoundFXManager.instance.PlaySoundFXClip(meleeHitSound, transform, 1f);
-                Debug.Log("Enemy hit player — player took damage.");
+                // ❌ Player is not dashing → damage player (if not invulnerable)
+                if (!playerHealth.invulnerable)
+                {
+                    playerHealth.TakeDamage(damageToPlayer);
+                    SoundFXManager.instance.PlaySoundFXClip(meleeHitSound, transform, 1f);
+                    Debug.Log("Enemy hit player — player took damage.");
+                }
+                else
+                {
+                    Debug.Log("Player is invulnerable — no damage taken.");
+                }
             }
         }
     }
+
+    // ReSharper disable Unity.PerformanceAnalysis
+    private IEnumerator ReenableDamage()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<MeleeDamage>().enabled = true;
+    }
+
 }
