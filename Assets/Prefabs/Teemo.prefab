@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9119903807317058883}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 6538243492545897746}
   - component: {fileID: 2189535191658158395}
   - component: {fileID: 659358574342749967}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Teemo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageToPlayer: 10
   damageToEnemy: 100
+  dashDamageSound: {fileID: 8300000, guid: 7ddc2c28f26be45419bf53839197e4ef, type: 3}
 --- !u!61 &8403270256628970079
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 0668a1e4462078047a9064e0533f1532, type: 2}
-  resolutionDropdown: {fileID: 0}
+  resolutionDropdown: {fileID: 1072811192}
 --- !u!114 &33256037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +461,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 6f78aef2948e040a99701889929b3d37, type: 3}
   m_Resource: {fileID: 8300000, guid: 6f78aef2948e040a99701889929b3d37, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1585,6 +1585,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4460161706458657503, guid: bb15f090027264368945812a7a484cf6, type: 3}
   m_PrefabInstance: {fileID: 1072811187}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1072811192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5174319750368225324, guid: bb15f090027264368945812a7a484cf6, type: 3}
+  m_PrefabInstance: {fileID: 1072811187}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0b652f32a2cc243917e4028fa0f046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1090291751
 PrefabInstance:
   m_ObjectHideFlags: 0
