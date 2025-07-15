@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - PauseMenu
   - IgnoreForDungeon
+  - BossHealthbar
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Player
   - Barrel
   - Enemy
-  - 
+  - Boss
   - 
   - 
   - 
