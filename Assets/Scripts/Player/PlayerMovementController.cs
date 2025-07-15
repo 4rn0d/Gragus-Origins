@@ -121,7 +121,7 @@ namespace Scripts
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
             _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
-            _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+            //_currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
             setAlcoolBarColor(Color.darkOrchid);
 
             health = gameObject.GetComponent<PlayerHealth>();
