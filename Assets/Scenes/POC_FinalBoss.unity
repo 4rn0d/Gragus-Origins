@@ -208,6 +208,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 582548459530841460, guid: d9321f4b424ee4d11bc542abbf8d6e62, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 582548459530841460, guid: d9321f4b424ee4d11bc542abbf8d6e62, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 544
+      objectReference: {fileID: 0}
     - target: {fileID: 5545725292251609191, guid: d9321f4b424ee4d11bc542abbf8d6e62, type: 3}
       propertyPath: m_RenderMode
       value: 0
@@ -1315,10 +1323,11 @@ GameObject:
   - component: {fileID: 551460468}
   - component: {fileID: 551460471}
   - component: {fileID: 551460470}
+  - component: {fileID: 551460472}
+  - component: {fileID: 551460473}
   - component: {fileID: 551460474}
-  - component: {fileID: 551460476}
-  - component: {fileID: 551460477}
-  m_Layer: 0
+  - component: {fileID: 551460475}
+  m_Layer: 6
   m_Name: Garen
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1371,7 +1380,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -6833953978306140631, guid: eecbebfbb9dee47c4a432b9983f459ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -1421,9 +1430,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085579bdf3adc44f0aabd01755ab9d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 25
-  meleeHitSound: {fileID: 8300000, guid: deacbe98c6102452aaebea75af428bda, type: 3}
---- !u!61 &551460474
+  damageToPlayer: 30
+  meleeHitSound: {fileID: 8300000, guid: 04558b8e9015b4c0080c9413fa219ac6, type: 3}
+--- !u!61 &551460472
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1439,7 +1448,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1457,7 +1466,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.15288329, y: 0.025526822}
+  m_Offset: {x: -0.17450333, y: 0.041880667}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1467,36 +1476,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.449236, y: 3.08664}
+  m_Size: {x: 2.4197087, y: 3.0645556}
   m_EdgeRadius: 0
---- !u!50 &551460476
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551460467}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &551460477
+--- !u!61 &551460473
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1530,7 +1512,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.17450333, y: 0.041880667}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1540,8 +1522,72 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.02, y: 3.26}
+  m_Size: {x: 2.4197087, y: 3.0645556}
   m_EdgeRadius: 0
+--- !u!50 &551460474
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551460467}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &551460475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551460467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: 5393043814651110018, guid: 5498edb6d0143499dbdaed3ab22c1d0e, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 6455566252039471222
+  - rid: 6455566252039471268
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6455566252039471222
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Enemy
+        m_Value: {fileID: 551460467}
+    - rid: 6455566252039471268
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10398784754935737540
+          m_Value1: 16958123868771798415
+        Name: Player
+        m_Value: {fileID: 89339374}
 --- !u!1 &612292501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,13 +2455,13 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805515592}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -547207947340261023, guid: 0668a1e4462078047a9064e0533f1532, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6f78aef2948e040a99701889929b3d37, type: 3}
-  m_Resource: {fileID: 8300000, guid: 6f78aef2948e040a99701889929b3d37, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c2f48dd4cf5a4477aafeb158a26f128e, type: 3}
+  m_Resource: {fileID: 8300000, guid: c2f48dd4cf5a4477aafeb158a26f128e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2987,11 +3033,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.6
+      value: -12.1
       objectReference: {fileID: 0}
     - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.7
+      value: -4.34
       objectReference: {fileID: 0}
     - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3024,6 +3070,10 @@ PrefabInstance:
     - target: {fileID: 3019686962793473907, guid: 56218ff834801d448bcd0c697423c491, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5040505111505949004, guid: 56218ff834801d448bcd0c697423c491, type: 3}
+      propertyPath: damageToEnemy
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6188314894093641039, guid: 56218ff834801d448bcd0c697423c491, type: 3}
       propertyPath: m_Name
