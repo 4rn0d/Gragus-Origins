@@ -55,10 +55,13 @@ namespace Health
             {
                 GameObject enemyRoot = transform.parent != null ? transform.parent.gameObject : gameObject;
                 room.OnEnemyDied(enemyRoot);
+                Destroy(_healthBar.gameObject);
                 Destroy(enemyRoot);
+                
             }
             else
             {
+                Destroy(_healthBar.gameObject);
                 Destroy(gameObject);
             }
         }
