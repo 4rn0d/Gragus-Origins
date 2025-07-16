@@ -7,14 +7,14 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] private float explosionDamage = 25f;
     [SerializeField] private AudioClip explosionSound;
-    
+
     private float _delay = 1f;
     private bool _canKnockback = true;
 
     private void Start()
     {
-        SoundFXManager.instance.PlaySoundFXClip(explosionSound,transform,1f);
-        
+        SoundFXManager.instance.PlaySoundFXClip(explosionSound, transform, 1f);
+
         Destroy(gameObject, 1f); // Auto-destroy after 1 second
     }
 
@@ -39,10 +39,11 @@ public class Explosion : MonoBehaviour
         }
         else
         {
-            Health.Health health = other.GetComponent<Health.Health>();
+            Health.EnemyHealth health = other.GetComponent<Health.EnemyHealth>();
             if (health != null)
             {
-                health.TakeDamage(explosionDamage);
+                PlayerController player = other.GetComponent<PlayerController>();
+                health.TakeDamage(explosionDamage, player);
                 Debug.Log($"[Explosion] {other.name} took {explosionDamage} damage.");
             }
         }
