@@ -13,6 +13,8 @@ public class Barrel : MonoBehaviour
     
     private bool _isStopping = false;
     private SpriteRenderer _explosionSprite;
+    public bool _sticky = false;
+    public bool _powerful = false;
 
     private void Awake()
     {
@@ -36,6 +38,8 @@ public class Barrel : MonoBehaviour
 
     public void InitalizeBarrel(PlayerController player, float speed)
     {
+        _sticky = player.sticky;
+        _powerful = player.powerful;
         //Play Barrel Sound
         SoundFXManager.instance.PlaySoundFXClip(barrelSound, transform, 1f);
         
@@ -55,9 +59,12 @@ public class Barrel : MonoBehaviour
         _isStopping = true;
     }
 
-    public void ExplodeBarrel(PlayerController player)
+    public void ExplodeBarrel()
     {
-        Instantiate(explosionEffect, new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f), new Quaternion(0, 0, 0, 0));
+        GameObject obj = Instantiate(explosionEffect, new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f), new Quaternion(0, 0, 0, 0));
+        var explosion = obj.GetComponent<Explosion>();
+        explosion._sticky = _sticky;
+        explosion._powerful = _powerful;
         Destroy(gameObject);
     }
     
