@@ -12,11 +12,12 @@ public class Barrel : MonoBehaviour
     [SerializeField] private AudioClip barrelSound;
     
     private bool _isStopping = false;
-    private SpriteRenderer _barrelSprite;
+    private SpriteRenderer _explosionSprite;
 
     private void Awake()
     {
-        _barrelSprite = explosionEffect.GetComponent<SpriteRenderer>();
+        _explosionSprite = explosionEffect.GetComponent<SpriteRenderer>();
+        
     }
 
     private void FixedUpdate()
@@ -33,19 +34,20 @@ public class Barrel : MonoBehaviour
         }
     }
 
-    public void InitalizeBarrel(Rigidbody2D player, float speed)
+    public void InitalizeBarrel(PlayerController player, float speed)
     {
         //Play Barrel Sound
         SoundFXManager.instance.PlaySoundFXClip(barrelSound, transform, 1f);
         
-        if (player.linearVelocity.magnitude <= 1f)
+        if (player.GetComponentInParent<Rigidbody2D>().linearVelocity.magnitude <= 1f)
         {
             rb.linearVelocity = speed * transform.right;
         }
         else
         {
-            rb.linearVelocity = (player.linearVelocity.magnitude + speed) * transform.right;
+            rb.linearVelocity = (player.GetComponentInParent<Rigidbody2D>().linearVelocity.magnitude + speed) * transform.right;
         }
+        _explosionSprite.color = player._alcoholBar.color;
     }
     
     public void StopBarrel()
@@ -55,7 +57,6 @@ public class Barrel : MonoBehaviour
 
     public void ExplodeBarrel(PlayerController player)
     {
-        _barrelSprite.color = player._alcoholBar.color;
         Instantiate(explosionEffect, new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f), new Quaternion(0, 0, 0, 0));
         Destroy(gameObject);
     }

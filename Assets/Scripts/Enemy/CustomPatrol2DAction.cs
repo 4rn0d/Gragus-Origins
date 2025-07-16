@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Behavior;
 using UnityEngine;
@@ -107,6 +108,26 @@ namespace Enemy
         {
             _waitTimer = 0f;
             _waiting = false;
+        }
+
+        public void TriggerSlow(float  time, MonoBehaviour behaviour)
+        {
+            var sprit = Agent.Value.GetComponent<SpriteRenderer>();
+            sprit.color = Color.pink;
+            Speed = (BlackboardVariable<float>)(Speed * 0.6f);
+            behaviour.StartCoroutine(StartTimer(time));
+        }
+        IEnumerator StartTimer(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            StopSlow();
+        }
+
+        private void StopSlow()
+        {
+            var sprit = Agent.Value.GetComponent<SpriteRenderer>();
+            sprit.color = Color.pink;
+            Speed = (BlackboardVariable<float>)(Speed / 0.6f);
         }
     }
 }

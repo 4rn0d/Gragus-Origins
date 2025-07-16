@@ -115,6 +115,7 @@ namespace Scripts
         public bool healOnBarrel = false;
         public bool resistant = false;
         public bool powerful = false;
+        public bool sticky = false;
         
         void Awake()
         {
@@ -488,7 +489,7 @@ namespace Scripts
             {
                 _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation)
                     .GetComponent<Barrel>();
-                _barrel.InitalizeBarrel(rb, throwSpeed);
+                _barrel.InitalizeBarrel(this, throwSpeed);
             }
         }
 

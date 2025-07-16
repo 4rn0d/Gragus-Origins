@@ -74,7 +74,7 @@ namespace Alcohol
         public override void Apply(PlayerController player)
         {
             player.powerful = true;
-            player.setAlcoolBarColor(Color.blueViolet);
+            player.setAlcoolBarColor(Color.darkMagenta);
         }
 
         protected override void Revert(PlayerController player)
@@ -88,12 +88,14 @@ namespace Alcohol
     {
         public override void Apply(PlayerController player)
         {
-            Debug.Log("Stun");
+            player.sticky = true;
+            player.setAlcoolBarColor(Color.pink);
         }
 
         protected override void Revert(PlayerController player)
         {
-            throw new System.NotImplementedException();
+            player.sticky = false;
+            player.setAlcoolBarColor(Color.darkOrchid);
         }
     }
 }

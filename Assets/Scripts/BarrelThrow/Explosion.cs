@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using Enemy;
+using Managers;
 using Scripts;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] private float explosionDamage = 25f;
     [SerializeField] private AudioClip explosionSound;
+    [SerializeField] private float stickyTime = 10f;
     
     private float _delay = 1f;
     private bool _canKnockback = true;
@@ -43,6 +45,12 @@ public class Explosion : MonoBehaviour
             Health.Health health = other.GetComponent<Health.Health>();
             if (health != null)
             {
+                if (player.sticky)
+                {
+                    CustomPatrol2DAction  action = other.GetComponent<CustomPatrol2DAction>();
+                    action.TriggerSlow(stickyTime, this);
+                }
+                    
                 float finalDamage = player.powerful ? explosionDamage * 1.5f : explosionDamage;
                 health.TakeDamage(finalDamage);
                 Debug.Log($"[Explosion] {other.name} took {finalDamage} damage.");
