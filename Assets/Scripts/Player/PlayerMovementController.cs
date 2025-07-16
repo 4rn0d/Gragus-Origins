@@ -114,6 +114,7 @@ namespace Scripts
         public PlayerHealth health;
         public bool healOnBarrel = false;
         public bool resistant = false;
+        public bool powerful = false;
         
         void Awake()
         {
@@ -171,7 +172,10 @@ namespace Scripts
         public void BarrelJump(Vector3 position)
         {
             Vector3 moveDirection = position - rb.transform.position;
-            rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
+            if(powerful)
+                rb.AddForce(moveDirection.normalized * -explosionForce * 1.5f, ForceMode2D.Impulse);
+            else
+                rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
         }
 
         private void HandleMovement()

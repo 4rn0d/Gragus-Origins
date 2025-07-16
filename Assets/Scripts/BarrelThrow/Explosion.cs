@@ -39,11 +39,13 @@ public class Explosion : MonoBehaviour
         }
         else
         {
+            PlayerController player = other.GetComponent<PlayerController>();
             Health.Health health = other.GetComponent<Health.Health>();
             if (health != null)
             {
-                health.TakeDamage(explosionDamage);
-                Debug.Log($"[Explosion] {other.name} took {explosionDamage} damage.");
+                float finalDamage = player.powerful ? explosionDamage * 1.5f : explosionDamage;
+                health.TakeDamage(finalDamage);
+                Debug.Log($"[Explosion] {other.name} took {finalDamage} damage.");
             }
         }
     }
