@@ -164,7 +164,7 @@ namespace Scripts
 
                 if (_explosionTimer <= 0 && _barrel != null)
                 {
-                    _barrel.ExplodeBarrel();
+                    _barrel.ExplodeBarrel(this);
                     _canThrow = true;
                 }
             }
@@ -408,7 +408,7 @@ namespace Scripts
                 else
                 {
                     Debug.Log("Boom");
-                    _barrel.ExplodeBarrel();
+                    _barrel.ExplodeBarrel(this);
                     _canThrow = true;
                 }
             }

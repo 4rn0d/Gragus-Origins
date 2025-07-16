@@ -59,12 +59,13 @@ public class Barrel : MonoBehaviour
         _isStopping = true;
     }
 
-    public void ExplodeBarrel()
+    public void ExplodeBarrel(PlayerController player)
     {
         GameObject obj = Instantiate(explosionEffect, new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f), new Quaternion(0, 0, 0, 0));
         var explosion = obj.GetComponent<Explosion>();
         explosion._sticky = _sticky;
         explosion._powerful = _powerful;
+        explosion.playerController = player; 
         Destroy(gameObject);
     }
     

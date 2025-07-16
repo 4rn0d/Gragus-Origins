@@ -27,7 +27,7 @@ public class Explosion : MonoBehaviour
         _delay -= Time.deltaTime;
         if (_delay < 0.97f)
         {
-            _canKnockback = false; // Small window for knockback
+            _canKnockback = false;
         }
     }
 
@@ -35,7 +35,7 @@ public class Explosion : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController player = other.GetComponent<PlayerController>();
+            var player = other.GetComponent<PlayerController>();
             if (_canKnockback && player != null)
             {
                 player.BarrelJump(transform.position);
@@ -43,19 +43,25 @@ public class Explosion : MonoBehaviour
         }
         else
         {
-            PlayerController player = other.GetComponent<PlayerController>();
-            Health.Health health = other.GetComponent<Health.Health>();
-            if (health != null)
+            // Identifier la cible ennemie
+            var enemyHealth = other.GetComponent<Health.EnemyHealth>();
+            if (enemyHealth != null)
             {
                 if (_sticky)
                 {
-                    CustomPatrol2DAction  action = other.GetComponent<CustomPatrol2DAction>();
-                    action.TriggerSlow(stickyTime, this);
+                    var ai = other.GetComponent<CustomPatrol2DAction>();
+                    if (ai != null)
+                    {
+                        ai.TriggerSlow(stickyTime, this);
+                    }
                 }
+                
                 float finalDamage = _powerful ? explosionDamage * 1.5f : explosionDamage;
-                health.TakeDamage(finalDamage);
+                
+                enemyHealth.TakeDamage(finalDamage, playerController);
                 Debug.Log($"[Explosion] {other.name} took {finalDamage} damage.");
             }
         }
     }
+
 }
