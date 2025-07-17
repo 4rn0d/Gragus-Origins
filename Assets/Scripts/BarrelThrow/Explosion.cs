@@ -49,10 +49,10 @@ public class Explosion : MonoBehaviour
             {
                 if (_sticky)
                 {
-                    var ai = other.GetComponent<CustomPatrol2DAction>();
-                    if (ai != null)
+                    SlowableEnemy slowable = other.GetComponent<SlowableEnemy>();
+                    if (slowable != null)
                     {
-                        ai.TriggerSlow(stickyTime, this);
+                        slowable.Slow(0.6f, stickyTime);
                     }
                 }
                 

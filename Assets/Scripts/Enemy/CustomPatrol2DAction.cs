@@ -19,7 +19,7 @@ namespace Enemy
         [SerializeReference] public BlackboardVariable<List<GameObject>> Waypoints;
         [SerializeReference] public BlackboardVariable<GameObject> Player;
         [SerializeReference] public BlackboardVariable<float> PlayerRange = new(3f);
-        [SerializeReference] public BlackboardVariable<float> Speed = new(2f);
+        [SerializeReference] private SlowableEnemy slowable;
         [SerializeReference] public BlackboardVariable<float> WaypointWaitTime = new(1.0f);
         [SerializeReference] public BlackboardVariable<float> DistanceThreshold = new(0.2f);
         [SerializeReference] public BlackboardVariable<bool> PreserveLatestPatrolPoint = new(false);
@@ -36,6 +36,8 @@ namespace Enemy
             {
                 return Status.Failure;
             }
+            
+            slowable = Agent.Value.GetComponent<SlowableEnemy>();
 
             _agent = Agent.Value.transform;
             _initScale = _agent.localScale;
@@ -83,7 +85,8 @@ namespace Enemy
             else
             {
                 Vector2 direction = (currentTarget - agentPos).normalized;
-                _agent.position += (Vector3)(direction * Speed.Value * Time.deltaTime);
+                float moveSpeed = slowable != null ? slowable.CurrentSpeed : 2f;
+                _agent.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
 
                 // Flip sprite based on direction
                 if (direction.x != 0)
@@ -108,26 +111,6 @@ namespace Enemy
         {
             _waitTimer = 0f;
             _waiting = false;
-        }
-
-        public void TriggerSlow(float  time, MonoBehaviour behaviour)
-        {
-            var sprit = Agent.Value.GetComponent<SpriteRenderer>();
-            sprit.color = Color.pink;
-            Speed = (BlackboardVariable<float>)(Speed * 0.6f);
-            behaviour.StartCoroutine(StartTimer(time));
-        }
-        IEnumerator StartTimer(float duration)
-        {
-            yield return new WaitForSeconds(duration);
-            StopSlow();
-        }
-
-        private void StopSlow()
-        {
-            var sprit = Agent.Value.GetComponent<SpriteRenderer>();
-            sprit.color = Color.pink;
-            Speed = (BlackboardVariable<float>)(Speed / 0.6f);
         }
     }
 }
