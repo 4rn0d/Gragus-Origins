@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Alcohol;
 using Map;
 using System.Threading;
@@ -538,6 +539,11 @@ namespace Scripts
         public void setAlcoolBarColor(Color color)
         {
             _alcoholBar.color = color;
+        }
+
+        public List<Alcohol> GetPotions()
+        {
+            return _alcoholCarousel.GetAllAlcohols();
         }
 
     }

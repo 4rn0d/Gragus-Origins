@@ -80,6 +80,11 @@ namespace Scripts
             ShowPotions(_currentIndex);
             return _alcoholInstances[alcoholList[_currentIndex]];
         }
+        public List<Alcohol> GetAllAlcohols()
+        {
+            return _spawnedAlcohols;
+        }
+
 
     }
 }
