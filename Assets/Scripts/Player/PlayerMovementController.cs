@@ -441,6 +441,8 @@ namespace Scripts
                 {
                     animator.SetBool(IsDrinking, true);
                     _currentAlcohol.Drink(this);
+                    if(healOnBarrel)
+                        health.AddHealth(15);
                     RefillAlcohol(2);
                 }
                 else
@@ -478,7 +480,7 @@ namespace Scripts
         private void SpawnBarrel()
         {
             if(healOnBarrel)
-                health.AddHealth(50);
+                health.AddHealth(15);
             UseAlcohol(throwAlcoholCost);
             _throwTimer = throwDistance;
             _explosionTimer = explosionCooldown;
