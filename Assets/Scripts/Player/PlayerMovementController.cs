@@ -440,7 +440,8 @@ namespace Scripts
                 if (!isOnCooldown && (_currentAlcohol.state != State.Broken && _currentAlcohol.state != State.Empty))
                 {
                     animator.SetBool(IsDrinking, true);
-                    _currentAlcohol.Drink(this);  
+                    _currentAlcohol.Drink(this);
+                    RefillAlcohol(2);
                 }
                 else
                 { 
