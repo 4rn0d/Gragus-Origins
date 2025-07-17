@@ -136,7 +136,7 @@ MonoBehaviour:
   - rid: 6455566252039471284
   - rid: 6455566252039471345
   - rid: 6455566318924464203
-  m_VersionTimestamp: 638883530883148180
+  m_VersionTimestamp: 638883539821016720
   m_DebugInfo: {fileID: -2424560921332953682}
   m_RuntimeGraph: {fileID: 5393043814651110018}
   AssetID:
@@ -252,6 +252,13 @@ MonoBehaviour:
         m_SerializableType: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
       Tooltip: 
+    NamedChildren: []
+  - Name: Sequence
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 10181448252506100447
+      m_Value1: 8737116843063128493
+    Variables: []
     NamedChildren: []
   - Name: Time Out
     Story: Time out after [Duration] seconds
@@ -406,13 +413,6 @@ MonoBehaviour:
         m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
       Tooltip: 
-    NamedChildren: []
-  - Name: Sequence
-    Story: 
-    RuntimeTypeID:
-      m_Value0: 10181448252506100447
-      m_Value1: 8737116843063128493
-    Variables: []
     NamedChildren: []
   - Name: Set Variable Value
     Story: 'Set [Variable] value to [Value]'
@@ -1145,16 +1145,16 @@ MonoBehaviour:
   m_Name: Garen
   m_EditorClassIdentifier: 
   Graphs:
-  - rid: 6455566318924464511
+  - rid: 6455566318924464550
   RootGraph:
-    rid: 6455566318924464511
+    rid: 6455566318924464550
   m_DebugInfo: {fileID: -2424560921332953682}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 6455566318924464511
+    - rid: 6455566318924464550
       type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         AuthoringAssetID:
@@ -1162,70 +1162,70 @@ MonoBehaviour:
           m_Value1: 1017018234860067547
         m_DebugInfo: {fileID: 0}
         BlackboardReference:
-          rid: 6455566318924464512
+          rid: 6455566318924464551
         BlackboardGroupReferences: []
         Root:
-          rid: 6455566318924464513
+          rid: 6455566318924464552
         m_ActiveNodes: []
         m_NodesToTick: []
         m_NodesToEnd:
-          rid: 6455566318924464514
+          rid: 6455566318924464553
         m_EndedNodes:
-          rid: 6455566318924464515
-        m_VersionTimestamp: 638883530883148180
-    - rid: 6455566318924464512
+          rid: 6455566318924464554
+        m_VersionTimestamp: 638883539821016720
+    - rid: 6455566318924464551
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Blackboard:
-          rid: 6455566318924464516
+          rid: 6455566318924464555
         m_Source: {fileID: -8722268991031540093}
-    - rid: 6455566318924464513
+    - rid: 6455566318924464552
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
           m_Value0: 12299051807670170321
           m_Value1: 5223925681029375525
         Graph:
-          rid: 6455566318924464511
+          rid: 6455566318924464550
         m_Parent:
           rid: -2
         m_Child:
-          rid: 6455566318924464517
+          rid: 6455566318924464556
         Repeat: 1
         AllowMultipleRepeatsPerTick: 0
-    - rid: 6455566318924464514
+    - rid: 6455566318924464553
       type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
       data: 
-    - rid: 6455566318924464515
+    - rid: 6455566318924464554
       type: {class: 'HashSet`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: System.Core}
       data: 
-    - rid: 6455566318924464516
+    - rid: 6455566318924464555
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Variables:
-        - rid: 6455566318924464518
-        - rid: 6455566318924464519
-        - rid: 6455566318924464520
-        - rid: 6455566318924464521
-        - rid: 6455566318924464522
-        - rid: 6455566318924464523
-        - rid: 6455566318924464524
-        - rid: 6455566318924464525
-        - rid: 6455566318924464526
-    - rid: 6455566318924464517
+        - rid: 6455566318924464557
+        - rid: 6455566318924464558
+        - rid: 6455566318924464559
+        - rid: 6455566318924464560
+        - rid: 6455566318924464561
+        - rid: 6455566318924464562
+        - rid: 6455566318924464563
+        - rid: 6455566318924464564
+        - rid: 6455566318924464565
+    - rid: 6455566318924464556
       type: {class: RandomComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
           m_Value0: 3834099346845823472
           m_Value1: 14061345986677300042
         Graph:
-          rid: 6455566318924464511
+          rid: 6455566318924464550
         m_Parent:
-          rid: 6455566318924464513
+          rid: 6455566318924464552
         m_Children:
-        - rid: 6455566318924464527
-        - rid: 6455566318924464528
-    - rid: 6455566318924464518
+        - rid: 6455566318924464566
+        - rid: 6455566318924464567
+    - rid: 6455566318924464557
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -1233,7 +1233,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: Enemy
         m_Value: {fileID: 0}
-    - rid: 6455566318924464519
+    - rid: 6455566318924464558
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -1241,7 +1241,7 @@ MonoBehaviour:
           m_Value1: 16958123868771798415
         Name: Player
         m_Value: {fileID: 6188314894093641039, guid: 56218ff834801d448bcd0c697423c491, type: 3}
-    - rid: 6455566318924464520
+    - rid: 6455566318924464559
       type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -1249,7 +1249,7 @@ MonoBehaviour:
           m_Value1: 5908619344653059721
         Name: PatrolPoints
         m_Value: []
-    - rid: 6455566318924464521
+    - rid: 6455566318924464560
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -1257,7 +1257,7 @@ MonoBehaviour:
           m_Value1: 15941055632899644681
         Name: DistanceToPlayer
         m_Value: 0
-    - rid: 6455566318924464522
+    - rid: 6455566318924464561
       type: {class: 'BlackboardVariable`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -1265,7 +1265,7 @@ MonoBehaviour:
           m_Value1: 17614506042022510847
         Name: SpinSound
         m_Value: {fileID: 8300000, guid: c2f48dd4cf5a4477aafeb158a26f128e, type: 3}
-    - rid: 6455566318924464523
+    - rid: 6455566318924464562
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -1273,7 +1273,7 @@ MonoBehaviour:
           m_Value1: 13904101515137493573
         Name: Sword
         m_Value: {fileID: 0}
-    - rid: 6455566318924464524
+    - rid: 6455566318924464563
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -1281,7 +1281,7 @@ MonoBehaviour:
           m_Value1: 9526985504558167558
         Name: CenterPoint
         m_Value: {fileID: 0}
-    - rid: 6455566318924464525
+    - rid: 6455566318924464564
       type: {class: 'BlackboardVariable`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -1289,7 +1289,7 @@ MonoBehaviour:
           m_Value1: 1220432055899004068
         Name: Yell
         m_Value: {fileID: 0}
-    - rid: 6455566318924464526
+    - rid: 6455566318924464565
       type: {class: 'BlackboardVariable`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -1297,49 +1297,49 @@ MonoBehaviour:
           m_Value1: 235192607083445364
         Name: Yell2
         m_Value: {fileID: 0}
-    - rid: 6455566318924464527
+    - rid: 6455566318924464566
       type: {class: GarenRangeAttackAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
           m_Value0: 6335166251501623189
           m_Value1: 1186586771791669772
         Graph:
-          rid: 6455566318924464511
+          rid: 6455566318924464550
         m_Parent:
-          rid: 6455566318924464517
+          rid: 6455566318924464556
         Garen:
-          rid: 6455566318924464518
+          rid: 6455566318924464557
         Sword:
-          rid: 6455566318924464523
+          rid: 6455566318924464562
         CenterPoint:
-          rid: 6455566318924464524
+          rid: 6455566318924464563
         Yell2:
-          rid: 6455566318924464526
+          rid: 6455566318924464565
         swordSpeed: 7
         waveCount: 5
         timeBetweenWaves: 1.5
         moveSpeed: 3
         reachThreshold: 0.2
-    - rid: 6455566318924464528
+    - rid: 6455566318924464567
       type: {class: GarenSpinAttackAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
           m_Value0: 11742603557745058794
           m_Value1: 261225482153442807
         Graph:
-          rid: 6455566318924464511
+          rid: 6455566318924464550
         m_Parent:
-          rid: 6455566318924464517
+          rid: 6455566318924464556
         Garen:
-          rid: 6455566318924464518
+          rid: 6455566318924464557
         Spins:
-          rid: 6455566318924464522
+          rid: 6455566318924464561
         Yell:
-          rid: 6455566318924464525
+          rid: 6455566318924464564
         Around:
-          rid: 6455566318924464520
+          rid: 6455566318924464559
         Player:
-          rid: 6455566318924464519
+          rid: 6455566318924464558
         moveSpeed: 10
         distanceThreshold: 0.1
         spinCountTarget: 2

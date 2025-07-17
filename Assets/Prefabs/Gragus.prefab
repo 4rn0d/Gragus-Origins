@@ -446,7 +446,7 @@ MonoBehaviour:
   velPower: 0.9
   maxAlcohoLevel: 10
   alcoholLevel: 10
-  jumpForce: 5
+  jumpForce: 6
   jumpMovementReductionForce: 0.14
   minJumpVelocity: 3
   coyoteTime: 0.2
@@ -476,7 +476,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   pauseMenuPrefab: {fileID: 4974426787910646412, guid: bb15f090027264368945812a7a484cf6, type: 3}
+  _alcoholBar: {fileID: 0}
   triggerActive: 0
+  isOnCooldown: 0
+  spriteRenderer: {fileID: 0}
+  health: {fileID: 0}
+  healOnBarrel: 0
+  resistant: 0
 --- !u!95 &8267062349567699985
 Animator:
   serializedVersion: 7

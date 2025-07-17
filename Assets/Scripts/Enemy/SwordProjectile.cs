@@ -23,9 +23,13 @@ namespace Enemy
                 if (healthPlayer != null && playerController != null && !playerController.IsThePlayerDashing())
                 {
                     healthPlayer.TakeDamage(damageToPlayer, playerController);
+                    Destroy(gameObject);
                 }
-
-                Destroy(gameObject);
+                else if (playerController.IsThePlayerDashing())
+                {
+                    //TODO Flash Effect sur le projectile
+                    
+                }
             }
         }
     }
