@@ -66,6 +66,10 @@ namespace Scripts
                 case State.Broken: default: return brokenBottle;
             }
         }
+        public Sprite GetSpriteFull()
+        {
+            return fullBottle;
+        }
         
         private Effect GetEffectByType()
         {
