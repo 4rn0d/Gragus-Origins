@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.007, y: 0.281}
+  m_AnchoredPosition: {x: -0.011, y: 0.36}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6880475664453311075
@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 5544575110147053962}
   - component: {fileID: 8188142625000765305}
   - component: {fileID: 5828587471494008811}
+  - component: {fileID: 933457783132591767}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -205,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 9154262338556476317}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.42, y: -4.71, z: 0}
+  m_LocalPosition: {x: -8.507, y: -4.554, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -302,17 +303,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.03153014, y: 0.03152965}
+  m_Offset: {x: -0.03153014, y: 0.12570837}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 0.3, y: 0.22}
     newSize: {x: 0.3, y: 0.22}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5283184, y: 0.2830594}
+  m_Size: {x: 0.5283184, y: 0.23959212}
   m_EdgeRadius: 0
 --- !u!114 &5828587471494008811
 MonoBehaviour:
@@ -328,15 +329,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isUsed: 0
   fPromptUI: {fileID: 2008565574251966462}
-  potions:
-  - {fileID: -5738970367926067988, guid: efea7ba83a323427aa6f0899f7226c9a, type: 3}
-  - {fileID: 102342268825624797, guid: a223baa7d1d1943fea5fef6a31cd256a, type: 3}
-  - {fileID: -4178734442398687955, guid: 586e06d698f5c4d45adf4cd4259e05f5, type: 3}
-  - {fileID: 6095333157509624677, guid: 625e3248d9da842e7b6e13378ee170c9, type: 3}
-  - {fileID: 7024740969169147715, guid: d0a0a7a92ea084217aa8392b06cb4728, type: 3}
   floatingPoint: {fileID: 3085119864603366836}
   floatingPotionPrefab: {fileID: 0}
   openChestSound: {fileID: 0}
+  animator: {fileID: 933457783132591767}
+--- !u!95 &933457783132591767
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9154262338556476317}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b32b950155d4a84584bced767b2c7dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9202883969957075238
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +381,7 @@ Transform:
   m_GameObject: {fileID: 9202883969957075238}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016, y: 0.14, z: 0}
+  m_LocalPosition: {x: -0.022, y: 0.212, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -376,7 +394,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9202883969957075238}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

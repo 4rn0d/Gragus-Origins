@@ -506,12 +506,12 @@ namespace Scripts
         {
             if (!context.performed) return;
 
-            if (_nearbyInteractible != null && !_nearbyInteractible.IsUsed)
+            if (_nearbyInteractible != null && !_nearbyInteractible._isUsed)
             {
                 _nearbyInteractible.Interact(this);
+                _nearbyInteractible = null;  // <-- empêche de réutiliser sans sortir/entrer trigger
             }
         }
-
 
         public void RefillAlcohol(float amount)
         {

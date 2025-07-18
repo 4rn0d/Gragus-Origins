@@ -13,6 +13,8 @@ namespace Scripts
         [SerializeField] private Transform floatingPoint;
         [SerializeField] private GameObject floatingPotionPrefab;
         [SerializeField] private AudioClip openChestSound;
+        [SerializeField] private Animator animator;
+
 
         private void Start()
         {
@@ -22,14 +24,10 @@ namespace Scripts
         public override void Interact(PlayerController player)
         {
             if (_isUsed) return;
+            
 
             List<Alcohol> potions = player.GetPotions();
-            Debug.Log($"[Chest] Potions trouvées chez le joueur: {potions.Count}");
 
-            foreach (var potion in potions)
-            {
-                Debug.Log($"[Chest] Potion {potion.name} has state: {potion.state}");
-            }
             Alcohol potionToRefill = GetEmptyPotion(potions);
 
             if (potionToRefill == null)
@@ -37,15 +35,17 @@ namespace Scripts
                 Debug.Log("[Chest] Aucun alcool vide à remplir.");
                 return;
             }
-
+            animator.SetTrigger("Open");
             potionToRefill.Refill();
             Sprite fullSprite = potionToRefill.GetSpriteFull();
-
-            StartCoroutine(AnimateFloatingPotion(fullSprite));
-
-            SoundFXManager.instance.PlaySoundFXClip(openChestSound, transform, 1f);
+            
+            
             _isUsed = true;
             fPromptUI.SetActive(false);
+            StartCoroutine(AnimateFloatingPotion(fullSprite));
+            SoundFXManager.instance.PlaySoundFXClip(openChestSound, transform, 1f);
+
+            
         }
 
         private Alcohol GetEmptyPotion(List<Alcohol> potions)
