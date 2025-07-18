@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cb517979c2d434c83bcc5a8614666b45
+guid: ecd3aa30c49ad4888adb987e72798080
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -137,10 +137,10 @@ TextureImporter:
       name: Gragas32-Sheet-jump_1
       rect:
         serializedVersion: 2
-        x: 57
-        y: 56
-        width: 29
-        height: 30
+        x: 54
+        y: 52
+        width: 39
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: Gragas32-Sheet-jump_2
       rect:
         serializedVersion: 2
-        x: 9
-        y: 8
-        width: 29
-        height: 31
+        x: 7
+        y: 6
+        width: 37
+        height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

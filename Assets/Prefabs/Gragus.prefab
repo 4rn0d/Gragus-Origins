@@ -450,6 +450,8 @@ MonoBehaviour:
   jumpMovementReductionForce: 0.14
   minJumpVelocity: 3
   coyoteTime: 0.2
+  jumpParticle1: {fileID: 5576448992457329975, guid: ecd3aa30c49ad4888adb987e72798080, type: 3}
+  jumpParticle2: {fileID: 7787535398269065204, guid: ecd3aa30c49ad4888adb987e72798080, type: 3}
   dashSpeed: 7.5
   dashDuration: 0.4
   dashDecceleration: 0.4

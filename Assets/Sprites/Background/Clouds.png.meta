@@ -1,27 +1,30 @@
 fileFormatVersion: 2
-guid: cb517979c2d434c83bcc5a8614666b45
+guid: f20e6a270ba9e09478c965d7dabeceee
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2488152332976256965
-    second: Gragas32-Sheet-jump_0
+      213: 2669142961033076756
+    second: Clouds_0
   - first:
-      213: 5576448992457329975
-    second: Gragas32-Sheet-jump_1
+      213: -3967920315399815954
+    second: Clouds_1
   - first:
-      213: 7787535398269065204
-    second: Gragas32-Sheet-jump_2
+      213: -1749161583622989117
+    second: Clouds_2
   - first:
-      213: 7085714241402892232
-    second: Gragas32-Sheet-jump_3
+      213: -5240784962635489071
+    second: Clouds_3
   - first:
-      213: 7246584140840822078
-    second: Gragas32-Sheet-jump_4
+      213: 1327514091082312007
+    second: Clouds_4
+  - first:
+      213: 5063102313881138252
+    second: Clouds_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -108,17 +111,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gragas32-Sheet-jump_0
+      name: Clouds_4
       rect:
         serializedVersion: 2
-        x: 10
-        y: 56
-        width: 28
-        height: 32
+        x: 0
+        y: 0
+        width: 320
+        height: 320
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,74 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b3804edc2ae487dd0800000000000000
-      internalID: -2488152332976256965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gragas32-Sheet-jump_1
-      rect:
-        serializedVersion: 2
-        x: 57
-        y: 56
-        width: 29
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 73d018730d6836d40800000000000000
-      internalID: 5576448992457329975
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gragas32-Sheet-jump_2
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 8
-        width: 29
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4f79b914f22e21c60800000000000000
-      internalID: 7787535398269065204
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gragas32-Sheet-jump_4
-      rect:
-        serializedVersion: 2
-        x: 57
-        y: 8
-        width: 29
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e35ebcdc1e9019460800000000000000
-      internalID: 7246584140840822078
+      spriteID: 749694948074c6210800000000000000
+      internalID: 1327514091082312007
       vertices: []
       indices: 
       edges: []
@@ -203,7 +153,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 79a74e283670341de9366bb35246a021
+    spriteID: cd312bcea8af67e4abf731a6d01bdaf6
     internalID: 0
     vertices: []
     indices: 
@@ -213,11 +163,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Gragas32-Sheet-jump_0: -2488152332976256965
-      Gragas32-Sheet-jump_1: 5576448992457329975
-      Gragas32-Sheet-jump_2: 7787535398269065204
-      Gragas32-Sheet-jump_3: 7085714241402892232
-      Gragas32-Sheet-jump_4: 7246584140840822078
+      Clouds_0: 2669142961033076756
+      Clouds_1: -3967920315399815954
+      Clouds_2: -1749161583622989117
+      Clouds_3: -5240784962635489071
+      Clouds_4: 1327514091082312007
+      Clouds_5: 5063102313881138252
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

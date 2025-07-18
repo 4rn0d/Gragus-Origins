@@ -13,12 +13,15 @@ using Unity.Properties;
     id: "21ad70ba8f1a94266d7fb966db76e5bc")]
 public partial class AttackAction : Action
 {
+    
     [SerializeReference] public BlackboardVariable<GameObject> Player;
     [SerializeReference] public BlackboardVariable<GameObject> Enemy;
     [SerializeReference] public BlackboardVariable<GameObject> ProjectilePrefab;
     [SerializeReference] public BlackboardVariable<Transform> FirePoint;
     [SerializeReference] public BlackboardVariable<float> LastAttackTime;
 
+
+    [SerializeField] private Animator animator;
     [SerializeField] public float projectileSpeed = 5f;
     [SerializeField] public float cooldown = 3f; // seconds
 
@@ -44,6 +47,7 @@ public partial class AttackAction : Action
 
     private void ShootAtPlayer()
     {
+        
         Vector2 direction = (Player.Value.transform.position - FirePoint.Value.position).normalized;
 
         GameObject projectile = UnityEngine.Object.Instantiate(
