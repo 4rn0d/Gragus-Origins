@@ -13,7 +13,6 @@ using Unity.Properties;
     id: "21ad70ba8f1a94266d7fb966db76e5bc")]
 public partial class AttackAction : Action
 {
-    private static readonly int ShootingTrigger = Animator.StringToHash("ShootingTrigger");
     
     [SerializeReference] public BlackboardVariable<GameObject> Player;
     [SerializeReference] public BlackboardVariable<GameObject> Enemy;
@@ -48,7 +47,6 @@ public partial class AttackAction : Action
 
     private void ShootAtPlayer()
     {
-        animator.SetTrigger(ShootingTrigger);
         
         Vector2 direction = (Player.Value.transform.position - FirePoint.Value.position).normalized;
 
