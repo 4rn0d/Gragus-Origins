@@ -42,6 +42,8 @@ namespace Scripts
         [SerializeField] float jumpMovementReductionForce = 0.14f;
         [SerializeField] float minJumpVelocity = 4f;
         [SerializeField] float coyoteTime = 0.2f;
+        [SerializeField] Sprite jumpParticle1;
+        [SerializeField] Sprite jumpParticle2;
         private float _coyoteTimeCounter;
 
         [Header("Dash Settings")] [SerializeField]
@@ -304,6 +306,9 @@ namespace Scripts
             if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0)
             {
                 animator.SetBool(IsJumping, true);
+                var jumpParticle = Instantiate(jumpParticle1, groundCheck.position, Quaternion.identity);
+                jumpParticle = jumpParticle2;
+                
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             }
 
