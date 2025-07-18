@@ -331,7 +331,7 @@ MonoBehaviour:
   fPromptUI: {fileID: 2008565574251966462}
   floatingPoint: {fileID: 3085119864603366836}
   floatingPotionPrefab: {fileID: 0}
-  openChestSound: {fileID: 0}
+  openChestSound: {fileID: 8300000, guid: bc53dcd5b82cc8c45b9baf33e3f8b2f6, type: 3}
   animator: {fileID: 933457783132591767}
 --- !u!95 &933457783132591767
 Animator:
