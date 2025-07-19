@@ -8,12 +8,11 @@ namespace Health
     public class EnemyHealth : BaseHealth
     {
         [SerializeField] private Behaviour[] componentsToDisable;
-        
+
         private Image _healthBar;
-        
 
 
-        public override void TakeDamage(float damage,  PlayerController player)
+        public override void TakeDamage(float damage, PlayerController player)
         {
             // Check if the object is on the "Boss" layer
             if (gameObject.layer == LayerMask.NameToLayer("Boss"))
@@ -35,7 +34,7 @@ namespace Health
                 // Adjust regular enemy health bar if needed
                 Debug.Log("Regular enemy is taking damage");
             }
-            
+
             base.TakeDamage(damage, player);
         }
 
@@ -57,11 +56,14 @@ namespace Health
                 room.OnEnemyDied(enemyRoot);
                 Destroy(_healthBar.gameObject);
                 Destroy(enemyRoot);
-                
             }
             else
             {
-                Destroy(_healthBar.gameObject);
+                if (gameObject.layer == LayerMask.NameToLayer("Boss"))
+                {
+                    Destroy(_healthBar.gameObject);
+                }
+
                 Destroy(gameObject);
             }
         }

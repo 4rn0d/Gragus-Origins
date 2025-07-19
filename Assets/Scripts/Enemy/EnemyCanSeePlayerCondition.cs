@@ -7,12 +7,14 @@ namespace Enemy
     [Serializable, Unity.Properties.GeneratePropertyBag]
     [Condition(
         name: "Enemy Can See Player",
-        story: "[Enemy] has line of sight to [Player] (blocked by Ground or Wall layers)",
+        story: "[Enemy] has line of sight to [Player] (blocked by Ground or Wall layers) [CanSeePlayer]",
         category: "Conditions")]
     public partial class EnemyCanSeePlayerCondition : Condition
     {
         [SerializeReference] public BlackboardVariable<GameObject> Player;
         [SerializeReference] public BlackboardVariable<GameObject> Enemy;
+        [SerializeReference] public BlackboardVariable<bool> CanSeePlayer;
+
 
         public override bool IsTrue()
         {
@@ -35,21 +37,31 @@ namespace Enemy
 
             Debug.DrawLine(enemyPos, playerPos, Color.red, 0.1f);
 
-            // Raycast against everything
-            RaycastHit2D hit = Physics2D.Raycast(enemyPos, direction, distance);
+            int mask = (1 << 6) | (1 << 7) | (1 << 13); // Ground and Wall and Map layers
+            RaycastHit2D hit = Physics2D.Raycast(enemyPos, direction, distance, mask);
 
             if (hit.collider != null)
             {
                 int hitLayer = hit.collider.gameObject.layer;
-                
-                if (hitLayer == 6 || hitLayer == 7) // 6 = Ground, 7 = Wall, 13 = Map
+                string layerName = LayerMask.LayerToName(hitLayer);
+
+                Debug.Log($"[Raycast] Hit {hit.collider.name} on layer {hitLayer} ({layerName})");
+
+                if (hitLayer == 6 || hitLayer == 7 || hitLayer == 13)
                 {
-                    Debug.Log($"[Condition] Line of sight blocked by: {hit.collider.name} on layer {hitLayer}");
+                    CanSeePlayer.Value = false;
+                    Debug.Log("[Condition] Line of sight BLOCKED var value : " + CanSeePlayer.Value);
                     return false;
                 }
             }
+            else
+            {
+                Debug.Log("[Raycast] No collider hit at all");
+            }
 
-            Debug.Log("[Condition] Enemy can see player");
+            CanSeePlayer.Value = true;
+            Debug.Log("[Condition] Enemy can see player var value : " +  CanSeePlayer.Value);
+            
             return true;
         }
     }

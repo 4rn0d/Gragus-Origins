@@ -55,11 +55,13 @@ namespace Enemy
 
             // Check if Player is in range
             float playerDistance = Vector2.Distance(_agent.position, Player.Value.transform.position);
-            if (playerDistance <= PlayerRange.Value)
+            
+            if (playerDistance <= PlayerRange.Value && HasLineOfSightToPlayer(_agent.position, Player.Value.transform.position))
             {
-                Debug.Log("[Patrol2D] Player in range — stop patrolling.");
+                Debug.Log("[Patrol2D] Player in range and visible — stop patrolling.");
                 return Status.Failure;
             }
+
 
             Vector2 currentTarget = Waypoints.Value[_currentPoint].transform.position;
             Vector2 agentPos = _agent.position;
@@ -108,5 +110,26 @@ namespace Enemy
             _waitTimer = 0f;
             _waiting = false;
         }
+        
+        private bool HasLineOfSightToPlayer(Vector2 from, Vector2 to)
+        {
+            Vector2 direction = (to - from).normalized;
+            float distance = Vector2.Distance(from, to);
+    
+            int mask = (1 << 6) | (1 << 7) | (1 << 13); // Ground, Wall, Map layers
+
+            RaycastHit2D hit = Physics2D.Raycast(from, direction, distance, mask);
+
+            if (hit.collider != null)
+            {
+                int hitLayer = hit.collider.gameObject.layer;
+                Debug.Log($"[Patrol2D] LOS blocked by {hit.collider.name} on layer {LayerMask.LayerToName(hitLayer)}");
+                return false;
+            }
+
+            Debug.DrawLine(from, to, Color.green); // helpful visual in Scene view
+            return true;
+        }
+
     }
 }

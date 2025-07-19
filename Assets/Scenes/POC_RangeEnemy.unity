@@ -2834,8 +2834,17 @@ PrefabInstance:
       value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Int32, mscorlib]]'
       objectReference: {fileID: 0}
     - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
+      propertyPath: 'managedReferences[6455566368668647500]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Boolean,
+        mscorlib]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
       propertyPath: managedReferences[6455566343896564004].Name
       value: GroundLayerMask
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
+      propertyPath: managedReferences[6455566368668647500].Name
+      value: CanSeePlayer
       objectReference: {fileID: 0}
     - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
       propertyPath: m_BlackboardVariableOverridesList.Array.size
@@ -2850,8 +2859,12 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
+      propertyPath: managedReferences[6455566368668647500].m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
       propertyPath: 'm_BlackboardVariableOverridesList.Array.data[5]'
-      value: 6455566343896564004
+      value: 6455566368668647500
       objectReference: {fileID: 0}
     - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
       propertyPath: managedReferences[6455566343896564004].GUID.m_Value0
@@ -2860,6 +2873,14 @@ PrefabInstance:
     - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
       propertyPath: managedReferences[6455566343896564004].GUID.m_Value1
       value: 12089192061710381766
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
+      propertyPath: managedReferences[6455566368668647500].GUID.m_Value0
+      value: 15719943123794005563
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781993096884309684, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
+      propertyPath: managedReferences[6455566368668647500].GUID.m_Value1
+      value: 6631241372348079911
       objectReference: {fileID: 0}
     - target: {fileID: 2823159626746716466, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
       propertyPath: m_Enabled
@@ -10534,6 +10555,10 @@ PrefabInstance:
     - target: {fileID: 7764545210754260556, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
       propertyPath: m_Name
       value: Room_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764545210754260556, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7947544807318105662, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
       propertyPath: iFramesDuration
