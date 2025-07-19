@@ -9,6 +9,9 @@ namespace Map
 {
     public static DungeonManager Instance;
 
+    public GameObject loadingPanel;
+    public GameObject OtherUI;
+    public AudioSource musicAudioSource;
     public GameObject dungeonGeneratorPrefab;
 
     public GameObject gragusPrefab;
@@ -23,8 +26,7 @@ namespace Map
         else Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-
-        // Instantiate Gragus only once
+        
         if (_gragusInstance == null)
         {
             _gragusInstance = Instantiate(gragusPrefab);
@@ -36,6 +38,8 @@ namespace Map
 
     private IEnumerator GenerateFirstDungeonNextFrame()
     {
+        if (loadingPanel != null) loadingPanel.SetActive(true);
+        if (OtherUI != null) OtherUI.SetActive(false);
         yield return null;
 
         _currentDungeon = Instantiate(dungeonGeneratorPrefab);
@@ -46,7 +50,11 @@ namespace Map
         
         yield return new WaitUntil(() => dungeonGen.IsGenerationComplete);
 
+        yield return new WaitForSeconds(1f);
+        
         PositionGragusAtStart();
+        if (loadingPanel != null) loadingPanel.SetActive(false);
+        if (OtherUI != null) OtherUI.SetActive(true);
     }
 
 
@@ -62,6 +70,8 @@ namespace Map
 
     private IEnumerator GenerateNewFloor()
     {
+        if (loadingPanel != null) loadingPanel.SetActive(true);
+        if (OtherUI != null) OtherUI.SetActive(false);
         yield return null;
 
         DungeonGenerator genData = dungeonGeneratorPrefab.GetComponent<DungeonGenerator>();
@@ -74,7 +84,18 @@ namespace Map
 
         yield return new WaitUntil(() => dungeonGen.IsGenerationComplete);
 
+        yield return new WaitForSeconds(1f);
+        
         PositionGragusAtStart();
+        
+        if (loadingPanel != null) loadingPanel.SetActive(false);
+        if (OtherUI != null) OtherUI.SetActive(true);
+        
+        if (musicAudioSource != null)
+        {
+            musicAudioSource.Stop();
+            musicAudioSource.Play();
+        }
     }
 
 
