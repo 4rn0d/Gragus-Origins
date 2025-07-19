@@ -2452,7 +2452,7 @@ MonoBehaviour:
   - {fileID: 7764545210754260556, guid: 0e890464b5fcb51468f820028861f5c9, type: 3}
   normalRoomCount: 50
   specialRoomCount: 5
-  debug: 0
+  debug: 1
   seed: 0
   useRandomSeed: 1
 --- !u!4 &1755891252

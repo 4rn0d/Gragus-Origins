@@ -69,10 +69,12 @@ namespace Scripts
                 _spawnedAlcohols.Add(alcohol);
             }
         }
-        public Alcohol GetCurrentAlcohol()
-        {
-            return _alcoholInstances[alcoholList[_currentIndex]];
-        }
+        
+        // public Alcohol GetCurrentAlcohol()
+        // {
+        //     return _alcoholInstances[alcoholList[_currentIndex]];
+        // }
+        
 
         public Alcohol NextPotion()
         {

@@ -17,6 +17,7 @@ namespace Scripts
     public class PlayerController : MonoBehaviour
     {
         private static readonly int IsDashing = Animator.StringToHash("IsDashing");
+        private static readonly int IsBouncing = Animator.StringToHash("IsBouncing");
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int IsJumping = Animator.StringToHash("IsJumping");
         private static readonly int IsFalling = Animator.StringToHash("IsFalling");
@@ -44,6 +45,8 @@ namespace Scripts
         [SerializeField] float jumpMovementReductionForce = 0.14f;
         [SerializeField] float minJumpVelocity = 4f;
         [SerializeField] float coyoteTime = 0.2f;
+        [SerializeField] Sprite jumpParticle1;
+        [SerializeField] Sprite jumpParticle2;
         private float _coyoteTimeCounter;
 
         [Header("Dash Settings")] [SerializeField]
@@ -124,7 +127,7 @@ namespace Scripts
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
             _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
-            _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+            //_currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
             setAlcoolBarColor(Color.darkOrchid);
 
             health = gameObject.GetComponent<PlayerHealth>();
@@ -234,6 +237,7 @@ namespace Scripts
 
         private void TriggerBounce()
         {
+            animator.SetBool(IsBouncing, true);
             _isBouncing = true;
             _bounceTimer = bounceInputLockDuration;
             _isDashing = false;
@@ -256,6 +260,7 @@ namespace Scripts
             
             
             animator.SetBool(IsDashing, false);
+            animator.SetBool(IsBouncing, true);
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
@@ -339,6 +344,9 @@ namespace Scripts
             if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0)
             {
                 animator.SetBool(IsJumping, true);
+                var jumpParticle = Instantiate(jumpParticle1, groundCheck.position, Quaternion.identity);
+                jumpParticle = jumpParticle2;
+                
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             }
 
@@ -460,7 +468,7 @@ namespace Scripts
         }
         public void ChangeAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed && !_pauseMenu.isPaused)
+            if (context.performed && !_pauseMenu.isPaused && animator.GetBool(IsDrinking) == false)
             {
                 _currentAlcohol = _alcoholCarousel.NextPotion();
                 // Debug.Log("TogglePause performed");
