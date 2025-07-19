@@ -13,7 +13,6 @@ namespace Enemy
         [SerializeField] private AudioClip dartTravelSound;
         [SerializeField] private AudioClip dartHitSound;
 
-
         private Vector2 direction;
 
         public void SetDirection(Vector2 dir)
@@ -30,21 +29,39 @@ namespace Enemy
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag("Player")) return;
-            Health.PlayerHealth playerHealth = other.GetComponent<Health.PlayerHealth>();
-            var player = other.GetComponent<PlayerController>();
-            if (playerHealth != null)
+            // Hit Player
+            if (other.CompareTag("Player"))
             {
-                playerHealth.TakeDamage(damage, player);
+                var playerHealth = other.GetComponent<Health.PlayerHealth>();
+                var player = other.GetComponent<PlayerController>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(damage, player);
+                    SoundFXManager.instance.PlaySoundFXClip(dartHitSound, transform, 1f);
+                }
+                Destroy(gameObject);
+            }
+
+            // Hit Ground, Wall, or Map
+            if (IsBlockingLayer(other.gameObject.layer))
+            {
                 SoundFXManager.instance.PlaySoundFXClip(dartHitSound, transform, 1f);
-                Destroy(gameObject); // Destroy bullet on hit
+                Destroy(gameObject);
             }
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            if (IsBlockingLayer(other.gameObject.layer))
+            {
                 SoundFXManager.instance.PlaySoundFXClip(dartHitSound, transform, 1f);
-                Destroy(gameObject); // Destroy bullet on hit
+                Destroy(gameObject);
+            }
+        }
+
+        private bool IsBlockingLayer(int layer)
+        {
+            return layer == 6 || layer == 7 || layer == 13; // Ground, Wall, Map
         }
     }
 }
