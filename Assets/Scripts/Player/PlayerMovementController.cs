@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Alcohol;
 using Map;
 using System.Threading;
@@ -117,6 +118,8 @@ namespace Scripts
         public PlayerHealth health;
         public bool healOnBarrel = false;
         public bool resistant = false;
+        public bool powerful = false;
+        public bool sticky = false;
         
         void Awake()
         {
@@ -174,7 +177,10 @@ namespace Scripts
         public void BarrelJump(Vector3 position)
         {
             Vector3 moveDirection = position - rb.transform.position;
-            rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
+            if(powerful)
+                rb.AddForce(moveDirection.normalized * -explosionForce * 1.5f, ForceMode2D.Impulse);
+            else
+                rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
         }
 
         private void HandleMovement()
@@ -443,7 +449,10 @@ namespace Scripts
                 if (!isOnCooldown && (_currentAlcohol.state != State.Broken && _currentAlcohol.state != State.Empty))
                 {
                     animator.SetBool(IsDrinking, true);
-                    _currentAlcohol.Drink(this);  
+                    _currentAlcohol.Drink(this);
+                    if(healOnBarrel)
+                        health.AddHealth(15);
+                    RefillAlcohol(2);
                 }
                 else
                 { 
@@ -480,7 +489,7 @@ namespace Scripts
         private void SpawnBarrel()
         {
             if(healOnBarrel)
-                health.AddHealth(50);
+                health.AddHealth(15);
             UseAlcohol(throwAlcoholCost);
             _throwTimer = throwDistance;
             _explosionTimer = explosionCooldown;
@@ -492,7 +501,7 @@ namespace Scripts
             {
                 _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation)
                     .GetComponent<Barrel>();
-                _barrel.InitalizeBarrel(rb, throwSpeed);
+                _barrel.InitalizeBarrel(this, throwSpeed);
             }
         }
 
@@ -505,12 +514,12 @@ namespace Scripts
         {
             if (!context.performed) return;
 
-            if (_nearbyInteractible != null && !_nearbyInteractible.IsUsed)
+            if (_nearbyInteractible != null && !_nearbyInteractible._isUsed)
             {
                 _nearbyInteractible.Interact(this);
+                _nearbyInteractible = null;  // <-- empêche de réutiliser sans sortir/entrer trigger
             }
         }
-
 
         public void RefillAlcohol(float amount)
         {
@@ -538,6 +547,11 @@ namespace Scripts
         public void setAlcoolBarColor(Color color)
         {
             _alcoholBar.color = color;
+        }
+
+        public List<Alcohol> GetPotions()
+        {
+            return _alcoholCarousel.GetAllAlcohols();
         }
 
     }

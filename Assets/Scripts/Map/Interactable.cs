@@ -6,7 +6,6 @@ namespace Map
     public abstract class Interactable : MonoBehaviour
     {
         public bool _isUsed;
-        public bool IsUsed => _isUsed;
         [SerializeField] protected GameObject fPromptUI;
         private void OnTriggerEnter2D(Collider2D other)
         {

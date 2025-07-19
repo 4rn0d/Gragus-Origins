@@ -14,6 +14,7 @@ namespace Map
 
         public Vector3 playerOffsetInStartRoom;
         private GameObject _playerInstance;
+        private Collider2D _playerCollider;
         
         [Header("Salles")]
         public GameObject startRoomPrefab;
@@ -40,7 +41,6 @@ namespace Map
         private const float GridSize = 1f;
 
         private Room _currentPlayerRoom;
-        
 
         private void Update()
         {
@@ -52,6 +52,22 @@ namespace Map
         }
         private void UpdatePlayerRoom()
         {
+            if (!_playerInstance) return;
+            
+            if (!_playerCollider) return;
+
+            foreach (var room in _placedRooms)
+            {
+                foreach (var col in room.colliders)
+                {
+                    if (col && col.bounds.Intersects(_playerCollider.bounds))
+                    {
+                        _currentPlayerRoom = room;
+                        return;
+                    }
+                }
+            }
+            
             Room closestRoom = null;
             float closestDist = float.MaxValue;
             Vector3 playerPos = _playerInstance.transform.position;
@@ -68,9 +84,10 @@ namespace Map
 
             _currentPlayerRoom = closestRoom;
         }
+
         private void UpdateActiveRooms(int maxDepth)
         {
-            if (_currentPlayerRoom == null) return;
+            if (!_currentPlayerRoom) return;
 
             HashSet<Room> roomsToActivate = new HashSet<Room>();
             Queue<(Room room, int depth)> queue = new();
@@ -131,6 +148,7 @@ namespace Map
                     Debug.Log("Generated a dungeon with a final room after " + attempt + " attempts.");
                     SpawnPlayerInStartRoom();
                     EnableAllUnusedDoors();
+                    _playerCollider = _playerInstance.GetComponent<Collider2D>();
                 }
             }
 
