@@ -74,8 +74,8 @@ namespace Scripts
             sr.sprite = sprite;
 
             Vector3 start = floating.transform.position;
-            Vector3 end = start + new Vector3(0f, 1.5f, 0f);
-            float duration = 2f;
+            Vector3 end = start + new Vector3(0f, 0.5f, 0f);
+            float duration = 2.5f;
             float elapsed = 0f;
 
             while (elapsed < duration)
