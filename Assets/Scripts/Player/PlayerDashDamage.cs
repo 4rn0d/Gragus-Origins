@@ -19,12 +19,15 @@ namespace Player
         {
             if (!other.CompareTag("Enemy")) return;
             var player = gameObject.GetComponentInParent<PlayerController>();
-            var controller = GetComponentInParent<Scripts.PlayerController>();
+            var controller = GetComponentInParent<PlayerController>();
             var enemyHealth = other.GetComponent<Health.EnemyHealth>();
 
             if (controller != null && controller.IsThePlayerDashing() && enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damageToEnemy, player);
+                if(player.powerful)
+                    enemyHealth.TakeDamage(damageToEnemy * 1.5f, player);
+                else
+                    enemyHealth.TakeDamage(damageToEnemy, player);
                 SoundFXManager.instance.PlaySoundFXClip(dashDamageSound, transform, 1f);
                 Debug.Log("Player dashed into enemy — enemy took damage.");
             }

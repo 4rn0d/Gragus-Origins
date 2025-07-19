@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 659358574342749967}
   - component: {fileID: 6212477299137405509}
   - component: {fileID: 9061901830755212310}
+  - component: {fileID: 4084591759345039753}
   m_Layer: 11
   m_Name: Teemo
   m_TagString: Enemy
@@ -473,6 +474,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 50
   componentsToDisable: []
+--- !u!114 &4084591759345039753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3619221698321341920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a350facacad4f8bab9df101f3757e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalSpeed: 2
+  spriteRenderer: {fileID: 2189535191658158395}
 --- !u!1 &5065283215047554215
 GameObject:
   m_ObjectHideFlags: 0
