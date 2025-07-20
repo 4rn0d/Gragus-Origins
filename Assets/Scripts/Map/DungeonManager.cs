@@ -38,6 +38,10 @@ namespace Map
 
     private IEnumerator GenerateFirstDungeonNextFrame()
     {
+        if (musicAudioSource != null)
+        {
+            musicAudioSource.Stop();
+        }
         if (loadingPanel != null) loadingPanel.SetActive(true);
         if (OtherUI != null) OtherUI.SetActive(false);
         yield return null;
@@ -55,6 +59,11 @@ namespace Map
         PositionGragusAtStart();
         if (loadingPanel != null) loadingPanel.SetActive(false);
         if (OtherUI != null) OtherUI.SetActive(true);
+        
+        if (musicAudioSource != null)
+        {
+            musicAudioSource.Play();
+        }
     }
 
 
@@ -70,6 +79,10 @@ namespace Map
 
     private IEnumerator GenerateNewFloor()
     {
+        if (musicAudioSource != null)
+        {
+            musicAudioSource.Stop();
+        }
         if (loadingPanel != null) loadingPanel.SetActive(true);
         if (OtherUI != null) OtherUI.SetActive(false);
         yield return null;
@@ -93,7 +106,6 @@ namespace Map
         
         if (musicAudioSource != null)
         {
-            musicAudioSource.Stop();
             musicAudioSource.Play();
         }
     }
