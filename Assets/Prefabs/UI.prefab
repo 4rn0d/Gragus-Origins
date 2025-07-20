@@ -121,7 +121,6 @@ GameObject:
   - component: {fileID: 582548459530841460}
   - component: {fileID: 3076762644036159330}
   - component: {fileID: 7080449579218480273}
-  - component: {fileID: 6860552217590682615}
   m_Layer: 5
   m_Name: UIBackdrop
   m_TagString: AlcoholBar
@@ -189,20 +188,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6860552217590682615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116308641157241095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5599531a60340f2a92b1de76b46b4d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalhealthBar: {fileID: 7080449579218480273}
-  currenthealthBar: {fileID: 2647512680802437724}
 --- !u!1 &2781610912907785341
 GameObject:
   m_ObjectHideFlags: 0

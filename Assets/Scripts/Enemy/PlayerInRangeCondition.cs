@@ -1,38 +1,40 @@
 using System;
 using Unity.Behavior;
-using UnityEditor.Rendering;
 using UnityEngine;
 
-[Serializable, Unity.Properties.GeneratePropertyBag]
-[Condition(
-    name: "Player In Range",
-    story: "[Player] is within [Range] of [Enemy]",
-    category: "Conditions")]
-public partial class PlayerInRangeCondition : Condition
+namespace Enemy
 {
-    [SerializeReference] public BlackboardVariable<GameObject> Player;
-    [SerializeReference] public BlackboardVariable<GameObject> Enemy;
-    [SerializeReference] public BlackboardVariable<float> Range;
-
-    public override bool IsTrue()
+    [Serializable, Unity.Properties.GeneratePropertyBag]
+    [Condition(
+        name: "Player In Range",
+        story: "[Player] is within [Range] of [Enemy]",
+        category: "Conditions")]
+    public partial class PlayerInRangeCondition : Condition
     {
-        if (Player?.Value == null || Enemy?.Value == null)
-            return false;
+        [SerializeReference] public BlackboardVariable<GameObject> Player;
+        [SerializeReference] public BlackboardVariable<GameObject> Enemy;
+        [SerializeReference] public BlackboardVariable<float> Range;
 
-        float distance = Vector2.Distance(
-            Player.Value.transform.position,
-            Enemy.Value.transform.position);
-
-        Debug.Log($"[Condition] Distance: {distance}, Range: {Range.Value}");
-
-        if (distance <= Range.Value)
+        public override bool IsTrue()
         {
-            Debug.Log("Player In Range");
-            return true;
-        }
+            if (Player?.Value == null || Enemy?.Value == null)
+                return false;
 
-        Debug.Log("Player Not In Range");
+            float distance = Vector2.Distance(
+                Player.Value.transform.position,
+                Enemy.Value.transform.position);
+
+            Debug.Log($"[Condition] Distance: {distance}, Range: {Range.Value}");
+
+            if (distance <= Range.Value)
+            {
+                Debug.Log("Player In Range");
+                return true;
+            }
+
+            Debug.Log("Player Not In Range");
         
-        return false;
+            return false;
+        }
     }
 }

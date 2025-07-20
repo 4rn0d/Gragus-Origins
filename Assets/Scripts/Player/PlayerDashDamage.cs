@@ -25,9 +25,9 @@ namespace Player
             if (controller != null && controller.IsThePlayerDashing() && enemyHealth != null)
             {
                 if(player.powerful)
-                    enemyHealth.TakeDamage(damageToEnemy * 1.5f, player);
+                    enemyHealth.TakeDamage(damageToEnemy * 1.5f);
                 else
-                    enemyHealth.TakeDamage(damageToEnemy, player);
+                    enemyHealth.TakeDamage(damageToEnemy);
                 SoundFXManager.instance.PlaySoundFXClip(dashDamageSound, transform, 1f);
                 Debug.Log("Player dashed into enemy — enemy took damage.");
             }

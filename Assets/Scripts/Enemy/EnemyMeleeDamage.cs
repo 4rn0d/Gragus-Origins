@@ -19,7 +19,7 @@ namespace Enemy
             var playerHealth = other.GetComponent<Health.PlayerHealth>();
             if (playerHealth != null && !playerHealth.invulnerable)
             {
-                playerHealth.TakeDamage(damageToPlayer, playerController);
+                playerHealth.TakeDamage(damageToPlayer);
                 SoundFXManager.instance.PlaySoundFXClip(meleeHitSound, transform, 1f);
                 Debug.Log("Enemy hit player — player took damage.");
             }
