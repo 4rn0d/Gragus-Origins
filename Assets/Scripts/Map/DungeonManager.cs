@@ -46,29 +46,20 @@ namespace Map
         if (loadingPanel != null) loadingPanel.SetActive(true);
         if (OtherUI != null) OtherUI.SetActive(false);
         yield return null;
-
         _currentDungeon = Instantiate(dungeonGeneratorPrefab);
         var dungeonGen = _currentDungeon.GetComponent<DungeonGenerator>();
         dungeonGen.normalRoomCount = (6 + (floor * 3));
         dungeonGen.specialRoomCount = 1 + floor;
         dungeonGen.SetPlayerInstance(_gragusInstance);
-        
         yield return new WaitUntil(() => dungeonGen.IsGenerationComplete);
-
         PositionGragusAtStart();
-        Debug.Log($"Before WaitForSeconds, timeScale={Time.timeScale}");
         yield return new WaitForSecondsRealtime(2f);
-        Debug.Log("After WaitForSeconds");
-        Debug.Log("waaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         if (loadingPanel != null) loadingPanel.SetActive(false);
-        Debug.Log("waaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         if (OtherUI != null) OtherUI.SetActive(true);
-        Debug.Log("waaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         if (musicAudioSource != null)
         {
             musicAudioSource.Play();
         }
-        Debug.Log("wiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
     }
     
     public void GoToNextFloor()
@@ -84,7 +75,6 @@ namespace Map
 
     private void PositionGragusAtStart()
     {
-        Debug.Log("Positioning player...");
         if (_currentDungeon == null || _gragusInstance == null) return;
 
         var dungeonGen = _currentDungeon.GetComponent<DungeonGenerator>();
@@ -100,7 +90,6 @@ namespace Map
             controller.enabled = true;
             Debug.Log("Player controller re-enabled.");
         }
-        Debug.Log("wiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
     }
 
 
