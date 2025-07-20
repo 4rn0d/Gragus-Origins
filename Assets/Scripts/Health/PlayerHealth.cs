@@ -28,14 +28,17 @@ namespace Health
             _healthBar = GameObject.FindWithTag("HealthBar")?.GetComponent<Image>();
         }
 
-        public override void TakeDamage(float damage, PlayerController player)
+        public override void TakeDamage(float damage)
         {
             if (invulnerable || dead) return;
-            if (player.resistant)
+            
+            PlayerController player = GetComponentInParent<PlayerController>();
+            
+            if (player!=null && player.resistant)
                 damage /= 2;
             
             Debug.Log("Player is taking damage : " + damage);
-            base.TakeDamage(damage, player);
+            base.TakeDamage(damage);
 
             if (!dead)
             {

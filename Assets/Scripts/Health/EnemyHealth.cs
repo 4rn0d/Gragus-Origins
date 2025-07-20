@@ -12,7 +12,7 @@ namespace Health
         private Image _healthBar;
 
 
-        public override void TakeDamage(float damage, PlayerController player)
+        public override void TakeDamage(float damage)
         {
             // Check if the object is on the "Boss" layer
             if (gameObject.layer == LayerMask.NameToLayer("Boss"))
@@ -35,7 +35,7 @@ namespace Health
                 Debug.Log("Regular enemy is taking damage");
             }
 
-            base.TakeDamage(damage, player);
+            base.TakeDamage(damage);
         }
 
         protected override void Die()
@@ -54,7 +54,6 @@ namespace Health
             {
                 GameObject enemyRoot = transform.parent != null ? transform.parent.gameObject : gameObject;
                 room.OnEnemyDied(enemyRoot);
-                Destroy(_healthBar.gameObject);
                 Destroy(enemyRoot);
             }
             else

@@ -15,7 +15,7 @@ namespace Health
             currentHealth = startingHealth;
         }
 
-        public virtual void TakeDamage(float damage,  PlayerController player)
+        public virtual void TakeDamage(float damage)
         {
             if (dead) return;
 

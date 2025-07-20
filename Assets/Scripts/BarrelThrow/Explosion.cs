@@ -58,7 +58,7 @@ public class Explosion : MonoBehaviour
                 
                 float finalDamage = _powerful ? explosionDamage * 1.5f : explosionDamage;
                 
-                enemyHealth.TakeDamage(finalDamage, playerController);
+                enemyHealth.TakeDamage(finalDamage);
                 Debug.Log($"[Explosion] {other.name} took {finalDamage} damage.");
             }
         }

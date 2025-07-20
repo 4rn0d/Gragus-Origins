@@ -22,7 +22,7 @@ namespace Enemy
 
                 if (healthPlayer != null && playerController != null && !playerController.IsThePlayerDashing())
                 {
-                    healthPlayer.TakeDamage(damageToPlayer, playerController);
+                    healthPlayer.TakeDamage(damageToPlayer);
                     Destroy(gameObject);
                 }
                 else if (playerController.IsThePlayerDashing())

@@ -36,7 +36,7 @@ namespace Enemy
                 var player = other.GetComponent<PlayerController>();
                 if (playerHealth != null)
                 {
-                    playerHealth.TakeDamage(damage, player);
+                    playerHealth.TakeDamage(damage);
                     SoundFXManager.instance.PlaySoundFXClip(dartHitSound, transform, 1f);
                 }
                 Destroy(gameObject);
