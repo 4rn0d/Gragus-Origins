@@ -70,7 +70,7 @@ namespace Health
             dead = true;
             foreach (var comp in componentsToDisable)
                 comp.enabled = false;
-
+            Destroy(gameObject);
             Debug.Log("Player died — returning to main menu.");
             SceneManager.LoadScene(0); // Main menu scene index
         }

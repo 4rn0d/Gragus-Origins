@@ -26,9 +26,16 @@ namespace Scripts
                 instance.ChangeState(State.Full); 
                 _alcoholInstances[prefab] = instance;
             }
-        
+    
+            Debug.Log("[AlcoholCarousel] Loaded alcohols:");
+            foreach (var key in _alcoholInstances.Keys)
+            {
+                Debug.Log($"- {key}");
+            }
+    
             ShowPotions(_currentIndex);
         }
+
 
         private void ClearPreviousPotions()
         {
@@ -71,7 +78,13 @@ namespace Scripts
         }
         public Alcohol GetCurrentAlcohol()
         {
-            return _alcoholInstances[alcoholList[_currentIndex]];
+            var key = alcoholList[_currentIndex];
+            if (!_alcoholInstances.ContainsKey(key))
+            {
+                Debug.LogError($"[AlcoholCarousel] Alcohol key '{key}' not found in _alcoholInstances dictionary.");
+                return null; // or return a default Alcohol
+            }
+            return _alcoholInstances[key];
         }
 
         public Alcohol NextPotion()

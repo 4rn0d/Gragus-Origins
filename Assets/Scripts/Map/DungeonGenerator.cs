@@ -158,6 +158,7 @@ namespace Map
             if (!success)
                 Debug.LogError("Failed to generate a dungeon with a final room after " + maxRetries + " attempts.");
 
+            Debug.Log("[DungeonGenerator] Generation complete.");
             IsGenerationComplete = true;
         }
 
@@ -179,6 +180,7 @@ namespace Map
         
         private void GenerateDungeon()
         {
+            Debug.Log("[DungeonGenerator] Starting generation...");
             _placedRooms.Clear();
             _occupiedCells.Clear();
 
@@ -205,6 +207,8 @@ namespace Map
 
                     for (int attempt = 0; attempt < maxAttempts; attempt++)
                     {
+                        Debug.Log($"[DungeonGenerator] Attempt {attempt} to generate dungeon.");
+
                         GameObject prefab = SelectRoomPrefab(placedNormals, placedSpecials);
                         if (prefab == null) break;
 

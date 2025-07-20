@@ -118,13 +118,17 @@ namespace Scripts
         public bool powerful = false;
         public bool sticky = false;
         
+        private void Start()
+        {
+            _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+        }
         void Awake()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
             _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
-            _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+            
             setAlcoolBarColor(Color.darkOrchid);
 
             health = gameObject.GetComponent<PlayerHealth>();
