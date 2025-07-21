@@ -54,6 +54,9 @@ namespace Scripts
         [SerializeField] float bounceVerticalBoost = 5f;
         [SerializeField] float bounceHorizontalForce = 4f;
         [SerializeField] float bounceInputLockDuration = 0.6f;
+        private float _wallCoyoteCounter;
+        [SerializeField] float wallRayLength = 1.3f;
+        [SerializeField] float maxWallCoyoteTime = 1.5f;
 
         [Header("BarrelThrow Settings")] [SerializeField]
         GameObject barrelPrefab;
@@ -123,6 +126,7 @@ namespace Scripts
             HandleMovement();
             HandleDash();
             HandleBounceTimer();
+            UpdateWallCoyoteTime();
             _justBounced = false;
             
         }
@@ -198,7 +202,6 @@ namespace Scripts
 
             if (!_hasBouncedThisDash && IsTouchingWall())
             {
-                animator.SetBool(IsBouncing, true);
                 TriggerBounce();
             }
             else if (_dashTimer <= 0)
@@ -206,6 +209,33 @@ namespace Scripts
                 EndDash();
             }
         }
+        
+        private void UpdateWallCoyoteTime()
+        {
+            float direction = _isDashing ? _dashDirection : Mathf.Sign(_horizontal);
+            RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, Vector2.right * direction, wallRayLength, wallLayer);
+
+            if (hit.collider != null)
+            {
+                float distance = hit.distance;
+                float speed = Mathf.Abs(rb.linearVelocity.x);
+
+                // Only if we're moving toward the wall
+                if (speed > 0.01f)
+                {
+                    float graceTime = Mathf.Min(distance / speed, maxWallCoyoteTime);
+                    _wallCoyoteCounter = graceTime;
+                }
+            }
+            else
+            {
+                _wallCoyoteCounter -= Time.fixedDeltaTime;
+            }
+
+            // Set the animation based on whether grace time is active
+            animator.SetBool(IsBouncing, _wallCoyoteCounter > 0);
+        }
+
 
         private void TriggerBounce()
         {
@@ -222,6 +252,8 @@ namespace Scripts
             rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
 
             _lastNonZeroHorizontal = _rawHorizontalInput != 0 ? _rawHorizontalInput : -_lastNonZeroHorizontal;
+            
+            animator.SetBool(IsDashing, false);
         }
         
         private void EndDash()
@@ -256,7 +288,6 @@ namespace Scripts
                 {
                     _isBouncing = false;
                     animator.SetBool(IsBouncing, false);
-                    animator.SetBool(IsDashing, false);
                     _horizontal = _rawHorizontalInput;
                 }
             }
