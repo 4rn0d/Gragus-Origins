@@ -326,7 +326,7 @@ namespace Scripts
 
         public void Jump(InputAction.CallbackContext context)
         {
-            if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0)
+            if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0 && !animator.GetBool(IsDrinking))
             {
                 animator.SetBool(IsJumping, true);
                 
@@ -413,7 +413,7 @@ namespace Scripts
 
         public void DrinkAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed && !_pauseMenu.isPaused)
+            if (context.performed && !_pauseMenu.isPaused && !animator.GetBool(IsJumping))
             {
                 Debug.Log(_currentAlcohol);
                 animator.SetBool(IsDrinking, true);
@@ -423,7 +423,7 @@ namespace Scripts
 
         public void ChangeAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed && !_pauseMenu.isPaused && animator.GetBool(IsDrinking) == false)
+            if (context.performed && !_pauseMenu.isPaused && !animator.GetBool(IsDrinking))
             {
                 _currentAlcohol = _alcoholCarousel.NextPotion(); 
                 // Debug.Log("TogglePause performed");
