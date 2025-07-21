@@ -198,6 +198,7 @@ namespace Scripts
 
             if (!_hasBouncedThisDash && IsTouchingWall())
             {
+                animator.SetBool(IsBouncing, true);
                 TriggerBounce();
             }
             else if (_dashTimer <= 0)
@@ -208,32 +209,21 @@ namespace Scripts
 
         private void TriggerBounce()
         {
-            animator.SetBool(IsBouncing, true);
             _isBouncing = true;
             _bounceTimer = bounceInputLockDuration;
             _isDashing = false;
             _hasBouncedThisDash = true;
             _justBounced = true;
 
-            float bounceRotation = 180f;
-            if (_dashDirection == 1)
-            {
-                bounceRotation = 0f;
-            }
-
+            float bounceRotation = (_dashDirection == 1) ? 0f : 180f;
             float bounceDir = -_dashDirection;
+
             transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
             rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
-            if (_rawHorizontalInput != 0)
-                _lastNonZeroHorizontal = _rawHorizontalInput;
-            else
-                _lastNonZeroHorizontal = -_lastNonZeroHorizontal;
-            
-            
-            animator.SetBool(IsDashing, false);
-            animator.SetBool(IsBouncing, true);
-        }
 
+            _lastNonZeroHorizontal = _rawHorizontalInput != 0 ? _rawHorizontalInput : -_lastNonZeroHorizontal;
+        }
+        
         private void EndDash()
         {
             animator.SetBool(IsDashing, false);
@@ -265,6 +255,8 @@ namespace Scripts
                 if (_bounceTimer <= 0)
                 {
                     _isBouncing = false;
+                    animator.SetBool(IsBouncing, false);
+                    animator.SetBool(IsDashing, false);
                     _horizontal = _rawHorizontalInput;
                 }
             }
@@ -306,8 +298,6 @@ namespace Scripts
             if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0)
             {
                 animator.SetBool(IsJumping, true);
-                var jumpParticle = Instantiate(jumpParticle1, groundCheck.position, Quaternion.identity);
-                jumpParticle = jumpParticle2;
                 
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             }
@@ -348,10 +338,7 @@ namespace Scripts
 
         public void SMod(InputAction.CallbackContext context)
         {
-            if (context.performed)
-            {
-                _sModIsPressed = context.performed;
-            }
+            _sModIsPressed = context.performed;
         }
 
         public void StartBarrelAnim(InputAction.CallbackContext context)
