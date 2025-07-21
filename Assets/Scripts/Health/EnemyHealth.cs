@@ -40,30 +40,27 @@ namespace Health
 
         protected override void Die()
         {
-            if (dead) return;
+            base.Die();
 
-            dead = true;
             Debug.Log("Enemy died.");
 
             foreach (var comp in componentsToDisable)
                 comp.enabled = false;
 
-            // Notify parent room if needed
             Room room = GetComponentInParent<Room>();
+            GameObject enemyRoot = transform.parent != null ? transform.parent.gameObject : gameObject;
+
             if (room != null)
             {
-                GameObject enemyRoot = transform.parent != null ? transform.parent.gameObject : gameObject;
                 room.OnEnemyDied(enemyRoot);
                 Destroy(enemyRoot);
             }
             else
             {
-                if (gameObject.layer == LayerMask.NameToLayer("Boss"))
-                {
+                if (_healthBar != null)
                     Destroy(_healthBar.gameObject);
-                }
 
-                Destroy(gameObject);
+                Destroy(enemyRoot);
             }
         }
     }

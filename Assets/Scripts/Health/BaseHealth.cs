@@ -1,5 +1,6 @@
 using Scripts;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Health
 {
@@ -7,6 +8,8 @@ namespace Health
     {
         [Header("Health")]
         [SerializeField] protected float startingHealth = 100f;
+        [Header("Events")]
+        public UnityEvent onDeath = new();
         public float currentHealth { get; protected set; }
         public bool dead { get; protected set; }
 
@@ -26,6 +29,12 @@ namespace Health
             }
         }
 
-        protected abstract void Die();
+        protected virtual void Die()
+        {
+            if (dead) return;
+            dead = true;
+
+            onDeath.Invoke();
+        }
     }
 }

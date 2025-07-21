@@ -76,7 +76,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -472,7 +472,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      garen_0: -7937764578974416199
+      garen_1: 8604413784021502711
+      garen_10: 5166782031793190574
+      garen_11: -7536015193023815142
+      garen_12: -2908619295291825319
+      garen_13: -5728808486894909569
+      garen_2: 3862059974942173060
+      garen_3: -6490037706708572842
+      garen_4: 6506877523986148228
+      garen_5: -6833953978306140631
+      garen_6: -7052205251597473207
+      garen_7: -8646736019758379208
+      garen_8: 7964671082665274471
+      garen_9: -2375243465841244627
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

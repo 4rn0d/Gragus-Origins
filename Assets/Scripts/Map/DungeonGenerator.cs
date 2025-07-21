@@ -17,6 +17,11 @@ namespace Map
         private Collider2D _playerCollider;
         
         [Header("Salles")]
+        public GameObject bossRoomUpPrefab;
+        public GameObject bossRoomDownPrefab;
+        public GameObject bossRoomLeftPrefab;
+        public GameObject bossRoomRightPrefab;
+
         public GameObject startRoomPrefab;
         public GameObject finalRoomUpPrefab;
         public GameObject finalRoomDownPrefab;
@@ -281,7 +286,7 @@ namespace Map
         {
             int maxDepth = _placedRooms.Max(room => room.depth);
             List<Room> candidates = _placedRooms.Where(r => r.depth == maxDepth || r.depth == (maxDepth - 1)).ToList();
-            
+
             candidates = ShuffleList(candidates);
 
             foreach (var room in candidates)
@@ -290,7 +295,13 @@ namespace Map
                 {
                     if (door.isUsed) continue;
 
-                    GameObject prefab = GetFinalRoomPrefabForDirection(door.direction);
+                    // SELECT ROOM TYPE BASED ON FLOOR
+                    GameObject prefab;
+                    if (DungeonManager.Instance.GetCurrentFloor() == 3)
+                        prefab = GetBossRoomPrefabForDirection(door.direction);
+                    else
+                        prefab = GetFinalRoomPrefabForDirection(door.direction);
+
                     if (prefab == null) continue;
 
                     GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
@@ -478,18 +489,25 @@ namespace Map
         {
             switch (doorDir)
             {
-                case Direction.North:
-                    return finalRoomDownPrefab;
-                case Direction.South:
-                    return finalRoomUpPrefab;
-                case Direction.West:
-                    return finalRoomRightPrefab;
-                case Direction.East:
-                    return finalRoomLeftPrefab;
-                default:
-                    return null;
+                case Direction.North:  return finalRoomDownPrefab;
+                case Direction.South: return finalRoomUpPrefab;
+                case Direction.West: return finalRoomRightPrefab;
+                case Direction.East: return finalRoomLeftPrefab;
+                default: return null;
             }
         }
+        private GameObject GetBossRoomPrefabForDirection(Direction doorDir)
+        {
+            switch (doorDir)
+            {
+                case Direction.North: return bossRoomDownPrefab;
+                case Direction.South: return bossRoomUpPrefab;
+                case Direction.West: return bossRoomRightPrefab;
+                case Direction.East: return bossRoomLeftPrefab;
+                default: return null;
+            }
+        }
+
         private void EnableAllUnusedDoors()
         {
             foreach (var room in _placedRooms)
