@@ -170,6 +170,7 @@ namespace Scripts
                 if (_explosionTimer <= 0 && _barrel != null)
                 {
                     _barrel.ExplodeBarrel(this);
+                    _barrel = null;
                     _canThrow = true;
                 }
             }
@@ -414,10 +415,10 @@ namespace Scripts
                         animator.SetBool(IsRolling, true);
                     }
                 }
-                else
+                else if (_barrel != null)
                 {
-                    Debug.Log("Boom");
                     _barrel.ExplodeBarrel(this);
+                    _barrel = null;
                     _canThrow = true;
                 }
             }
@@ -480,6 +481,7 @@ namespace Scripts
         private void EndBarrelAnim()
         {
             animator.SetBool(IsRolling, false);
+            SpawnBarrel();
         }
 
         private void EndDrinkingAnim()
@@ -489,6 +491,12 @@ namespace Scripts
 
         private void SpawnBarrel()
         {
+            if (_barrel != null)
+            {
+                Debug.Log("Ignoring barrel because _barrel is not null");
+                return;
+            }
+
             if (healOnBarrel)
                 health.AddHealth(15);
             UseAlcohol(throwAlcoholCost);

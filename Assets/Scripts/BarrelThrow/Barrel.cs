@@ -61,6 +61,7 @@ public class Barrel : MonoBehaviour
 
     public void ExplodeBarrel(PlayerController player)
     {
+        Debug.Log("Boom");
         GameObject obj = Instantiate(explosionEffect, new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f), new Quaternion(0, 0, 0, 0));
         var explosion = obj.GetComponent<Explosion>();
         explosion._sticky = _sticky;
