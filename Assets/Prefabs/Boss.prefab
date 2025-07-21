@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 3112574182314588941}
   - component: {fileID: 6561856198170674570}
   - component: {fileID: 1444769345153083983}
+  - component: {fileID: 5042868606018351820}
   m_Layer: 12
   m_Name: Garen
   m_TagString: Enemy
@@ -508,6 +509,28 @@ MonoBehaviour:
           m_Value1: 235192607083445364
         Name: Yell2
         m_Value: {fileID: 8300000, guid: 4feb276f1ceba422d9353170171562b5, type: 3}
+--- !u!95 &5042868606018351820
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4785355258555788343}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cdee60f21d84a4a80b10b9dfb6ebf54d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5213750890291609243
 GameObject:
   m_ObjectHideFlags: 0
