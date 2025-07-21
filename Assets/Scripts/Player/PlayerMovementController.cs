@@ -109,18 +109,18 @@ namespace Scripts
 
         public bool triggerActive;
         private Interactable _nearbyInteractible;
-        
+
         private float _cooldownTimer;
         public bool isOnCooldown;
         public SpriteRenderer spriteRenderer;
 
-        
+
         public PlayerHealth health;
         public bool healOnBarrel = false;
         public bool resistant = false;
         public bool powerful = false;
         public bool sticky = false;
-        
+
         void Awake()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -132,6 +132,7 @@ namespace Scripts
 
             health = gameObject.GetComponent<PlayerHealth>();
         }
+
         private void FixedUpdate()
         {
             if (_pauseMenu.isPaused) return;
@@ -140,9 +141,8 @@ namespace Scripts
             HandleMovement();
             HandleDash();
             HandleBounceTimer();
-            
         }
-        
+
         private void Update()
         {
             if (!isOnCooldown) return;
@@ -151,6 +151,7 @@ namespace Scripts
             {
                 isOnCooldown = false;
             }
+
             _justBounced = false;
         }
 
@@ -177,7 +178,7 @@ namespace Scripts
         public void BarrelJump(Vector3 position)
         {
             Vector3 moveDirection = position - rb.transform.position;
-            if(powerful)
+            if (powerful)
                 rb.AddForce(moveDirection.normalized * -explosionForce * 1.5f, ForceMode2D.Impulse);
             else
                 rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
@@ -257,8 +258,8 @@ namespace Scripts
                 _lastNonZeroHorizontal = _rawHorizontalInput;
             else
                 _lastNonZeroHorizontal = -_lastNonZeroHorizontal;
-            
-            
+
+
             animator.SetBool(IsDashing, false);
             animator.SetBool(IsBouncing, true);
         }
@@ -266,7 +267,6 @@ namespace Scripts
         // ReSharper disable Unity.PerformanceAnalysis
         private void EndDash()
         {
-            
             animator.SetBool(IsDashing, false);
             _horizontal = _rawHorizontalInput;
             _isDashing = false;
@@ -277,6 +277,7 @@ namespace Scripts
                 Debug.Log("Vunerable");
                 playerHealth.invulnerable = false;
             }
+
             _horizontal = _rawHorizontalInput;
             if (_rawHorizontalInput == 0)
             {
@@ -312,12 +313,14 @@ namespace Scripts
                 _canDash = true;
             }
         }
+
         private float GetCurrentDirection()
         {
             if (Mathf.Abs(rb.linearVelocity.x) > 0.2f)
             {
                 return Mathf.Sign(rb.linearVelocity.x);
             }
+
             return _lastNonZeroHorizontal;
         }
 
@@ -346,7 +349,7 @@ namespace Scripts
                 animator.SetBool(IsJumping, true);
                 var jumpParticle = Instantiate(jumpParticle1, groundCheck.position, Quaternion.identity);
                 jumpParticle = jumpParticle2;
-                
+
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             }
 
@@ -364,7 +367,7 @@ namespace Scripts
                 SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
                 animator.SetBool(IsDashing, true);
                 _isDashing = true;
-                
+
                 global::Health.Health playerHealth = GetComponent<global::Health.Health>();
 
                 if (playerHealth != null)
@@ -372,7 +375,7 @@ namespace Scripts
                     playerHealth.invulnerable = true;
                     Debug.Log("Invulnerable");
                 }
-                
+
                 _dashTimer = dashDuration;
                 _dashDirection = _lastNonZeroHorizontal;
                 _hasBouncedThisDash = false;
@@ -396,10 +399,7 @@ namespace Scripts
 
         public void SMod(InputAction.CallbackContext context)
         {
-            if (context.performed)
-            {
-                _sModIsPressed = context.performed;
-            }
+            _sModIsPressed = context.performed;
         }
 
         public void StartBarrelAnim(InputAction.CallbackContext context)
@@ -450,12 +450,12 @@ namespace Scripts
                 {
                     animator.SetBool(IsDrinking, true);
                     _currentAlcohol.Drink(this);
-                    if(healOnBarrel)
+                    if (healOnBarrel)
                         health.AddHealth(15);
                     RefillAlcohol(2);
                 }
                 else
-                { 
+                {
                     Debug.Log("AlcoolOnCooldown");
                 }
             }
@@ -466,6 +466,7 @@ namespace Scripts
             _cooldownTimer = cooldown;
             isOnCooldown = true;
         }
+
         public void ChangeAlcohol(InputAction.CallbackContext context)
         {
             if (context.performed && !_pauseMenu.isPaused && animator.GetBool(IsDrinking) == false)
@@ -488,7 +489,7 @@ namespace Scripts
 
         private void SpawnBarrel()
         {
-            if(healOnBarrel)
+            if (healOnBarrel)
                 health.AddHealth(15);
             UseAlcohol(throwAlcoholCost);
             _throwTimer = throwDistance;
@@ -509,7 +510,7 @@ namespace Scripts
         {
             return _isDashing;
         }
-        
+
         public void OnInteract(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
@@ -517,7 +518,7 @@ namespace Scripts
             if (_nearbyInteractible != null && !_nearbyInteractible._isUsed)
             {
                 _nearbyInteractible.Interact(this);
-                _nearbyInteractible = null;  // <-- empêche de réutiliser sans sortir/entrer trigger
+                _nearbyInteractible = null; // <-- empêche de réutiliser sans sortir/entrer trigger
             }
         }
 
@@ -553,8 +554,5 @@ namespace Scripts
         {
             return _alcoholCarousel.GetAllAlcohols();
         }
-
     }
-
 }
-
