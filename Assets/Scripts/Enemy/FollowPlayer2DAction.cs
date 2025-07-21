@@ -13,7 +13,7 @@ namespace Enemy
 
         [SerializeReference] public BlackboardVariable<GameObject> Enemy;
         [SerializeReference] public BlackboardVariable<GameObject> Player;
-        [SerializeReference] public BlackboardVariable<float> Speed = new(3f);
+        [SerializeReference] private SlowableEnemy slowable;
         [SerializeReference] public BlackboardVariable<float> StopRange = new(0.5f); // How close before stopping
         [SerializeReference] public BlackboardVariable<float> MaxChaseRange = new(10f);
 
@@ -23,6 +23,7 @@ namespace Enemy
 
         protected override Status OnStart()
         {
+            slowable = Enemy.Value.GetComponent<SlowableEnemy>();
             if (Enemy?.Value == null || Player?.Value == null)
                 return Status.Failure;
 
@@ -58,7 +59,8 @@ namespace Enemy
 
             // Continue following
             Vector2 direction = (playerPos - enemyPos).normalized;
-            _enemyTransform.position += (Vector3)(direction * Speed.Value * Time.deltaTime);
+            float moveSpeed = slowable != null ? slowable.CurrentSpeed : 3f;
+            _enemyTransform.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
 
             // Flip sprite
             if (direction.x != 0)

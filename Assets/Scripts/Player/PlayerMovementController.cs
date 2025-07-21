@@ -1,13 +1,16 @@
-
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Alcohol;
 using Map;
+using System.Threading;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Health;
 
 namespace Scripts
 {
@@ -54,6 +57,7 @@ namespace Scripts
         [SerializeField] float bounceVerticalBoost = 5f;
         [SerializeField] float bounceHorizontalForce = 4f;
         [SerializeField] float bounceInputLockDuration = 0.6f;
+        [SerializeField] AudioClip dashSound;
         private float _wallCoyoteCounter;
         [SerializeField] float wallRayLength = 1.3f;
         [SerializeField] float maxWallCoyoteTime = 1.5f;
@@ -100,24 +104,38 @@ namespace Scripts
         private float _rawHorizontalInput;
 
         //UI
-        private Image _alcoholBar;
+        public Image _alcoholBar;
         private Alcohol _currentAlcohol;
         private AlcoholCarousel _alcoholCarousel;
 
         private bool _sModIsPressed;
 
         public bool triggerActive;
-        
         private Interactable _nearbyInteractible;
+
+        private float _cooldownTimer;
+        public bool isOnCooldown;
+        public SpriteRenderer spriteRenderer;
+
+
+        public PlayerHealth health;
+        public bool healOnBarrel = false;
+        public bool resistant = false;
+        public bool powerful = false;
+        public bool sticky = false;
+
         void Awake()
         {
+            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
             _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
             _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
-            _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+            //_currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+            setAlcoolBarColor(Color.darkOrchid);
 
-            // healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
+            health = gameObject.GetComponent<PlayerHealth>();
         }
+
         private void FixedUpdate()
         {
             if (_pauseMenu.isPaused) return;
@@ -127,8 +145,18 @@ namespace Scripts
             HandleDash();
             HandleBounceTimer();
             UpdateWallCoyoteTime();
+        }
+
+        private void Update()
+        {
+            if (!isOnCooldown) return;
+            _cooldownTimer -= Time.deltaTime;
+            if (_cooldownTimer <= 0)
+            {
+                isOnCooldown = false;
+            }
+
             _justBounced = false;
-            
         }
 
         private void HandleThrow()
@@ -145,7 +173,8 @@ namespace Scripts
 
                 if (_explosionTimer <= 0 && _barrel != null)
                 {
-                    _barrel.ExplodeBarrel();
+                    _barrel.ExplodeBarrel(this);
+                    _barrel = null;
                     _canThrow = true;
                 }
             }
@@ -154,12 +183,14 @@ namespace Scripts
         public void BarrelJump(Vector3 position)
         {
             Vector3 moveDirection = position - rb.transform.position;
-            rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
+            if (powerful)
+                rb.AddForce(moveDirection.normalized * -explosionForce * 1.5f, ForceMode2D.Impulse);
+            else
+                rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
         }
 
         private void HandleMovement()
         {
-
             animator.SetFloat(Speed, Mathf.Abs(_horizontal));
 
             if (_isDashing || _isBouncing) return;
@@ -250,9 +281,12 @@ namespace Scripts
 
             transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
             rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
+            if (_rawHorizontalInput != 0)
+                _lastNonZeroHorizontal = _rawHorizontalInput;
+            else
+                _lastNonZeroHorizontal = -_lastNonZeroHorizontal;
 
-            _lastNonZeroHorizontal = _rawHorizontalInput != 0 ? _rawHorizontalInput : -_lastNonZeroHorizontal;
-            
+
             animator.SetBool(IsDashing, false);
         }
         
@@ -261,6 +295,14 @@ namespace Scripts
             animator.SetBool(IsDashing, false);
             _horizontal = _rawHorizontalInput;
             _isDashing = false;
+            global::Health.Health playerHealth = GetComponent<global::Health.Health>();
+
+            if (playerHealth != null)
+            {
+                Debug.Log("Vunerable");
+                playerHealth.invulnerable = false;
+            }
+
             _horizontal = _rawHorizontalInput;
             if (_rawHorizontalInput == 0)
             {
@@ -297,12 +339,14 @@ namespace Scripts
                 _canDash = true;
             }
         }
+
         private float GetCurrentDirection()
         {
             if (Mathf.Abs(rb.linearVelocity.x) > 0.2f)
             {
                 return Mathf.Sign(rb.linearVelocity.x);
             }
+
             return _lastNonZeroHorizontal;
         }
 
@@ -344,8 +388,18 @@ namespace Scripts
         {
             if (context.performed && !_isDashing && _canDash && !_pauseMenu.isPaused)
             {
+                SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
                 animator.SetBool(IsDashing, true);
                 _isDashing = true;
+
+                global::Health.Health playerHealth = GetComponent<global::Health.Health>();
+
+                if (playerHealth != null)
+                {
+                    playerHealth.invulnerable = true;
+                    Debug.Log("Invulnerable");
+                }
+
                 _dashTimer = dashDuration;
                 _dashDirection = _lastNonZeroHorizontal;
                 _hasBouncedThisDash = false;
@@ -384,10 +438,10 @@ namespace Scripts
                         animator.SetBool(IsRolling, true);
                     }
                 }
-                else
+                else if (_barrel != null)
                 {
-                    Debug.Log("Boom");
-                    _barrel.ExplodeBarrel();
+                    _barrel.ExplodeBarrel(this);
+                    _barrel = null;
                     _canThrow = true;
                 }
             }
@@ -416,27 +470,43 @@ namespace Scripts
             if (context.performed && !_pauseMenu.isPaused && !animator.GetBool(IsJumping))
             {
                 Debug.Log(_currentAlcohol);
-                animator.SetBool(IsDrinking, true);
-                _currentAlcohol.Drink();
+                if (!isOnCooldown && (_currentAlcohol.state != State.Broken && _currentAlcohol.state != State.Empty))
+                {
+                    animator.SetBool(IsDrinking, true);
+                    _currentAlcohol.Drink(this);
+                    if (healOnBarrel)
+                        health.AddHealth(15);
+                    RefillAlcohol(2);
+                }
+                else
+                {
+                    Debug.Log("AlcoolOnCooldown");
+                }
             }
+        }
+
+        public void StartCooldown(float cooldown)
+        {
+            _cooldownTimer = cooldown;
+            isOnCooldown = true;
         }
 
         public void ChangeAlcohol(InputAction.CallbackContext context)
         {
             if (context.performed && !_pauseMenu.isPaused && !animator.GetBool(IsDrinking))
             {
-                _currentAlcohol = _alcoholCarousel.NextPotion(); 
+                _currentAlcohol = _alcoholCarousel.NextPotion();
                 // Debug.Log("TogglePause performed");
                 // _pauseMenu.TogglePause();
-                
             }
         }
 
         private void EndBarrelAnim()
         {
             animator.SetBool(IsRolling, false);
+            SpawnBarrel();
         }
-        
+
         private void EndDrinkingAnim()
         {
             animator.SetBool(IsDrinking, false);
@@ -444,6 +514,14 @@ namespace Scripts
 
         private void SpawnBarrel()
         {
+            if (_barrel != null)
+            {
+                Debug.Log("Ignoring barrel because _barrel is not null");
+                return;
+            }
+
+            if (healOnBarrel)
+                health.AddHealth(15);
             UseAlcohol(throwAlcoholCost);
             _throwTimer = throwDistance;
             _explosionTimer = explosionCooldown;
@@ -455,22 +533,23 @@ namespace Scripts
             {
                 _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation)
                     .GetComponent<Barrel>();
-                _barrel.InitalizeBarrel(rb, throwSpeed);
+                _barrel.InitalizeBarrel(this, throwSpeed);
             }
         }
-        
+
         public bool IsThePlayerDashing()
         {
             return _isDashing;
         }
-        
+
         public void OnInteract(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
 
-            if (_nearbyInteractible != null && !_nearbyInteractible.IsUsed)
+            if (_nearbyInteractible != null && !_nearbyInteractible._isUsed)
             {
                 _nearbyInteractible.Interact(this);
+                _nearbyInteractible = null; // <-- empêche de réutiliser sans sortir/entrer trigger
             }
         }
 
@@ -492,6 +571,19 @@ namespace Scripts
                 _nearbyInteractible = null;
         }
 
-    }
+        public void setSpeed(float speed)
+        {
+            moveSpeed += speed;
+        }
 
+        public void setAlcoolBarColor(Color color)
+        {
+            _alcoholBar.color = color;
+        }
+
+        public List<Alcohol> GetPotions()
+        {
+            return _alcoholCarousel.GetAllAlcohols();
+        }
+    }
 }

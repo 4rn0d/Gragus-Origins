@@ -1,108 +1,139 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 
-[Serializable, Unity.Properties.GeneratePropertyBag]
-[NodeDescription(
-    name: "Patrol 2D",
-    description: "Moves a GameObject back and forth between waypoints using simple 2D transform movement. Returns Failure if Player is in range.",
-    category: "Action/Navigation")]
-public class CustomPatrol2DAction : Action
+namespace Enemy
 {
-    [SerializeReference] public BlackboardVariable<GameObject> Agent;
-    [SerializeReference] public BlackboardVariable<List<GameObject>> Waypoints;
-    [SerializeReference] public BlackboardVariable<GameObject> Player;
-    [SerializeReference] public BlackboardVariable<float> PlayerRange = new(3f);
-    [SerializeReference] public BlackboardVariable<float> Speed = new(2f);
-    [SerializeReference] public BlackboardVariable<float> WaypointWaitTime = new(1.0f);
-    [SerializeReference] public BlackboardVariable<float> DistanceThreshold = new(0.2f);
-    [SerializeReference] public BlackboardVariable<bool> PreserveLatestPatrolPoint = new(false);
-
-    private Transform _agent;
-    private Vector3 _initScale;
-    private int _currentPoint = 0;
-    private float _waitTimer = 0f;
-    private bool _waiting = false;
-
-    protected override Node.Status OnStart()
+    [Serializable, Unity.Properties.GeneratePropertyBag]
+    [NodeDescription(
+        name: "Patrol 2D",
+        description:
+        "Moves a GameObject back and forth between waypoints using simple 2D transform movement. Returns Failure if Player is in range.",
+        category: "Action/Navigation")]
+    public class CustomPatrol2DAction : Action
     {
-        if (Agent?.Value == null || Waypoints?.Value == null || Waypoints.Value.Count == 0 || Player?.Value == null)
+        [SerializeReference] public BlackboardVariable<GameObject> Agent;
+        [SerializeReference] public BlackboardVariable<List<GameObject>> Waypoints;
+        [SerializeReference] public BlackboardVariable<GameObject> Player;
+        [SerializeReference] public BlackboardVariable<float> PlayerRange = new(3f);
+        [SerializeReference] private SlowableEnemy slowable;
+        [SerializeReference] public BlackboardVariable<float> WaypointWaitTime = new(1.0f);
+        [SerializeReference] public BlackboardVariable<float> DistanceThreshold = new(0.2f);
+        [SerializeReference] public BlackboardVariable<bool> PreserveLatestPatrolPoint = new(false);
+
+        private Transform _agent;
+        private Vector3 _initScale;
+        private int _currentPoint = 0;
+        private float _waitTimer = 0f;
+        private bool _waiting = false;
+
+        protected override Node.Status OnStart()
         {
-            return Status.Failure;
-        }
-
-        _agent = Agent.Value.transform;
-        _initScale = _agent.localScale;
-
-        if (!PreserveLatestPatrolPoint.Value)
-            _currentPoint = 0;
-
-        _waitTimer = 0f;
-        _waiting = false;
-
-        return Status.Running;
-    }
-
-    protected override Status OnUpdate()
-    {
-        if (_agent == null || Waypoints?.Value == null || Waypoints.Value.Count == 0 || Player?.Value == null)
-            return Status.Failure;
-
-        // Check if Player is in range
-        float playerDistance = Vector2.Distance(_agent.position, Player.Value.transform.position);
-        if (playerDistance <= PlayerRange.Value)
-        {
-            Debug.Log("[Patrol2D] Player in range — stop patrolling.");
-            return Status.Failure;
-        }
-
-        Vector2 currentTarget = Waypoints.Value[_currentPoint].transform.position;
-        Vector2 agentPos = _agent.position;
-        float distance = Vector2.Distance(agentPos, currentTarget);
-
-        if (_waiting)
-        {
-            _waitTimer -= Time.deltaTime;
-            if (_waitTimer <= 0f)
+            if (Agent?.Value == null || Waypoints?.Value == null || Waypoints.Value.Count == 0 || Player?.Value == null)
             {
-                _waiting = false;
-                AdvanceToNextWaypoint();
+                return Status.Failure;
             }
-        }
-        else if (distance <= DistanceThreshold.Value)
-        {
-            _waiting = true;
-            _waitTimer = WaypointWaitTime.Value;
-        }
-        else
-        {
-            Vector2 direction = (currentTarget - agentPos).normalized;
-            _agent.position += (Vector3)(direction * Speed.Value * Time.deltaTime);
+            
+            slowable = Agent.Value.GetComponent<SlowableEnemy>();
 
-            // Flip sprite based on direction
-            if (direction.x != 0)
+            _agent = Agent.Value.transform;
+            _initScale = _agent.localScale;
+
+            if (!PreserveLatestPatrolPoint.Value)
+                _currentPoint = 0;
+
+            _waitTimer = 0f;
+            _waiting = false;
+
+            return Status.Running;
+        }
+
+        protected override Status OnUpdate()
+        {
+            if (_agent == null || Waypoints?.Value == null || Waypoints.Value.Count == 0 || Player?.Value == null)
+                return Status.Failure;
+
+            // Check if Player is in range
+            float playerDistance = Vector2.Distance(_agent.position, Player.Value.transform.position);
+            
+            if (playerDistance <= PlayerRange.Value && HasLineOfSightToPlayer(_agent.position, Player.Value.transform.position))
             {
-                _agent.localScale = new Vector3(
-                    Mathf.Sign(direction.x) * Mathf.Abs(_initScale.x),
-                    _initScale.y,
-                    _initScale.z
-                );
+                Debug.Log("[Patrol2D] Player in range and visible — stop patrolling.");
+                return Status.Failure;
             }
+
+
+            Vector2 currentTarget = Waypoints.Value[_currentPoint].transform.position;
+            Vector2 agentPos = _agent.position;
+            float distance = Vector2.Distance(agentPos, currentTarget);
+
+            if (_waiting)
+            {
+                _waitTimer -= Time.deltaTime;
+                if (_waitTimer <= 0f)
+                {
+                    _waiting = false;
+                    AdvanceToNextWaypoint();
+                }
+            }
+            else if (distance <= DistanceThreshold.Value)
+            {
+                _waiting = true;
+                _waitTimer = WaypointWaitTime.Value;
+            }
+            else
+            {
+                Vector2 direction = (currentTarget - agentPos).normalized;
+                float moveSpeed = slowable != null ? slowable.CurrentSpeed : 2f;
+                _agent.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
+
+                // Flip sprite based on direction
+                if (direction.x != 0)
+                {
+                    _agent.localScale = new Vector3(
+                        Mathf.Sign(direction.x) * Mathf.Abs(_initScale.x),
+                        _initScale.y,
+                        _initScale.z
+                    );
+                }
+            }
+
+            return Status.Running;
         }
 
-        return Status.Running;
-    }
+        private void AdvanceToNextWaypoint()
+        {
+            _currentPoint = (_currentPoint + 1) % Waypoints.Value.Count;
+        }
 
-    private void AdvanceToNextWaypoint()
-    {
-        _currentPoint = (_currentPoint + 1) % Waypoints.Value.Count;
-    }
+        protected override void OnEnd()
+        {
+            _waitTimer = 0f;
+            _waiting = false;
+        }
+        
+        private bool HasLineOfSightToPlayer(Vector2 from, Vector2 to)
+        {
+            Vector2 direction = (to - from).normalized;
+            float distance = Vector2.Distance(from, to);
+    
+            int mask = (1 << 6) | (1 << 7) | (1 << 13); // Ground, Wall, Map layers
 
-    protected override void OnEnd()
-    {
-        _waitTimer = 0f;
-        _waiting = false;
+            RaycastHit2D hit = Physics2D.Raycast(from, direction, distance, mask);
+
+            if (hit.collider != null)
+            {
+                int hitLayer = hit.collider.gameObject.layer;
+                Debug.Log($"[Patrol2D] LOS blocked by {hit.collider.name} on layer {LayerMask.LayerToName(hitLayer)}");
+                return false;
+            }
+
+            Debug.DrawLine(from, to, Color.green); // helpful visual in Scene view
+            return true;
+        }
+
     }
 }

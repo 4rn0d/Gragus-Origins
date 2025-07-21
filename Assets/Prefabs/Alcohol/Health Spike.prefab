@@ -92,7 +92,7 @@ MonoBehaviour:
   fullBottle: {fileID: 21300000, guid: 24541a78376e14c22910c0e079ebacbf, type: 2}
   halfBottle: {fileID: 21300000, guid: 0251cc634e7134e17b1bf1e9df691c87, type: 2}
   emptyBottle: {fileID: 21300000, guid: 7b2228495bc1f4590ab633a790eed469, type: 2}
-  activatedBottle: {fileID: 21300000, guid: 2091b35839ed6485fa7f8f15e14fc6f1, type: 2}
-  effectBottle: {fileID: 21300000, guid: c8bc6b4fa489045538217daf3a12985f, type: 2}
   brokenBottle: {fileID: 21300000, guid: 784c49ecc4740417ab9f555edd94b286, type: 2}
   cooldown: 5
+  hasCooldown: 1
+  state: 0

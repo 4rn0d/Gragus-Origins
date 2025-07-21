@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Alcohol;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -20,9 +21,7 @@ namespace Scripts
         Full,
         Half,
         Empty,
-        Broken,
-        Activated,
-        Effected
+        Broken
     }
     
     public class Alcohol : MonoBehaviour
@@ -31,10 +30,8 @@ namespace Scripts
         [SerializeField] Sprite fullBottle;
         [SerializeField] Sprite halfBottle;
         [SerializeField] Sprite emptyBottle;
-        [SerializeField] Sprite activatedBottle;
-        [SerializeField] Sprite effectBottle;
         [SerializeField] Sprite brokenBottle;
-        [SerializeField] float cooldown = 5;
+        [SerializeField] float cooldown = 25;
         [SerializeField] bool hasCooldown = true;
 
         private Effect _effect;
@@ -42,37 +39,21 @@ namespace Scripts
         private Image _image;
         private Coroutine _cooldownCoroutine;
         
-        private float _cooldownTimer;
-        private bool _isOnCooldown;
+        
         
         private void Awake()
         {
+            _image = GetComponent<Image>();
             state = State.Full;
-            GetComponent<Image>().sprite = GetSpriteByState();
+            _image.sprite = GetSpriteByState();
             _effect = GetEffectByType();
-            Debug.Log($"Initial state: {state}");
             UpdateSprite();
-        }
-        
-        private void Update()
-        {
-            if (_isOnCooldown)
-            {
-                _cooldownTimer -= Time.deltaTime;
-                if (_cooldownTimer <= 0)
-                {
-                    Refill();
-                    _isOnCooldown = false;
-                }
-            }
         }
         
         private void UpdateSprite()
         {
-            Debug.Log(state);
             var newSprite = GetSpriteByState();
-            Debug.Log(newSprite);
-            GetComponent<Image>().sprite = newSprite;
+            _image.sprite = newSprite;
         }
 
         private Sprite GetSpriteByState()
@@ -82,25 +63,26 @@ namespace Scripts
                 case State.Full: return fullBottle;
                 case State.Half: return halfBottle;
                 case State.Empty: return emptyBottle;
-                case State.Broken: return brokenBottle;
-                case State.Activated: return activatedBottle;
-                case State.Effected: return effectBottle;
-                default: return fullBottle;
+                case State.Broken: default: return brokenBottle;
             }
+        }
+        public Sprite GetSpriteFull()
+        {
+            return fullBottle;
         }
         
         private Effect GetEffectByType()
         {
-            Debug.Log(alcoholEffect);   
-            switch (alcoholEffect)
+            Debug.Log(alcoholEffect);
+            return alcoholEffect switch
             {
-                case EffectType.Swiftness: return new Swiftness();
-                case EffectType.Health: return new Health();
-                case EffectType.Resistance: return new Resistance();
-                case EffectType.Power: return new Power();
-                case EffectType.Stun: return new Stun();
-                default: return null;
-            }
+                EffectType.Swiftness => new Swiftness(),
+                EffectType.Health => new Healing(),
+                EffectType.Resistance => new Resistance(),
+                EffectType.Power => new Power(),
+                EffectType.Stun => new Stun(),
+                _ => null
+            };
         }
 
         public void ChangeState(State newState)
@@ -111,7 +93,7 @@ namespace Scripts
             UpdateSprite();
         }
         
-        public void Drink()
+        public void Drink(PlayerController player)
         {
             Debug.Log(state);
             _effect = GetEffectByType();
@@ -119,23 +101,18 @@ namespace Scripts
             {
                 case State.Full:
                     ChangeState(State.Half);
-                    _effect.Apply();
+                    _effect.ApplyWithDuration(player);
+                    player.StartCooldown(cooldown);
                     return;
                 case State.Half:
                     ChangeState(State.Empty);
-                    _effect.Apply();
-                    StartCooldown();
+                    _effect.ApplyWithDuration(player);
+                    player.StartCooldown(cooldown);
                     return;
                 default:
                     Debug.LogWarning($"Can't drink in state: {state}");
                     return;
             }
-        }
-        
-        private void StartCooldown()
-        {
-            _cooldownTimer = cooldown;
-            _isOnCooldown = true;
         }
         
         public void Refill()

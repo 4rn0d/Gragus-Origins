@@ -24,7 +24,7 @@ namespace Alcohol
 
         public override void Interact(PlayerController player)
         {
-            if (_isUsed) return;
+            if (_isUsed || player._alcoholBar.fillAmount == 1) return;
 
             player.RefillAlcohol(refillAmount);
             _isUsed = true;

@@ -8,6 +8,11 @@ namespace Map
         public Tilemap tilemap;
         public string groundLayer = "Ground";
         public string wallLayer = "Wall";
+        
+        private void Start()
+        {
+            gameObject.layer = LayerMask.NameToLayer(wallLayer);
+        }
 
         private void OnCollisionStay2D(Collision2D collision)
         {
