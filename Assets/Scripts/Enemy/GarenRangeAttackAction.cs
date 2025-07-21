@@ -19,6 +19,7 @@ public partial class GarenRangeAttackAction : Action
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float reachThreshold = 0.2f;
 
+    private Animator _animator;
     private float _waveTimer = 0f;
     private int _wavesSpawned = 0;
     private Transform _garenTransform;
@@ -44,6 +45,8 @@ public partial class GarenRangeAttackAction : Action
             Debug.LogWarning("[GarenRangeAttack] Missing references.");
             return Status.Failure;
         }
+        
+        _animator = Garen.Value.GetComponent<Animator>();
 
         _garenTransform = Garen.Value.transform;
         _centerTransform = CenterPoint.Value.transform;
@@ -51,6 +54,7 @@ public partial class GarenRangeAttackAction : Action
         _wavesSpawned = 0;
         _hasReachedCenter = false;
 
+        _animator.SetBool("IsAttacking", false);
         return Status.Running;
     }
 
@@ -63,6 +67,7 @@ public partial class GarenRangeAttackAction : Action
             {
                 _hasReachedCenter = true;
                 SoundFXManager.instance.PlaySoundFXClip(Yell2.Value,_garenTransform,1f);
+                _animator.SetBool("IsAttacking", false);
                 return Status.Running;
             }
 
@@ -76,6 +81,7 @@ public partial class GarenRangeAttackAction : Action
                 _garenTransform.localScale = new Vector3(Mathf.Sign(direction.x) * Mathf.Abs(_garenTransform.localScale.x), _garenTransform.localScale.y, _garenTransform.localScale.z);
             }
 
+            _animator.SetBool("IsAttacking", false);
             return Status.Running;
         }
 
@@ -86,11 +92,13 @@ public partial class GarenRangeAttackAction : Action
         _waveTimer -= Time.deltaTime;
         if (_waveTimer <= 0f)
         {
+            _animator.SetBool("IsAttacking", true);
             FireSwordWave();
             _waveTimer = timeBetweenWaves;
             _wavesSpawned++;
         }
-
+        
+        _animator.SetBool("IsAttacking", false);
         return Status.Running;
     }
 
