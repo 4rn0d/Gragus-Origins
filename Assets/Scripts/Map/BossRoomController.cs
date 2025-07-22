@@ -15,13 +15,13 @@ namespace Map
         private void Start()
         {
             GameObject boss = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
-
-            _health = boss.GetComponent<BaseHealth>();
+            bossPrefab = boss;
+            _health = boss.GetComponentInChildren<EnemyHealth>();
         }
 
         private void Update()
         {
-            if (_health && _health.dead && !done)
+            if (_health.dead && !done)
             {
                 OnBossDeath();
             }
@@ -29,10 +29,9 @@ namespace Map
 
         private void OnBossDeath()
         {
-            Debug.Log("Boss died — spawning portal!");
+            Instantiate(portalPrefab, spawnPoint.position, Quaternion.identity);
             PlayerPrefs.SetInt("BossDefeated", 1);
             //ADD CHEST
-            Instantiate(portalPrefab, transform.position, Quaternion.identity);
             done = true;
         }
     }
