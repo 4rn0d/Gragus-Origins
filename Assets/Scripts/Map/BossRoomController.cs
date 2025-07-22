@@ -1,4 +1,5 @@
-﻿using Health;
+﻿using System;
+using Health;
 using UnityEngine;
 
 namespace Map
@@ -8,26 +9,31 @@ namespace Map
         public GameObject bossPrefab;
         public Transform spawnPoint;
         public GameObject portalPrefab;
-
+        public GameObject chestPrefab;
+        private BaseHealth _health;
+        private bool done = false;
         private void Start()
         {
             GameObject boss = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
 
-            BaseHealth bossHealth = boss.GetComponent<BaseHealth>();
-            if (bossHealth != null)
+            _health = boss.GetComponent<BaseHealth>();
+        }
+
+        private void Update()
+        {
+            if (_health && _health.dead && !done)
             {
-                bossHealth.onDeath.AddListener(OnBossDeath);
-            }
-            else
-            {
-                Debug.LogWarning("Boss prefab does not have a BaseHealth component.");
+                OnBossDeath();
             }
         }
 
         private void OnBossDeath()
         {
             Debug.Log("Boss died — spawning portal!");
+            PlayerPrefs.SetInt("BossDefeated", 1);
+            //ADD CHEST
             Instantiate(portalPrefab, transform.position, Quaternion.identity);
+            done = true;
         }
     }
 }

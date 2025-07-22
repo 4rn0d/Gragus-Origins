@@ -9,7 +9,6 @@ namespace Health
         [Header("Health")]
         [SerializeField] protected float startingHealth = 100f;
         [Header("Events")]
-        public UnityEvent onDeath = new();
         public float currentHealth { get; protected set; }
         public bool dead { get; protected set; }
 
@@ -33,8 +32,6 @@ namespace Health
         {
             if (dead) return;
             dead = true;
-
-            onDeath.Invoke();
         }
     }
 }
