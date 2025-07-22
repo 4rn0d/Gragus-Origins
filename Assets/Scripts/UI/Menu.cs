@@ -10,8 +10,7 @@ namespace Scripts
         
         private void Start()
         {
-            // Check if coming from boss death
-            if (PlayerPrefs.GetInt("BossDefeated", 0) == 1)
+            if (PlayerPrefs.GetInt("BossDefeated") == 1)
             {
                 if (thankYouPanel != null)
                     thankYouPanel.SetActive(true);
@@ -20,6 +19,7 @@ namespace Scripts
             }
             else
             {
+                Debug.Log("test");
                 if (thankYouPanel != null)
                     thankYouPanel.SetActive(false);
             }
