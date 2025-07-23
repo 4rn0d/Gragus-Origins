@@ -1,56 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Alcohol;
 using Managers;
-using Map;
+using Scripts;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Scripts
+namespace Map
 {
-    public class Chest : Interactable
+    public abstract class Chest : Interactable
     {
-        [SerializeField] private Transform floatingPoint;
-        [SerializeField] private GameObject floatingPotionPrefab;
-        [SerializeField] private AudioClip openChestSound;
-        [SerializeField] private Animator animator;
+        [SerializeField] protected Transform floatingPoint;
+        [SerializeField] protected GameObject floatingPotionPrefab;
+        [SerializeField] protected AudioClip openChestSound;
+        [SerializeField] protected Animator animator;
 
 
-        private void Start()
+        protected void Start()
         {
             fPromptUI.SetActive(false);
         }
 
-        public override void Interact(PlayerController player)
+        public abstract override void Interact(PlayerController player);
+
+        protected Scripts.Alcohol GetEmptyPotion(List<Scripts.Alcohol> potions)
         {
-            if (_isUsed) return;
-            
-
-            List<Alcohol> potions = player.GetPotions();
-
-            Alcohol potionToRefill = GetEmptyPotion(potions);
-
-            if (potionToRefill == null)
-            {
-                Debug.Log("[Chest] Aucun alcool vide à remplir.");
-                return;
-            }
-            animator.SetTrigger("Open");
-            potionToRefill.Refill();
-            Sprite fullSprite = potionToRefill.GetSpriteFull();
-            
-            
-            _isUsed = true;
-            fPromptUI.SetActive(false);
-            StartCoroutine(AnimateFloatingPotion(fullSprite));
-            SoundFXManager.instance.PlaySoundFXClip(openChestSound, transform, 1f);
-
-            
-        }
-
-        private Alcohol GetEmptyPotion(List<Alcohol> potions)
-        {
-            List<Alcohol> emptyPotions = new List<Alcohol>();
+            List<Scripts.Alcohol> emptyPotions = new List<Scripts.Alcohol>();
 
             foreach (var potion in potions)
             {
@@ -66,8 +39,19 @@ namespace Scripts
             int index = Random.Range(0, emptyPotions.Count);
             return emptyPotions[index];
         }
+        protected Scripts.Alcohol GetBrokenPotion(List<Scripts.Alcohol> potions)
+        {
+            foreach (var potion in potions)
+            {
+                if (potion.state == State.Broken)
+                {
+                    return potion;
+                }
+            }
+            return null;
+        }
 
-        private IEnumerator AnimateFloatingPotion(Sprite sprite)
+        protected IEnumerator AnimateFloatingPotion(Sprite sprite)
         {
             GameObject floating = Instantiate(floatingPotionPrefab, floatingPoint.position, Quaternion.identity);
             SpriteRenderer sr = floating.GetComponent<SpriteRenderer>();
