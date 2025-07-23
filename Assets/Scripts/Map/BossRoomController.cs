@@ -1,5 +1,6 @@
 ﻿using System;
 using Health;
+using Scripts;
 using UnityEngine;
 
 namespace Map
@@ -7,7 +8,8 @@ namespace Map
     public class BossRoomController : MonoBehaviour
     {
         public GameObject bossPrefab;
-        public Transform spawnPoint;
+        public Transform bossSpawnPoint;
+        public Transform playerSpawnPoint;
         public GameObject portalPrefab;
         public GameObject chestPrefab;
         private BaseHealth _health;
@@ -15,9 +17,12 @@ namespace Map
         private void Start()
         {
             chestPrefab.SetActive(false);
-            GameObject boss = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
+            GameObject boss = Instantiate(bossPrefab, bossSpawnPoint.position, Quaternion.identity);
             bossPrefab = boss;
             _health = boss.GetComponentInChildren<EnemyHealth>();
+            GameObject obj = GameObject.Find("Gragus(Clone)");
+            PlayerController controller = obj.GetComponent<PlayerController>();
+            controller.gameObject.transform.position = playerSpawnPoint.position;
         }
 
         private void Update()
@@ -30,7 +35,7 @@ namespace Map
 
         private void OnBossDeath()
         {
-            Instantiate(portalPrefab, spawnPoint.position, Quaternion.identity);
+            Instantiate(portalPrefab, bossSpawnPoint.position, Quaternion.identity);
             PlayerPrefs.SetInt("BossDefeated", 1);
             chestPrefab.SetActive(true);
             done = true;

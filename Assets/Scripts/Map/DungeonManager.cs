@@ -32,6 +32,7 @@ namespace Map
         if (_gragusInstance == null)
         {
             _gragusInstance = Instantiate(gragusPrefab);
+            DontDestroyOnLoad(_gragusInstance);
         }
 
         StartCoroutine(GenerateNewFloor());
