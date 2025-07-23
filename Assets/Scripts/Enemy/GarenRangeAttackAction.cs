@@ -54,7 +54,6 @@ public partial class GarenRangeAttackAction : Action
         _wavesSpawned = 0;
         _hasReachedCenter = false;
 
-        _animator.SetBool("IsAttacking", false);
         return Status.Running;
     }
 
@@ -67,7 +66,6 @@ public partial class GarenRangeAttackAction : Action
             {
                 _hasReachedCenter = true;
                 SoundFXManager.instance.PlaySoundFXClip(Yell2.Value,_garenTransform,1f);
-                _animator.SetBool("IsAttacking", false);
                 return Status.Running;
             }
 
@@ -81,7 +79,6 @@ public partial class GarenRangeAttackAction : Action
                 _garenTransform.localScale = new Vector3(Mathf.Sign(direction.x) * Mathf.Abs(_garenTransform.localScale.x), _garenTransform.localScale.y, _garenTransform.localScale.z);
             }
 
-            _animator.SetBool("IsAttacking", false);
             return Status.Running;
         }
 
@@ -92,13 +89,11 @@ public partial class GarenRangeAttackAction : Action
         _waveTimer -= Time.deltaTime;
         if (_waveTimer <= 0f)
         {
-            _animator.SetBool("IsAttacking", true);
             FireSwordWave();
             _waveTimer = timeBetweenWaves;
             _wavesSpawned++;
         }
         
-        _animator.SetBool("IsAttacking", false);
         return Status.Running;
     }
 

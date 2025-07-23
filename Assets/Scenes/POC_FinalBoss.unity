@@ -5539,9 +5539,13 @@ PrefabInstance:
       propertyPath: managedReferences[6455566252039471268].m_Value
       value: 
       objectReference: {fileID: 89339374}
+    - target: {fileID: 1553199672737548964, guid: 55bb39470761946a28c10061d9516097, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3112574182314588941, guid: 55bb39470761946a28c10061d9516097, type: 3}
       propertyPath: m_Size.x
-      value: 7.67
+      value: 3.61
       objectReference: {fileID: 0}
     - target: {fileID: 3112574182314588941, guid: 55bb39470761946a28c10061d9516097, type: 3}
       propertyPath: m_Size.y
@@ -5591,9 +5595,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5042868606018351820, guid: 55bb39470761946a28c10061d9516097, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5501503587764303038, guid: 55bb39470761946a28c10061d9516097, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844454843559288713, guid: 55bb39470761946a28c10061d9516097, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7042364689634884363, guid: 55bb39470761946a28c10061d9516097, type: 3}
       propertyPath: m_SortingOrder
@@ -5601,7 +5613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8073912887891025837, guid: 55bb39470761946a28c10061d9516097, type: 3}
       propertyPath: m_Size.x
-      value: 5.13
+      value: 8.17
       objectReference: {fileID: 0}
     - target: {fileID: 8073912887891025837, guid: 55bb39470761946a28c10061d9516097, type: 3}
       propertyPath: m_Size.y
