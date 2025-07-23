@@ -14,6 +14,7 @@ namespace Map
         private bool done = false;
         private void Start()
         {
+            chestPrefab.SetActive(false);
             GameObject boss = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
             bossPrefab = boss;
             _health = boss.GetComponentInChildren<EnemyHealth>();
@@ -31,7 +32,7 @@ namespace Map
         {
             Instantiate(portalPrefab, spawnPoint.position, Quaternion.identity);
             PlayerPrefs.SetInt("BossDefeated", 1);
-            //ADD CHEST
+            chestPrefab.SetActive(true);
             done = true;
         }
     }

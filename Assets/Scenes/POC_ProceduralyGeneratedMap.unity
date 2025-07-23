@@ -1790,26 +1790,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3048331371005612010, guid: d9321f4b424ee4d11bc542abbf8d6e62, type: 3}
-      propertyPath: 'alcoholList.Array.data[0]'
-      value: 
-      objectReference: {fileID: -5738970367926067988, guid: efea7ba83a323427aa6f0899f7226c9a, type: 3}
-    - target: {fileID: 3048331371005612010, guid: d9321f4b424ee4d11bc542abbf8d6e62, type: 3}
-      propertyPath: 'alcoholList.Array.data[1]'
-      value: 
-      objectReference: {fileID: 7024740969169147715, guid: d0a0a7a92ea084217aa8392b06cb4728, type: 3}
-    - target: {fileID: 3048331371005612010, guid: d9321f4b424ee4d11bc542abbf8d6e62, type: 3}
-      propertyPath: 'alcoholList.Array.data[2]'
-      value: 
-      objectReference: {fileID: 102342268825624797, guid: a223baa7d1d1943fea5fef6a31cd256a, type: 3}
-    - target: {fileID: 3048331371005612010, guid: d9321f4b424ee4d11bc542abbf8d6e62, type: 3}
-      propertyPath: 'alcoholList.Array.data[3]'
-      value: 
-      objectReference: {fileID: -4178734442398687955, guid: 586e06d698f5c4d45adf4cd4259e05f5, type: 3}
-    - target: {fileID: 3048331371005612010, guid: d9321f4b424ee4d11bc542abbf8d6e62, type: 3}
-      propertyPath: 'alcoholList.Array.data[4]'
-      value: 
-      objectReference: {fileID: 6095333157509624677, guid: 625e3248d9da842e7b6e13378ee170c9, type: 3}
     - target: {fileID: 5545725292251609191, guid: d9321f4b424ee4d11bc542abbf8d6e62, type: 3}
       propertyPath: m_RenderMode
       value: 0
