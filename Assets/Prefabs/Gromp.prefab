@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2106255948977822489}
   - component: {fileID: 6961886329390007610}
   - component: {fileID: 6394126655763126064}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gromp
   m_TagString: Enemy
   m_Icon: {fileID: 0}

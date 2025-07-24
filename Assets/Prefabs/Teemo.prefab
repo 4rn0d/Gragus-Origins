@@ -223,11 +223,10 @@ GameObject:
   - component: {fileID: 6538243492545897746}
   - component: {fileID: 2189535191658158395}
   - component: {fileID: 659358574342749967}
-  - component: {fileID: 6212477299137405509}
   - component: {fileID: 9061901830755212310}
   - component: {fileID: 4084591759345039753}
   - component: {fileID: 6590584383177581176}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Teemo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -503,21 +502,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!95 &6590584383177581176
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3619221698321341920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 085579bdf3adc44f0aabd01755ab9d32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageToPlayer: 15
-  meleeHitSound: {fileID: 8300000, guid: b382d7c3551864a77a27ca9cd7c36f14, type: 3}
 --- !u!114 &9061901830755212310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,8 +530,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalSpeed: 2
   spriteRenderer: {fileID: 2189535191658158395}
+--- !u!95 &6590584383177581176
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3619221698321341920}
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 88a0af162ee2a4a43a15ed5fc4d5249b, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
