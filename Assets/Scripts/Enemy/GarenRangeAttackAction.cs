@@ -19,6 +19,7 @@ public partial class GarenRangeAttackAction : Action
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float reachThreshold = 0.2f;
 
+    private Animator _animator;
     private float _waveTimer = 0f;
     private int _wavesSpawned = 0;
     private Transform _garenTransform;
@@ -44,6 +45,8 @@ public partial class GarenRangeAttackAction : Action
             Debug.LogWarning("[GarenRangeAttack] Missing references.");
             return Status.Failure;
         }
+        
+        _animator = Garen.Value.GetComponent<Animator>();
 
         _garenTransform = Garen.Value.transform;
         _centerTransform = CenterPoint.Value.transform;
@@ -90,7 +93,7 @@ public partial class GarenRangeAttackAction : Action
             _waveTimer = timeBetweenWaves;
             _wavesSpawned++;
         }
-
+        
         return Status.Running;
     }
 

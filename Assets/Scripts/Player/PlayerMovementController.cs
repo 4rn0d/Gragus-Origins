@@ -58,6 +58,9 @@ namespace Scripts
         [SerializeField] float bounceHorizontalForce = 4f;
         [SerializeField] float bounceInputLockDuration = 0.6f;
         [SerializeField] AudioClip dashSound;
+        private float _wallCoyoteCounter;
+        [SerializeField] float wallRayLength = 1.3f;
+        [SerializeField] float maxWallCoyoteTime = 1.5f;
 
         [Header("BarrelThrow Settings")] [SerializeField]
         GameObject barrelPrefab;
@@ -145,6 +148,7 @@ namespace Scripts
             HandleMovement();
             HandleDash();
             HandleBounceTimer();
+            UpdateWallCoyoteTime();
         }
 
         private void Update()
@@ -240,23 +244,45 @@ namespace Scripts
                 EndDash();
             }
         }
+        
+        private void UpdateWallCoyoteTime()
+        {
+            float direction = _isDashing ? _dashDirection : Mathf.Sign(_horizontal);
+            RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, Vector2.right * direction, wallRayLength, wallLayer);
+
+            if (hit.collider != null)
+            {
+                float distance = hit.distance;
+                float speed = Mathf.Abs(rb.linearVelocity.x);
+
+                // Only if we're moving toward the wall
+                if (speed > 0.01f)
+                {
+                    float graceTime = Mathf.Min(distance / speed, maxWallCoyoteTime);
+                    _wallCoyoteCounter = graceTime;
+                }
+            }
+            else
+            {
+                _wallCoyoteCounter -= Time.fixedDeltaTime;
+            }
+
+            // Set the animation based on whether grace time is active
+            animator.SetBool(IsBouncing, _wallCoyoteCounter > 0);
+        }
+
 
         private void TriggerBounce()
         {
-            animator.SetBool(IsBouncing, true);
             _isBouncing = true;
             _bounceTimer = bounceInputLockDuration;
             _isDashing = false;
             _hasBouncedThisDash = true;
             _justBounced = true;
 
-            float bounceRotation = 180f;
-            if (_dashDirection == 1)
-            {
-                bounceRotation = 0f;
-            }
-
+            float bounceRotation = (_dashDirection == 1) ? 0f : 180f;
             float bounceDir = -_dashDirection;
+
             transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
             rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
             if (_rawHorizontalInput != 0)
@@ -266,10 +292,8 @@ namespace Scripts
 
 
             animator.SetBool(IsDashing, false);
-            animator.SetBool(IsBouncing, true);
         }
-
-        // ReSharper disable Unity.PerformanceAnalysis
+        
         private void EndDash()
         {
             animator.SetBool(IsDashing, false);
@@ -309,6 +333,7 @@ namespace Scripts
                 if (_bounceTimer <= 0)
                 {
                     _isBouncing = false;
+                    animator.SetBool(IsBouncing, false);
                     _horizontal = _rawHorizontalInput;
                 }
             }
@@ -349,12 +374,10 @@ namespace Scripts
 
         public void Jump(InputAction.CallbackContext context)
         {
-            if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0)
+            if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0 && !animator.GetBool(IsDrinking))
             {
                 animator.SetBool(IsJumping, true);
-                var jumpParticle = Instantiate(jumpParticle1, groundCheck.position, Quaternion.identity);
-                jumpParticle = jumpParticle2;
-
+                
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             }
 
@@ -448,7 +471,7 @@ namespace Scripts
 
         public void DrinkAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed && !_pauseMenu.isPaused)
+            if (context.performed && !_pauseMenu.isPaused && !animator.GetBool(IsJumping))
             {
                 Debug.Log(_currentAlcohol);
                 if (!isOnCooldown && (_currentAlcohol.state != State.Broken && _currentAlcohol.state != State.Empty))
@@ -474,7 +497,7 @@ namespace Scripts
 
         public void ChangeAlcohol(InputAction.CallbackContext context)
         {
-            if (context.performed && !_pauseMenu.isPaused && animator.GetBool(IsDrinking) == false)
+            if (context.performed && !_pauseMenu.isPaused && !animator.GetBool(IsDrinking))
             {
                 _currentAlcohol = _alcoholCarousel.NextPotion();
                 // Debug.Log("TogglePause performed");
