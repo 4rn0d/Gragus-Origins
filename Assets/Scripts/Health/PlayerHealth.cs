@@ -73,9 +73,9 @@ namespace Health
             dead = true;
             foreach (var comp in componentsToDisable)
                 comp.enabled = false;
-            Destroy(gameObject);
-            Debug.Log("Player died — returning to main menu.");
-            SceneManager.LoadScene(0); // Main menu scene index
+
+            Debug.Log("Player died");
+            SceneManager.LoadScene(2); // Main menu scene index
         }
         
         public void AddHealth(float _value)

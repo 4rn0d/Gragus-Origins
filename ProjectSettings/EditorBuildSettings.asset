@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/POC_ProceduralyGeneratedMap.unity
     guid: 54ab3cb38b411d54c9b0e1c3b3998d74
   - enabled: 1
+    path: Assets/Scenes/POC_EcranFin.unity
+    guid: 7dfc53f3a92494f3b8a7396f07ca0b0c
+  - enabled: 1
     path: Assets/Scenes/POC_FinalBoss.unity
     guid: 5041a8f833f1b445797a1546eea4b5cf
   m_configObjects:
