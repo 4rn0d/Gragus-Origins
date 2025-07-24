@@ -50,7 +50,8 @@ namespace Scripts
         public void ToMenu()
         {
             Debug.Log("Going to Main Menu");
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("MainMenu");
+            ResumeGame();
         }
         
     }

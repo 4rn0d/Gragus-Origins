@@ -71,6 +71,11 @@ namespace Scripts
             return fullBottle;
         }
         
+        public Sprite GetSpriteEmpty()
+        {
+            return emptyBottle;
+        }
+        
         private Effect GetEffectByType()
         {
             Debug.Log(alcoholEffect);
@@ -118,6 +123,13 @@ namespace Scripts
         public void Refill()
         {
             ChangeState(State.Full);
+        }
+
+        public void Repair()
+        {
+            Debug.Log("vsfgnhgtrefadsbghytewreafgjmyjtereafgbjmryet");
+            state = State.Empty;
+            UpdateSprite();
         }
     }
 }

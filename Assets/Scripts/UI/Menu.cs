@@ -6,6 +6,24 @@ namespace Scripts
     
     public class Menu : MonoBehaviour
     {
+        public GameObject thankYouPanel;
+        
+        private void Start()
+        {
+            if (PlayerPrefs.GetInt("BossDefeated") == 1)
+            {
+                if (thankYouPanel != null)
+                    thankYouPanel.SetActive(true);
+
+                PlayerPrefs.SetInt("BossDefeated", 0);
+            }
+            else
+            {
+                Debug.Log("test");
+                if (thankYouPanel != null)
+                    thankYouPanel.SetActive(false);
+            }
+        }
         
         public void PlayGame()
         {

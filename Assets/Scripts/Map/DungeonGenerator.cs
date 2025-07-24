@@ -17,6 +17,11 @@ namespace Map
         private Collider2D _playerCollider;
         
         [Header("Salles")]
+        public GameObject bossRoomUpPrefab;
+        public GameObject bossRoomDownPrefab;
+        public GameObject bossRoomLeftPrefab;
+        public GameObject bossRoomRightPrefab;
+
         public GameObject startRoomPrefab;
         public GameObject finalRoomUpPrefab;
         public GameObject finalRoomDownPrefab;
@@ -119,8 +124,12 @@ namespace Map
             }
         }
 
-        private IEnumerator  Start()
+        public bool IsGenerationComplete { get; private set; } = false;
+
+        private IEnumerator Start()
         {
+            IsGenerationComplete = false;
+
             bool success = false;
             int attempt = 0;
             int maxRetries = 50;
@@ -146,7 +155,6 @@ namespace Map
                 else
                 {
                     Debug.Log("Generated a dungeon with a final room after " + attempt + " attempts.");
-                    SpawnPlayerInStartRoom();
                     EnableAllUnusedDoors();
                     _playerCollider = _playerInstance.GetComponent<Collider2D>();
                 }
@@ -154,23 +162,11 @@ namespace Map
 
             if (!success)
                 Debug.LogError("Failed to generate a dungeon with a final room after " + maxRetries + " attempts.");
+
+            Debug.Log("[DungeonGenerator] Generation complete.");
+            IsGenerationComplete = true;
         }
-        private void SpawnPlayerInStartRoom()
-        {
-            Room startRoom = _placedRooms[0];
-            if (startRoom == null)
-            {
-                Debug.LogError("Start room is missing!");
-                return;
-            }
 
-            Vector3 spawnPosition = startRoom.transform.position + playerOffsetInStartRoom;
-
-            if (_playerInstance != null)
-                Destroy(_playerInstance);
-
-            _playerInstance = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-        }
 
         private void ClearDungeon()
         {
@@ -189,6 +185,7 @@ namespace Map
         
         private void GenerateDungeon()
         {
+            Debug.Log("[DungeonGenerator] Starting generation...");
             _placedRooms.Clear();
             _occupiedCells.Clear();
 
@@ -215,6 +212,8 @@ namespace Map
 
                     for (int attempt = 0; attempt < maxAttempts; attempt++)
                     {
+                        Debug.Log($"[DungeonGenerator] Attempt {attempt} to generate dungeon.");
+
                         GameObject prefab = SelectRoomPrefab(placedNormals, placedSpecials);
                         if (prefab == null) break;
 
@@ -287,7 +286,7 @@ namespace Map
         {
             int maxDepth = _placedRooms.Max(room => room.depth);
             List<Room> candidates = _placedRooms.Where(r => r.depth == maxDepth || r.depth == (maxDepth - 1)).ToList();
-            
+
             candidates = ShuffleList(candidates);
 
             foreach (var room in candidates)
@@ -296,7 +295,13 @@ namespace Map
                 {
                     if (door.isUsed) continue;
 
-                    GameObject prefab = GetFinalRoomPrefabForDirection(door.direction);
+                    // SELECT ROOM TYPE BASED ON FLOOR
+                    GameObject prefab;
+                    if (DungeonManager.Instance.GetCurrentFloor() == 3)
+                        prefab = GetBossRoomPrefabForDirection(door.direction);
+                    else
+                        prefab = GetFinalRoomPrefabForDirection(door.direction);
+
                     if (prefab == null) continue;
 
                     GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
@@ -317,7 +322,7 @@ namespace Map
                     go.transform.position = SnapToGrid(door.doorTransform.position - finalDoor.doorTransform.localPosition);
                     Physics2D.SyncTransforms();
 
-                    if (!IsInOccupiedGrid(finalRoom))
+                    if (!IsOverlapping(finalRoom) && !IsInOccupiedGrid(finalRoom))
                     {
                         door.isUsed = true;
                         finalDoor.isUsed = true;
@@ -484,18 +489,25 @@ namespace Map
         {
             switch (doorDir)
             {
-                case Direction.North:
-                    return finalRoomDownPrefab;
-                case Direction.South:
-                    return finalRoomUpPrefab;
-                case Direction.West:
-                    return finalRoomRightPrefab;
-                case Direction.East:
-                    return finalRoomLeftPrefab;
-                default:
-                    return null;
+                case Direction.North:  return finalRoomDownPrefab;
+                case Direction.South: return finalRoomUpPrefab;
+                case Direction.West: return finalRoomRightPrefab;
+                case Direction.East: return finalRoomLeftPrefab;
+                default: return null;
             }
         }
+        private GameObject GetBossRoomPrefabForDirection(Direction doorDir)
+        {
+            switch (doorDir)
+            {
+                case Direction.North: return bossRoomDownPrefab;
+                case Direction.South: return bossRoomUpPrefab;
+                case Direction.West: return bossRoomRightPrefab;
+                case Direction.East: return bossRoomLeftPrefab;
+                default: return null;
+            }
+        }
+
         private void EnableAllUnusedDoors()
         {
             foreach (var room in _placedRooms)
@@ -503,6 +515,15 @@ namespace Map
                 room.EnableUnusedDoor();
             }
         }
-
+        public Vector3 GetStartRoomPosition()
+        {
+            if (_placedRooms.Count > 0)
+                return _placedRooms[0].transform.position;
+            return Vector3.zero;
+        }
+        public void SetPlayerInstance(GameObject player)
+        {
+            _playerInstance = player;
+        }
     }
 }

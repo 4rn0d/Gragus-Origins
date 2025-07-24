@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      garenSword_0: 9027887273833942368
+      garenSword_1: 1097309208039059340
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

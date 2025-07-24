@@ -277,11 +277,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alcoholList:
-  - {fileID: 6095333157509624677, guid: 625e3248d9da842e7b6e13378ee170c9, type: 3}
-  - {fileID: 102342268825624797, guid: a223baa7d1d1943fea5fef6a31cd256a, type: 3}
-  - {fileID: -4178734442398687955, guid: 586e06d698f5c4d45adf4cd4259e05f5, type: 3}
   - {fileID: -5738970367926067988, guid: efea7ba83a323427aa6f0899f7226c9a, type: 3}
   - {fileID: 7024740969169147715, guid: d0a0a7a92ea084217aa8392b06cb4728, type: 3}
+  - {fileID: 102342268825624797, guid: a223baa7d1d1943fea5fef6a31cd256a, type: 3}
+  - {fileID: -4178734442398687955, guid: 586e06d698f5c4d45adf4cd4259e05f5, type: 3}
+  - {fileID: 6095333157509624677, guid: 625e3248d9da842e7b6e13378ee170c9, type: 3}
   positionList:
   - {fileID: 1057142685401538763}
   - {fileID: 9024863516956111449}

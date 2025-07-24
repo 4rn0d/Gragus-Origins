@@ -120,7 +120,11 @@ namespace Scripts
         public bool resistant = false;
         public bool powerful = false;
         public bool sticky = false;
-
+        
+        private void Start()
+        {
+            _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+        }
         void Awake()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();

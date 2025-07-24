@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1833120462876776993
+--- !u!1 &7538392950575837930
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 808886429261974685}
-  - component: {fileID: 7695540674568164882}
-  - component: {fileID: 4658047864355071735}
-  - component: {fileID: -4178734442398687955}
+  - component: {fileID: 6915324313810333158}
+  - component: {fileID: 707524934001669919}
+  - component: {fileID: 6221356071688393491}
+  - component: {fileID: 7024740969169147715}
   m_Layer: 5
-  m_Name: Resistence Spike
+  m_Name: Swiftness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &808886429261974685
+--- !u!224 &6915324313810333158
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1833120462876776993}
+  m_GameObject: {fileID: 7538392950575837930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.91, y: -6.52}
-  m_SizeDelta: {x: 24, y: 32}
+  m_AnchoredPosition: {x: 0.37, y: -6.52}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &7695540674568164882
+--- !u!222 &707524934001669919
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1833120462876776993}
+  m_GameObject: {fileID: 7538392950575837930}
   m_CullTransparentMesh: 1
---- !u!114 &4658047864355071735
+--- !u!114 &6221356071688393491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1833120462876776993}
+  m_GameObject: {fileID: 7538392950575837930}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1296930985478124889, guid: 9cfbead9a13e04d82b0b9997cf5936cf, type: 3}
+  m_Sprite: {fileID: 4283414626145635148, guid: c6dccccb93058479e9f0ad0e559f5290, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76,23 +76,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-4178734442398687955
+--- !u!114 &7024740969169147715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1833120462876776993}
+  m_GameObject: {fileID: 7538392950575837930}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d015ff32e4094337a06a98712d920a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcoholEffect: 2
-  fullBottle: {fileID: 21300000, guid: 5435da9fe6f0749f78154aceda1f33e0, type: 2}
-  halfBottle: {fileID: 21300000, guid: c37abdc604a4f417980e367edfca443a, type: 2}
-  emptyBottle: {fileID: 21300000, guid: 0b842b3afbdce443b97ca0ebbd799861, type: 2}
-  activatedBottle: {fileID: 21300000, guid: b773441222e42403fab3ac32896467c3, type: 2}
-  effectBottle: {fileID: 21300000, guid: edd24646ed9604b63828d34faf9c36a2, type: 2}
-  brokenBottle: {fileID: 21300000, guid: a088f8f7eff0342279c66e146bc71355, type: 2}
+  alcoholEffect: 0
+  fullBottle: {fileID: 21300000, guid: 8434d5b7868dc4ac68408d4f58469e83, type: 2}
+  halfBottle: {fileID: 21300000, guid: c0446422f024d4e4cabfbbf84478ae5c, type: 2}
+  emptyBottle: {fileID: 21300000, guid: 2ae1f087d9ddd4ed9a8475ab9b16a093, type: 2}
+  activatedBottle: {fileID: 21300000, guid: d94dcc82c24bc405190bd174b52d7680, type: 2}
+  effectBottle: {fileID: 21300000, guid: e75d65cbe75e2492e9cb7f9331391d14, type: 2}
+  brokenBottle: {fileID: 21300000, guid: 4a04857f9745643e59b543388ee34867, type: 2}
   cooldown: 5
