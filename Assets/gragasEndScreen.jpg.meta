@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      gragasEndScreen_0: 5219506004482258206
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
