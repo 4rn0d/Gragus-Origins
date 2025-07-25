@@ -49,6 +49,8 @@ namespace Scripts
 
         public void ToMenu()
         {
+            GameObject obj = GameObject.Find("Gragus(Clone)");
+            Destroy(obj);
             Debug.Log("Going to Main Menu");
             SceneManager.LoadScene("MainMenu");
             ResumeGame();
