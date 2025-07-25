@@ -10,8 +10,8 @@ namespace Map
         {
             if (other.CompareTag("Player"))
             {
-                SceneManager.LoadScene("MainMenu");
                 Destroy(other.gameObject);
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }

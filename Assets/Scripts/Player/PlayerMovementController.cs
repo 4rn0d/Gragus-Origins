@@ -322,7 +322,7 @@ namespace Scripts
             animator.SetBool(IsDashing, false);
             _horizontal = _rawHorizontalInput;
             _isDashing = false;
-            global::Health.Health playerHealth = GetComponent<global::Health.Health>();
+            global::Health.PlayerHealth playerHealth = GetComponent<global::Health.PlayerHealth>();
 
             if (playerHealth != null)
             {
@@ -419,7 +419,7 @@ namespace Scripts
                 animator.SetBool(IsDashing, true);
                 _isDashing = true;
 
-                global::Health.Health playerHealth = GetComponent<global::Health.Health>();
+                PlayerHealth playerHealth = GetComponent<PlayerHealth>();
 
                 if (playerHealth != null)
                 {

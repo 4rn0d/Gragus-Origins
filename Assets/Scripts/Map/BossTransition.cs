@@ -9,7 +9,6 @@ namespace Map
         {
             if (other.CompareTag("Player"))
             {
-                Destroy(other.gameObject);
                 SceneManager.LoadScene("POC_FinalBoss");
             }
         }
