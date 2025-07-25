@@ -71,6 +71,9 @@ namespace Scripts
         [SerializeField] float explosionCooldown = 2f;
         [SerializeField] float explosionForce = 10f;
         [SerializeField] float throwAlcoholCost = 1f;
+        [SerializeField] float barrelCooldown = 1f;
+        private float _barrelCooldownTimer;
+        private bool _isBarrelOnCooldown;
         private float _throwTimer;
         private float _explosionTimer;
         private bool _canThrow = true;
@@ -123,11 +126,12 @@ namespace Scripts
         public bool resistant = false;
         public bool powerful = false;
         public bool sticky = false;
-        
+
         private void Start()
         {
             _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
         }
+
         void Awake()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -153,11 +157,28 @@ namespace Scripts
 
         private void Update()
         {
-            if (!isOnCooldown) return;
-            _cooldownTimer -= Time.deltaTime;
-            if (_cooldownTimer <= 0)
+            //Alcohol
+            if (isOnCooldown)
             {
-                isOnCooldown = false;
+                _cooldownTimer -= Time.deltaTime;
+
+                if (_cooldownTimer <= 0)
+                {
+                    isOnCooldown = false;
+                }
+            }
+
+            //Barrel
+            if (_isBarrelOnCooldown)
+            {
+                _barrelCooldownTimer -= Time.deltaTime;
+
+                if (_barrelCooldownTimer <= 0)
+                {
+                    _isBarrelOnCooldown = false;
+                    _canThrow = true;
+                    Debug.Log("Barrel cooldown stopped");
+                }
             }
 
             _justBounced = false;
@@ -179,7 +200,8 @@ namespace Scripts
                 {
                     _barrel.ExplodeBarrel(this);
                     _barrel = null;
-                    _canThrow = true;
+                    //_canThrow = true;
+                    StartBarrelCooldown(barrelCooldown);
                 }
             }
         }
@@ -244,11 +266,12 @@ namespace Scripts
                 EndDash();
             }
         }
-        
+
         private void UpdateWallCoyoteTime()
         {
             float direction = _isDashing ? _dashDirection : Mathf.Sign(_horizontal);
-            RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, Vector2.right * direction, wallRayLength, wallLayer);
+            RaycastHit2D hit =
+                Physics2D.Raycast(wallCheck.position, Vector2.right * direction, wallRayLength, wallLayer);
 
             if (hit.collider != null)
             {
@@ -293,7 +316,7 @@ namespace Scripts
 
             animator.SetBool(IsDashing, false);
         }
-        
+
         private void EndDash()
         {
             animator.SetBool(IsDashing, false);
@@ -377,7 +400,7 @@ namespace Scripts
             if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0 && !animator.GetBool(IsDrinking))
             {
                 animator.SetBool(IsJumping, true);
-                
+
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             }
 
@@ -446,7 +469,8 @@ namespace Scripts
                 {
                     _barrel.ExplodeBarrel(this);
                     _barrel = null;
-                    _canThrow = true;
+                    StartBarrelCooldown(barrelCooldown);
+                    //_canThrow = true;
                 }
             }
         }
@@ -508,7 +532,12 @@ namespace Scripts
         private void EndBarrelAnim()
         {
             animator.SetBool(IsRolling, false);
-            SpawnBarrel();
+        }
+
+        public void StartBarrelCooldown(float cooldown)
+        {
+            _barrelCooldownTimer = cooldown;
+            _isBarrelOnCooldown = true;
         }
 
         private void EndDrinkingAnim()
