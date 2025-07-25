@@ -17,7 +17,7 @@ public class MeleeDamage : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         var controller = other.GetComponent<Scripts.PlayerController>();
-        var playerHealth = other.GetComponent<Health.Health>();
+        var playerHealth = other.GetComponent<Health.PlayerHealth>();
 
         if (controller != null && playerHealth != null)
         {
@@ -25,9 +25,8 @@ public class MeleeDamage : MonoBehaviour
             {
                 GetComponent<MeleeDamage>().enabled = false;
                 StartCoroutine(ReenableDamage());
-
-                // ✅ Player is dashing → only damage enemy
-                var enemyHealth = GetComponent<Health.Health>();
+                
+                var enemyHealth = GetComponent<Health.EnemyHealth>();
                 if (enemyHealth != null)
                 {
                     SoundFXManager.instance.PlaySoundFXClip(dashDamageSound, transform, 1f);
@@ -37,7 +36,6 @@ public class MeleeDamage : MonoBehaviour
             }
             else
             {
-                // ❌ Player is not dashing → damage player (if not invulnerable)
                 if (!playerHealth.invulnerable)
                 {
                     playerHealth.TakeDamage(damageToPlayer);
@@ -51,8 +49,7 @@ public class MeleeDamage : MonoBehaviour
             }
         }
     }
-
-    // ReSharper disable Unity.PerformanceAnalysis
+    
     private IEnumerator ReenableDamage()
     {
         yield return new WaitForSeconds(0.1f);

@@ -7,7 +7,7 @@ namespace Health
     public abstract class BaseHealth : MonoBehaviour
     {
         [Header("Health")]
-        [SerializeField] protected float startingHealth = 100f;
+        [SerializeField] public float startingHealth = 100f;
         [Header("Events")]
         public float currentHealth { get; protected set; }
         public bool dead { get; protected set; }

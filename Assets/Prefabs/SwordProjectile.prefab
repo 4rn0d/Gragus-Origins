@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8246844062686773837}
   - component: {fileID: 1221236968769193723}
   - component: {fileID: 1865168327707885485}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SwordProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2908619295291825319, guid: eecbebfbb9dee47c4a432b9983f459ac, type: 3}
+  m_Sprite: {fileID: -5728808486894909569, guid: eecbebfbb9dee47c4a432b9983f459ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -169,7 +169,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.625, y: 1.5}
+    oldSize: {x: 1.0625, y: 1.75}
     newSize: {x: 1.625, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

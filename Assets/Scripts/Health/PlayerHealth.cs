@@ -16,7 +16,7 @@ namespace Health
         [Header("Components")]
         [SerializeField] private Behaviour[] componentsToDisable;
         private Image _healthBar;
-        public bool invulnerable { get; private set; }
+        public bool invulnerable { get; set; }
 
         protected override void Awake()
         {
