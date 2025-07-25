@@ -459,6 +459,8 @@ MonoBehaviour:
   bounceHorizontalForce: 5
   bounceInputLockDuration: 0.6
   dashSound: {fileID: 8300000, guid: 5eecc81a7d7964d0f97ce411bdaf6078, type: 3}
+  wallRayLength: 1.3
+  maxWallCoyoteTime: 1.5
   barrelPrefab: {fileID: 5130933438599435640, guid: a80402e10d05e5948b163dfcee01ac3a, type: 3}
   launchOffset: {fileID: 8630630076342250254}
   throwDistance: 0.4
@@ -466,6 +468,7 @@ MonoBehaviour:
   explosionCooldown: 4
   explosionForce: 7
   throwAlcoholCost: 1
+  barrelCooldown: 1.2
   fallAirControlMinMultiplier: 0.4
   fallAirControlMaxMultiplier: 1
   fallSpeedForMinControl: -2
@@ -485,6 +488,8 @@ MonoBehaviour:
   health: {fileID: 0}
   healOnBarrel: 0
   resistant: 0
+  powerful: 0
+  sticky: 0
 --- !u!95 &8267062349567699985
 Animator:
   serializedVersion: 7
