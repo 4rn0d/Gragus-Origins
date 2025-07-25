@@ -17,6 +17,14 @@ namespace Player
             PlayerPrefs.Save();
         }
 
+        public static void ResetPotionSlots()
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                PlayerPrefs.SetInt(GetPotionSlotKey(i), 0);
+            }
+        }
+
     }
 
 }

@@ -1,3 +1,4 @@
+using Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,6 +36,11 @@ namespace Scripts
         {
             Debug.Log("Quit Game");
             Application.Quit();
+        }
+
+        public void ResetProgress()
+        {
+            SaveManager.ResetPotionSlots();
         }
         
     }
