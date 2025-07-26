@@ -42,6 +42,8 @@ public partial class GarenRangeAttackAction : Action
             Debug.LogWarning("[GarenRangeAttack] Missing references.");
             return Status.Failure;
         }
+        
+        _garenTransform = Garen.Value.transform;
         _waveTimer = 0f;
         _wavesSpawned = 0;
 
@@ -70,7 +72,7 @@ public partial class GarenRangeAttackAction : Action
     {
         foreach (var dir in Directions)
         {
-            GameObject sword = UnityEngine.Object.Instantiate(Sword.Value, _garenTransform.position, Quaternion.identity);
+            GameObject sword = GameObject.Instantiate(Sword.Value, _garenTransform.position, Quaternion.identity);
             var rb = sword.GetComponent<Rigidbody2D>();
             if (rb != null)
                 rb.linearVelocity = dir * swordSpeed;
