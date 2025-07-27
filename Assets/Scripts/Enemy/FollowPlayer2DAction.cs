@@ -1,84 +1,92 @@
 using System;
 using Unity.Behavior;
-using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 
 namespace Enemy
 {
-    [Serializable, GeneratePropertyBag]
-    [NodeDescription(name: "Follow Player 2D", story: "Moves the enemy towards the player if in range.", category: "Action", id: "4227d1b9729241013dcce6ee6b15f460")]
-    public partial class FollowPlayer2DAction : Action
+    [Serializable]
+    public class FollowPlayer2DAction : Action
     {
-
         [SerializeReference] public BlackboardVariable<GameObject> Enemy;
         [SerializeReference] public BlackboardVariable<GameObject> Player;
         [SerializeReference] private SlowableEnemy slowable;
-        [SerializeReference] public BlackboardVariable<float> StopRange = new(0.5f); // How close before stopping
+        [SerializeReference] public BlackboardVariable<float> StopRange = new(0.5f);
         [SerializeReference] public BlackboardVariable<float> MaxChaseRange = new(10f);
 
-        
         private Transform _enemyTransform;
         private Vector3 _initScale;
+        private Rigidbody2D _rb;
+        private LedgeDetector _ledgeDetector;
 
         protected override Status OnStart()
         {
-            slowable = Enemy.Value.GetComponent<SlowableEnemy>();
-            if (Enemy?.Value == null || Player?.Value == null)
-                return Status.Failure;
+            if (Enemy?.Value == null || Player?.Value == null) return Status.Failure;
 
             _enemyTransform = Enemy.Value.transform;
             _initScale = _enemyTransform.localScale;
+            _rb = Enemy.Value.GetComponent<Rigidbody2D>();
+            slowable = Enemy.Value.GetComponent<SlowableEnemy>();
+            _ledgeDetector = Enemy.Value.GetComponent<LedgeDetector>();
 
             return Status.Running;
         }
 
         protected override Status OnUpdate()
         {
-            if (_enemyTransform == null || Player?.Value == null)
-                return Status.Failure;
+            if (_enemyTransform == null || Player?.Value == null) return Status.Failure;
 
             Vector2 playerPos = Player.Value.transform.position;
             Vector2 enemyPos = _enemyTransform.position;
-
             float distance = Vector2.Distance(playerPos, enemyPos);
 
-            // Stop chasing if player is out of range
-            if (distance > MaxChaseRange.Value) // <-- adjust this multiplier if needed
+            if (distance > MaxChaseRange.Value)
             {
-                Debug.Log("[Follow2D] Player out of chase range — stop chasing.");
+                Debug.Log("[Follow2D] Player out of chase range.");
                 return Status.Failure;
             }
 
-            // Stop if already very close to the player
             if (distance <= StopRange.Value)
             {
-                Debug.Log("[Follow2D] Reached player — stop moving.");
+                Debug.Log("[Follow2D] Reached player.");
                 return Status.Success;
             }
 
-            // Continue following
             Vector2 direction = (playerPos - enemyPos).normalized;
+            float dir = Mathf.Sign(direction.x);
             float moveSpeed = slowable != null ? slowable.CurrentSpeed : 3f;
+
+            if (_ledgeDetector != null)
+            {
+                if (_ledgeDetector.IsWallAhead(dir))
+                {
+                    if (_ledgeDetector.CanJumpOverObstacle(dir))
+                    {
+                        Debug.Log("[Follow2D] Jumping over wall.");
+                        _ledgeDetector.Jump();
+                    }
+                    else
+                    {
+                        Debug.Log("[Follow2D] Wall ahead and can’t jump — stopping.");
+                        return Status.Failure;
+                    }
+                }
+
+                if (_ledgeDetector.IsLedgeAhead(dir))
+                {
+                    Debug.Log("[Follow2D] Ledge ahead — stopping.");
+                    return Status.Failure;
+                }
+            }
+
             _enemyTransform.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
 
-            // Flip sprite
             if (direction.x != 0)
             {
-                _enemyTransform.localScale = new Vector3(
-                    Mathf.Sign(direction.x) * Mathf.Abs(_initScale.x),
-                    _initScale.y,
-                    _initScale.z
-                );
+                _enemyTransform.localScale = new Vector3(Mathf.Sign(direction.x) * Mathf.Abs(_initScale.x), _initScale.y, _initScale.z);
             }
 
             return Status.Running;
         }
-
-
-        protected override void OnEnd()
-        {
-        }
     }
 }
-
