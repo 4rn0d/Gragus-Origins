@@ -10593,7 +10593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaaa316f5b8d4c0bbadfa3c04f5dcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 6
+  bounceForce: 8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
