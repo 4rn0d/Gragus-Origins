@@ -55,24 +55,24 @@ namespace Enemy
         {
             if (_agent == null || Waypoints?.Value == null || Waypoints.Value.Count == 0 || Player?.Value == null)
                 return Status.Failure;
-
+        
             float playerDistance = Vector2.Distance(_agent.position, Player.Value.transform.position);
             if (playerDistance <= PlayerRange.Value && HasLineOfSightToPlayer(_agent.position, Player.Value.transform.position))
             {
                 Debug.Log("[Patrol2D] Player in range and visible — stop patrolling.");
                 return Status.Failure;
             }
-
+        
             Vector2 currentTarget = new Vector2(Waypoints.Value[_currentPoint].transform.position.x, _agent.position.y);
             Vector2 agentPos = _agent.position;
             float distance = Vector2.Distance(agentPos, currentTarget);
             float dir = Mathf.Sign(currentTarget.x - agentPos.x);
-
+        
             if (_ledgeDetector != null)
             {
                 if (_ledgeDetector.IsWallAhead(dir))
                 {
-                    if (_ledgeDetector.CanJumpOverObstacle(dir))
+                    if (_ledgeDetector.IsGrounded() && _ledgeDetector.CanJumpOverObstacle(dir))
                     {
                         _ledgeDetector.Jump();
                         Debug.Log("[Patrol2D] Jumping over obstacle.");
@@ -86,12 +86,19 @@ namespace Enemy
                 }
                 else if (_ledgeDetector.IsLedgeAhead(dir))
                 {
-                    Debug.Log("[Patrol2D] Ledge ahead — turning back.");
-                    AdvanceToNextWaypoint();
-                    return Status.Running;
+                    if (_ledgeDetector.CanDropFromLedge(dir))
+                    {
+                        Debug.Log("[Patrol2D] Dropping from ledge.");
+                    }
+                    else
+                    {
+                        Debug.Log("[Patrol2D] Ledge ahead — turning back.");
+                        AdvanceToNextWaypoint();
+                        return Status.Running;
+                    }
                 }
             }
-
+        
             if (_waiting)
             {
                 _waitTimer -= Time.deltaTime;
@@ -111,15 +118,19 @@ namespace Enemy
                 Vector2 direction = (currentTarget - agentPos).normalized;
                 float moveSpeed = slowable != null ? slowable.CurrentSpeed : 2f;
                 _agent.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
-
+                if (_rb != null && Mathf.Abs(_rb.linearVelocity.y) > 0.1f)
+                {
+                    return Status.Running;
+                }
                 if (direction.x != 0)
                 {
                     _agent.localScale = new Vector3(Mathf.Sign(direction.x) * Mathf.Abs(_initScale.x), _initScale.y, _initScale.z);
                 }
             }
-
+        
             return Status.Running;
         }
+
 
         private void AdvanceToNextWaypoint()
         {
@@ -136,7 +147,7 @@ namespace Enemy
         {
             Vector2 direction = (to - from).normalized;
             float distance = Vector2.Distance(from, to);
-            int mask = (1 << 6) | (1 << 7) | (1 << 13); // Example: Ground, Wall, Map
+            int mask = (1 << 6) | (1 << 7) | (1 << 13);
 
             RaycastHit2D hit = Physics2D.Raycast(from, direction, distance, mask);
             if (hit.collider != null)

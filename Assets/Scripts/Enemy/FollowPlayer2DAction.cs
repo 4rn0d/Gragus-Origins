@@ -60,7 +60,7 @@ namespace Enemy
             {
                 if (_ledgeDetector.IsWallAhead(dir))
                 {
-                    if (_ledgeDetector.CanJumpOverObstacle(dir))
+                    if (_ledgeDetector.IsGrounded() && _ledgeDetector.CanJumpOverObstacle(dir))
                     {
                         Debug.Log("[Follow2D] Jumping over wall.");
                         _ledgeDetector.Jump();
@@ -71,14 +71,23 @@ namespace Enemy
                         return Status.Failure;
                     }
                 }
-
-                if (_ledgeDetector.IsLedgeAhead(dir))
+                else if (_ledgeDetector.IsLedgeAhead(dir))
                 {
-                    Debug.Log("[Follow2D] Ledge ahead — stopping.");
-                    return Status.Failure;
+                    if (_ledgeDetector.CanDropFromLedge(dir))
+                    {
+                        Debug.Log("[Follow2D] Dropping from ledge.");
+                    }
+                    else
+                    {
+                        Debug.Log("[Follow2D] Ledge ahead — stopping.");
+                        return Status.Failure;
+                    }
                 }
             }
-
+            if (_rb != null && Mathf.Abs(_rb.linearVelocity.y) > 0.1f)
+            {
+                return Status.Running;
+            }
             _enemyTransform.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
 
             if (direction.x != 0)
