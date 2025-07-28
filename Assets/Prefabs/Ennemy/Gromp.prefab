@@ -341,7 +341,7 @@ MonoBehaviour:
   groundCheckDistance: 1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 192
