@@ -60,6 +60,9 @@
                 if (playerDistance <= PlayerRange.Value && HasLineOfSightToPlayer(_agent.position, Player.Value.transform.position))
                 {
                     Debug.Log("[Patrol2D] Player in range and visible — stop patrolling.");
+                    if (_rb != null)
+                        _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+
                     return Status.Failure;
                 }
             
