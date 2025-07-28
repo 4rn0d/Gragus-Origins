@@ -9,7 +9,7 @@ namespace Map
         {
             if (other.CompareTag("Player"))
             {
-                SceneManager.LoadScene("POC_FinalBoss");
+                SceneManager.LoadScene("FinalBoss");
             }
         }
     }
