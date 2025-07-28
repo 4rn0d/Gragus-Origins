@@ -65,6 +65,6 @@ MonoBehaviour:
   - {fileID: 7764545210754260556, guid: 0e890464b5fcb51468f820028861f5c9, type: 3}
   normalRoomCount: 6
   specialRoomCount: 1
-  debug: 1
+  debug: 0
   seed: 0
   useRandomSeed: 1

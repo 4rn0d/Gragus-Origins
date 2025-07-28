@@ -31,7 +31,7 @@ namespace Enemy
         {
             shouldTurn = false;
 
-            float checkDistance = 0.6f;
+            float checkDistance = 0.8f;
 
             Vector2 feetOrigin = groundCheck.position + new Vector3(direction * 0.5f, 0.0f);
             Vector2 headOrigin = groundCheck.position + new Vector3(direction * 0.5f, 1.2f);
@@ -48,13 +48,11 @@ namespace Enemy
                 {
                     return true;
                 }
-                else if (hitHead.collider != null && IsGrounded())
+                if (hitHead.collider != null && IsGrounded())
                 {
                     shouldTurn = true;
-                    return false;
+                    
                 }
-
-                return false;
             }
 
             return false;
