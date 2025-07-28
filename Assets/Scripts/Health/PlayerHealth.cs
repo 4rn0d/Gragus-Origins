@@ -75,7 +75,7 @@ namespace Health
                 comp.enabled = false;
 
             Debug.Log("Player died");
-            SceneManager.LoadScene("POC_EcranFin");
+            SceneManager.LoadScene("EcranFin");
             Destroy(gameObject);
         }
         
