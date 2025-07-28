@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Behavior;
 using UnityEngine;
@@ -10,8 +9,7 @@ namespace Enemy
     [Serializable, Unity.Properties.GeneratePropertyBag]
     [NodeDescription(
         name: "Patrol 2D",
-        description:
-        "Moves a GameObject back and forth between waypoints using simple 2D transform movement. Returns Failure if Player is in range.",
+        description: "Moves a GameObject back and forth between waypoints using simple 2D transform movement. Returns Failure if Player is in range.",
         category: "Action/Navigation")]
     public class CustomPatrol2DAction : Action
     {
@@ -24,23 +22,25 @@ namespace Enemy
         [SerializeReference] public BlackboardVariable<float> DistanceThreshold = new(0.2f);
         [SerializeReference] public BlackboardVariable<bool> PreserveLatestPatrolPoint = new(false);
 
+        private LedgeDetector _ledgeDetector;
+        private Rigidbody2D _rb;
         private Transform _agent;
         private Vector3 _initScale;
         private int _currentPoint = 0;
         private float _waitTimer = 0f;
         private bool _waiting = false;
 
-        protected override Node.Status OnStart()
+        protected override Status OnStart()
         {
             if (Agent?.Value == null || Waypoints?.Value == null || Waypoints.Value.Count == 0 || Player?.Value == null)
-            {
                 return Status.Failure;
-            }
-            
-            slowable = Agent.Value.GetComponent<SlowableEnemy>();
 
             _agent = Agent.Value.transform;
             _initScale = _agent.localScale;
+
+            _ledgeDetector = Agent.Value.GetComponent<LedgeDetector>();
+            _rb = Agent.Value.GetComponent<Rigidbody2D>();
+            slowable = Agent.Value.GetComponent<SlowableEnemy>();
 
             if (!PreserveLatestPatrolPoint.Value)
                 _currentPoint = 0;
@@ -55,21 +55,50 @@ namespace Enemy
         {
             if (_agent == null || Waypoints?.Value == null || Waypoints.Value.Count == 0 || Player?.Value == null)
                 return Status.Failure;
-
-            // Check if Player is in range
+        
             float playerDistance = Vector2.Distance(_agent.position, Player.Value.transform.position);
-            
             if (playerDistance <= PlayerRange.Value && HasLineOfSightToPlayer(_agent.position, Player.Value.transform.position))
             {
                 Debug.Log("[Patrol2D] Player in range and visible — stop patrolling.");
                 return Status.Failure;
             }
-
-
-            Vector2 currentTarget = Waypoints.Value[_currentPoint].transform.position;
+        
+            Vector2 currentTarget = new Vector2(Waypoints.Value[_currentPoint].transform.position.x, _agent.position.y);
             Vector2 agentPos = _agent.position;
             float distance = Vector2.Distance(agentPos, currentTarget);
-
+            float dir = Mathf.Sign(currentTarget.x - agentPos.x);
+        
+            if (_ledgeDetector != null)
+            {
+                if (_ledgeDetector.IsWallAhead(dir))
+                {
+                    if (_ledgeDetector.IsGrounded() && _ledgeDetector.CanJumpOverObstacle(dir))
+                    {
+                        _ledgeDetector.Jump();
+                        Debug.Log("[Patrol2D] Jumping over obstacle.");
+                    }
+                    else
+                    {
+                        Debug.Log("[Patrol2D] Wall ahead — turning back.");
+                        AdvanceToNextWaypoint();
+                    }
+                    return Status.Running;
+                }
+                else if (_ledgeDetector.IsLedgeAhead(dir))
+                {
+                    if (_ledgeDetector.CanDropFromLedge(dir))
+                    {
+                        Debug.Log("[Patrol2D] Dropping from ledge.");
+                    }
+                    else
+                    {
+                        Debug.Log("[Patrol2D] Ledge ahead — turning back.");
+                        AdvanceToNextWaypoint();
+                        return Status.Running;
+                    }
+                }
+            }
+        
             if (_waiting)
             {
                 _waitTimer -= Time.deltaTime;
@@ -89,20 +118,19 @@ namespace Enemy
                 Vector2 direction = (currentTarget - agentPos).normalized;
                 float moveSpeed = slowable != null ? slowable.CurrentSpeed : 2f;
                 _agent.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
-
-                // Flip sprite based on direction
+                if (_rb != null && Mathf.Abs(_rb.linearVelocity.y) > 0.1f)
+                {
+                    return Status.Running;
+                }
                 if (direction.x != 0)
                 {
-                    _agent.localScale = new Vector3(
-                        Mathf.Sign(direction.x) * Mathf.Abs(_initScale.x),
-                        _initScale.y,
-                        _initScale.z
-                    );
+                    _agent.localScale = new Vector3(Mathf.Sign(direction.x) * Mathf.Abs(_initScale.x), _initScale.y, _initScale.z);
                 }
             }
-
+        
             return Status.Running;
         }
+
 
         private void AdvanceToNextWaypoint()
         {
@@ -114,26 +142,22 @@ namespace Enemy
             _waitTimer = 0f;
             _waiting = false;
         }
-        
+
         private bool HasLineOfSightToPlayer(Vector2 from, Vector2 to)
         {
             Vector2 direction = (to - from).normalized;
             float distance = Vector2.Distance(from, to);
-    
-            int mask = (1 << 6) | (1 << 7) | (1 << 13); // Ground, Wall, Map layers
+            int mask = (1 << 6) | (1 << 7) | (1 << 13);
 
             RaycastHit2D hit = Physics2D.Raycast(from, direction, distance, mask);
-
             if (hit.collider != null)
             {
-                int hitLayer = hit.collider.gameObject.layer;
-                Debug.Log($"[Patrol2D] LOS blocked by {hit.collider.name} on layer {LayerMask.LayerToName(hitLayer)}");
+                Debug.Log($"[Patrol2D] LOS blocked by {hit.collider.name}");
                 return false;
             }
 
-            Debug.DrawLine(from, to, Color.green); // helpful visual in Scene view
+            Debug.DrawLine(from, to, Color.green);
             return true;
         }
-
     }
 }
