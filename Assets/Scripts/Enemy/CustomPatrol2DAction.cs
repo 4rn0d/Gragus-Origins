@@ -60,9 +60,10 @@
                 if (playerDistance <= PlayerRange.Value && HasLineOfSightToPlayer(_agent.position, Player.Value.transform.position))
                 {
                     Debug.Log("[Patrol2D] Player in range and visible — stop patrolling.");
+            
                     if (_rb != null)
                         _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
-
+            
                     return Status.Failure;
                 }
             
@@ -72,13 +73,43 @@
                 float dir = Mathf.Sign(currentTarget.x - agentPos.x);
                 float moveSpeed = slowable != null ? slowable.CurrentSpeed : 2f;
             
+                // Stop while waiting
+                if (_waiting)
+                {
+                    _waitTimer -= Time.deltaTime;
+            
+                    if (_rb != null)
+                        _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+            
+                    if (_waitTimer <= 0f)
+                    {
+                        _waiting = false;
+                        AdvanceToNextWaypoint();
+                    }
+            
+                    return Status.Running;
+                }
+            
+                // Reached waypoint
+                if (distance <= DistanceThreshold.Value)
+                {
+                    _waiting = true;
+                    _waitTimer = WaypointWaitTime.Value;
+            
+                    if (_rb != null)
+                        _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+            
+                    return Status.Running;
+                }
+            
+                // Regular movement
                 if (_ledgeDetector != null)
                 {
                     bool shouldTurn;
                     if (_ledgeDetector.ShouldJumpOrTurn(dir, out shouldTurn))
                     {
                         Debug.Log("[Patrol2D] Jumping over obstacle.");
-                        _ledgeDetector.Jump();
+                        _ledgeDetector.Jump(); // Jump forward
                     }
                     else if (shouldTurn)
                     {
@@ -101,32 +132,16 @@
                     }
                 }
             
-                if (_waiting)
+                Vector2 moveDir = new Vector2(dir, 0);
+                Vector2 velocity = _rb.linearVelocity;
+                velocity.x = moveDir.x * moveSpeed;
+                _rb.linearVelocity = velocity;
+            
+                if (dir != 0)
                 {
-                    _waitTimer -= Time.deltaTime;
-                    if (_waitTimer <= 0f)
-                    {
-                        _waiting = false;
-                        AdvanceToNextWaypoint();
-                    }
+                    _agent.localScale = new Vector3(dir * Mathf.Abs(_initScale.x), _initScale.y, _initScale.z);
                 }
-                else if (distance <= DistanceThreshold.Value)
-                {
-                    _waiting = true;
-                    _waitTimer = WaypointWaitTime.Value;
-                }
-                else
-                {
-                    Vector2 moveDir = new Vector2(dir, 0);
-                    Vector2 velocity = _rb.linearVelocity;
-                    velocity.x = moveDir.x * moveSpeed;
-                    _rb.linearVelocity = velocity;
-
-                    if (dir != 0)
-                    {
-                        _agent.localScale = new Vector3(dir * Mathf.Abs(_initScale.x), _initScale.y, _initScale.z);
-                    }
-                }
+            
                 return Status.Running;
             }
 
