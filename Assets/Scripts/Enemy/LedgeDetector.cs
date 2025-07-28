@@ -21,64 +21,72 @@ namespace Enemy
         {
             Vector2 origin = groundCheck.position + Vector3.right * direction * 0.5f;
             float rayLength = groundCheckDistance + 0.1f;
-            Debug.DrawRay(origin, Vector2.down * rayLength, Color.red);
-            return !Physics2D.Raycast(origin, Vector2.down, rayLength, groundLayer);
+
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, rayLength, groundLayer);
+            Debug.DrawRay(origin, Vector2.down * rayLength, hit.collider ? Color.green : Color.red);
+
+            return !hit.collider;
         }
-
-
-        public bool IsWallAhead(float direction)
+        public bool ShouldJumpOrTurn(float direction, out bool shouldTurn)
         {
-            Vector2 offsetOrigin = groundCheck.position + Vector3.right * direction * 0.4f;
-            Debug.DrawRay(offsetOrigin, Vector2.right * direction * wallCheckDistance, Color.yellow);
-            return Physics2D.Raycast(offsetOrigin, Vector2.right * direction, wallCheckDistance, obstacleLayer);
-        }
+            shouldTurn = false;
 
-        public bool CanJumpOverObstacle(float direction)
-        {
-            if (Time.time - lastJumpTime < jumpCooldown)
+            float checkDistance = 0.6f;
+
+            Vector2 feetOrigin = groundCheck.position + new Vector3(direction * 0.5f, 0.0f);
+            Vector2 headOrigin = groundCheck.position + new Vector3(direction * 0.5f, 1.2f);
+
+            RaycastHit2D hitFeet = Physics2D.Raycast(feetOrigin, Vector2.right * direction, checkDistance, obstacleLayer);
+            RaycastHit2D hitHead = Physics2D.Raycast(headOrigin, Vector2.right * direction, checkDistance, obstacleLayer);
+
+            Debug.DrawRay(feetOrigin, Vector2.right * direction * checkDistance, hitFeet.collider ? Color.magenta : Color.green);
+            Debug.DrawRay(headOrigin, Vector2.right * direction * checkDistance, hitHead.collider ? Color.red : Color.cyan);
+
+            if (hitFeet.collider != null)
+            {
+                if (hitHead.collider == null && IsGrounded())
+                {
+                    return true;
+                }
+                else if (hitHead.collider != null && IsGrounded())
+                {
+                    shouldTurn = true;
+                    return false;
+                }
+
                 return false;
+            }
 
-            float wallOffset = 0.6f;
-            float ledgeOffset = 1.2f;
-
-            Vector2 wallOrigin = groundCheck.position + Vector3.right * direction * wallOffset;
-            Vector2 ledgeOrigin = wallOrigin + Vector2.right * direction * ledgeOffset;
-
-            bool wallDetected = Physics2D.Raycast(wallOrigin, Vector2.right * direction, wallCheckDistance, obstacleLayer);
-            bool groundAfterWall = Physics2D.Raycast(ledgeOrigin, Vector2.down, groundCheckDistance, groundLayer);
-
-            Debug.DrawRay(wallOrigin, Vector2.right * direction * wallCheckDistance, wallDetected ? Color.red : Color.gray);
-            Debug.DrawRay(ledgeOrigin, Vector2.down * groundCheckDistance, groundAfterWall ? Color.green : Color.yellow);
-
-            return wallDetected && groundAfterWall;
+            return false;
         }
 
-        
+        public void Jump()
+        {
+            if (rb != null && IsGrounded())
+            {
+                Vector2 velocity = rb.linearVelocity;
+                velocity.y = jumpForce;
+                rb.linearVelocity = velocity;
+            }
+        }
         public bool CanDropFromLedge(float direction)
         {
             Vector2 origin = groundCheck.position + Vector3.right * direction * 0.5f;
             float dropDistance = groundCheckDistance + 0.5f;
-    
+
             RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, dropDistance, groundLayer);
-            Debug.DrawRay(origin, Vector2.down * dropDistance, hit.collider != null ? Color.green : Color.yellow);
-            
+            Debug.DrawRay(origin, Vector2.down * dropDistance, hit.collider ? Color.cyan : Color.magenta);
+
             return hit.collider != null;
         }
 
-
-        public void Jump()
+        public bool IsGrounded()
         {
-            lastJumpTime = Time.time;
-            if (rb != null)
-            {
-                Debug.Log("[Jump] Jumping!");
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            }
-            else
-            {
-                Debug.LogWarning("[Jump] Rigidbody is missing!");
-            }
+            float checkDistance = 0.1f;
+            RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, checkDistance, groundLayer);
+            Debug.DrawRay(groundCheck.position, Vector2.down * checkDistance, hit.collider ? Color.green : Color.red);
+
+            return hit.collider;
         }
 
         private void OnDrawGizmosSelected()
@@ -88,20 +96,10 @@ namespace Enemy
             Gizmos.color = Color.red;
             Gizmos.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundCheckDistance);
 
-            Vector3 forwardOffset = Vector3.right * 0.5f;
+            Vector3 offset = Vector3.right * 0.5f;
             Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(groundCheck.position + forwardOffset, groundCheck.position + forwardOffset + Vector3.down * groundCheckDistance);
-            Gizmos.DrawLine(groundCheck.position - forwardOffset, groundCheck.position - forwardOffset + Vector3.down * groundCheckDistance);
+            Gizmos.DrawLine(groundCheck.position + offset, groundCheck.position + offset + Vector3.down * groundCheckDistance);
+            Gizmos.DrawLine(groundCheck.position - offset, groundCheck.position - offset + Vector3.down * groundCheckDistance);
         }
-        public bool IsGrounded()
-        {
-            float checkDistance = 0.1f;
-            RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, checkDistance, groundLayer);
-
-            Debug.DrawRay(groundCheck.position, Vector2.down * checkDistance, hit.collider != null ? Color.green : Color.red);
-
-            return hit.collider != null;
-        }
-
     }
 }

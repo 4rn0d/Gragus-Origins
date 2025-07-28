@@ -344,9 +344,9 @@ MonoBehaviour:
     m_Bits: 64
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   rb: {fileID: 3076399411374709272}
-  jumpForce: 7
+  jumpForce: 5
   wallCheckDistance: 0.5
   jumpCooldown: 1
 --- !u!1 &1054648911276103854
@@ -471,7 +471,7 @@ Transform:
   m_GameObject: {fileID: 6607779979924177856}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: -7.62, z: 0}
+  m_LocalPosition: {x: 1.3, y: -7.9, z: 0}
   m_LocalScale: {x: 16.666668, y: 11.6, z: 16.666668}
   m_ConstrainProportionsScale: 0
   m_Children: []

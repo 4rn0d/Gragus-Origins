@@ -55,21 +55,19 @@ namespace Enemy
             Vector2 direction = (playerPos - enemyPos).normalized;
             float dir = Mathf.Sign(direction.x);
             float moveSpeed = slowable != null ? slowable.CurrentSpeed : 3f;
-
+            
             if (_ledgeDetector != null)
             {
-                if (_ledgeDetector.IsWallAhead(dir))
+                bool shouldTurn;
+                if (_ledgeDetector.ShouldJumpOrTurn(dir, out shouldTurn))
                 {
-                    if (_ledgeDetector.IsGrounded() && _ledgeDetector.CanJumpOverObstacle(dir))
-                    {
-                        Debug.Log("[Follow2D] Jumping over wall.");
-                        _ledgeDetector.Jump();
-                    }
-                    else
-                    {
-                        Debug.Log("[Follow2D] Wall ahead and can’t jump — stopping.");
-                        return Status.Failure;
-                    }
+                    Debug.Log("[Follow2D] Jumping over obstacle.");
+                    _ledgeDetector.Jump();
+                }
+                else if (shouldTurn)
+                {
+                    Debug.Log("[Follow2D] Wall too tall — stopping follow.");
+                    return Status.Failure;
                 }
                 else if (_ledgeDetector.IsLedgeAhead(dir))
                 {
@@ -79,20 +77,20 @@ namespace Enemy
                     }
                     else
                     {
-                        Debug.Log("[Follow2D] Ledge ahead — stopping.");
+                        Debug.Log("[Follow2D] Ledge ahead — stopping follow.");
                         return Status.Failure;
                     }
                 }
             }
-            if (_rb != null && Mathf.Abs(_rb.linearVelocity.y) > 0.1f)
+            
+            if (_rb != null && Mathf.Abs(_rb.linearVelocity.y) < 0.1f)
             {
-                return Status.Running;
+                _rb.linearVelocity = new Vector2(dir * moveSpeed, _rb.linearVelocity.y);
             }
-            _enemyTransform.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
-
-            if (direction.x != 0)
+            
+            if (dir != 0)
             {
-                _enemyTransform.localScale = new Vector3(Mathf.Sign(direction.x) * Mathf.Abs(_initScale.x), _initScale.y, _initScale.z);
+                _enemyTransform.localScale = new Vector3(dir * Mathf.Abs(_initScale.x), _initScale.y, _initScale.z);
             }
 
             return Status.Running;
