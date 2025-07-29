@@ -127,6 +127,8 @@ namespace Scripts
         public bool powerful = false;
         public bool sticky = false;
 
+        public int grapes = 0;
+
         private void Start()
         {
             _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
@@ -617,6 +619,16 @@ namespace Scripts
         public List<Alcohol> GetPotions()
         {
             return _alcoholCarousel.GetAllAlcohols();
+        }
+
+        public void addGrape()
+        {
+            grapes += 1;
+            if (grapes == 20)
+            {
+                grapes = 0;
+                RefillAlcohol(20);
+            }
         }
     }
 }
