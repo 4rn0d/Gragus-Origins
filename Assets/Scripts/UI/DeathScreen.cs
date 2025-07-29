@@ -9,13 +9,13 @@ namespace Scripts
         
         public void PlayAgain()
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene("ProceduralyGeneratedMap");
         }
         
         public void QuitGame()
         {
             Debug.Log("Go back to main menu");
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("MainMenu");
         }
         
     }

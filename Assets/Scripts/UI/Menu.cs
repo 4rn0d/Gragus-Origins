@@ -26,10 +26,19 @@ namespace Scripts
             }
         }
         
-        public void PlayGame()
+        public void PlayNormal()
         {
-            Debug.Log(SceneManager.GetActiveScene().buildIndex);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("ProceduralyGeneratedMap");
+        }
+        
+        public void PlayTuto()
+        {
+            SceneManager.LoadScene("Tuto");
+        }
+        
+        public void PlayBoss()
+        {
+            SceneManager.LoadScene("FinalBoss");
         }
         
         public void QuitGame()

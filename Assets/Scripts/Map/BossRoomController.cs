@@ -12,6 +12,7 @@ namespace Map
         public Transform playerSpawnPoint;
         public GameObject portalPrefab;
         public GameObject chestPrefab;
+        public GameObject playerPrefab;
         private BaseHealth _health;
         private bool done = false;
         private void Start()
@@ -21,6 +22,11 @@ namespace Map
             bossPrefab = boss;
             _health = boss.GetComponentInChildren<EnemyHealth>();
             GameObject obj = GameObject.Find("Gragus(Clone)");
+            
+            if (obj == null)
+            {
+                obj = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+            }
             PlayerController controller = obj.GetComponent<PlayerController>();
             controller.gameObject.transform.position = playerSpawnPoint.position;
         }
