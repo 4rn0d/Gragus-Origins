@@ -60,11 +60,12 @@ MonoBehaviour:
   - {fileID: 7764545210754260556, guid: c7baf59000b3f4448b4969f046b873a6, type: 3}
   - {fileID: 7764545210754260556, guid: 85b1c0f3bcfb35942a4f7c76a339c69e, type: 3}
   - {fileID: 7764545210754260556, guid: 7475ad9f66610fd49b5136f53d74fce4, type: 3}
+  - {fileID: 7764545210754260556, guid: d697138e836e1a4419b3fdae894e3ce8, type: 3}
   specialRooms:
   - {fileID: 7764545210754260556, guid: e8c724a8cd63e824fae80c38b03b3451, type: 3}
   - {fileID: 7764545210754260556, guid: efee46913c7fcbf469c653599184a7a8, type: 3}
   normalRoomCount: 6
   specialRoomCount: 1
-  debug: 0
+  debug: 1
   seed: 0
   useRandomSeed: 1
