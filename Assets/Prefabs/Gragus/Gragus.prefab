@@ -455,8 +455,8 @@ MonoBehaviour:
   dashSpeed: 7.5
   dashDuration: 0.4
   dashDecceleration: 0.4
-  bounceVerticalBoost: 5
-  bounceHorizontalForce: 5
+  bounceVerticalBoost: 6
+  bounceHorizontalForce: 3.5
   bounceInputLockDuration: 0.6
   dashSound: {fileID: 8300000, guid: 5eecc81a7d7964d0f97ce411bdaf6078, type: 3}
   wallRayLength: 1.3

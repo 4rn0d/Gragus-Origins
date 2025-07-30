@@ -52,7 +52,7 @@ namespace Map
             if (!debug)
             {
                 UpdatePlayerRoom();
-                UpdateActiveRooms(2);
+                UpdateActiveRooms(1);
             }
         }
         private void UpdatePlayerRoom()
