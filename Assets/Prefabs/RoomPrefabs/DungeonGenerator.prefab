@@ -50,7 +50,7 @@ MonoBehaviour:
   bossRoomDownPrefab: {fileID: 7764545210754260556, guid: a258540ebd579154b990bef297c8be36, type: 3}
   bossRoomLeftPrefab: {fileID: 7764545210754260556, guid: 700b1e4b32c8a9a4c912699e2b4cbc57, type: 3}
   bossRoomRightPrefab: {fileID: 7764545210754260556, guid: 3b53f2d8ccb96724892b907f578e9880, type: 3}
-  startRoomPrefab: {fileID: 7764545210754260556, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
+  startRoomPrefab: {fileID: 7764545210754260556, guid: e949830b959884c9c82fc46169fe3f8b, type: 3}
   finalRoomUpPrefab: {fileID: 7764545210754260556, guid: 9a57dd6d1b7106942897c03936c9a25c, type: 3}
   finalRoomDownPrefab: {fileID: 7764545210754260556, guid: 61bb7bda978497241b189302fbc09ac7, type: 3}
   finalRoomLeftPrefab: {fileID: 7764545210754260556, guid: a02ad72aba3d18c44a676c40395c61eb, type: 3}
