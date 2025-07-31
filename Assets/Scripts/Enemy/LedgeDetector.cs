@@ -19,7 +19,7 @@ namespace Enemy
 
         public bool IsLedgeAhead(float direction)
         {
-            Vector2 origin = groundCheck.position + Vector3.right * direction * 0.5f;
+            Vector2 origin = groundCheck.position + Vector3.right * (direction * 0.5f);
             float rayLength = groundCheckDistance + 0.1f;
 
             RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, rayLength, groundLayer);
