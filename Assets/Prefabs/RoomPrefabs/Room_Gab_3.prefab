@@ -743,10 +743,10 @@ PolygonCollider2D:
   m_AutoTiling: 1
   m_Points:
     m_Paths:
-    - - {x: -18.898869, y: 12.157816}
-      - {x: -19.000732, y: -9.755385}
-      - {x: 15.0087185, y: -9.76412}
-      - {x: 14.931526, y: 12.165682}
+    - - {x: -19.128115, y: 12.184528}
+      - {x: -19.144335, y: -9.796619}
+      - {x: 15.138308, y: -9.774335}
+      - {x: 15.110936, y: 12.192394}
   m_UseDelaunayMesh: 0
 --- !u!114 &3583865835394982759
 MonoBehaviour:
@@ -4662,9 +4662,7 @@ MonoBehaviour:
     doorTransform: {fileID: 2545983802929741353}
     isUsed: 0
     connectedRoom: {fileID: 0}
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  spawnPoints: []
   wantedNbSpawn: 0
   ennemies:
   - {fileID: 5727607416861335527}
@@ -4673,9 +4671,7 @@ MonoBehaviour:
   - {fileID: 5617890772633602503}
   - {fileID: 8135839448045667159}
   - {fileID: 3548344872432431268}
-  ennemieToUse:
-  - {fileID: 4820439664741679196, guid: 71ff1f8aba6ae4bda9795e4975285baf, type: 3}
-  - {fileID: 30737752327119152, guid: 8ad9b11d6b3fd472aa09a0a99a60c585, type: 3}
+  ennemieToUse: []
   colliders: []
   depth: 0
 --- !u!114 &-5953283732350813124
@@ -4720,7 +4716,7 @@ Transform:
   m_GameObject: {fileID: 8444786960299025771}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1232986, y: 4.9622197, z: -10}
+  m_LocalPosition: {x: 0.16439056, y: 4.98937, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
