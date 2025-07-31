@@ -46,6 +46,8 @@ namespace Map
         private const float GridSize = 1f;
 
         private Room _currentPlayerRoom;
+        
+        private GameObject _lastRoomPrefabUsed = null;
 
         private void Update()
         {
@@ -261,24 +263,38 @@ namespace Map
         private GameObject SelectRoomPrefab(int normals, int specials)
         {
             int total = normalRoomCount + specialRoomCount;
-            
+
             if (normals >= normalRoomCount && specials >= specialRoomCount)
                 return null;
 
             float specialRatio = specialRoomCount / (float)total;
             bool chooseSpecial = Random.value < specialRatio;
 
+            List<GameObject> pool = null;
+
             if (chooseSpecial && specials < specialRoomCount)
-                return specialRooms[Random.Range(0, specialRooms.Count)];
-    
-            if (normals < normalRoomCount)
-                return normalRooms[Random.Range(0, normalRooms.Count)];
+                pool = specialRooms;
+            else if (normals < normalRoomCount)
+                pool = normalRooms;
+            else if (specials < specialRoomCount)
+                pool = specialRooms;
+
+            if (pool == null || pool.Count == 0)
+                return null;
             
-            if (specials < specialRoomCount)
-                return specialRooms[Random.Range(0, specialRooms.Count)];
-    
-            return null;
+            List<GameObject> filteredPool = new(pool);
+
+            if (_lastRoomPrefabUsed != null && filteredPool.Count > 1)
+            {
+                filteredPool.Remove(_lastRoomPrefabUsed);
+            }
+
+            GameObject selected = filteredPool[Random.Range(0, filteredPool.Count)];
+
+            _lastRoomPrefabUsed = selected;
+            return selected;
         }
+
 
 
 

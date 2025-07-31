@@ -12,6 +12,7 @@ TagManager:
   - PauseMenu
   - IgnoreForDungeon
   - BossHealthbar
+  - Spikes
   layers:
   - Default
   - TransparentFX
