@@ -49,8 +49,11 @@ namespace Map
         yield return null;
         _currentDungeon = Instantiate(dungeonGeneratorPrefab);
         var dungeonGen = _currentDungeon.GetComponent<DungeonGenerator>();
-        dungeonGen.normalRoomCount = (3 + (floor * 3));
-        dungeonGen.specialRoomCount = floor;
+        dungeonGen.normalRoomCount = (3 + (floor * 2));
+        if (floor == 1 || floor == 2)
+            dungeonGen.specialRoomCount = 1;
+        else
+            dungeonGen.specialRoomCount = 2;
         dungeonGen.SetPlayerInstance(_gragusInstance);
         yield return new WaitUntil(() => dungeonGen.IsGenerationComplete);
         PositionGragusAtStart();
