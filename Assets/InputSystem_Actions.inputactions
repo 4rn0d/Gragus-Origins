@@ -221,21 +221,10 @@
                 {
                     "name": "",
                     "id": "daba33a1-ad0c-4742-a909-43ad1cdfbeb6",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<HID::USB Gamepad >/stick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "603f3daf-40bd-4854-8724-93e8017f59e3",
-                    "path": "<XRController>/secondaryButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XR",
+                    "groups": "Gamepad;Joystick",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -246,7 +235,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -264,6 +253,17 @@
                 },
                 {
                     "name": "",
+                    "id": "8edb3ff1-80c3-4099-b193-a7dc8989a87d",
+                    "path": "<HID::USB Gamepad >/button10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e869e399-d3f6-47ae-ac65-610f40d36f43",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -275,11 +275,33 @@
                 },
                 {
                     "name": "",
+                    "id": "6f069422-90e2-4925-ba90-20a230322595",
+                    "path": "<HID::USB Gamepad >/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;Joystick",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3648072a-2e2c-4a46-954d-c8a022cff43f",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "BarrelRoll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d636a95d-fda0-4167-8495-8f3fc6b131b7",
+                    "path": "<HID::USB Gamepad >/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;Joystick",
                     "action": "BarrelRoll",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -290,7 +312,18 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "S Modifiers",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b8f8081-207a-4099-a719-17f0646fb016",
+                    "path": "<HID::USB Gamepad >/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;Joystick",
                     "action": "S Modifiers",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -301,7 +334,18 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Change Alcohol",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa17bb14-c055-4e00-80c2-20914b70668a",
+                    "path": "<HID::USB Gamepad >/button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "Change Alcohol",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -312,7 +356,18 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Drink Alcohol",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6e50b69-e50c-44a9-9259-53c9d18d9de1",
+                    "path": "<HID::USB Gamepad >/button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "Drink Alcohol",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -320,10 +375,10 @@
                 {
                     "name": "",
                     "id": "af6e185d-a2e1-42e4-a5cb-004cd8b6dd8c",
-                    "path": "<Keyboard>/f",
+                    "path": "<HID::USB Gamepad >/trigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": ";Gamepad",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
