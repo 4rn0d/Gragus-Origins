@@ -61,7 +61,6 @@ MonoBehaviour:
   - {fileID: 7764545210754260556, guid: 7f3886571a4e147ee82f4d7699d6b12a, type: 3}
   - {fileID: 7764545210754260556, guid: c7baf59000b3f4448b4969f046b873a6, type: 3}
   - {fileID: 7764545210754260556, guid: d697138e836e1a4419b3fdae894e3ce8, type: 3}
-  - {fileID: 7764545210754260556, guid: dda35c3c4bf275c428b1e627678c1938, type: 3}
   specialRooms:
   - {fileID: 7764545210754260556, guid: e8c724a8cd63e824fae80c38b03b3451, type: 3}
   - {fileID: 7764545210754260556, guid: efee46913c7fcbf469c653599184a7a8, type: 3}
@@ -70,3 +69,4 @@ MonoBehaviour:
   debug: 1
   seed: 0
   useRandomSeed: 1
+  _currentPlayerRoom: {fileID: 0}

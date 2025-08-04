@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using UI;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 namespace Map
@@ -22,6 +24,11 @@ namespace Map
         public List<GameObject> ennemieToUse = new();
         public Collider2D[] colliders;
         public int depth;
+        
+        public RoomDiscoveryState DiscoveryState = RoomDiscoveryState.Unseen;
+        public bool IsCurrentRoom => DiscoveryState == RoomDiscoveryState.Visited;
+
+        
         private void Awake()
         {
             colliders = GetComponentsInChildren<Collider2D>();
@@ -109,7 +116,17 @@ namespace Map
                 DisableUsedDoor();
             }
         }
+        public Rect GetBounds()
+        {
+            var tilemap = GetComponent<Tilemap>();
+            BoundsInt cellBounds = tilemap.cellBounds;
+            Vector3Int size = cellBounds.size;
 
+            Vector2 worldPos = tilemap.CellToWorld(cellBounds.min);
+            Vector2 worldSize = tilemap.cellSize * new Vector2(size.x, size.y);
+
+            return new Rect(worldPos, worldSize);
+        }
 
     }
 }

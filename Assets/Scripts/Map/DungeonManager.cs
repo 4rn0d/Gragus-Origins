@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Scripts;
+using UI;
 
 namespace Map
 {
@@ -18,8 +19,9 @@ namespace Map
     private GameObject _gragusInstance;
 
     public int floor = 1;
-    private GameObject _currentDungeon;
-
+    public GameObject currentDungeon;
+    public MinimapManager minimapManager;
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -47,8 +49,8 @@ namespace Map
         if (loadingPanel != null) loadingPanel.SetActive(true);
         if (OtherUI != null) OtherUI.SetActive(false);
         yield return null;
-        _currentDungeon = Instantiate(dungeonGeneratorPrefab);
-        var dungeonGen = _currentDungeon.GetComponent<DungeonGenerator>();
+        currentDungeon = Instantiate(dungeonGeneratorPrefab);
+        var dungeonGen = currentDungeon.GetComponent<DungeonGenerator>();
         dungeonGen.normalRoomCount = (3 + (floor * 2));
         if (floor == 1 || floor == 2)
             dungeonGen.specialRoomCount = 1;
@@ -58,6 +60,25 @@ namespace Map
         yield return new WaitUntil(() => dungeonGen.IsGenerationComplete);
         PositionGragusAtStart();
         yield return new WaitForSecondsRealtime(2f);
+        
+        if (minimapManager == null)
+        {
+            Debug.LogError("MinimapManager GameObject not found!");
+            yield break;
+        }
+        var mapScript = minimapManager.GetComponent<MinimapManager>();
+        if (mapScript == null)
+        {
+            Debug.LogError("MinimapManager component not found!");
+            yield break;
+        }
+        var rooms = dungeonGen.GetRoom();
+        if (rooms == null)
+        {
+            Debug.LogError("DungeonGenerator.GetRoom() returned null!");
+            yield break;
+        }
+        mapScript.Initialize(rooms);
         if (loadingPanel != null) loadingPanel.SetActive(false);
         if (OtherUI != null) OtherUI.SetActive(true);
         if (musicAudioSource != null)
@@ -70,8 +91,8 @@ namespace Map
     {
         floor++;
 
-        if (_currentDungeon != null)
-            Destroy(_currentDungeon);
+        if (currentDungeon != null)
+            Destroy(currentDungeon);
 
         StartCoroutine(GenerateNewFloor());
     }
@@ -79,9 +100,9 @@ namespace Map
 
     private void PositionGragusAtStart()
     {
-        if (_currentDungeon == null || _gragusInstance == null) return;
+        if (currentDungeon == null || _gragusInstance == null) return;
 
-        var dungeonGen = _currentDungeon.GetComponent<DungeonGenerator>();
+        var dungeonGen = currentDungeon.GetComponent<DungeonGenerator>();
         if (dungeonGen == null) return;
 
         Vector3 basePos = dungeonGen.GetStartRoomPosition();
