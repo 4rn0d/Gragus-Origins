@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 4084591759345039753}
   - component: {fileID: 6590584383177581176}
   - component: {fileID: 7259086044417311676}
+  - component: {fileID: 7689846414562690521}
   m_Layer: 11
   m_Name: Teemo
   m_TagString: Enemy
@@ -553,6 +554,20 @@ MonoBehaviour:
   jumpForce: 5
   wallCheckDistance: 0.5
   jumpCooldown: 1
+--- !u!114 &7689846414562690521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3619221698321341920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085579bdf3adc44f0aabd01755ab9d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToPlayer: 10
+  meleeHitSound: {fileID: 8300000, guid: b382d7c3551864a77a27ca9cd7c36f14, type: 3}
 --- !u!1 &5065283215047554215
 GameObject:
   m_ObjectHideFlags: 0
