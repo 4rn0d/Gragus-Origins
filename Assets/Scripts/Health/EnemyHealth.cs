@@ -9,7 +9,14 @@ namespace Health
     {
         [SerializeField] private Behaviour[] componentsToDisable;
 
+        private SpriteRenderer _spriteRenderer;
         private Image _healthBar;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
 
 
         public override void TakeDamage(float damage)
@@ -33,6 +40,7 @@ namespace Health
             {
                 // Adjust regular enemy health bar if needed
                 Debug.Log("Regular enemy is taking damage");
+                StartCoroutine(FlashSprite());
             }
 
             base.TakeDamage(damage);
@@ -61,6 +69,26 @@ namespace Health
                     Destroy(_healthBar.gameObject);
 
                 Destroy(enemyRoot);
+            }
+        }
+
+        private System.Collections.IEnumerator FlashSprite()
+        {
+            if (!_spriteRenderer)
+                yield break;
+
+            Color originalColor = _spriteRenderer.color;
+            Color flashColor = new Color(1f, 1f, 1f, 0.5f); // Semi-transparent white
+
+            int flashCount = 3;
+            float flashDuration = 0.1f; // time for each flash on/off
+
+            for (int i = 0; i < flashCount; i++)
+            {
+                _spriteRenderer.color = flashColor;
+                yield return new WaitForSeconds(flashDuration);
+                _spriteRenderer.color = originalColor;
+                yield return new WaitForSeconds(flashDuration);
             }
         }
     }
