@@ -350,6 +350,11 @@ namespace Scripts
             }
         }
 
+        public void changeCanDashStatus(bool canDash)
+        {
+            _canDash = canDash;
+        }
+
         private void HandleBounceTimer()
         {
             if (_isBouncing)

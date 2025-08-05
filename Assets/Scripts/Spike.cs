@@ -1,5 +1,6 @@
 using System;
 using Health;
+using Scripts;
 using UnityEngine;
 
 public class Spike : MonoBehaviour
@@ -11,6 +12,8 @@ public class Spike : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player")) return;
 
         PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        playerController.changeCanDashStatus(true);
         playerHealth.TakeDamage(10f);
 
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
