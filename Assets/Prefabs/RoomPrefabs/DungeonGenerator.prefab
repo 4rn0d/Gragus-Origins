@@ -46,14 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 6188314894093641039, guid: 56218ff834801d448bcd0c697423c491, type: 3}
   playerOffsetInStartRoom: {x: -15, y: -4.5, z: 0}
-  bossRoomUpPrefab: {fileID: 7764545210754260556, guid: 72e12c9c22068734088ced0074acf859, type: 3}
-  bossRoomDownPrefab: {fileID: 7764545210754260556, guid: a258540ebd579154b990bef297c8be36, type: 3}
-  bossRoomLeftPrefab: {fileID: 7764545210754260556, guid: 700b1e4b32c8a9a4c912699e2b4cbc57, type: 3}
-  bossRoomRightPrefab: {fileID: 7764545210754260556, guid: 3b53f2d8ccb96724892b907f578e9880, type: 3}
+  bossRoomUpPrefab: {fileID: 7764545210754260556, guid: 0c9e1254b4c6ee74cb779a6a0af4d899, type: 3}
+  bossRoomDownPrefab: {fileID: 7764545210754260556, guid: 956510b82fefb034a803ab39ad58e27e, type: 3}
+  bossRoomLeftPrefab: {fileID: 7764545210754260556, guid: 1c5e702ac7e60af4aa9a254e6ce2342b, type: 3}
+  bossRoomRightPrefab: {fileID: 7764545210754260556, guid: 557acd410b2928d47ae73c00550ba9ce, type: 3}
   startRoomPrefab: {fileID: 7764545210754260556, guid: 35a6d525912367243842ddd79b6099cd, type: 3}
-  finalRoomUpPrefab: {fileID: 7764545210754260556, guid: 9a57dd6d1b7106942897c03936c9a25c, type: 3}
-  finalRoomDownPrefab: {fileID: 7764545210754260556, guid: 61bb7bda978497241b189302fbc09ac7, type: 3}
-  finalRoomLeftPrefab: {fileID: 7764545210754260556, guid: a02ad72aba3d18c44a676c40395c61eb, type: 3}
+  finalRoomUpPrefab: {fileID: 7764545210754260556, guid: 6cd3b56001c8a8e44863ff699a98ac2e, type: 3}
+  finalRoomDownPrefab: {fileID: 7764545210754260556, guid: d25be7500c4dff447903382d0901092a, type: 3}
+  finalRoomLeftPrefab: {fileID: 7764545210754260556, guid: d190e27497fb2bb4594894ef708e375c, type: 3}
   finalRoomRightPrefab: {fileID: 7764545210754260556, guid: a19b1268c21d0f244a55fe832d73a7d2, type: 3}
   normalRooms:
   - {fileID: 7764545210754260556, guid: e949830b959884c9c82fc46169fe3f8b, type: 3}
