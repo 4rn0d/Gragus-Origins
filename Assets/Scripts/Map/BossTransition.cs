@@ -10,6 +10,7 @@ namespace Map
             if (other.CompareTag("Player"))
             {
                 SceneManager.LoadScene("FinalBoss");
+                Destroy(other.gameObject);
             }
         }
     }
