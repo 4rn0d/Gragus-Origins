@@ -1,25 +1,26 @@
 using System.Collections.Generic;
 using Player;
+using Scripts;
 using UnityEngine;
 
-namespace Scripts
+namespace UI
 {
     public class AlcoholCarousel : MonoBehaviour
     {
         [Header("Alcohol")]
-        [SerializeField] List<Alcohol> alcoholList;        // Prefabs
+        [SerializeField] List<Scripts.Alcohol> alcoholList;        // Prefabs
         [SerializeField] List<Transform> positionList;     // UI Positions
 
-        private Dictionary<Alcohol, Alcohol> _alcoholInstances = new();
-        private List<Alcohol> _spawnedAlcohols = new();
+        private Dictionary<int, Scripts.Alcohol> _alcoholInstances = new();  // Use index as key
+        private List<Scripts.Alcohol> _spawnedAlcohols = new();
         private int _currentIndex = 0;
 
-        private void Start()
+        private void Awake()
         {
             for (int i = 0; i < alcoholList.Count; i++)
             {
-                Alcohol prefab = alcoholList[i];
-                Alcohol instance = Instantiate(prefab);
+                Scripts.Alcohol prefab = alcoholList[i];
+                Scripts.Alcohol instance = Instantiate(prefab);
                 instance.gameObject.SetActive(false);
 
                 if (SaveManager.IsPotionSlotUnlocked(i))
@@ -32,7 +33,7 @@ namespace Scripts
                     instance.ChangeState(State.Broken);
                 }
 
-                _alcoholInstances[prefab] = instance;
+                _alcoholInstances[i] = instance;
             }
 
             ShowPotions(_currentIndex);
@@ -59,7 +60,13 @@ namespace Scripts
                 int posIndex = i;
                 int alcoholIndex = (centerIndex + i + count) % count;
 
-                Alcohol alcohol = _alcoholInstances[alcoholList[alcoholIndex]];
+                if (!_alcoholInstances.ContainsKey(alcoholIndex))
+                {
+                    Debug.LogWarning($"[AlcoholCarousel] Missing alcohol instance for index {alcoholIndex}");
+                    continue;
+                }
+
+                Scripts.Alcohol alcohol = _alcoholInstances[alcoholIndex];
                 alcohol.transform.SetParent(positionList[posIndex]);
                 alcohol.transform.position = positionList[posIndex].position;
                 alcohol.transform.rotation = positionList[posIndex].rotation;
@@ -70,25 +77,24 @@ namespace Scripts
             }
         }
 
-        public Alcohol GetCurrentAlcohol()
+        public Scripts.Alcohol GetCurrentAlcohol()
         {
-            var key = alcoholList[_currentIndex];
-            if (!_alcoholInstances.ContainsKey(key))
+            if (!_alcoholInstances.ContainsKey(_currentIndex))
             {
-                Debug.LogError($"[AlcoholCarousel] Alcohol key '{key}' not found.");
+                Debug.LogError($"[AlcoholCarousel] Alcohol index '{_currentIndex}' not found.");
                 return null;
             }
-            return _alcoholInstances[key];
+            return _alcoholInstances[_currentIndex];
         }
 
-        public Alcohol NextPotion()
+        public Scripts.Alcohol NextPotion()
         {
             _currentIndex = (_currentIndex + 1) % alcoholList.Count;
             ShowPotions(_currentIndex);
-            return _alcoholInstances[alcoholList[_currentIndex]];
+            return GetCurrentAlcohol();
         }
 
-        public List<Alcohol> GetAllAlcohols()
+        public List<Scripts.Alcohol> GetAllAlcohols()
         {
             return _spawnedAlcohols;
         }
