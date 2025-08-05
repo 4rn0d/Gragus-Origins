@@ -4,22 +4,31 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - AlcoholBar
   - Wall
+  - HealthBar
+  - AlcoholCarousel
+  - Enemy
+  - PauseMenu
+  - IgnoreForDungeon
+  - BossHealthbar
+  - Spikes
+  - EnemyCounter
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground
   - Wall
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Explosion
+  - Player
+  - Barrel
+  - Enemy
+  - Boss
+  - Map
   - 
   - 
   - 

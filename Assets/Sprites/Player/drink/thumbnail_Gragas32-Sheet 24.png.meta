@@ -1,0 +1,2628 @@
+fileFormatVersion: 2
+guid: 1c881a01680464f08ad721d084ab050f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6962478178512653824
+    second: thumbnail_Gragas32-Sheet_0
+  - first:
+      213: -2334579557698059927
+    second: thumbnail_Gragas32-Sheet_1
+  - first:
+      213: 188639751136927523
+    second: thumbnail_Gragas32-Sheet_2
+  - first:
+      213: 89485170473179240
+    second: thumbnail_Gragas32-Sheet_3
+  - first:
+      213: -8372887429616424223
+    second: thumbnail_Gragas32-Sheet_4
+  - first:
+      213: -1077602014892254456
+    second: thumbnail_Gragas32-Sheet_5
+  - first:
+      213: 7100036941022400950
+    second: thumbnail_Gragas32-Sheet_6
+  - first:
+      213: 7784629679451948666
+    second: thumbnail_Gragas32-Sheet_7
+  - first:
+      213: 1230443308871741338
+    second: thumbnail_Gragas32-Sheet_8
+  - first:
+      213: 7943058624448507206
+    second: thumbnail_Gragas32-Sheet_9
+  - first:
+      213: 5501920743677652068
+    second: thumbnail_Gragas32-Sheet_10
+  - first:
+      213: -2393004430761165544
+    second: thumbnail_Gragas32-Sheet_11
+  - first:
+      213: -3011355549380903970
+    second: thumbnail_Gragas32-Sheet_12
+  - first:
+      213: 8708356733935349576
+    second: thumbnail_Gragas32-Sheet_13
+  - first:
+      213: -1753090988360860461
+    second: thumbnail_Gragas32-Sheet_14
+  - first:
+      213: -4188335409538136794
+    second: thumbnail_Gragas32-Sheet_15
+  - first:
+      213: 1904700880803964512
+    second: thumbnail_Gragas32-Sheet_16
+  - first:
+      213: 3824188609870980049
+    second: thumbnail_Gragas32-Sheet_17
+  - first:
+      213: -7969024712391463468
+    second: thumbnail_Gragas32-Sheet_18
+  - first:
+      213: -690468794760826489
+    second: thumbnail_Gragas32-Sheet_19
+  - first:
+      213: 4266103756313250330
+    second: thumbnail_Gragas32-Sheet_20
+  - first:
+      213: -4445638528516190198
+    second: thumbnail_Gragas32-Sheet_21
+  - first:
+      213: 5665562595428015307
+    second: thumbnail_Gragas32-Sheet_22
+  - first:
+      213: -3320917219593207066
+    second: thumbnail_Gragas32-Sheet_23
+  - first:
+      213: -8379418892852808223
+    second: thumbnail_Gragas32-Sheet_24
+  - first:
+      213: -5050408286231042653
+    second: thumbnail_Gragas32-Sheet_25
+  - first:
+      213: -4450169439761772298
+    second: thumbnail_Gragas32-Sheet_26
+  - first:
+      213: -3380956437830719738
+    second: thumbnail_Gragas32-Sheet_27
+  - first:
+      213: -4283863212988949610
+    second: thumbnail_Gragas32-Sheet_28
+  - first:
+      213: 2638392834584228108
+    second: thumbnail_Gragas32-Sheet_29
+  - first:
+      213: 3315720553757639373
+    second: thumbnail_Gragas32-Sheet_30
+  - first:
+      213: 7285950910022165533
+    second: thumbnail_Gragas32-Sheet_31
+  - first:
+      213: -1307401373318718910
+    second: thumbnail_Gragas32-Sheet_32
+  - first:
+      213: 2502367610405003481
+    second: thumbnail_Gragas32-Sheet_33
+  - first:
+      213: -5121169892502762960
+    second: thumbnail_Gragas32-Sheet_34
+  - first:
+      213: 8577513694868923831
+    second: thumbnail_Gragas32-Sheet_35
+  - first:
+      213: -8257374780881177891
+    second: thumbnail_Gragas32-Sheet_36
+  - first:
+      213: -4544840442197358766
+    second: thumbnail_Gragas32-Sheet_37
+  - first:
+      213: 1991755055452461102
+    second: thumbnail_Gragas32-Sheet_38
+  - first:
+      213: -5917138012294979395
+    second: thumbnail_Gragas32-Sheet_39
+  - first:
+      213: -6024955469858168551
+    second: thumbnail_Gragas32-Sheet_40
+  - first:
+      213: 1395809582262853532
+    second: thumbnail_Gragas32-Sheet_41
+  - first:
+      213: 9123978345377400622
+    second: thumbnail_Gragas32-Sheet_42
+  - first:
+      213: 8386215574079911804
+    second: thumbnail_Gragas32-Sheet_43
+  - first:
+      213: -7285349970988630700
+    second: thumbnail_Gragas32-Sheet_44
+  - first:
+      213: 690756806534807547
+    second: thumbnail_Gragas32-Sheet_45
+  - first:
+      213: -4596076461739333703
+    second: thumbnail_Gragas32-Sheet_46
+  - first:
+      213: -6980449058903661589
+    second: thumbnail_Gragas32-Sheet_47
+  - first:
+      213: 4907096869801855134
+    second: thumbnail_Gragas32-Sheet_48
+  - first:
+      213: -8585909351775080909
+    second: thumbnail_Gragas32-Sheet_49
+  - first:
+      213: 4663095618267581642
+    second: thumbnail_Gragas32-Sheet_50
+  - first:
+      213: -6804040678952854463
+    second: thumbnail_Gragas32-Sheet_51
+  - first:
+      213: 1280658619780395095
+    second: thumbnail_Gragas32-Sheet_52
+  - first:
+      213: -6802747330149493183
+    second: thumbnail_Gragas32-Sheet_53
+  - first:
+      213: 774006955962017203
+    second: thumbnail_Gragas32-Sheet_54
+  - first:
+      213: -6442548180208851221
+    second: thumbnail_Gragas32-Sheet_55
+  - first:
+      213: -6959465465732917179
+    second: thumbnail_Gragas32-Sheet_56
+  - first:
+      213: 5267056376158223734
+    second: thumbnail_Gragas32-Sheet_57
+  - first:
+      213: -5293829346799524676
+    second: thumbnail_Gragas32-Sheet_58
+  - first:
+      213: -3795926903387070311
+    second: thumbnail_Gragas32-Sheet_59
+  - first:
+      213: -3753418343120093755
+    second: thumbnail_Gragas32-Sheet_60
+  - first:
+      213: 5314160020005440297
+    second: thumbnail_Gragas32-Sheet_61
+  - first:
+      213: 2668601205369248034
+    second: thumbnail_Gragas32-Sheet_62
+  - first:
+      213: 1742161348002080927
+    second: thumbnail_Gragas32-Sheet_63
+  - first:
+      213: -3369643107704827174
+    second: thumbnail_Gragas32-Sheet_64
+  - first:
+      213: -6990229932500520818
+    second: thumbnail_Gragas32-Sheet_65
+  - first:
+      213: -2426456517144903910
+    second: thumbnail_Gragas32-Sheet_66
+  - first:
+      213: 2708140337081040980
+    second: thumbnail_Gragas32-Sheet_67
+  - first:
+      213: 7331377445895524405
+    second: thumbnail_Gragas32-Sheet_68
+  - first:
+      213: 4937614143295581968
+    second: thumbnail_Gragas32-Sheet_69
+  - first:
+      213: -7152832888118852413
+    second: thumbnail_Gragas32-Sheet_70
+  - first:
+      213: 4781585365503737293
+    second: thumbnail_Gragas32-Sheet_71
+  - first:
+      213: 1775261792827505668
+    second: thumbnail_Gragas32-Sheet_72
+  - first:
+      213: 5944425763601859403
+    second: thumbnail_Gragas32-Sheet_73
+  - first:
+      213: 2069499077776641728
+    second: thumbnail_Gragas32-Sheet_74
+  - first:
+      213: 1172794436416443685
+    second: thumbnail_Gragas32-Sheet_75
+  - first:
+      213: 2324194829470726114
+    second: thumbnail_Gragas32-Sheet_76
+  - first:
+      213: 5751294671132044318
+    second: thumbnail_Gragas32-Sheet_77
+  - first:
+      213: -3168198240761326893
+    second: thumbnail_Gragas32-Sheet_78
+  - first:
+      213: -7841268407643444856
+    second: thumbnail_Gragas32-Sheet_79
+  - first:
+      213: -4696184701181119229
+    second: thumbnail_Gragas32-Sheet_80
+  - first:
+      213: -3704379900220882374
+    second: thumbnail_Gragas32-Sheet_81
+  - first:
+      213: -7307358535531198692
+    second: thumbnail_Gragas32-Sheet_82
+  - first:
+      213: -1670619095667580335
+    second: thumbnail_Gragas32-Sheet_83
+  - first:
+      213: 32663211462835467
+    second: thumbnail_Gragas32-Sheet_84
+  - first:
+      213: 1137491142436876879
+    second: thumbnail_Gragas32-Sheet_85
+  - first:
+      213: 3564295955835927715
+    second: thumbnail_Gragas32-Sheet_86
+  - first:
+      213: -7711838973757633247
+    second: thumbnail_Gragas32-Sheet_87
+  - first:
+      213: -2643793754942442084
+    second: thumbnail_Gragas32-Sheet_88
+  - first:
+      213: 5251464450850128102
+    second: thumbnail_Gragas32-Sheet_89
+  - first:
+      213: -2447250872965216385
+    second: thumbnail_Gragas32-Sheet_90
+  - first:
+      213: 1100491012049116910
+    second: thumbnail_Gragas32-Sheet_91
+  - first:
+      213: 1754335016011262498
+    second: thumbnail_Gragas32-Sheet_92
+  - first:
+      213: -210239327841149588
+    second: thumbnail_Gragas32-Sheet_93
+  - first:
+      213: -1307412193196715171
+    second: thumbnail_Gragas32-Sheet_94
+  - first:
+      213: 3330104427229892170
+    second: thumbnail_Gragas32-Sheet_95
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 248
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00238554cfe406f90800000000000000
+      internalID: -6962478178512653824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 248
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 961c48be248e99fd0800000000000000
+      internalID: -2334579557698059927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 248
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32fd80daade2e9200800000000000000
+      internalID: 188639751136927523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 248
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86818b6d94aed3100800000000000000
+      internalID: 89485170473179240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 248
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ea21658e378dcb80800000000000000
+      internalID: -8372887429616424223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 248
+        width: 28
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80b1a154da69b01f0800000000000000
+      internalID: -1077602014892254456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 248
+        width: 28
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b19ac1faf5688260800000000000000
+      internalID: 7100036941022400950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 248
+        width: 28
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7642bfd27f880c60800000000000000
+      internalID: 7784629679451948666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 248
+        width: 28
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9f6e859ba9631110800000000000000
+      internalID: 1230443308871741338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 248
+        width: 28
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64d2b5c1cb96b3e60800000000000000
+      internalID: 7943058624448507206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 248
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46c624514cfba5c40800000000000000
+      internalID: 5501920743677652068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 248
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81d7b8e16275aced0800000000000000
+      internalID: -2393004430761165544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 200
+        width: 29
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edbffba25148536d0800000000000000
+      internalID: -3011355549380903970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 200
+        width: 31
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84fe8978f4c4ad870800000000000000
+      internalID: 8708356733935349576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 200
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dcffcbc805cba7e0800000000000000
+      internalID: -1753090988360860461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 200
+        width: 24
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6250a42c22b00e5c0800000000000000
+      internalID: -4188335409538136794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 200
+        width: 22
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 066a1bb0c5bde6a10800000000000000
+      internalID: 1904700880803964512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 200
+        width: 21
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d3647d774f321530800000000000000
+      internalID: 3824188609870980049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 200
+        width: 24
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dde89bee36586190800000000000000
+      internalID: -7969024712391463468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 200
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 781f9c71a46fa66f0800000000000000
+      internalID: -690468794760826489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 152
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1ac20a73ce343b30800000000000000
+      internalID: 4266103756313250330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 152
+        width: 26
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a009004ff4bed42c0800000000000000
+      internalID: -4445638528516190198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 152
+        width: 24
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcc1a31c92f10ae40800000000000000
+      internalID: 5665562595428015307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 152
+        width: 20
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e24bad326bb9e1d0800000000000000
+      internalID: -3320917219593207066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 152
+        width: 20
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e5bf4bb9e256bb80800000000000000
+      internalID: -8379418892852808223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 152
+        width: 21
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a562800c6859e9b0800000000000000
+      internalID: -5050408286231042653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 152
+        width: 25
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f053b8f872dd32c0800000000000000
+      internalID: -4450169439761772298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 152
+        width: 22
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 607a70a680e6411d0800000000000000
+      internalID: -3380956437830719738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 152
+        width: 36
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69b1e6bca19ac84c0800000000000000
+      internalID: -4283863212988949610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 152
+        width: 34
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c013453ed447d9420800000000000000
+      internalID: 2638392834584228108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 152
+        width: 26
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc28f25b64ec30e20800000000000000
+      internalID: 3315720553757639373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 152
+        width: 22
+        height: 29
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d142ec200c5ec1560800000000000000
+      internalID: 7285950910022165533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 152
+        width: 22
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24ada7cb06d2bdde0800000000000000
+      internalID: -1307401373318718910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 152
+        width: 26
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d022a365123ab220800000000000000
+      internalID: 2502367610405003481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 104
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03a82faad13fde8b0800000000000000
+      internalID: -5121169892502762960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 104
+        width: 29
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b5e5b68243790770800000000000000
+      internalID: 8577513694868923831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 104
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd2fe40e269e76d80800000000000000
+      internalID: -8257374780881177891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 104
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2574ff982bb7de0c0800000000000000
+      internalID: -4544840442197358766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 104
+        width: 25
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2815df8ba224ab10800000000000000
+      internalID: 1991755055452461102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 104
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db06232045a12eda0800000000000000
+      internalID: -5917138012294979395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 104
+        width: 26
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 911ae87fbee036ca0800000000000000
+      internalID: -6024955469858168551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 104
+        width: 26
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9f1dd47b69ee5310800000000000000
+      internalID: 1395809582262853532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 104
+        width: 24
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e278396d6f1ee9e70800000000000000
+      internalID: 9123978345377400622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_43
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 104
+        width: 26
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c77b1eee1a2d16470800000000000000
+      internalID: 8386215574079911804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_44
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 104
+        width: 24
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45df1d20dcc35ea90800000000000000
+      internalID: -7285349970988630700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_45
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 104
+        width: 26
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bffb0bfd7af069900800000000000000
+      internalID: 690756806534807547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_46
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 104
+        width: 24
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b72e712fc47730c0800000000000000
+      internalID: -4596076461739333703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_47
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 104
+        width: 26
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be3665f9096702f90800000000000000
+      internalID: -6980449058903661589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_48
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 104
+        width: 24
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9888faaa92891440800000000000000
+      internalID: 4907096869801855134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_49
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 104
+        width: 26
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33eedb54fe8b8d880800000000000000
+      internalID: -8585909351775080909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_50
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 104
+        width: 24
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acc058832c4a6b040800000000000000
+      internalID: 4663095618267581642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_51
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 104
+        width: 26
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14c15b54d013391a0800000000000000
+      internalID: -6804040678952854463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_52
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 104
+        width: 24
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7507d8eba30d5c110800000000000000
+      internalID: 1280658619780395095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_53
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 104
+        width: 26
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 146d3b18859c791a0800000000000000
+      internalID: -6802747330149493183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_54
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 104
+        width: 24
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b52ccfb933ddba00800000000000000
+      internalID: 774006955962017203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_55
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 104
+        width: 26
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be6ef4e60987796a0800000000000000
+      internalID: -6442548180208851221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_56
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 104
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 548146028030b6f90800000000000000
+      internalID: -6959465465732917179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_57
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 104
+        width: 25
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67dfdd83ed7581940800000000000000
+      internalID: 5267056376158223734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_58
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 104
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb4e97ac14a8886b0800000000000000
+      internalID: -5293829346799524676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_59
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 56
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 990e342d798225bc0800000000000000
+      internalID: -3795926903387070311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_60
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 56
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cd34e447ed29ebc0800000000000000
+      internalID: -3753418343120093755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_61
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 56
+        width: 26
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92bc100f160bfb940800000000000000
+      internalID: 5314160020005440297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_62
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 56
+        width: 28
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 229963d48a6c80520800000000000000
+      internalID: 2668601205369248034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_63
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 57
+        width: 34
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f98641104866d2810800000000000000
+      internalID: 1742161348002080927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_64
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 57
+        width: 34
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad21969527f9c31d0800000000000000
+      internalID: -3369643107704827174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_65
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 57
+        width: 34
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e80f00789e6bdfe90800000000000000
+      internalID: -6990229932500520818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_66
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 57
+        width: 32
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1f75a057ae735ed0800000000000000
+      internalID: -2426456517144903910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_67
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 57
+        width: 30
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4504f99c94f359520800000000000000
+      internalID: 2708140337081040980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_69
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 57
+        width: 30
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01fe31917ede58440800000000000000
+      internalID: 4937614143295581968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_71
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 56
+        width: 25
+        height: 35
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcd7e065e8a9b5240800000000000000
+      internalID: 4781585365503737293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_72
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 54
+        width: 31
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40c7ec0e13ff2a810800000000000000
+      internalID: 1775261792827505668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_73
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 52
+        width: 39
+        height: 34
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b434b21bcb7de7250800000000000000
+      internalID: 5944425763601859403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_74
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 56
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ce00e1527658bc10800000000000000
+      internalID: 2069499077776641728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_78
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 8
+        width: 28
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d257616c7c4804d0800000000000000
+      internalID: -3168198240761326893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_79
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 8
+        width: 29
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8896be59de73e2390800000000000000
+      internalID: -7841268407643444856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_80
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 8
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 305b97e45ecc3deb0800000000000000
+      internalID: -4696184701181119229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_81
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 8
+        width: 27
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a32cc3e7b16679cc0800000000000000
+      internalID: -3704379900220882374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_82
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 8
+        width: 25
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c178e33c02c079a90800000000000000
+      internalID: -7307358535531198692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_83
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 8
+        width: 26
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 152efb7a8c4c0d8e0800000000000000
+      internalID: -1670619095667580335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_84
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 8
+        width: 20
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0d377c840b047000800000000000000
+      internalID: 32663211462835467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_85
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 8
+        width: 20
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f427a18da2e29cf00800000000000000
+      internalID: 1137491142436876879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_86
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 8
+        width: 21
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ac36f1994ce67130800000000000000
+      internalID: 3564295955835927715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_87
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 8
+        width: 23
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12dc92cff4b0af490800000000000000
+      internalID: -7711838973757633247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_88
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 8
+        width: 24
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c957249569b5f4bd0800000000000000
+      internalID: -2643793754942442084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_89
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 8
+        width: 36
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e083873813f0e840800000000000000
+      internalID: 5251464450850128102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_90
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 8
+        width: 34
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f77c4a01c4e990ed0800000000000000
+      internalID: -2447250872965216385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_91
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 8
+        width: 30
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee92bbaebab54f00800000000000000
+      internalID: 1100491012049116910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_92
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 8
+        width: 26
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22a6166f666a85810800000000000000
+      internalID: 1754335016011262498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_93
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 8
+        width: 26
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6d163af174151df0800000000000000
+      internalID: -210239327841149588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_94
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 8
+        width: 26
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d53de7989832bdde0800000000000000
+      internalID: -1307412193196715171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_95
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 8
+        width: 26
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4e4ef93558e63e20800000000000000
+      internalID: 3330104427229892170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_68
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 65
+        width: 8
+        height: 20
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16efe4c4ee9ab714a85e13cedd5d7864
+      internalID: 7331377445895524405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_70
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 84
+        width: 7
+        height: 5
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcb1e6769fd1e45c28ec168de0b7f703
+      internalID: -7152832888118852413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_75
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 71
+        width: 4
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4b998190ef4343a6b2ec08cceb261d6
+      internalID: 1172794436416443685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_76
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 61
+        width: 5
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45fedf5c9a4d843eb8b1da3d81631dc3
+      internalID: 2324194829470726114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Gragas32-Sheet_77
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 56
+        width: 6
+        height: 4
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66f69762291c84019a58e64190165c3f
+      internalID: 5751294671132044318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 295bf9baa40eca842bf6b311c4959c2a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      thumbnail_Gragas32-Sheet_0: -6962478178512653824
+      thumbnail_Gragas32-Sheet_1: -2334579557698059927
+      thumbnail_Gragas32-Sheet_10: 5501920743677652068
+      thumbnail_Gragas32-Sheet_11: -2393004430761165544
+      thumbnail_Gragas32-Sheet_12: -3011355549380903970
+      thumbnail_Gragas32-Sheet_13: 8708356733935349576
+      thumbnail_Gragas32-Sheet_14: -1753090988360860461
+      thumbnail_Gragas32-Sheet_15: -4188335409538136794
+      thumbnail_Gragas32-Sheet_16: 1904700880803964512
+      thumbnail_Gragas32-Sheet_17: 3824188609870980049
+      thumbnail_Gragas32-Sheet_18: -7969024712391463468
+      thumbnail_Gragas32-Sheet_19: -690468794760826489
+      thumbnail_Gragas32-Sheet_2: 188639751136927523
+      thumbnail_Gragas32-Sheet_20: 4266103756313250330
+      thumbnail_Gragas32-Sheet_21: -4445638528516190198
+      thumbnail_Gragas32-Sheet_22: 5665562595428015307
+      thumbnail_Gragas32-Sheet_23: -3320917219593207066
+      thumbnail_Gragas32-Sheet_24: -8379418892852808223
+      thumbnail_Gragas32-Sheet_25: -5050408286231042653
+      thumbnail_Gragas32-Sheet_26: -4450169439761772298
+      thumbnail_Gragas32-Sheet_27: -3380956437830719738
+      thumbnail_Gragas32-Sheet_28: -4283863212988949610
+      thumbnail_Gragas32-Sheet_29: 2638392834584228108
+      thumbnail_Gragas32-Sheet_3: 89485170473179240
+      thumbnail_Gragas32-Sheet_30: 3315720553757639373
+      thumbnail_Gragas32-Sheet_31: 7285950910022165533
+      thumbnail_Gragas32-Sheet_32: -1307401373318718910
+      thumbnail_Gragas32-Sheet_33: 2502367610405003481
+      thumbnail_Gragas32-Sheet_34: -5121169892502762960
+      thumbnail_Gragas32-Sheet_35: 8577513694868923831
+      thumbnail_Gragas32-Sheet_36: -8257374780881177891
+      thumbnail_Gragas32-Sheet_37: -4544840442197358766
+      thumbnail_Gragas32-Sheet_38: 1991755055452461102
+      thumbnail_Gragas32-Sheet_39: -5917138012294979395
+      thumbnail_Gragas32-Sheet_4: -8372887429616424223
+      thumbnail_Gragas32-Sheet_40: -6024955469858168551
+      thumbnail_Gragas32-Sheet_41: 1395809582262853532
+      thumbnail_Gragas32-Sheet_42: 9123978345377400622
+      thumbnail_Gragas32-Sheet_43: 8386215574079911804
+      thumbnail_Gragas32-Sheet_44: -7285349970988630700
+      thumbnail_Gragas32-Sheet_45: 690756806534807547
+      thumbnail_Gragas32-Sheet_46: -4596076461739333703
+      thumbnail_Gragas32-Sheet_47: -6980449058903661589
+      thumbnail_Gragas32-Sheet_48: 4907096869801855134
+      thumbnail_Gragas32-Sheet_49: -8585909351775080909
+      thumbnail_Gragas32-Sheet_5: -1077602014892254456
+      thumbnail_Gragas32-Sheet_50: 4663095618267581642
+      thumbnail_Gragas32-Sheet_51: -6804040678952854463
+      thumbnail_Gragas32-Sheet_52: 1280658619780395095
+      thumbnail_Gragas32-Sheet_53: -6802747330149493183
+      thumbnail_Gragas32-Sheet_54: 774006955962017203
+      thumbnail_Gragas32-Sheet_55: -6442548180208851221
+      thumbnail_Gragas32-Sheet_56: -6959465465732917179
+      thumbnail_Gragas32-Sheet_57: 5267056376158223734
+      thumbnail_Gragas32-Sheet_58: -5293829346799524676
+      thumbnail_Gragas32-Sheet_59: -3795926903387070311
+      thumbnail_Gragas32-Sheet_6: 7100036941022400950
+      thumbnail_Gragas32-Sheet_60: -3753418343120093755
+      thumbnail_Gragas32-Sheet_61: 5314160020005440297
+      thumbnail_Gragas32-Sheet_62: 2668601205369248034
+      thumbnail_Gragas32-Sheet_63: 1742161348002080927
+      thumbnail_Gragas32-Sheet_64: -3369643107704827174
+      thumbnail_Gragas32-Sheet_65: -6990229932500520818
+      thumbnail_Gragas32-Sheet_66: -2426456517144903910
+      thumbnail_Gragas32-Sheet_67: 2708140337081040980
+      thumbnail_Gragas32-Sheet_68: 7331377445895524405
+      thumbnail_Gragas32-Sheet_69: 4937614143295581968
+      thumbnail_Gragas32-Sheet_7: 7784629679451948666
+      thumbnail_Gragas32-Sheet_70: -7152832888118852413
+      thumbnail_Gragas32-Sheet_71: 4781585365503737293
+      thumbnail_Gragas32-Sheet_72: 1775261792827505668
+      thumbnail_Gragas32-Sheet_73: 5944425763601859403
+      thumbnail_Gragas32-Sheet_74: 2069499077776641728
+      thumbnail_Gragas32-Sheet_75: 1172794436416443685
+      thumbnail_Gragas32-Sheet_76: 2324194829470726114
+      thumbnail_Gragas32-Sheet_77: 5751294671132044318
+      thumbnail_Gragas32-Sheet_78: -3168198240761326893
+      thumbnail_Gragas32-Sheet_79: -7841268407643444856
+      thumbnail_Gragas32-Sheet_8: 1230443308871741338
+      thumbnail_Gragas32-Sheet_80: -4696184701181119229
+      thumbnail_Gragas32-Sheet_81: -3704379900220882374
+      thumbnail_Gragas32-Sheet_82: -7307358535531198692
+      thumbnail_Gragas32-Sheet_83: -1670619095667580335
+      thumbnail_Gragas32-Sheet_84: 32663211462835467
+      thumbnail_Gragas32-Sheet_85: 1137491142436876879
+      thumbnail_Gragas32-Sheet_86: 3564295955835927715
+      thumbnail_Gragas32-Sheet_87: -7711838973757633247
+      thumbnail_Gragas32-Sheet_88: -2643793754942442084
+      thumbnail_Gragas32-Sheet_89: 5251464450850128102
+      thumbnail_Gragas32-Sheet_9: 7943058624448507206
+      thumbnail_Gragas32-Sheet_90: -2447250872965216385
+      thumbnail_Gragas32-Sheet_91: 1100491012049116910
+      thumbnail_Gragas32-Sheet_92: 1754335016011262498
+      thumbnail_Gragas32-Sheet_93: -210239327841149588
+      thumbnail_Gragas32-Sheet_94: -1307412193196715171
+      thumbnail_Gragas32-Sheet_95: 3330104427229892170
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

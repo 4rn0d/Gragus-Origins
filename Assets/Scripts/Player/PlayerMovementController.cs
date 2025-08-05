@@ -1,247 +1,665 @@
-
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using Alcohol;
+using Map;
+using System.Threading;
+using Managers;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
+using Health;
+using UI;
 
-public class PlayerController : MonoBehaviour
+namespace Scripts
 {
-    [Header("Player Component References")]
-    [SerializeField] Rigidbody2D rb;
-    [SerializeField] Animator animator;
-
-    [Header("Player Settings")]
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float acceleration = 10f;
-    [SerializeField] float decceleration = 10f;
-    [SerializeField] float velPower = 0.9f;
-    
-    [Header("Jump Settings")]
-    [SerializeField] float jumpForce = 7f;
-    [SerializeField] float jumpMovementReductionForce = 0.14f;
-    [SerializeField] float minJumpVelocity = 4f;
-    [SerializeField] float coyoteTime = 0.2f;
-    private float _coyoteTimeCounter;
-    
-    [Header("Dash Settings")]
-    [SerializeField] float dashSpeed = 7.5f;
-    [SerializeField] float dashDuration = 0.4f;
-    [SerializeField] float dashDecceleration = 0.4f;
-    [SerializeField] float bounceVerticalBoost = 5f;
-    [SerializeField] float bounceHorizontalForce = 4f;
-    [SerializeField] float bounceInputLockDuration = 0.6f;
-
-    [Header("Air Control")]
-    [SerializeField] float fallAirControlMinMultiplier = 0.4f;
-    [SerializeField] float fallAirControlMaxMultiplier = 1f;
-    [SerializeField] float fallSpeedForMinControl = -2f;
-
-    [Header("Other")]
-    [SerializeField] Transform groundCheck;
-    [SerializeField] Transform wallCheck;
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] LayerMask wallLayer;
-
-    private float _horizontal;
-    private float _lastNonZeroHorizontal = 1;
-
-    private bool _isDashing;
-    private float _dashTimer;
-    private float _dashDirection;
-    private bool _canDash = true;
-
-
-    private bool _justBounced;
-    private bool _isBouncing;
-    private float _bounceTimer;
-    private bool _hasBouncedThisDash;
-    private float _rawHorizontalInput;
-
-
-    private void FixedUpdate()
+    public class PlayerController : MonoBehaviour
     {
-        HandleMovement();
-        HandleDash();
-        HandleBounceTimer();
-        UpdateFacingDirection();
-        _justBounced = false;
-    }
+        private static readonly int IsDashing = Animator.StringToHash("IsDashing");
+        private static readonly int IsBouncing = Animator.StringToHash("IsBouncing");
+        private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int IsJumping = Animator.StringToHash("IsJumping");
+        private static readonly int IsFalling = Animator.StringToHash("IsFalling");
+        private static readonly int IsRolling = Animator.StringToHash("IsRolling");
+        private static readonly int IsDrinking = Animator.StringToHash("IsDrinking");
 
-    private void HandleMovement()
-    {
-        
-        animator.SetFloat("Speed", Mathf.Abs(_horizontal));
-        
-        if (_isDashing || _isBouncing) return;
 
-        float fallSpeed = rb.linearVelocity.y;
-        float airControlMultiplier = 1f;
+        [Header("Player Component References")] [SerializeField]
+        Rigidbody2D rb;
 
-        if (!IsGrounded() && fallSpeed < 0)
+        [SerializeField] Animator animator;
+
+        [Header("Player Settings")] [SerializeField]
+        float moveSpeed = 5f;
+
+        [SerializeField] float acceleration = 10f;
+        [SerializeField] float decceleration = 10f;
+        [SerializeField] float velPower = 0.9f;
+        [SerializeField] float maxAlcohoLevel = 10f;
+        [SerializeField] float alcoholLevel = 10f;
+
+        [Header("Jump Settings")] [SerializeField]
+        float jumpForce = 7f;
+
+        [SerializeField] float jumpMovementReductionForce = 0.14f;
+        [SerializeField] float minJumpVelocity = 4f;
+        [SerializeField] float coyoteTime = 0.2f;
+        [SerializeField] Sprite jumpParticle1;
+        [SerializeField] Sprite jumpParticle2;
+        private float _coyoteTimeCounter;
+
+        [Header("Dash Settings")] [SerializeField]
+        float dashSpeed = 7.5f;
+
+        [SerializeField] float dashDuration = 0.4f;
+        [SerializeField] float dashDecceleration = 0.4f;
+        [SerializeField] float bounceVerticalBoost = 5f;
+        [SerializeField] float bounceHorizontalForce = 4f;
+        [SerializeField] float bounceInputLockDuration = 0.6f;
+        [SerializeField] AudioClip dashSound;
+        private float _wallCoyoteCounter;
+        [SerializeField] float wallRayLength = 1.3f;
+        [SerializeField] float maxWallCoyoteTime = 1.5f;
+
+        [Header("BarrelThrow Settings")] [SerializeField]
+        GameObject barrelPrefab;
+
+        [SerializeField] Transform launchOffset;
+        [SerializeField] float throwDistance = 0.5f;
+        [SerializeField] float throwSpeed = 10f;
+        [SerializeField] float explosionCooldown = 2f;
+        [SerializeField] float explosionForce = 10f;
+        [SerializeField] float throwAlcoholCost = 1f;
+        [SerializeField] float barrelCooldown = 1f;
+        private float _barrelCooldownTimer;
+        private bool _isBarrelOnCooldown;
+        private float _throwTimer;
+        private float _explosionTimer;
+        private bool _canThrow = true;
+        private Barrel _barrel;
+
+        [Header("Air Control")] [SerializeField]
+        float fallAirControlMinMultiplier = 0.4f;
+
+        [SerializeField] float fallAirControlMaxMultiplier = 1f;
+        [SerializeField] float fallSpeedForMinControl = -2f;
+
+        [Header("Other")] [SerializeField] Transform groundCheck;
+        [SerializeField] Transform wallCheck;
+        [SerializeField] LayerMask groundLayer;
+        [SerializeField] LayerMask wallLayer;
+        [SerializeField] GameObject pauseMenuPrefab;
+        private PauseMenu _pauseMenu;
+
+        private float _horizontal;
+        private float _lastNonZeroHorizontal = 1;
+
+        private bool _isDashing;
+        private float _dashTimer;
+        private float _dashDirection;
+        private bool _canDash = true;
+
+        private bool _justBounced;
+        private bool _isBouncing;
+        private float _bounceTimer;
+        private bool _hasBouncedThisDash;
+        private float _rawHorizontalInput;
+
+        //UI
+        public Image _alcoholBar;
+        private Alcohol _currentAlcohol;
+        private AlcoholCarousel _alcoholCarousel;
+
+        private bool _sModIsPressed;
+
+        public bool triggerActive;
+        private Interactable _nearbyInteractible;
+
+        private float _cooldownTimer;
+        public bool isOnCooldown;
+        public SpriteRenderer spriteRenderer;
+
+
+        public PlayerHealth health;
+        public bool healOnBarrel = false;
+        public bool resistant = false;
+        public bool powerful = false;
+        public bool sticky = false;
+
+        public int grapes = 0;
+
+        private void Start()
         {
-            float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, fallSpeed);
-            airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
-            animator.SetBool("IsJumping", false);
+            _currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
         }
 
-        if (IsGrounded())
+        void Awake()
         {
-            _coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            _coyoteTimeCounter -= Time.deltaTime;
-        }
-        
-        animator.SetBool("IsJumping", !IsGrounded() && fallSpeed > 0.01f);
-        animator.SetBool("IsFalling", !IsGrounded() && fallSpeed < -0.01f);
+            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            _alcoholBar = GameObject.FindWithTag("AlcoholBar").GetComponent<Image>();
+            _alcoholCarousel = GameObject.FindWithTag("AlcoholCarousel").GetComponent<AlcoholCarousel>();
+            _pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
+            //_currentAlcohol = _alcoholCarousel.GetCurrentAlcohol();
+            setAlcoolBarColor(Color.darkOrchid);
 
-        float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
-        float speedDiff = targetSpeed - rb.linearVelocity.x;
-        float accelRate = (Mathf.Abs(targetSpeed) >0.01f) ? acceleration : decceleration;
-        float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
-        rb.AddForce(movement * Vector2.right);
-    }
-
-    private void HandleDash()
-    {
-        if (!_isDashing) return;
-
-        rb.linearVelocity = new Vector2(_dashDirection * dashSpeed, 0);
-        _dashTimer -= Time.fixedDeltaTime;
-
-        if (!_hasBouncedThisDash && IsTouchingWall())
-        {
-            TriggerBounce();
+            health = gameObject.GetComponent<PlayerHealth>();
         }
-        else if (_dashTimer <= 0)
-        {
-            EndDash();
-        }
-    }
-    
-    private void TriggerBounce()
-    {
-        _isBouncing = true;
-        _bounceTimer = bounceInputLockDuration;
-        _isDashing = false;
-        _hasBouncedThisDash = true;
-        _justBounced = true;
 
-        float bounceRotation = 180f;
-        if (_dashDirection == 1)
+        private void FixedUpdate()
         {
-            bounceRotation = 0f;
+            if (_pauseMenu.isPaused) return;
+            UpdateFacingDirection();
+            HandleThrow();
+            HandleMovement();
+            HandleDash();
+            HandleBounceTimer();
+            UpdateWallCoyoteTime();
         }
-        
-        float bounceDir = -_dashDirection;
-        transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
-        rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
-        
-        animator.SetBool("IsDashing", false);
-    }
 
-    private void EndDash()
-    {
-        animator.SetBool("IsDashing", false);
-        _horizontal = _rawHorizontalInput;
-        _isDashing = false;
-        _horizontal = _rawHorizontalInput; 
-        if (_rawHorizontalInput == 0)
+        private void Update()
         {
-            float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, rb.linearVelocity.y);
-            float airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
-            float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
-            float speedDiff = targetSpeed - rb.linearVelocity.x;
-            float movement = Mathf.Pow(Mathf.Abs(speedDiff) * (dashDecceleration), velPower) * Mathf.Sign(speedDiff);
-            rb.AddForce(movement * Vector2.right);
-            _horizontal = 0;
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.5f, rb.linearVelocity.y);
-        }
-    }
-
-    private void HandleBounceTimer()
-    {
-        if (_isBouncing)
-        {
-            _bounceTimer -= Time.fixedDeltaTime;
-            if (_bounceTimer <= 0)
+            //Alcohol
+            if (isOnCooldown)
             {
-                _isBouncing = false;
-                _horizontal = _rawHorizontalInput;
+                _cooldownTimer -= Time.deltaTime;
+
+                if (_cooldownTimer <= 0)
+                {
+                    isOnCooldown = false;
+                }
+            }
+
+            //Barrel
+            if (_isBarrelOnCooldown)
+            {
+                _barrelCooldownTimer -= Time.deltaTime;
+
+                if (_barrelCooldownTimer <= 0)
+                {
+                    _isBarrelOnCooldown = false;
+                    _canThrow = true;
+                    Debug.Log("Barrel cooldown stopped");
+                }
+            }
+
+            _justBounced = false;
+        }
+
+        private void HandleThrow()
+        {
+            if (!_canThrow)
+            {
+                _throwTimer -= Time.fixedDeltaTime;
+                _explosionTimer -= Time.fixedDeltaTime;
+
+                if (_throwTimer <= 0 && _barrel != null)
+                {
+                    _barrel.StopBarrel();
+                }
+
+                if (_explosionTimer <= 0 && _barrel != null)
+                {
+                    _barrel.ExplodeBarrel(this);
+                    _barrel = null;
+                    //_canThrow = true;
+                    StartBarrelCooldown(barrelCooldown);
+                }
             }
         }
 
-        if (IsGrounded() || _hasBouncedThisDash && !_isDashing && !_isBouncing)
+        public void BarrelJump(Vector3 position)
         {
-            _canDash = true;
-        }
-    }
-
-    private void UpdateFacingDirection()
-    {
-        if (_isBouncing) return;
-
-        if (_rawHorizontalInput != 0 && !_isDashing)
-        {
-            transform.localRotation = new Quaternion(0f, (Mathf.Sign(_rawHorizontalInput) * -180) - 180f,0f, 1f);
-        }
-    }
-
-    public bool IsGrounded()
-    {
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.5f, 0.2f), CapsuleDirection2D.Horizontal, 0, groundLayer);
-    }
-
-    public bool IsTouchingWall()
-    {
-        float direction = _isDashing ? _dashDirection : Mathf.Sign(_horizontal);
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * direction, 0.3f, wallLayer);
-    }
-
-    public void Jump(InputAction.CallbackContext context)
-    {
-        if (context.performed && _coyoteTimeCounter > 0)
-        {
-            animator.SetBool("IsJumping", true);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            Vector3 moveDirection = position - rb.transform.position;
+            if (powerful)
+                rb.AddForce(moveDirection.normalized * -explosionForce * 1.5f, ForceMode2D.Impulse);
+            else
+                rb.AddForce(moveDirection.normalized * -explosionForce, ForceMode2D.Impulse);
         }
 
-        if (context.canceled && rb.linearVelocity.y > minJumpVelocity)
+        private void HandleMovement()
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, minJumpVelocity);
-            _coyoteTimeCounter = 0f;
-        }
-    }
+            animator.SetFloat(Speed, Mathf.Abs(_horizontal));
 
-    public void Dash(InputAction.CallbackContext context)
-    {
-        if (context.performed && !_isDashing && _canDash)
+            if (_isDashing || _isBouncing) return;
+
+            float fallSpeed = rb.linearVelocity.y;
+            float airControlMultiplier = 1f;
+
+            if (!IsGrounded() && fallSpeed < 0)
+            {
+                float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, fallSpeed);
+                airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
+                animator.SetBool(IsJumping, false);
+            }
+
+            if (IsGrounded())
+            {
+                _coyoteTimeCounter = coyoteTime;
+            }
+            else
+            {
+                _coyoteTimeCounter -= Time.deltaTime;
+            }
+
+            animator.SetBool(IsJumping, !IsGrounded() && fallSpeed > 0.01f);
+            animator.SetBool(IsFalling, !IsGrounded() && fallSpeed < -0.01f);
+
+            float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
+            float speedDiff = targetSpeed - rb.linearVelocity.x;
+            float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : decceleration;
+            float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
+            rb.AddForce(movement * Vector2.right);
+        }
+
+        private void HandleDash()
         {
-            animator.SetBool("IsDashing", true);
-            _isDashing = true;
-            _dashTimer = dashDuration;
-            _dashDirection = _lastNonZeroHorizontal;
-            _hasBouncedThisDash = false;
-            _canDash = false;
+            if (!_isDashing) return;
+
+            rb.linearVelocity = new Vector2(_dashDirection * dashSpeed, 0);
+            _dashTimer -= Time.fixedDeltaTime;
+
+            if (!_hasBouncedThisDash && IsTouchingWall())
+            {
+                TriggerBounce();
+            }
+            else if (_dashTimer <= 0)
+            {
+                EndDash();
+            }
         }
-    }
 
-    public void Move(InputAction.CallbackContext context)
-    {
-        float input = context.ReadValue<Vector2>().x;
-        _rawHorizontalInput = input;
-
-        if (input != 0)
-            _lastNonZeroHorizontal = Mathf.Sign(input);
-
-        if (!_isDashing && !_isBouncing)
+        private void UpdateWallCoyoteTime()
         {
-            _horizontal = input;
-        }
-    }
+            float direction = _isDashing ? _dashDirection : Mathf.Sign(_horizontal);
+            RaycastHit2D hit =
+                Physics2D.Raycast(wallCheck.position, Vector2.right * direction, wallRayLength, wallLayer);
 
+            if (hit.collider != null)
+            {
+                float distance = hit.distance;
+                float speed = Mathf.Abs(rb.linearVelocity.x);
+
+                // Only if we're moving toward the wall
+                if (speed > 0.01f)
+                {
+                    float graceTime = Mathf.Min(distance / speed, maxWallCoyoteTime);
+                    _wallCoyoteCounter = graceTime;
+                }
+            }
+            else
+            {
+                _wallCoyoteCounter -= Time.fixedDeltaTime;
+            }
+
+            // Set the animation based on whether grace time is active
+            animator.SetBool(IsBouncing, _wallCoyoteCounter > 0);
+        }
+
+
+        private void TriggerBounce()
+        {
+            _isBouncing = true;
+            _bounceTimer = bounceInputLockDuration;
+            _isDashing = false;
+            _hasBouncedThisDash = true;
+            _justBounced = true;
+
+            float bounceRotation = (_dashDirection == 1) ? 0f : 180f;
+            float bounceDir = -_dashDirection;
+
+            transform.localRotation = new Quaternion(0f, bounceRotation, 0f, 1f);
+            rb.linearVelocity = new Vector2(bounceDir * bounceHorizontalForce, bounceVerticalBoost);
+            if (_rawHorizontalInput != 0)
+                _lastNonZeroHorizontal = _rawHorizontalInput;
+            else
+                _lastNonZeroHorizontal = -_lastNonZeroHorizontal;
+
+
+            animator.SetBool(IsDashing, false);
+        }
+
+        private void EndDash()
+        {
+            animator.SetBool(IsDashing, false);
+            _horizontal = _rawHorizontalInput;
+            _isDashing = false;
+            global::Health.PlayerHealth playerHealth = GetComponent<global::Health.PlayerHealth>();
+
+            if (playerHealth != null)
+            {
+                Debug.Log("Vunerable");
+                playerHealth.invulnerable = false;
+            }
+
+            _horizontal = _rawHorizontalInput;
+            if (_rawHorizontalInput == 0)
+            {
+                float t = Mathf.InverseLerp(0f, fallSpeedForMinControl, rb.linearVelocity.y);
+                float airControlMultiplier = Mathf.Lerp(fallAirControlMaxMultiplier, fallAirControlMinMultiplier, t);
+                float targetSpeed = _horizontal * moveSpeed * airControlMultiplier;
+                float speedDiff = targetSpeed - rb.linearVelocity.x;
+                float movement = Mathf.Pow(Mathf.Abs(speedDiff) * (dashDecceleration), velPower) *
+                                 Mathf.Sign(speedDiff);
+                rb.AddForce(movement * Vector2.right);
+                _horizontal = 0;
+            }
+            else
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.5f, rb.linearVelocity.y);
+            }
+        }
+
+        public void changeCanDashStatus(bool canDash)
+        {
+            _canDash = canDash;
+        }
+
+        private void HandleBounceTimer()
+        {
+            if (_isBouncing)
+            {
+                _bounceTimer -= Time.fixedDeltaTime;
+                if (_bounceTimer <= 0)
+                {
+                    _isBouncing = false;
+                    animator.SetBool(IsBouncing, false);
+                    _horizontal = _rawHorizontalInput;
+                }
+            }
+
+            if (IsGrounded() || _hasBouncedThisDash && !_isDashing && !_isBouncing)
+            {
+                _canDash = true;
+            }
+        }
+
+        private float GetCurrentDirection()
+        {
+            if (Mathf.Abs(rb.linearVelocity.x) > 0.2f)
+            {
+                return Mathf.Sign(rb.linearVelocity.x);
+            }
+
+            return _lastNonZeroHorizontal;
+        }
+
+
+        private void UpdateFacingDirection()
+        {
+            transform.localRotation = new Quaternion(0f, (Mathf.Sign(GetCurrentDirection()) * -180) - 180f, 0f, 1f);
+        }
+
+        public bool IsGrounded()
+        {
+            return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.5f, 0.2f),
+                CapsuleDirection2D.Horizontal, 0, groundLayer);
+        }
+
+        public bool IsTouchingWall()
+        {
+            float direction = _isDashing ? _dashDirection : Mathf.Sign(_horizontal);
+            return Physics2D.Raycast(wallCheck.position, Vector2.right * direction, 0.3f, wallLayer);
+        }
+
+        public void Jump(InputAction.CallbackContext context)
+        {
+            if (context.performed && !_pauseMenu.isPaused && _coyoteTimeCounter > 0 && !animator.GetBool(IsDrinking))
+            {
+                animator.SetBool(IsJumping, true);
+
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            }
+
+            if (context.canceled && rb.linearVelocity.y > minJumpVelocity)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, minJumpVelocity);
+                _coyoteTimeCounter = 0f;
+            }
+        }
+
+        public void Dash(InputAction.CallbackContext context)
+        {
+            if (context.performed && !_isDashing && _canDash && !_pauseMenu.isPaused)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
+                animator.SetBool(IsDashing, true);
+                _isDashing = true;
+
+                PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+
+                if (playerHealth != null)
+                {
+                    playerHealth.invulnerable = true;
+                    Debug.Log("Invulnerable");
+                }
+
+                _dashTimer = dashDuration;
+                _dashDirection = _lastNonZeroHorizontal;
+                _hasBouncedThisDash = false;
+                _canDash = false;
+            }
+        }
+
+        public void Move(InputAction.CallbackContext context)
+        {
+            float input = context.ReadValue<Vector2>().x;
+            _rawHorizontalInput = input;
+
+            if (input != 0)
+                _lastNonZeroHorizontal = Mathf.Sign(input);
+
+            if (!_isDashing)
+            {
+                _horizontal = input;
+            }
+        }
+
+        public void SMod(InputAction.CallbackContext context)
+        {
+            _sModIsPressed = context.performed;
+        }
+
+        public void StartBarrelAnim(InputAction.CallbackContext context)
+        {
+            if (context.performed && !_pauseMenu.isPaused)
+            {
+                if (_canThrow)
+                {
+                    if (alcoholLevel - throwAlcoholCost >= 0)
+                    {
+                        _canThrow = false;
+                        animator.SetBool(IsRolling, true);
+                    }
+                }
+                else if (_barrel != null)
+                {
+                    _barrel.ExplodeBarrel(this);
+                    _barrel = null;
+                    StartBarrelCooldown(barrelCooldown);
+                    //_canThrow = true;
+                }
+            }
+        }
+
+        public void PauseGame(InputAction.CallbackContext context)
+        {
+            Debug.Log("TogglePause performed");
+            if (context.performed)
+            {
+                Debug.Log("TogglePause performed");
+                _pauseMenu.TogglePause();
+            }
+        }
+
+        private float UseAlcohol(float cost)
+        {
+            alcoholLevel -= cost;
+            _alcoholBar.fillAmount -= (cost * 0.1f);
+            Debug.Log(alcoholLevel);
+            return alcoholLevel;
+        }
+
+        public void DrinkAlcohol(InputAction.CallbackContext context)
+        {
+            if (context.performed && !_pauseMenu.isPaused && !animator.GetBool(IsJumping))
+            {
+                Debug.Log(_currentAlcohol);
+                if (!isOnCooldown && (_currentAlcohol.state != State.Broken && _currentAlcohol.state != State.Empty))
+                {
+                    animator.SetBool(IsDrinking, true);
+                    _currentAlcohol.Drink(this);
+                    if (healOnBarrel)
+                        health.AddHealth(15);
+                    RefillAlcohol(2);
+                }
+                else
+                {
+                    Debug.Log("AlcoolOnCooldown");
+                }
+            }
+        }
+
+        public void StartCooldown(float cooldown)
+        {
+            _cooldownTimer = cooldown;
+            isOnCooldown = true;
+        }
+
+        public void ChangeAlcohol(InputAction.CallbackContext context)
+        {
+            if (context.performed && !_pauseMenu.isPaused && !animator.GetBool(IsDrinking))
+            {
+                _currentAlcohol = _alcoholCarousel.NextPotion();
+                // Debug.Log("TogglePause performed");
+                // _pauseMenu.TogglePause();
+            }
+        }
+
+        private void EndBarrelAnim()
+        {
+            animator.SetBool(IsRolling, false);
+        }
+
+        public void StartBarrelCooldown(float cooldown)
+        {
+            _barrelCooldownTimer = cooldown;
+            _isBarrelOnCooldown = true;
+        }
+
+        private void EndDrinkingAnim()
+        {
+            animator.SetBool(IsDrinking, false);
+        }
+
+        private void SpawnBarrel()
+        {
+            if (_barrel != null)
+            {
+                Debug.Log("Ignoring barrel because _barrel is not null");
+                return;
+            }
+
+            if (healOnBarrel)
+                health.AddHealth(15);
+            UseAlcohol(throwAlcoholCost);
+            _throwTimer = throwDistance;
+            _explosionTimer = explosionCooldown;
+            if (_sModIsPressed)
+            {
+                _barrel = Instantiate(barrelPrefab, transform.position, transform.rotation).GetComponent<Barrel>();
+            }
+            else
+            {
+                _barrel = Instantiate(barrelPrefab, launchOffset.position, launchOffset.rotation)
+                    .GetComponent<Barrel>();
+                _barrel.InitalizeBarrel(this, throwSpeed);
+            }
+        }
+
+        public bool IsThePlayerDashing()
+        {
+            return _isDashing;
+        }
+
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+
+            if (_nearbyInteractible != null && !_nearbyInteractible._isUsed)
+            {
+                _nearbyInteractible.Interact(this);
+                _nearbyInteractible = null; // <-- empêche de réutiliser sans sortir/entrer trigger
+            }
+        }
+
+        public void RefillAlcohol(float amount)
+        {
+            alcoholLevel = Mathf.Clamp(alcoholLevel + amount, 0f, maxAlcohoLevel);
+            _alcoholBar.fillAmount = alcoholLevel / maxAlcohoLevel;
+            Debug.Log($"[Fountain] Refilled alcohol. Current level: {alcoholLevel}");
+        }
+
+        public void SetNearbyInteractable(Interactable interactable)
+        {
+            _nearbyInteractible = interactable;
+        }
+
+        public void ClearNearbyInteractable(Interactable interactable)
+        {
+            if (_nearbyInteractible == interactable)
+                _nearbyInteractible = null;
+        }
+
+        public void setSpeed(float speed)
+        {
+            moveSpeed += speed;
+        }
+
+        public void setAlcoolBarColor(Color color)
+        {
+            _alcoholBar.color = color;
+        }
+
+        public List<Alcohol> GetPotions()
+        {
+            return _alcoholCarousel.GetAllAlcohols();
+        }
+
+        public void addGrape()
+        {
+            grapes += 1;
+            if (grapes == 20)
+            {
+                grapes = 0;
+                RefillAlcohol(20);
+            }
+        }
+
+        public void SetAlcoholBar(GameObject alcohol)
+        {
+            _alcoholBar = alcohol.GetComponent<Image>();
+        }
+        public void InitializeAlcoholState()
+        {
+            if (_alcoholCarousel == null)
+            {
+                Debug.LogError("AlcoholCarousel not set!");
+                return;
+            }
+
+            var alcohol = _alcoholCarousel.GetCurrentAlcohol();
+            if (alcohol == null)
+            {
+                Debug.LogError("Current alcohol is null!");
+                return;
+            }
+
+            _currentAlcohol = alcohol;
+            _currentAlcohol.ChangeState(State.Full); // or whatever logic you need
+            Debug.Log("First alcohol initialized manually.");
+        }
+
+    }
 }
