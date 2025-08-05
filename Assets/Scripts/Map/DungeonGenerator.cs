@@ -313,7 +313,7 @@ namespace Map
 
                     // SELECT ROOM TYPE BASED ON FLOOR
                     GameObject prefab;
-                    if (DungeonManager.Instance.GetCurrentFloor() == 3)
+                    if (DungeonManager.Instance.GetCurrentFloor() == 1)
                         prefab = GetBossRoomPrefabForDirection(door.direction);
                     else
                         prefab = GetFinalRoomPrefabForDirection(door.direction);
