@@ -64,6 +64,9 @@ namespace Map
         {
             musicAudioSource.Play();
         }
+        var controller = _gragusInstance.GetComponent<PlayerController>();
+        controller.SetAlcoholBar(GameObject.FindWithTag("AlcoholBar"));
+        controller.InitializeAlcoholState(); 
     }
     
     public void GoToNextFloor()

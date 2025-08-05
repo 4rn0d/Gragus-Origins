@@ -17,16 +17,28 @@ namespace UI
 
         private void Awake()
         {
+            // Fallback loading if list is empty (in case it's stripped)
+            if (alcoholList == null || alcoholList.Count == 0 || alcoholList[0] == null)
+            {
+                alcoholList = new List<Scripts.Alcohol>(Resources.LoadAll<Scripts.Alcohol>("Alcohols"));
+                Debug.LogWarning("[AlcoholCarousel] alcoholList was empty. Loaded from Resources.");
+            }
+
             for (int i = 0; i < alcoholList.Count; i++)
             {
                 Scripts.Alcohol prefab = alcoholList[i];
+                if (prefab == null)
+                {
+                    Debug.LogError($"[AlcoholCarousel] alcoholList[{i}] is null!");
+                    continue;
+                }
+
                 Scripts.Alcohol instance = Instantiate(prefab);
                 instance.gameObject.SetActive(false);
 
                 if (SaveManager.IsPotionSlotUnlocked(i))
                 {
-                    if (i == 0) instance.ChangeState(State.Full);
-                    else instance.ChangeState(State.Empty);
+                    instance.ChangeState(i == 0 ? State.Full : State.Empty);
                 }
                 else
                 {
@@ -38,6 +50,8 @@ namespace UI
 
             ShowPotions(_currentIndex);
         }
+
+
 
         private void ClearPreviousPotions()
         {

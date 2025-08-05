@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 2106255948977822489}
   - component: {fileID: 6961886329390007610}
   - component: {fileID: 6394126655763126064}
-  - component: {fileID: 2742040708897959075}
   - component: {fileID: 7888799547572293911}
   m_Layer: 11
   m_Name: Gromp
@@ -295,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085579bdf3adc44f0aabd01755ab9d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 34
+  damageToPlayer: 20
   meleeHitSound: {fileID: 8300000, guid: deacbe98c6102452aaebea75af428bda, type: 3}
 --- !u!114 &6394126655763126064
 MonoBehaviour:
@@ -311,20 +310,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalSpeed: 2
   spriteRenderer: {fileID: 2141988119376205790}
---- !u!114 &2742040708897959075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869523412650322001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 085579bdf3adc44f0aabd01755ab9d32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageToPlayer: 25
-  meleeHitSound: {fileID: 8300000, guid: deacbe98c6102452aaebea75af428bda, type: 3}
 --- !u!114 &7888799547572293911
 MonoBehaviour:
   m_ObjectHideFlags: 0

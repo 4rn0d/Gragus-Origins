@@ -636,5 +636,30 @@ namespace Scripts
                 RefillAlcohol(20);
             }
         }
+
+        public void SetAlcoholBar(GameObject alcohol)
+        {
+            _alcoholBar = alcohol.GetComponent<Image>();
+        }
+        public void InitializeAlcoholState()
+        {
+            if (_alcoholCarousel == null)
+            {
+                Debug.LogError("AlcoholCarousel not set!");
+                return;
+            }
+
+            var alcohol = _alcoholCarousel.GetCurrentAlcohol();
+            if (alcohol == null)
+            {
+                Debug.LogError("Current alcohol is null!");
+                return;
+            }
+
+            _currentAlcohol = alcohol;
+            _currentAlcohol.ChangeState(State.Full); // or whatever logic you need
+            Debug.Log("First alcohol initialized manually.");
+        }
+
     }
 }
