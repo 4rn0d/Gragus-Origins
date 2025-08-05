@@ -5,7 +5,7 @@ namespace Alcohol
 {
     public abstract class Effect
     {
-        private const float _duration = 5f;
+        private const float _duration = 20f;
 
         public void ApplyWithDuration(PlayerController player)
         {
