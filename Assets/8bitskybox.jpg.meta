@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      8bitskybox_0: 2130667772715781779
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
