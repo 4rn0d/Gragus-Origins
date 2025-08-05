@@ -17,6 +17,8 @@ namespace Map
         private bool done = false;
         private void Start()
         {
+            
+            Screen.fullScreen = true;
             chestPrefab.SetActive(false);
             GameObject boss = Instantiate(bossPrefab, bossSpawnPoint.position, Quaternion.identity);
             bossPrefab = boss;
